@@ -1,6 +1,6 @@
 const lightMode = {
     colors: {
-        primary:'#0566sd',
+        primary:'#05668d',
         secondary:'#00a896',
         secondaryLighter:'#79dabc',
         font: '#000000',
@@ -10,7 +10,7 @@ const lightMode = {
 
 const darkMode = {
     colors: {
-        primary:'#0566sd',
+        primary:'#05668d',
         secondary:'#00a896',
         secondaryLighter:'#79dabc',
         font:"#ffffff",

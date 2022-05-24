@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 import { BsFacebook } from 'react-icons/bs';
 import { BsTwitter } from 'react-icons/bs';
@@ -7,56 +7,68 @@ import { BsInstagram } from 'react-icons/bs';
 import { BsLinkedin } from 'react-icons/bs';
 import { BiWorld } from 'react-icons/bi';
 
+import { InfoFooter } from "./styledInfoFooter.js";
+import { LastInfoFooter } from "./styledInfoFooter.js";
+import { CategoriesList } from "./styledInfoFooter.js";
+import { AboutList } from "./styledInfoFooter.js";
+import { ComunityList } from "./styledInfoFooter.js";
+import { Li } from "./styledInfoFooter.js";
+//import { tittleInfoFooter } from "./styledInfoFooter.js";
+
 const Footer = () => {
   return (
     <footer>
-        <div>
+        <InfoFooter>
             <div>
-                <h5>Categorías</h5>
+                <h4 className='tittleInfo'>Categorías</h4>
 
-                <ul>
-                    <li>Artes gráficas y diseño</li>
-                    <li>Marketing digital</li>
-                    <li>Redacción y traducción</li>
-                    <li>Video y animación</li>
-                    <li>Música y audio</li>
-                    <li>Programación y tecnología</li>
-                    <li>Datos</li>
-                    <li>Negocios</li>
-                    <li>Estilo de vida</li>
-                    <li>Mapa del sitio</li>
-                </ul>
+                <CategoriesList>
+                    <Li>Artes gráficas y diseño</Li>
+                    <Li>Marketing digital</Li>
+                    <Li>Redacción y traducción</Li>
+                    <Li>Video y animación</Li>
+                    <Li>Música y audio</Li>
+                    <Li>Programación y tecnología</Li>
+                    <Li>Datos</Li>
+                    <Li>Negocios</Li>
+                    <Li>Estilo de vida</Li>
+                    <Li>Mapa del sitio</Li>
+                </CategoriesList>
             </div>
 
             <div>
-                <h5>Acerca de</h5>
+                <h4 className='tittleInfo'>Acerca de</h4>
 
-                <li>Política de privacidad</li>
-                <li>Términos de Servicio</li>
+                <AboutList>
+                    <Li>Política de privacidad</Li>
+                    <Li>Términos de Servicio</Li>
+                </AboutList>
             </div>
 
             <div>
-                <h5>Comunidad</h5>
+                <h4 className='tittleInfo'>Comunidad</h4>
 
-                <li>Conviértete en vendedor</li>
-                <li>Afiliados</li>
+                <ComunityList>
+                    <Li>Conviértete en vendedor</Li>
+                    <Li>Afiliados</Li>
+                </ComunityList>
             </div>
-        </div>
+        </InfoFooter>
 
-        <div>
-            <div>
-                <h1>Projecto X</h1>
-                <p>@Todos los derechos reservados</p>
-            </div>
+        <LastInfoFooter>
+            <LastInfoFooter useFlex>
+                <h2 className='footerCopyright' id='footerLogo'>Proyecto X</h2>
+                <p className='footerCopyright'>© 2022 Proyecto X, All rights reserved</p>
+            </LastInfoFooter>
 
-            <div>
-                <BsFacebook/>
-                <BsTwitter/>
-                <BsInstagram/>
-                <BsLinkedin/>
-                <p><BiWorld/> Español</p>
-            </div>
-        </div>
+            <LastInfoFooter useFlex>
+                <BsFacebook className='socials'/>
+                <BsTwitter className='socials'/>
+                <BsInstagram className='socials'/>
+                <BsLinkedin className='socials'/>
+                <p className='socials'><BiWorld/> Español</p>
+            </LastInfoFooter>
+        </LastInfoFooter>
     </footer>
   );
 };
