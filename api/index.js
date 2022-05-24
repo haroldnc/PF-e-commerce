@@ -11,7 +11,8 @@ var cors = require('cors')
 dbConnection();
 
 //settings
-//server.set('port', process.env.PORT || 4000);
+
+server.set('port', process.env.PORT || 4000);
 
 //middlewares
 server.use(morgan('dev'));
