@@ -40,5 +40,6 @@ font-size: 25px;
 font-family: 'Poppins', sans-serif;
 font-weight: 700;
 margin-left: 50px;
+margin-top: 40px
 
 `
