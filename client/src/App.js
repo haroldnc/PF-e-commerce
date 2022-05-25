@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Carousel from "./components/Carousel/Carousel";
 import Hero from "./components/Hero/Hero";
+import WorkersCarousel from "./components/workersCarousel";
+import data from "../src/data"
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
@@ -28,7 +30,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
         </Switch>
-
+        <WorkersCarousel profiles={data}/>
         <Footer />
         <GlobalStyle />
       </ThemeProvider>
