@@ -8,13 +8,13 @@ export const Container = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 10px 20px 0 rgba(0,0,0,.05);
   transition: .3s;
+  box-shadow: ${props => props.theme.boxShadow};
   opacity: ${({ isScrolled }) => (isScrolled ? "100%" : "0")};
   top: ${({ isScrolled }) => (isScrolled ? "0" : "-100%")};
 
   @media (max-width: 768px) {
-      width: 16rem;
+      width: 13rem;
   }
 `;
 

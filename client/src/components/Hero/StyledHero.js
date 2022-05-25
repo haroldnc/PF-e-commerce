@@ -11,6 +11,11 @@ export const Wrapper = styled.div`
     min-width: 1150px;
     justify-content: space-between;
     display: flex;
+
+    @media (max-width: 768px){
+        flex-flow: column;
+        min-width: 100%;
+    }
 `
 
 export const Left = styled.div`
@@ -23,6 +28,11 @@ export const Left = styled.div`
         color: ${props => props.theme.colors.primary};
         font-weight: 800;
     }
+
+    @media (max-width: 768px){
+        justify-content:center;
+        align-items: center;
+    }
 `
 
 export const Title = styled.h1`
@@ -30,6 +40,10 @@ export const Title = styled.h1`
     font-weight: 500;
 
     margin-bottom: 2.3rem;
+
+    @media (max-width: 768px){
+        text-align: center;
+    }
 `
 
 export const Right = styled.div`
@@ -47,4 +61,8 @@ export const Image = styled.div`
     width: 25rem;
     border-radius: 99999px;
     margin-right: 2rem;
+
+    @media (max-width: 768px){
+        margin: 0 auto;
+    }
 `

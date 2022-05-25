@@ -13,7 +13,6 @@ export const Container = styled.header`
   z-index: 100;
   background-color: white;
   font-weight: 600;
-  box-shadow: ${({isScrolled}) => (isScrolled ? '0 10px 20px 0 rgba(0,0,0,.07)' : 'none')}
 `;
 
 export const Wrapper = styled.div`
