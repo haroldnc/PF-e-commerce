@@ -1,0 +1,24 @@
+const { Schema, model } = require('mongoose');
+
+
+const Publications = Schema({
+    title:{
+        type: String,
+        require: [true, "title is required"]
+    },
+    description:{
+        type: String,
+        require: [true, "description is required"]
+    },
+    categories:{
+        type: [Schema.Types.ObjectId],
+        ref: "Categories"
+    }
+})
+
+Publications.method('toJSON', function () {
+    const { __v, ...object } = this.toObject();
+    return object;
+});
+
+module.exports = model("Publications", Publications);
