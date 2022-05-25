@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-
 const User_roles = Schema({
     name: {
         type: String,
@@ -14,12 +13,11 @@ const User_roles = Schema({
                }
             }
         }
+    },
+    v: {
+       type: Number,
+       select: false
     }
-});
-
-User_roles.method('toJSON', function () {
-    const { __v, ...object } = this.toObject();
-    return object;
 });
 
 module.exports = model('User_roles', User_roles);

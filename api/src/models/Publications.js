@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 
-
 const Publications = Schema({
     idUser: {
         type: Schema.Types.ObjectId,
@@ -21,9 +20,9 @@ const Publications = Schema({
     }
 })
 
-Publications.method('toJSON', function () {
+Publication.method('toJSON', function () {
     const { __v, ...object } = this.toObject();
     return object;
 });
 
-module.exports = model("Publications", Publications);
+module.exports = model('Publication', Publication);

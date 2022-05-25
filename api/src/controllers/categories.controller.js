@@ -1,4 +1,5 @@
 const Categories = require('../models/Categories');
+const Services = require('../models/Services');
 
 const getCategories = async (req, res) => {
    const { name } = req.query;
@@ -8,8 +9,8 @@ const getCategories = async (req, res) => {
 
       if (name) categories = await Categories.find({
          name: new RegExp(`${name}`,'i')
-      });
-      else categories = await Categories.find();
+      }).populate({path: 'services'});
+      else categories = await Categories.find().populate({path: 'services'});
 
       res.status(200).json(categories);
    } catch (error) {
@@ -21,7 +22,7 @@ const getCategoryById = async (req, res) => {
    const { idCategory } = req.params;
 
    try {
-      const category = await Categories.findById(idCategory);
+      const category = await Categories.findById(idCategory).populate({path: 'services'});
 
       res.status(200).json(category);
    } catch (error) {
@@ -30,23 +31,26 @@ const getCategoryById = async (req, res) => {
 }
 
 const addCategory = async (req, res) => {
-   const { name, tags } = req.body;
+   const { id } = req.query;
 
    try {
-      if (!name) throw new Error('Name not found');
+      if (id) {
+         const { services } = req.body;
 
-      const category = new Categories({ name });
-      category.tags = [];
+         if (!Array.isArray(services) || !services.length) throw new Error('Services not found');
 
-      if (tags){
-         tags.forEach(tag => {
-            if (!tag.name) throw new Error(`Category "${tag.name}" contains an invalid tag`);
+         await Services.insertMany( services.map(s => {
+            return { ...s, category: id }
+         }));
+      } else {
+         const { name, img, phrase } = req.body;
+
+         if (!name) throw new Error('"name" is required');
+         if (!img) throw new Error('"img" is required');
+         if (!phrase) throw new Error('"phrase" is required');
    
-            category.tags.push({ name: tag.name });
-         });
+         await Categories.create({ name, img, phrase });
       }
-
-      await category.save();
 
       res.status(200).json({ msg: 'Category created successfully' });
    } catch (error) {
@@ -54,32 +58,8 @@ const addCategory = async (req, res) => {
    }
 }
 
-const addSubCategory = async (req, res) => {
-   const { idCategory } = req.params;
-   const { name } = req.body;
-
-   try {
-      if (!name) throw new Error('Name not found');
-      if (name.length < 3) throw new Error('Subcategory name accept minimun 3 letters');
-      if (!(/^[a-zñáéíóú\s]$/i.test(name))) throw new Error('Subcategory name only accept letters');
-
-      await Categories.updateOne({ _id: idCategory }, {
-         $push: { tags: { name } }
-      }, {
-         new: true,
-         upsert: true
-      });
-
-      res.status(200).json({ msg: 'Subcategory created successfully' });
-   } catch(error) {
-      res.status(422).json({ error: error.message });
-   }
-}
-
-
 module.exports = {
    getCategories,
    getCategoryById,
-   addCategory,
-   addSubCategory
+   addCategory
 }
