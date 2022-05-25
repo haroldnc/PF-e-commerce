@@ -2,20 +2,30 @@ import styled from "styled-components";
 
 export const Container = styled.form`
   background: white;
-  width: 23rem;
-  height: 2.8rem;
+  width: 18rem;
+  height: 2.2rem;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 10px 20px 0 rgba(0,0,0,.05);
+  transition: .3s;
+  opacity: ${({ isScrolled }) => (isScrolled ? "100%" : "0")};
+  top: ${({ isScrolled }) => (isScrolled ? "0" : "-100%")};
+
+  @media (max-width: 768px) {
+      width: 16rem;
+  }
 `;
+
 export const Input = styled.input`
   width: 70%;
   height: 2rem;
   background-color: transparent;
   margin-left: 1rem;
-  caret-color: ${props => props.theme.colors.primary};
+  caret-color: ${(props) => props.theme.colors.primary};
 `;
+
 export const Button = styled.button`
   color: white;
   background-color: ${(props) => props.theme.colors.primary};
@@ -24,9 +34,9 @@ export const Button = styled.button`
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   cursor: pointer;
-  transition: .3s ease;
+  transition: 0.3s ease;
 
-  :hover{
-      background-color: ${(props) => props.theme.colors.secondary};
+  :hover {
+    background-color: ${(props) => props.theme.colors.secondary};
   }
 `;
