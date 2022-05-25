@@ -24,10 +24,15 @@ function App() {
       <div>
         <GlobalStyle />
       </div>
+<<<<<<< HEAD
       <Hero />
       <Carousel />
       <Presentation />
 
+=======
+      <Carousel />
+      <Presentation />
+>>>>>>> d4f028dde218713838bc324587033d2e61285dfe
       <Footer />
     </ThemeProvider>
   );

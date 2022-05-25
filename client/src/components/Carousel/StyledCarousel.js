@@ -22,6 +22,8 @@ export const Image = styled.img `
 
     &:hover{
         filter: brightness(120%); 
+        transition-property: all;
+        transition-duration: 250ms;
     }
 `
 
@@ -31,4 +33,10 @@ export const NameCard = styled.h3 `
     top: 10px;
     left: 30px;
     color: white
+`
+
+export const ImgArrow = styled.img `
+    padding:"10px",
+    borderRadius:"30px",
+    marginRight:"20px"
 `
