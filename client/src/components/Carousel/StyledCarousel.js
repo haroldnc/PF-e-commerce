@@ -22,6 +22,8 @@ export const Image = styled.img `
 
     &:hover{
         filter: brightness(120%); 
+        transition-property: all;
+        transition-duration: 250ms;
     }
 `
 
