@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Carousel from "./components/Carousel/Carousel";
 import Hero from "./components/Hero/Hero";
+import Testimonials from "./components/Testimonials/Testimonials";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ function App() {
       <Carousel />
       <Presentation />
       <Carousel />
-      <Presentation />
+      <Testimonials/>
       <Footer />
     </ThemeProvider>
   );
