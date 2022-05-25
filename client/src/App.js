@@ -10,6 +10,9 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Carousel from "./components/Carousel/Carousel";
 import Hero from "./components/Hero/Hero";
 
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,23 +21,18 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={themes.light}>
-      <Navbar toggle={toggle} />
-      <Sidebar isOpen={isOpen} toggle={toggle} />
-      <div>
-        <GlobalStyle />
-      </div>
-<<<<<<< HEAD
-      <Hero />
-      <Carousel />
-      <Presentation />
+    <BrowserRouter>
+      <ThemeProvider theme={themes.light}>
+        <Navbar toggle={toggle} />
+        <Sidebar isOpen={isOpen} toggle={toggle} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+        </Switch>
 
-=======
-      <Carousel />
-      <Presentation />
->>>>>>> d4f028dde218713838bc324587033d2e61285dfe
-      <Footer />
-    </ThemeProvider>
+        <Footer />
+        <GlobalStyle />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
