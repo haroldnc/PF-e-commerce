@@ -8,6 +8,11 @@ export const Container = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: ${props => props.theme.boxShadow};
+
+  @media (max-width: 768px){
+    margin-bottom: 3rem;
+  }
 `;
 export const Input = styled.input`
   width: 70%;

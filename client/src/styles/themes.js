@@ -5,7 +5,8 @@ const lightMode = {
         secondaryLighter:'#79dabc',
         font: '#000000',
         backgroundColor:'#FFFFFF'
-    }
+    },
+    boxShadow: '0 10px 20px 0 rgba(0,0,0,.07)'
 }
 
 const darkMode = {
@@ -15,7 +16,8 @@ const darkMode = {
         secondaryLighter:'#79dabc',
         font:"#ffffff",
         backgroundColor:'#060606'
-    }
+    },
+    boxShadow: '0 10px 20px 0 rgba(0,0,0,.07)'
 }
 
 export const themes = {
