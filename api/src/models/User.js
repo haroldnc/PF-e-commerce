@@ -75,7 +75,7 @@ const User = Schema({
     },
     publications: {
         type: [Schema.Types.ObjectId],
-        ref: ''
+        ref: 'Publications'
     },
     punctuation: {
         type: Number
