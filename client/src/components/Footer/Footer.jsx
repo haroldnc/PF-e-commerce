@@ -57,7 +57,7 @@ const Footer = () => {
 
         <LastInfoFooter>
             <LastInfoFooter useFlex>
-                <h2 className='footerCopyright' id='footerLogo'>Proyecto X</h2>
+                <h2 className='footerCopyright' id='footerLogo'>Wixer</h2>
                 <p className='footerCopyright'>© 2022 Proyecto X, All rights reserved</p>
             </LastInfoFooter>
 
