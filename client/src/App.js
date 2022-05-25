@@ -24,8 +24,8 @@ function App() {
       <div>
         <GlobalStyle />
       </div>
-      <Presentation />
       <Carousel />
+      <Presentation />
       <Footer />
     </ThemeProvider>
   );
