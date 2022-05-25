@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-
 const Services = Schema({
    name: {
       type: String,
@@ -26,12 +25,11 @@ const Services = Schema({
       type: Schema.Types.ObjectId,
       require: true,
       ref: 'Categories'
+   },
+   __v: {
+      type: Number,
+      select: false
    }
-});
-
-Services.method('toJSON', function () {
-    const { __v, ...object } = this.toObject();
-    return object;
 });
 
 module.exports = model('Services', Services);

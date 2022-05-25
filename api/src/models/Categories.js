@@ -1,6 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-
 const Categories = Schema({
    name: {
       type: String,
@@ -16,12 +15,6 @@ const Categories = Schema({
          }
       }
    },
-   
-   tags: [
-      {
-         name: String
-      }
-   ]
    img: {
       type: String,
       require: true,
@@ -31,12 +24,24 @@ const Categories = Schema({
    phrase: {
       type: String,
       require: true
+   },
+   __v: {
+      type: Number,
+      select: false
+   },
+   id: {
+      type: Schema.Types.ObjectId,
+      select: false
    }
+}, {
+   toJSON: { virtuals: true },
+   toObject: { virtuals: true }
 });
 
-Categories.method('toJSON', function () {
-    const { __v, ...object } = this.toObject();
-    return object;
+Categories.virtual('services', {
+   ref: 'Services',
+   localField: '_id',
+   foreignField: 'category'
 });
 
 module.exports = model('Categories', Categories);
