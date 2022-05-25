@@ -29,15 +29,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
         </Switch>
-
         <Footer />
         <GlobalStyle />
-      <Hero />
-      <Carousel />
-      <Presentation />
-      <Carousel />
-      <Testimonials/>
-      <Footer />
     </ThemeProvider>
     </BrowserRouter>
   );
