@@ -20,9 +20,9 @@ const Publications = Schema({
     }
 })
 
-Publication.method('toJSON', function () {
+Publications.method('toJSON', function () {
     const { __v, ...object } = this.toObject();
     return object;
 });
 
-module.exports = model('Publication', Publication);
+module.exports = model('Publications', Publications);
