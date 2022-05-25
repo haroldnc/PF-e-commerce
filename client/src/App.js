@@ -7,6 +7,7 @@ import Footer from "./components/Footer/Footer";
 import Presentation from "./components/Presentation/Presentation";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Carousel from "./components/Carousel/Carousel";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <GlobalStyle />
       </div>
       <Presentation />
+      <Carousel />
       <Footer />
     </ThemeProvider>
   );
