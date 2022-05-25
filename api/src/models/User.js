@@ -80,7 +80,7 @@ const User = Schema({
         require: [true, 'DNI number is required'],
     },
     phone: {
-        type: Number,
+        type: String,
         require: [true, 'Phone number is required'],
         validate: {
             validator: (v) => /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/i.test(v),
@@ -96,10 +96,6 @@ const User = Schema({
     },
     linkedin: {
         type: String 
-    },
-    publications: {
-        type: [Schema.Types.ObjectId],
-        ref: 'Publications'
     },
     punctuation: {
         type: Number

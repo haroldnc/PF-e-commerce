@@ -1,27 +1,24 @@
 const { Schema, model } = require('mongoose');
 
 
-const Publication = Schema({
-   name: {
-      type: String,
-      validate: {
-         validator: (v) => /^[a-zñáéíóú\s]{3,}$/i.test(v),
-         message: props => {
-            if (props.value.length < 3){
-               return 'Category name accept minimun 3 letters';
-            } else {
-               return 'Category name only accept letters';
-            }
-         }
-      }
-   },
-   
-   tags: [
-      {
-         name: String
-      }
-   ]
-});
+const Publications = Schema({
+    idUser: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    title:{
+        type: String,
+        require: [true, "title is required"]
+    },
+    description:{
+        type: String,
+        require: [true, "description is required"]
+    },
+    categories:{
+        type: [Schema.Types.ObjectId],
+        ref: "Categories"
+    }
+})
 
 Publication.method('toJSON', function () {
     const { __v, ...object } = this.toObject();
