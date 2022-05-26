@@ -1,11 +1,13 @@
 const { Router } = require('express');
 const { getUserById, getAllUsers, upDateUser, deleteUser } = require('../controllers/user.controllers')
+const {validarADMIN_ROLE} = require('../middlewares/validarAdminRole')
 
 const router = Router();
 
-router.get('/:idUser', getUserById);
+router.get('/:id', getUserById);
 router.get('/', getAllUsers);
-router.put('/', upDateUser);
-router.delete('/:idUser', deleteUser);
+router.put('/:id', upDateUser);
+router.delete('/:id', deleteUser);
+
 
 module.exports = router;
