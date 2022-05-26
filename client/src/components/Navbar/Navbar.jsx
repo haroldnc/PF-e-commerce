@@ -11,7 +11,7 @@ import {
 } from "./StyledNavbar";
 import ScrolledSearchbar from "./ScrolledSearchbar/ScrolledSearchbar";
 
-const Navbar = ({ toggle }) => {
+const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const navScroll = () => {
@@ -38,7 +38,7 @@ const Navbar = ({ toggle }) => {
             <h1>wixer</h1>
           </TitleContainer>
           <div>
-            <ScrolledSearchbar isScrolled={isScrolled}/>
+            <ScrolledSearchbar isScrolled={isScrolled} />
           </div>
         </Right>
         <div>
@@ -49,10 +49,10 @@ const Navbar = ({ toggle }) => {
               <button></button>
             </li>
             <li>
-              <SignIn>Sign In</SignIn>
+              <SignIn onClick={toggleModalLogIn}>Log In</SignIn>
             </li>
             <li>
-              <LogIn>Log In</LogIn>
+              <LogIn  onClick={toggleModalSignUp}>Sign Up</LogIn>
             </li>
           </LinksContainer>
         </div>
