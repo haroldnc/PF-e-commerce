@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css"
 import LeftArrow from '../assets/images/arrowL.png'
 import RightArrow from '../assets/images/arrowR.png'
 
-import {CarouselDiv, TitleCarousel, CardCarousel, Image, NameCard, ImgArrow} from './StyledCarousel'
+import {CarouselDiv, TitleCarousel, CardCarousel, Image, NameCard, ArrowImage} from './StyledCarousel'
 
 
 
@@ -13,11 +13,11 @@ import {CarouselDiv, TitleCarousel, CardCarousel, Image, NameCard, ImgArrow} fro
 const Carousel = () => {
 
     const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
-        <ImgArrow src={LeftArrow} alt="prevArrow" {...props} />
+        <ArrowImage src={LeftArrow} alt="prevArrow" {...props} />
       );
       
     const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => (
-        <ImgArrow src={RightArrow} alt="nextArrow" {...props} />
+        <ArrowImage src={RightArrow} alt="nextArrow" {...props} />
     );
 
     const categories =[

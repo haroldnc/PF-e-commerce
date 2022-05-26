@@ -7,11 +7,6 @@ import { themes } from "../src/styles/themes";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
-import Carousel from "./components/Carousel/Carousel";
-import Hero from "./components/Hero/Hero";
-import WorkersCarousel from "./components/workersCarousel";
-import data from "../src/data"
-import Testimonials from "./components/Testimonials/Testimonials";
 import Home from "./pages/Home/Home";
 // import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
 import ModalLogIn from "./components/ModalLogIn/ModalLogIn";
@@ -50,9 +45,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
         </Switch>
-        <WorkersCarousel profiles={data}/>
         <Footer />
-
         <ModalLogIn
           isOpenModalLogIn={isOpenModalLogIn}
           toggleModalLogIn={toggleModalLogIn}

@@ -1,14 +1,12 @@
 import styled from "styled-components";
 
 export const ImgArrow = styled.img `
-    padding:10px;
-    border-radius:30px;
-    margin-right:20px;
+padding: 10px,
 `
 
 export const WorkerDiv = styled.div`
-    margin: 15px;
-    text-align: center;
+margin: 50px;
+padding-bottom: 50px; 
 `
 
 export const TitleCarousel = styled.h2 `

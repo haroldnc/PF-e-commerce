@@ -38,8 +38,6 @@ export const NameCard = styled.h3 `
     color: white
 `
 
-export const ImgArrow = styled.img `
-    padding:10px;
-    border-radius:30px;
-    margin-right:20px;
+export const ArrowImage = styled.img `
+    padding: 10px,
 `
