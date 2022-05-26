@@ -8,6 +8,7 @@ const upDatePost = async (req, res, next) => {
         const newPost = {
             title: post.title,
             description: post.description,
+            categories: post.categories
         }
     
         let result = await Publications.findByIdAndUpdate(id, newPost)
