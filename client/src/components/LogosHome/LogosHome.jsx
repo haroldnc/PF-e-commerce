@@ -14,7 +14,7 @@ import Video from '../assets/LogosHome/Video o animacion.JPG'
 
 
 
-const LogosHome = () => {
+const LogosHome = ({allCategories}) => {
 
     
     const marketplace = [

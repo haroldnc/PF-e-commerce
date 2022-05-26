@@ -1,13 +1,13 @@
 const initialState = {
-    hola: []
+    allCategories: []
 };
   
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "PRUEBA":
+        case "GET_CATEGORIES":
             return {
                 ...state,
-                hola: action.payload,
+                allCategories: action.payload,
             };                          
 
         default: return state;
