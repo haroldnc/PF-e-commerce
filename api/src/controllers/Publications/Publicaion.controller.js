@@ -21,7 +21,7 @@ function FindNeedle(haystack, needle) {
     return -1
   }
 
-  const getAll = async(req, next) => {
+  const getAll = async(req,res, next) => {
   try{
     const {title} = req.query;
     let TodasDB = []

@@ -1,7 +1,7 @@
 const {Publications} = require('../../models/Publications');
 const {Categories} = require('../../models/Categories')
 
-const addPublicate =  (req, res, next) =>{
+const addPublicate = async (req, res, next) =>{
     const { title, description, categories} = req.body;
     try{
     let Publicacion = { 
