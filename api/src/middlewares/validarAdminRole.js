@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const User_type = require('../models/User_type');
+const User_roles = require('../models/User_roles');
 
 const validarADMIN_ROLE = async (req, res, next) => {
 
