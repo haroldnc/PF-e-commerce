@@ -13,6 +13,7 @@ import ModalLogIn from "./components/ModalLogIn/ModalLogIn";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
+import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +56,7 @@ function App() {
           isOpenModalSignUp={isOpenModalSignUp}
           toggleModalSignUp={toggleModalSignUp}
         />
-
+        <DarkModeBtn />
         <GlobalStyle />
       </ThemeProvider>
     </BrowserRouter>
