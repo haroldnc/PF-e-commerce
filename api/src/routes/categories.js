@@ -2,7 +2,10 @@ const { Router } = require('express');
 const {
    getCategories,
    getCategoryById,
-   addCategory
+   addCategory,
+   updateCategory,
+   updateService,
+   deleteCategory
 } = require('../controllers/categories.controller');
 const { validarADMIN_ROLE } = require('../middlewares/validarAdminRole');
 
@@ -10,7 +13,10 @@ const { validarADMIN_ROLE } = require('../middlewares/validarAdminRole');
 const router = Router();
 
 router.get('/', getCategories);
+router.post('/', addCategory);
+router.put('/', updateCategory);
 router.get('/:idCategory', getCategoryById);
-router.post('/', validarADMIN_ROLE, addCategory);
+router.put('/:idCategory', updateService);
+router.delete('/:idCategory', deleteCategory);
 
 module.exports = router;
