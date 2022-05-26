@@ -1,11 +1,11 @@
 const {Publications} = require('../../models/Publications');
 const {Categories} = require('../../models/Categories')
 
-const addPublicate =  (req, res, next) =>{
-    const { title, description, categories} = req.body;
+const addPublicate =  (req, res) =>{
+    const { name, description, categories} = req.body;
     try{
     let Publicacion = { 
-        title,
+        name,
         description,
         categories
     }
