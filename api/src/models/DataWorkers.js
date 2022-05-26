@@ -4,14 +4,14 @@ const Workers = Schema({
 
     title: {
         type: String,
-        require: [true, 'title is required'],
+        require: [true, 'position or category is required'],
         validate: {
             validator: (v) => /^[a-z]+$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
-                   return 'title accept minimun 3 letters';
+                   return 'position or category accept minimun 3 letters';
                 } else {
-                   return 'title only accept letters';
+                   return 'position or category only accept letters';
                 }
              }
          }
@@ -25,8 +25,35 @@ const Workers = Schema({
         require: [true, "Information is required"]
     },
     
-    // languages (Array(strings))
-    // skills (Array(strings)) // Habilidades
+    languages: {
+        type: String,
+        require: [true, 'languages is required'],
+        validate: {
+            validator: (v) => /^[a-z]+$/i.test(v),
+            message: props =>{
+                if (props.value.length < 3){
+                   return 'languages accept minimun 3 letters';
+                } else {
+                   return 'languages only accept letters';
+                }
+             }
+         }
+    },
+    
+    skills: {
+        type: String,
+        require: [true, 'languages is required'],
+        validate: {
+            validator: (v) => /^[a-z]+$/i.test(v),
+            message: props =>{
+                if (props.value.length < 3){
+                   return 'languages accept minimun 3 letters';
+                } else {
+                   return 'languages only accept letters';
+                }
+             }
+         }
+    },
 
     pricePerHour: {
         type: Number
