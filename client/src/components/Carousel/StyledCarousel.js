@@ -39,7 +39,7 @@ export const NameCard = styled.h3 `
 `
 
 export const ImgArrow = styled.img `
-    padding:"10px",
-    borderRadius:"30px",
-    marginRight:"20px"
+    padding:10px;
+    border-radius:30px;
+    margin-right:20px;
 `
