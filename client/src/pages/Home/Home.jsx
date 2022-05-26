@@ -1,6 +1,6 @@
 import React, { useEffect }from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { getCategories } from '../../store/actions/index'
+import { getAllCategories } from '../../store/actions/index'
 
 import Carousel from '../../components/Carousel/Carousel'
 import Hero from '../../components/Hero/Hero'
@@ -14,7 +14,7 @@ const Home = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getCategories())
+    dispatch(getAllCategories())
   },[dispatch])
 
   return (

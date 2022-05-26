@@ -1,5 +1,6 @@
 import React from "react";
 import { LogosGlobal, LogoCard, Logo, NameCard, Name} from './StyledLogosHome'
+import { Link } from 'react-router-dom'
 
 import Data from '../assets/LogosHome/Data.JPG'
 import DiseñoGrafico from '../assets/LogosHome/Diseño.JPG'
@@ -19,31 +20,40 @@ const LogosHome = ({allCategories}) => {
     
     const marketplace = [
         {name:"Diseñadores Graficos",
-         logo: DiseñoGrafico
+         logo: DiseñoGrafico,
+         id: 1
         },{
             name: "Marketing Digital",
-            logo: MarketingDigital
+            logo: MarketingDigital,
+            id: 2
         },{
             name: "Escritura y Traducción",
-            logo: Traduccion
+            logo: Traduccion,
+            id: 3
         },{
             name: "Video y Animación",
-            logo: Video
+            logo: Video,
+            id: 4
         },{
             name: "Musica y Audio",
-            logo: MusicaAudio
+            logo: MusicaAudio,
+            id: 5
         },{
             name: "Programación y Tecnologia",
-            logo: Programacion
+            logo: Programacion,
+            id: 6
         },{
             name: "Negocios",
-            logo: Negocios
+            logo: Negocios,
+            id: 7
         },{
             name: "Estilo de vida",
-            logo: EstiloDeVida
+            logo: EstiloDeVida,
+            id: 8
         },{
             name: "Data",
-            logo: Data
+            logo: Data,
+            id: 9
         }
     ]
 
@@ -53,10 +63,12 @@ const LogosHome = ({allCategories}) => {
         <LogosGlobal className="divTotal">
             
             {marketplace && marketplace.map( logo => (
-                <LogoCard className="divLogo" key={logo.name}>
-                    <Logo className="logo" src={logo.logo}/>
-                    <NameCard className="name">{logo.name}</NameCard>
-                </LogoCard>
+                <Link to={`/category/${logo.id}`}>
+                    <LogoCard className="divLogo" key={logo.name}>
+                        <Logo className="logo" src={logo.logo}/>
+                        <NameCard className="name">{logo.name}</NameCard>
+                    </LogoCard>
+                </Link>
             ))}
         </LogosGlobal>  
         </>
