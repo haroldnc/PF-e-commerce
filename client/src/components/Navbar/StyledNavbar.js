@@ -4,14 +4,13 @@ import {GiHamburgerMenu} from 'react-icons/gi'
 export const Container = styled.header`
   width: 100%;
   height: 5rem;
-  background-color: transparent;
+  background-color: ${props => props.theme.colors.backgroundColor};
   display: flex;
   justify-content: center;
   align-items: center;
   top: 0;
   position: fixed;
   z-index: 100;
-  background-color: white;
   font-weight: 600;
 `;
 

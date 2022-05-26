@@ -15,7 +15,7 @@ import {
   Title,
 } from "./StyledModalLogIn";
 
-const Modal = ({ isOpenModalLogIn, toggleModalLogIn}) => {
+const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn}) => {
   return (
     <>
       {isOpenModalLogIn && (
@@ -50,4 +50,4 @@ const Modal = ({ isOpenModalLogIn, toggleModalLogIn}) => {
   );
 };
 
-export default Modal;
+export default ModalLogIn;

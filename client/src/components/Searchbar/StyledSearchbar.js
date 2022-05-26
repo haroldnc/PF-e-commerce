@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-  background: white;
+  background: ${props => props.theme.colors.backgroundColorAlt};
   width: 23rem;
   height: 2.8rem;
   border-radius: 5px;

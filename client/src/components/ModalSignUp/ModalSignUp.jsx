@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import {
   Button,
+  ButtonAlt,
   CheckBoxContainer,
   CloseIcon,
   Container,
+  DivisionContainer,
   Input,
   InputContainer,
   ModalBox,
   Title,
+  GoogleIcon,
+  Line
 } from "../ModalLogIn/StyledModalLogIn";
 import { SignInLink } from "./StyledModalSignUp";
 
@@ -32,6 +36,15 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               <input type="checkbox" />I agree with Terms & Conditions
             </CheckBoxContainer>
             <Button>Create New Account</Button>
+            <DivisionContainer>
+              <Line />
+              Or
+              <Line />
+            </DivisionContainer>
+            <ButtonAlt>
+              <GoogleIcon />
+              Continue with Google
+            </ButtonAlt>
           </ModalBox>
         </Container>
       )}

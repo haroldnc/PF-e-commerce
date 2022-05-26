@@ -18,7 +18,7 @@ export const Container = styled.section`
 `;
 
 export const ModalBox = styled.div`
-  background: white;
+  background: ${props => props.theme.colors.backgroundColorAlt};
   padding: 10px;
   height: 32rem;
   width: 20rem;
@@ -43,6 +43,7 @@ export const InputContainer = styled.div`
   height: 2.3rem;
   border-radius: 5px;
   margin: 1rem 0;
+  background-color: white;
 
   display: flex;
   align-items: center;
@@ -74,7 +75,7 @@ export const Button = styled.button`
   height: 2.3rem;
   border-radius: 5px;
   margin: 2rem 0 1rem 0;
-  color: ${(props) => props.theme.colors.backgroundColor};
+  color: white;
   cursor: pointer
 `;
 export const DivisionContainer = styled.div`
@@ -99,7 +100,7 @@ export const ButtonAlt = styled.button`
   height: 2.3rem;
   border-radius: 5px;
   margin: 1rem 0 2rem 0;
-  color: ${(props) => props.theme.colors.backgroundColor};
+  color: white;
   padding: 0 30px;
   cursor: pointer;
 
@@ -116,6 +117,7 @@ export const CloseIcon = styled(FaTimes)`
     top: 0.5rem;
     right: 0.5rem;
     font-size: 1.2rem;
+    color: ${props => props.theme.colors.font};
     cursor: pointer;
 `
 export const SignUpLink = styled.a`

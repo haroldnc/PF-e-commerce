@@ -14,9 +14,13 @@ import ModalLogIn from "./components/ModalLogIn/ModalLogIn";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
 import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
+import { useDarkMode } from "./Hooks/useDarkMode";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useDarkMode();
+
+  const themeMode = theme === 'light' ? 'light' : 'dark';
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -33,7 +37,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ThemeProvider theme={themes.light}>
+      <ThemeProvider theme={themes[themeMode]}>
         <Navbar
           toggle={toggle}
           isOpenModalSignUp={isOpenModalSignUp}
@@ -56,7 +60,7 @@ function App() {
           isOpenModalSignUp={isOpenModalSignUp}
           toggleModalSignUp={toggleModalSignUp}
         />
-        <DarkModeBtn />
+        <DarkModeBtn theme={theme} setTheme={setTheme}/>
         <GlobalStyle />
       </ThemeProvider>
     </BrowserRouter>
