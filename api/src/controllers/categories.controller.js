@@ -58,8 +58,59 @@ const addCategory = async (req, res) => {
    }
 }
 
+const updateCategory = async (req, res) => {
+   const { id } = req.query;
+   const { name, img, phrase } = req.body;
+
+   try {
+      if (!id) throw new Error('Category ID is required');
+
+      await Categories.updateOne({ _id: id }, { name, img, phrase });
+
+      res.status(200).json({ msg: 'Category updated successfully' });
+   } catch (error) {
+      res.status(422).json({ error: error.message })
+   }
+}
+
+const updateService = async (req, res) => {
+   const { idCategory } = req.params;
+   const { idService } = req.query
+   const { name, img, category } = req.body;
+
+   try {
+      if (!idService) throw new Error('Service ID is required');
+
+      await Services.findByIdAndUpdate({ _id: idService ,category: idCategory }, {
+         name,
+         img,
+         category
+      });
+
+      res.status(200).json({ msg: 'Service updated successfully' });
+   } catch (error) {
+      res.status(422).json({ error: error.message })
+   }
+}
+
+const deleteCategory = async (req, res) => {
+   const { idCategory } = req.params;
+
+   try {
+      await Categories.findByIdAndDelete(idCategory);
+      await Services.deleteMany({category: idCategory});
+
+      res.status(200).json({ msg: 'Category deleted successfully' })
+   } catch(error) {
+      res.status(422).json({ error: error.message });
+   }
+}
+
 module.exports = {
    getCategories,
    getCategoryById,
-   addCategory
+   addCategory,
+   updateCategory,
+   updateService,
+   deleteCategory
 }

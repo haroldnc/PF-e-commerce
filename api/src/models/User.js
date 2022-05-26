@@ -5,11 +5,13 @@ const User = Schema({
         type: String,
         require: [true, 'Username is required'],
         validate: {
-            validator: (v) => /^[a-z]+$/i.test(v),
+            validator: (v) => /^[a-z]{3,}$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
-                   return 'First name accept minimun 3 characters';
-                }; 
+                   return 'Role name accept minimun 3 letters';
+                } else {
+                   return 'First name only accept letters';
+                }
              }
          }
     },
@@ -17,7 +19,7 @@ const User = Schema({
         type: String,
         require: [true, 'First name is required'],
         validate: {
-            validator: (v) => /^[a-z]+$/i.test(v),
+            validator: (v) => /^[a-záéíóúñ\s]{3,}$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
                    return 'First name accept minimun 3 letters';
@@ -31,7 +33,7 @@ const User = Schema({
         type: String,
         require: [true, 'Last name is required'],
         validate: {
-            validator: (v) => /^[a-z]+$/i.test(v),
+            validator: (v) => /^[a-záéíóúñ\s]{3,}$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
                    return 'Last name accept minimun 3 letters';
@@ -71,11 +73,13 @@ const User = Schema({
         }
     },
     image: {
-        type: String
+        type: String,
+        validate: v => /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i,
+        message: props => `${props.value} is not valid url image`
     },
     user_role: {
-            type: Schema.Types.ObjectId,
-            ref: 'User_roles'  
+        type: Schema.Types.ObjectId,
+        ref: 'User_roles'  
     },
     dni: {
         type: String,
@@ -92,7 +96,7 @@ const User = Schema({
     web: {
         type: String,
         validate: {
-            validator: (v) => /^[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i.test(v),
+            validator: (v) => /^(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i.test(v),
             message: props => `Web is not valid`
         }
     },
@@ -100,7 +104,8 @@ const User = Schema({
         type: String 
     },
     punctuation: {
-        type: Number
+        type: Number,
+        default: 0
     },
     // estado del usuario confirmacion de mail? Evaluar si queda o no.
     confirm_email: {
