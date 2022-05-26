@@ -25,7 +25,7 @@ const getAllUsers = async (req, res) => {
         const users = await User.find({})
             .skip(start)
             .limit(limit)
-            .populate('user_roles', 'name')
+            .populate('user_role', 'name')
             .exec();
         const total = await User.countDocuments();//cuenta la cantidad de documentos
         const countPages = Math.ceil(total / limit);
