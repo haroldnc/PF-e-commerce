@@ -7,7 +7,10 @@ export const CarouselDiv = styled.div `
 
 export const TitleCarousel = styled.h2 `
     margin-bottom: 30px;
-    margin-left: 25px
+    margin-left: 25px;
+    font-size: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
 `
 export const CardCarousel = styled.h1 `
     position: relative;

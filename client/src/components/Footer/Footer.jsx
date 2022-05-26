@@ -58,7 +58,7 @@ const Footer = () => {
         <LastInfoFooter>
             <LastInfoFooter useFlex>
                 <h2 className='footerCopyright' id='footerLogo'>Wixer</h2>
-                <p className='footerCopyright'>© 2022 Proyecto X, All rights reserved</p>
+                <p className='footerCopyright'>© 2022 Wixer, All rights reserved</p>
             </LastInfoFooter>
 
             <LastInfoFooter useFlex>
