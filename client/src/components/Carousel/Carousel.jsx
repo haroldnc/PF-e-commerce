@@ -60,7 +60,7 @@ const Carousel = () => {
 
     return(
         <CarouselDiv>
-            <TitleCarousel> Popular services</TitleCarousel>
+            <TitleCarousel>Servicios populares</TitleCarousel>
             <Slider {...settings}>
             { categories && categories.map(card => (
                 <CardCarousel key={card.name}>
