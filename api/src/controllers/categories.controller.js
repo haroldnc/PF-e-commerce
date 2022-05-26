@@ -93,10 +93,24 @@ const updateService = async (req, res) => {
    }
 }
 
+const deleteCategory = async (req, res) => {
+   const { idCategory } = req.params;
+
+   try {
+      await Categories.findByIdAndDelete(idCategory);
+      await Services.deleteMany({category: idCategory});
+
+      res.status(200).json({ msg: 'Category deleted successfully' })
+   } catch(error) {
+      res.status(422).json({ error: error.message });
+   }
+}
+
 module.exports = {
    getCategories,
    getCategoryById,
    addCategory,
    updateCategory,
-   updateService
+   updateService,
+   deleteCategory
 }
