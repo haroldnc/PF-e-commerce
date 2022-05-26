@@ -1,5 +1,6 @@
 const initialState = {
-    allCategories: []
+    allCategories: [],
+    category: [],
 };
   
 const rootReducer = (state = initialState, action) => {
@@ -7,9 +8,13 @@ const rootReducer = (state = initialState, action) => {
         case "GET_CATEGORIES":
             return {
                 ...state,
-                allCategories: action.payload,
+                allCategories: action.payload
             };                          
-
+        case "GET_CATEGORY":
+            return{
+                ...state,
+                category: action.payload
+            }
         default: return state;
     };
 };

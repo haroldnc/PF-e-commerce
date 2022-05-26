@@ -50,7 +50,6 @@ function App() {
           <Route exact path="/" component={Home} />
         </Switch>
         <Footer />
-
         <ModalLogIn
           isOpenModalLogIn={isOpenModalLogIn}
           toggleModalLogIn={toggleModalLogIn}
