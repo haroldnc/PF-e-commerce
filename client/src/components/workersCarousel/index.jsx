@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import LeftArrow from '../assets/images/arrowL.png'
 import RightArrow from '../assets/images/arrowR.png'
-import { ImgArrow, WorkerDiv } from "./workerCardsStyled";
+import { Container, ImgArrow, StyledPicture, TitleCarousel, WorkerDiv } from "./workerCardsStyled";
 
 export default function WorkersCarousel({profiles}){
 
@@ -18,7 +18,7 @@ export default function WorkersCarousel({profiles}){
     );
 
     const settings = {
-        dots: false,
+        dots: true,
         infinite: true,
         arrows: true,
         speed: 500,
@@ -28,10 +28,17 @@ export default function WorkersCarousel({profiles}){
         prevArrow: <SlickArrowRight />
        }
 
+    //    const workerProfiles = profiles.map(p=>p)
+
     return(
         <WorkerDiv>
-            <h3>Our Best Talents</h3>
+            <TitleCarousel>Our Best Talents</TitleCarousel>
             <Slider {...settings}>
+                {/* {workerProfiles && workerProfiles.map(p=>(
+                    <Container key={p.id}>
+                        <StyledPicture src={p.portfolio_pic}/>
+                    </Container>
+                ))} */}
                 {profiles.map(p=>
                      <Card
                      key={p.id}
