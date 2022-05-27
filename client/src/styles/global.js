@@ -11,4 +11,22 @@ export default createGlobalStyle`
         background-color: ${props => props.theme.colors.backgroundColor};
         color: ${props => props.theme.colors.font}
     }
+
+    ul{
+        list-style: none;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    button{
+        border: none;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    input{
+        border: none;
+        outline: none;
+    }
 `
