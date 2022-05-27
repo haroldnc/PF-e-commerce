@@ -1,4 +1,6 @@
-const { Schema, model,Types } = require('mongoose');
+const { Schema, model} = require('mongoose');
+var mongoose = require ("mongoose")
+require ("mongoose-double")(mongoose)
 
 
 const Publications = Schema({
@@ -19,7 +21,7 @@ const Publications = Schema({
         ref: "Categories"
     },    
     price:{
-        type: Number,
+        type: Schema.Types.Double,
         require: [true, "description is required"]
     },
     user:{
