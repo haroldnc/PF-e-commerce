@@ -1,7 +1,7 @@
 const {Router} = require("express")
 const {addPublicate} = require("../controllers/Publications/Agregar.controller")
 const {getId} = require("../controllers/Publications/ID.controller")
-const {getAll} = require("../controllers/Publications/Publicaion.controller")
+const {getAll} = require("../controllers/Publications/Publication.controller")
 const {upDatePost , deletePost} = require("../controllers/Publications/PostRoutes")
 
 const router = Router()
