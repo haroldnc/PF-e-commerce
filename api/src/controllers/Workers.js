@@ -1,10 +1,10 @@
 const {User, findByIdAndUpdate} = require("../models/User")
 
 
-const listAllWorkers = async (req, res) => {
-    const allWorkers = await User.find({user_role: "worker"})
-    return allWorkers
-}
+// const listAllWorkers = async (req, res) => {
+//     const allWorkers = await User.find({user_role: "worker"})
+//     return allWorkers
+// }
 
 const getAllWorkers = async (req, res, next) => {
     let {name} = req.query
@@ -19,7 +19,7 @@ const getAllWorkers = async (req, res, next) => {
         }
     }else{
         try{
-            const oneWorker = await listAllWorkers().find(e=> e.name === name)
+            const oneWorker = await User.find({user_role: "worker"})
             if(!oneWorker) res.send({msg: "User not found"})
             else res.send(oneWorker)
         }catch(error){
@@ -40,7 +40,7 @@ const getWorkerById = async (req, res, next) => {
     }
 }
 
-const updAteWorker = async (req, res, next) => {
+const upDateWorker = async (req, res, next) => {
     let {id} = req.params;
     let dates = req.body;
     try{
@@ -67,4 +67,4 @@ const updAteWorker = async (req, res, next) => {
 }
 
 
-module.exports = {getAllWorkers,getWorkerById,updAteWorker}
+module.exports = {getAllWorkers,getWorkerById,upDateWorker}
