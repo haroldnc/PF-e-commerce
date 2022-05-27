@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../src/styles/global";
 import { themes } from "../src/styles/themes";
 
+import Services from './pages/Services/Services'
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -48,6 +49,7 @@ function App() {
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/servicios/:id" component={Services} />
         </Switch>
         <Footer />
         <ModalLogIn
