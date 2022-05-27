@@ -1,10 +1,10 @@
-const {User} = require("../models/User")
+const User = require("../models/User")
 
 
 const listAllWorkers = async () => {
     // console.log(User)
-    const allWorkers = await User.find({user_role: "worker"})
-    consolelog(allWorkers)
+    const allWorkers = await User.find({user_role:"628efa09f43fddcf2b47bfa2"}).populate("user_role", {name:1,_id:0})
+    console.log(allWorkers)
     return allWorkers
 }
 //{user_role: "worker"}

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose-double')('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const Workers = Schema({
 
@@ -56,7 +56,7 @@ const Workers = Schema({
     },
 
     pricePerHour: {
-        type: Schema.Types.Double
+        type: Number
     },
 
     workExperience: ({

@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose-double')('mongoose');
+const { Schema, model,Types } = require('mongoose');
 
 
 const Publications = Schema({
@@ -19,7 +19,7 @@ const Publications = Schema({
         ref: "Categories"
     },    
     price:{
-        type: Schema.Types.Double,
+        type: Number,
         require: [true, "description is required"]
     },
     user:{
