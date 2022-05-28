@@ -32,7 +32,7 @@ const Filters = () => {
                     <li>
                       {category.name}
                       <ul>
-                        <li>{category.services}</li>
+                        <li>{category.services.name}</li>
                       </ul>
                     </li>
                   }
