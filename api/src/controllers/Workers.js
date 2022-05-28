@@ -1,9 +1,12 @@
-const User = require("../models/User")
+// const User = require("../models/User")
+const DataWorkers = require("../models/DataWorkers")
 
 
 const listAllWorkers = async () => {
     // console.log(User)
-    const allWorkers = await User.find({user_role:"628efa11f43fddcf2b47bfa4"}).populate("user_role", {name:1,_id:0})
+    // const allWorkers = await User.find({user_role:"628efa11f43fddcf2b47bfa4"}).populate("user_role", {name:1,_id:0})
+    const allWorkers = await DataWorkers.find()
+        .populate("userId", {username:0,password:0,confirm_email:0});
     console.log(allWorkers)
     return allWorkers
 }
@@ -24,8 +27,13 @@ const getAllWorkers = async (req, res, next) => {
         try{
 
             const WorkersByname = await listAllWorkers()
-            const WorkersByUsername = WorkersByname.filter(e=> e.username.toLowerCase().includes(name.toLowerCase()))
-            if(!WorkersByUsername) res.send({msg: "User not found"})
+            // const WorkersByUsername = WorkersByname.filter(e=> e.username.toLowerCase().includes(name.toLowerCase()))
+            const WorkersByUsername = WorkersByname.filter( e => {
+                const reg = new RegExp(`${name}`,'i');
+
+                return reg.test(e.userId.firstName) || reg.test(e.userId.lastName);
+            });
+            if(!WorkersByUsername.length) res.send({msg: "User not found"})
             else res.send(WorkersByname)
         }catch(error){
             next(error)
