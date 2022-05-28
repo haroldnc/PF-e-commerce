@@ -22,9 +22,11 @@ const getAllWorkers = async (req, res, next) => {
         }
     }else{
         try{
-            const oneWorker = await listAllWorkers().find(e=> e.name === name)
-            if(!oneWorker) res.send({msg: "User not found"})
-            else res.send(oneWorker)
+
+            const WorkersByname = await listAllWorkers()
+            WorkersByname = WorkersByname.filter(e=> e.name.toLowerCase().includes(name.toLowerCase()))
+            if(!WorkersByname) res.send({msg: "User not found"})
+            else res.send(WorkersByname)
         }catch(error){
             next(error)
         }
