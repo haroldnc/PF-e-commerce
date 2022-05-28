@@ -105,7 +105,11 @@ const Workers = Schema({
             validate: v => /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i,
             message: props => `${props.value} is not valid url image`
             }
-        })
+        }),
+        userId:{
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }
 })
 
 module.exports = model('Workers',Workers );
