@@ -3,8 +3,8 @@ const User = require("../models/User")
 
 const listAllWorkers = async () => {
     // console.log(User)
-    const allWorkers = await User.find({}).populate("user_rol",{_id: false, name: true})
-    // console.log(allWorkers)
+    const allWorkers = await User.find({user_role:"628efa09f43fddcf2b47bfa2"}).populate("user_role", {name:1,_id:0})
+    console.log(allWorkers)
     return allWorkers
 }
 //{user_role: "worker"}
@@ -22,9 +22,9 @@ const getAllWorkers = async (req, res, next) => {
         }
     }else{
         try{
-            // const oneWorker = await listAllWorkers().find(e=> e.name === name)
-            // if(!oneWorker) res.send({msg: "User not found"})
-            // else res.send(oneWorker)
+            const oneWorker = await listAllWorkers().find(e=> e.name === name)
+            if(!oneWorker) res.send({msg: "User not found"})
+            else res.send(oneWorker)
         }catch(error){
             next(error)
         }
