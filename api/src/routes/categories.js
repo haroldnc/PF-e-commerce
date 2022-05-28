@@ -13,10 +13,10 @@ const { validarADMIN_ROLE } = require('../middlewares/validarAdminRole');
 const router = Router();
 
 router.get('/', getCategories);
-router.post('/', validarADMIN_ROLE, addCategory);
-router.put('/', validarADMIN_ROLE, updateCategory);
+router.post('/', addCategory);
+router.put('/', updateCategory);
 router.get('/:idCategory', getCategoryById);
-router.put('/:idCategory', validarADMIN_ROLE, updateService);
-router.delete('/:idCategory', validarADMIN_ROLE, deleteCategory);
+router.put('/:idCategory', updateService);
+router.delete('/:idCategory', deleteCategory);
 
 module.exports = router;
