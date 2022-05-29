@@ -12,6 +12,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allCategories: action.payload,
+            };
+        case "GET_ALL_USERS":
+            return {
+                ...state,
+                allUsers: action.payload,
             };                          
         case "GET_CATEGORY":
             return{
@@ -19,6 +24,8 @@ const rootReducer = (state = initialState, action) => {
                 category: action.payload
             }
         case "GET_SERVICES":
+            const users = state.allUsers;
+            console.log(users)
             const services = state.allCategories.map((s) => s.services);
 
             return {

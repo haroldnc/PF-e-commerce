@@ -13,3 +13,8 @@ export const getCAtegory = (id) => dispatch => {
 export const getServices = (payload) => {
     return {type: "GET_SERVICES", payload: payload}
 }
+
+export const getAllUsers = () => dispatch => {
+    axios.get(`https://wixer-server.herokuapp.com/user`)
+    .then(res => dispatch({type: "GET_ALL_USERS", payload: res.data}))
+}
