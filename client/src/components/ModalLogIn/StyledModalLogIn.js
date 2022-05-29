@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import {FaTimes} from "react-icons/fa";
+import {Form, Field} from 'formik'
 
 export const Container = styled.section`
   height: 100vh;
@@ -17,11 +18,11 @@ export const Container = styled.section`
   align-items: center;
 `;
 
-export const ModalBox = styled.div`
+export const ModalBox = styled(Form)`
   background: ${props => props.theme.colors.backgroundColorAlt};
   padding: 10px;
   height: 32rem;
-  width: 20rem;
+  min-width: 20rem;
   border-radius: 5px;
   box-shadow: ${(props) => props.theme.boxShadow};
   position: relative;
@@ -49,7 +50,7 @@ export const InputContainer = styled.div`
   align-items: center;
 `;
 
-export const Input = styled.input`
+export const Input = styled(Field)`
   background-color: transparent;
   height: 70%;
   width: 90%;
@@ -125,4 +126,16 @@ export const SignUpLink = styled.a`
     font-size: 0.8rem;
     cursor: pointer;
     text-decoration: underline;
+`
+
+export const Error = styled.div`
+    width: 240px;
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
 `

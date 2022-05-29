@@ -1,6 +1,7 @@
 const initialState = {
     allCategories: [],
     category: [],
+    users: [],
 };
   
 const rootReducer = (state = initialState, action) => {
