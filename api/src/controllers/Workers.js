@@ -10,7 +10,6 @@ const listAllWorkers = async () => {
     console.log(allWorkers)
     return allWorkers
 }
-//{user_role: "worker"}
 
 const getAllWorkers = async (req, res, next) => {
     let {name} = req.query

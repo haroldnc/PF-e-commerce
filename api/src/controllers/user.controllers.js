@@ -135,6 +135,7 @@ const createUser = async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         usuario.password = bcrypt.hashSync(password, salt);
         // guardar usuario
+        
         await usuario.save();
         // enviar email de confirmacion de registro
         const transporter = nodemailer.createTransport({
@@ -171,7 +172,6 @@ const createUser = async (req, res) => {
             usuario,
             token
         });*/
-
     } 
     catch (error) {
         console.log(error);
