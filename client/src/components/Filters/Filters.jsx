@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getServices } from "../../store/actions/index"
+import { getServices } from "../../store/actions/index";
+import { Filter, SectionFilters, SectionFilters2, SelectsDiv } from "./styledFilters";
 
 const Filters = () => {
   const dispatch = useDispatch();
@@ -23,51 +24,53 @@ const Filters = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <Filter>
       <h2>Categorias</h2>
 
-      <select onChange={(e) => handleClick(e)}>
-        <option value="select category">SELECT CATEGORY</option>
-        {
-          categories && categories
-          .sort((a, b) => {
-            if (a.name < b.name) return -1;
-            if (a.name > b.name) return 1;
-            return 0;
-          })
-
-          .map((category) => {
-            return (
-              <option value={category._id} key={category._id} id={category._id}>
-                {category.name}
-              </option>
-            );
-          })
-        }
-      </select>
-
-      <select>
-        <option>SELECT SERVICE</option>
-        {
-          servicesC && servicesC
-          .sort((a, b) => {
-            if (a.name < b.name) return -1;
-            if (a.name > b.name) return 1;
-            return 0;
-          })
-
-          .map((s) => {
-            return s.map((ss) => {
-              return (
-                <option value={ss.name} id={ss.category} key={ss._id}>
-                  {ss.name}
-                </option>
-              )
+      <SelectsDiv>
+        <SectionFilters onChange={(e) => handleClick(e)}>
+          <option value="select category">SELECT CATEGORY</option>
+          {
+            categories && categories
+            .sort((a, b) => {
+              if (a.name < b.name) return -1;
+              if (a.name > b.name) return 1;
+              return 0;
             })
-          })
-        }
-      </select>
-    </div>
+
+            .map((category) => {
+              return (
+                <option value={category._id} key={category._id} id={category._id}>
+                  {category.name}
+                </option>
+              );
+            })
+          }
+        </SectionFilters>
+
+        <SectionFilters2>
+          <option>SELECT SERVICE</option>
+          {
+            servicesC && servicesC
+            .sort((a, b) => {
+              if (a.name < b.name) return -1;
+              if (a.name > b.name) return 1;
+              return 0;
+            })
+
+            .map((s) => {
+              return s.map((ss) => {
+                return (
+                  <option value={ss.name} id={ss.category} key={ss._id}>
+                    {ss.name}
+                  </option>
+                )
+              })
+            })
+          }
+        </SectionFilters2>
+      </SelectsDiv>
+    </Filter>
   );
 };
 

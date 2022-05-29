@@ -5,7 +5,7 @@ import { BsFacebook } from 'react-icons/bs';
 import { BsTwitter } from 'react-icons/bs';
 import { BsInstagram } from 'react-icons/bs';
 import { BsLinkedin } from 'react-icons/bs';
-import { BiWorld } from 'react-icons/bi';
+//import { BiWorld } from 'react-icons/bi';
 
 import { InfoFooter } from "./styledInfoFooter.js";
 import { LastInfoFooter } from "./styledInfoFooter.js";
