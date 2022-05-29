@@ -10,6 +10,7 @@ describe('Model DataWorkers  (ningún campo es requerido)', () => {
       title,
       aboutMe,
       textInfo,
+      p_image,
       languages,
       skills,
       pricePerHour,
@@ -35,6 +36,11 @@ describe('Model DataWorkers  (ningún campo es requerido)', () => {
    it('Modelo DataWorkers tiene un campo "textInfo" de tipo String', () => {
       assert(textInfo, 'No existe el campo "textInfo"');
       assert(textInfo?.type?.name === 'String', '"textInfo" debe ser de tipo String');
+   });
+
+   it('Modelo DataWorkers tiene un campo "p_image" de tipo String', () => {
+      assert(p_image, 'No existe el campo "p_image"');
+      assert(p_image?.type?.name === 'String', '"p_image" debe ser de tipo String');
    });
 
    it('Modelo DataWorkers tiene un campo "languages" de tipo ARRAY de Strings', () => {
