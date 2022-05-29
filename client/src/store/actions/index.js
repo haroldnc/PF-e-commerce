@@ -9,3 +9,7 @@ export const getCAtegory = (id) => dispatch => {
     axios.get(`https://wixer-server.herokuapp.com/categories/${id}`)
     .then(res => dispatch({type: "GET_CATEGORY", payload: res.data}))
 }
+
+export const getServices = (payload) => {
+    return {type: "GET_SERVICES", payload: payload}
+}
