@@ -71,13 +71,15 @@ const Carousel = () => {
         <CarouselDiv>
             <TitleCarousel>Servicios populares</TitleCarousel>
             <Slider {...settings}>
-            { serviciosTop && serviciosTop.map(card => (
-                <Link to={`/servicios/${card.id}`}>
-                    <CardCarousel key={card.name}>
-                        <Image src={card.image} alt="img"/>
-                        <NameCard>{card.name}</NameCard>
+            { serviciosTop && serviciosTop.map((card,index) => (
+                
+                    <CardCarousel key={index}>
+                        <Link to={`/servicios/${card.id}`}>
+                            <Image src={card.image} alt="img"/>
+                            <NameCard>{card.name}</NameCard>
+                        </Link>
                     </CardCarousel>
-                </Link>
+                
             ))}
             </Slider>
         </CarouselDiv>  
