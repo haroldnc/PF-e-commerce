@@ -35,11 +35,11 @@ export default function WorkersCarousel(){
     );
 
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         arrows: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 3,   
         nextArrow: <SlickArrowLeft />,
         prevArrow: <SlickArrowRight />
@@ -53,7 +53,7 @@ export default function WorkersCarousel(){
 
     return(
         <WorkerDiv>
-            <TitleCarousel>Our Best Talents</TitleCarousel>
+            <TitleCarousel>Nuestros mejores talentos</TitleCarousel>
             <Slider {...settings}>
                 {/* {workerProfiles && workerProfiles.map(p=>(
                     <Container key={p.id}>

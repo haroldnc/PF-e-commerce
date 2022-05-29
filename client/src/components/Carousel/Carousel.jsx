@@ -6,7 +6,7 @@ import LeftArrow from '../assets/images/arrowL.png'
 import RightArrow from '../assets/images/arrowR.png'
 import { Link } from 'react-router-dom'
 
-import {CarouselDiv, TitleCarousel, CardCarousel, Image, NameCard, ArrowImage} from './StyledCarousel'
+import {CarouselDiv, TitleCarousel, CardCarousel, Image, NameCard, ArrowImage, Linked} from './StyledCarousel'
 
 
 
@@ -71,13 +71,15 @@ const Carousel = () => {
         <CarouselDiv>
             <TitleCarousel>Servicios populares</TitleCarousel>
             <Slider {...settings}>
-            { serviciosTop && serviciosTop.map(card => (
-                <Link to={`/servicios/${card.id}`}>
-                    <CardCarousel key={card.name}>
-                        <Image src={card.image} alt="img"/>
-                        <NameCard>{card.name}</NameCard>
+            { serviciosTop && serviciosTop.map((card,index) => (
+                
+                    <CardCarousel key={index}>
+                        <Link style={{textDecoration: "none"}} to={`/servicios/${card.id}`}>
+                            <Image src={card.image} alt="img"/>
+                            <NameCard>{card.name}</NameCard>
+                        </Link>
                     </CardCarousel>
-                </Link>
+                
             ))}
             </Slider>
         </CarouselDiv>  
