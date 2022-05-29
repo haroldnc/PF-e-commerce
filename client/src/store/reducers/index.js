@@ -18,8 +18,7 @@ const rootReducer = (state = initialState, action) => {
                 category: action.payload
             }
         case "GET_SERVICES":
-            const categories = state.allCategories;
-            const services = categories.map((s) => s.services);
+            const services = state.allCategories.map((s) => s.services);
 
             return {
                 ...state,

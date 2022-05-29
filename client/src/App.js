@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./pages/Home/Home";
+import Categories from "./pages/Categories/Categories";
 // import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
 import ModalLogIn from "./components/ModalLogIn/ModalLogIn";
 
@@ -50,6 +51,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/servicios/:id" component={Services} />
+          <Route exact path="/categorias" component={Categories} />
         </Switch>
         <Footer />
         <ModalLogIn

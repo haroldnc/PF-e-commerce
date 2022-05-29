@@ -1,53 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAllCategories, getServices } from "../../store/actions/index"
+import { getServices } from "../../store/actions/index"
 
-const Filters = ({ services }) => {
-    const dispatch = useDispatch();
-    const categories = useSelector((state) => state.allCategories);
+const Filters = () => {
+  const dispatch = useDispatch();
+  const categories = useSelector((state) => state.allCategories);
+  const services = useSelector((state) => state.services);
+  const [servicesC, setServices]= useState([]);
 
-    const [servicesC, setServices]= useState([]);
-    const [categoryId, setCategoryId]= useState('');
-    /*
-    const services = categories.map((s) => s.services);
-    const serviceCategory = services.map((s) => {
-      return s.map((ss) => {
-        return ss.category
-      })
-    })
+  const handleClick = (e) => {
+    const IDcategory = e.target.value;
 
-    const serviceName = services.map((s) => {
-      return s.map((ss) => {
-        return ss.name
-      })
-    })
-    const obj = Object.assign({}, serviceName);
+    const serviceFilter = services.map((s) => {
+      return s.filter((f) => f.category === IDcategory)
+    });
+    setServices(serviceFilter);
+  }
 
-    const array = categories;
-
-    const arrayC = array.map((a) => {
-      if (a._id === serviceCategory) {
-        a.services = obj
-      }
-
-      return a;
-    })
-    */
-    const handleClick = (e) => {
-      const IDcategory = e.target.value;
-      setCategoryId(IDcategory);
-
-      const serviceFilter = services.map((s) => {
-        return s.filter((f) => f.category === categoryId)
-      });
-      setServices(serviceFilter);
-    }
-
-    useEffect(() => {
-      dispatch(getServices());
-      dispatch(getAllCategories());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getServices())
+  }, [dispatch]);
 
   return (
     <div>
@@ -86,7 +59,7 @@ const Filters = ({ services }) => {
           .map((s) => {
             return s.map((ss) => {
               return (
-                <option value={ss.id} id={ss.category}>
+                <option value={ss.name} id={ss.category} key={ss._id}>
                   {ss.name}
                 </option>
               )
