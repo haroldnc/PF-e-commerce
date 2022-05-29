@@ -14,6 +14,6 @@ export const Alejandra = JSON.parse(
   `{"id": 4, "name": "Alejandra", "lastName": "Sotelo", "age": 34, "profession": "Interior design", "services": ["Desarrollo Web", "Desarrollo Frontend"], "description": "Exercitation non eiusmod incididunt ut veniam. Consectetur labore dolor ipsum mollit dolor ex non mollit eu ullamco excepteur fugiat amet. Labore incididunt mollit esse ad nulla exercitation exercitation veniam ad velit commodo ea reprehenderit officia.", "profile_photo":"https://www.riluxa.com/m2f/media/mgs_blog/w/o/xwoman-interior-designer_5.jpg.pagespeed.ic.fSBsDZcbJR.jpg", "portfolio_pic": "https://images.adsttc.com/media/images/5f2c/8545/b357/65db/c000/008c/large_jpg/FEAT_ID.jpg?1596753213"}`
 );
 
-var profiles = [Juan, Santiago, Leandro, Alejandra];
+var profiles = [Juan, Santiago, Leandro, Alejandra, Juan, Santiago, Leandro, Alejandra];
 
 export default profiles;

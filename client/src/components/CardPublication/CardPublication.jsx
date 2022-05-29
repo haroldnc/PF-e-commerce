@@ -4,12 +4,12 @@ import { IconContext } from "react-icons";
 
 import { Card, Image, Profile, ImgProfile, NameProfile, Description, DivRating, Rating, DivPay, Staring, Pay} from './StyledCardPublication'
 
-const CardPublication = ({Publicaciones}) => {
+const CardPublication = ({pageslice}) => {
 
 
     return(
         <>
-            {Publicaciones && Publicaciones.map(card => (
+            {pageslice && pageslice.map(card => (
                     <Card key={card.id}>
                         <Image src={card.imagen}/>
                         <Profile>

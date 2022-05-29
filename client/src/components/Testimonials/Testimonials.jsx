@@ -84,7 +84,7 @@ const Testimonials = () => {
             <Slider {...settings}>
                 {
                     testimonials && testimonials.map(card => (
-                        <div>
+                        <div key={card.name}>
                             <TestimonialCard>
                                 <TestimonialImage src={card.image} alt={card.name}/>
                                 <TestimonialText>

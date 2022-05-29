@@ -5,25 +5,34 @@ export const LogosGlobal = styled.div `
     flex-direction: row;
     grid-template-columns: repeat(5, 1fr);
     padding-left: 70px;
+    margin-top: 25px
 `
 export const LogoCard = styled.div `
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 150px;
-    
+    width: 120px;
+    height: 120px;
+    border: solid 1px transparent;
     border-radius: 100px;
     cursor: pointer;
-
-    &:hover{
-        width: 165px;
-    }
+    margin-bottom: 15px;
+    transition-property: all;
+    transition-duration: 1s;
+     &:hover{
+        border: solid 1px ${(props) => props.theme.colors.secondaryLighter};
+        
+        
+     }
+    
 `
+// &:hover{
+//     width: 165px;
+// }
 
 export const Logo = styled.img `
-    width: 30%;
+    width: 50%;
     margin-top: 10px;
     margin-bottom: -10px;
 `

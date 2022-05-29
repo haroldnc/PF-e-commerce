@@ -41,3 +41,7 @@ export const NameCard = styled.h3 `
 export const ArrowImage = styled.img `
     padding: 10px,
 `
+
+export const Linked = styled.link `
+text-decoration: none;
+`

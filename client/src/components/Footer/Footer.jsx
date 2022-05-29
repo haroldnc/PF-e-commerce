@@ -1,11 +1,11 @@
 import React from 'react';
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { BsFacebook } from 'react-icons/bs';
 import { BsTwitter } from 'react-icons/bs';
 import { BsInstagram } from 'react-icons/bs';
 import { BsLinkedin } from 'react-icons/bs';
-import { BiWorld } from 'react-icons/bi';
+//import { BiWorld } from 'react-icons/bi';
 
 import { InfoFooter } from "./styledInfoFooter.js";
 import { LastInfoFooter } from "./styledInfoFooter.js";
@@ -23,16 +23,16 @@ const Footer = () => {
                 <h4 className='tittleInfo'>Categorías</h4>
 
                 <CategoriesList>
-                    <Li>Artes gráficas y diseño</Li>
-                    <Li>Marketing digital</Li>
-                    <Li>Redacción y traducción</Li>
-                    <Li>Video y animación</Li>
-                    <Li>Música y audio</Li>
-                    <Li>Programación y tecnología</Li>
-                    <Li>Datos</Li>
-                    <Li>Negocios</Li>
-                    <Li>Estilo de vida</Li>
-                    <Li>Mapa del sitio</Li>
+                    <Link to="/categorias"><Li>Artes gráficas y diseño</Li></Link>
+                    <Link to="/categorias"><Li>Marketing digital</Li></Link>
+                    <Link to="/categorias"><Li>Redacción y traducción</Li></Link>
+                    <Link to="/categorias"><Li>Video y animación</Li></Link>
+                    <Link to="/categorias"><Li>Música y audio</Li></Link>
+                    <Link to="/categorias"><Li>Programación y tecnología</Li></Link>
+                    <Link to="/categorias"><Li>Datos</Li></Link>
+                    <Link to="/categorias"><Li>Negocios</Li></Link>
+                    <Link to="/categorias"><Li>Estilo de vida</Li></Link>
+                    <Link to="/categorias"><Li>Mapa del sitio</Li></Link>
                 </CategoriesList>
             </div>
 
@@ -40,8 +40,8 @@ const Footer = () => {
                 <h4 className='tittleInfo'>Acerca de</h4>
 
                 <AboutList>
-                    <Li>Política de privacidad</Li>
-                    <Li>Términos de Servicio</Li>
+                <Link to="/categorias"><Li>Política de privacidad</Li></Link>
+                <Link to="/categorias"><Li>Términos de Servicio</Li></Link>
                 </AboutList>
             </div>
 
@@ -49,15 +49,15 @@ const Footer = () => {
                 <h4 className='tittleInfo'>Comunidad</h4>
 
                 <ComunityList>
-                    <Li>Conviértete en vendedor</Li>
-                    <Li>Afiliados</Li>
+                <Link to="/categorias"><Li>Conviértete en vendedor</Li></Link>
+                <Link to="/categorias"><Li>Afiliados</Li></Link>
                 </ComunityList>
             </div>
         </InfoFooter>
 
         <LastInfoFooter>
             <LastInfoFooter useFlex>
-                <h2 className='footerCopyright' id='footerLogo'>Wixer</h2>
+                <Link to="/"><h2 className='footerCopyright' id='footerLogo'>Wixer</h2></Link>
                 <p className='footerCopyright'>© 2022 Wixer, All rights reserved</p>
             </LastInfoFooter>
 
@@ -66,7 +66,7 @@ const Footer = () => {
                 <BsTwitter className='socials'/>
                 <BsInstagram className='socials'/>
                 <BsLinkedin className='socials'/>
-                <p className='socials'><BiWorld/> Español</p>
+                {/*<p className='socials'><BiWorld/> Español</p>*/}
             </LastInfoFooter>
         </LastInfoFooter>
     </footer>

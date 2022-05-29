@@ -18,8 +18,8 @@ import {
   SubmitContainer,
   CheckBoxContainer,
   Error,
+  InputContainer, Label
 } from "./StyledModalSignUp";
-import { InputContainer, Label } from "../SignUp/StyledSignUp";
 import { useDispatch } from "react-redux";
 import { postUser } from "../../store/actions";
 
