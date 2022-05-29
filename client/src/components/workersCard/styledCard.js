@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 
 export const Container = styled.div`
-    width: 322px;
+    width: 270px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     padding: 0px 9px 8px;
@@ -10,17 +11,14 @@ export const Container = styled.div`
     align-content: space-around;
     align-items: flex-start;
     margin: 25px;
-    box-shadow: 10px 10px 5px 0px rgba(232,191,191,0.75);
-    text-align: center;
-    
-
-
+    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.158);
+    cursor:pointer
 
 `
 
 export const StyledPicture = styled.img`
-    width: 304px;
-    height: 237px;
+    width: 270px;
+    height: 230px;
     border-radius: 4px 4px 0 0;
 `
 
