@@ -10,7 +10,7 @@ export const Filter = styled.div `
 `
 
 export const SelectsDiv = styled.div `
-    margin-top 2rem;
+    margin-top: 2rem;
 `
 
 export const SectionFilters = styled.select `
