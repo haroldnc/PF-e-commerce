@@ -1,7 +1,8 @@
 const initialState = {
     allCategories: [],
+    allUsers: [],
+    filteredUsers: [],
     services: [],
-    filteredServices: [],
     category: [],
 };
   
@@ -25,13 +26,13 @@ const rootReducer = (state = initialState, action) => {
                 services: services
             }
         case "FILTER_BY_CATEGORY": 
-            //const category = state.allCategories;
-            //const service = state.allCategories;
+            const category = state.allCategories;
+            const service = state.allCategories;
 
-            //const filteredByCategory = category;
+            const filteredByCategory = category;
 
-            //const filteredByService = service.map((s) => s.services);
-            /*
+            const filteredByService = service.map((s) => s.services);
+            
             if (filteredByCategory.length > 0) {
                 return {
                     ...state
@@ -39,12 +40,12 @@ const rootReducer = (state = initialState, action) => {
             } else if (filteredByService.length > 0) {
                     return {
                         ...state,
-                    } */  
-            //} else {
+                } 
+            } else {
                 return {
                     ...state
                 }
-            //}
+            }
             
         default: return state;
     };

@@ -52,6 +52,7 @@ export const LastInfoFooter = styled.div `
 
     #footerLogo {
         cursor: pointer;
+        color: ${(props) => props.theme.colors.font};
 
         &:hover {
             color: ${(props) => props.theme.colors.secondary};
@@ -79,6 +80,7 @@ export const ComunityList = styled.ul `
 export const Li = styled.li `
     padding-top: 0.5rem;
     cursor: pointer;
+    color: ${(props) => props.theme.colors.font};
 
     &:hover {
         color: ${(props) => props.theme.colors.secondary};

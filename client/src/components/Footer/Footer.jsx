@@ -57,7 +57,7 @@ const Footer = () => {
 
         <LastInfoFooter>
             <LastInfoFooter useFlex>
-                <h2 className='footerCopyright' id='footerLogo'>Wixer</h2>
+                <Link to="/"><h2 className='footerCopyright' id='footerLogo'>Wixer</h2></Link>
                 <p className='footerCopyright'>© 2022 Wixer, All rights reserved</p>
             </LastInfoFooter>
 
@@ -66,7 +66,7 @@ const Footer = () => {
                 <BsTwitter className='socials'/>
                 <BsInstagram className='socials'/>
                 <BsLinkedin className='socials'/>
-                <p className='socials'><BiWorld/> Español</p>
+                {/*<p className='socials'><BiWorld/> Español</p>*/}
             </LastInfoFooter>
         </LastInfoFooter>
     </footer>
