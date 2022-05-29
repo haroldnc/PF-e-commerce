@@ -25,7 +25,7 @@ const Filters = () => {
 
   return (
     <Filter>
-      <h2>Categorias</h2>
+      <h2>Filtros</h2>
 
       <SelectsDiv>
         <SectionFilters onChange={(e) => handleClick(e)}>
