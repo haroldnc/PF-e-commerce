@@ -1,6 +1,6 @@
 import React from "react";
 import { LogosGlobal, LogoCard, Logo, NameCard, Name} from './StyledLogosHome'
-import { Link } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 import Data from '../assets/LogosHome/Data.JPG'
 import DiseñoGrafico from '../assets/LogosHome/Diseño.JPG'
@@ -17,6 +17,7 @@ import Video from '../assets/LogosHome/Video o animacion.JPG'
 
 const LogosHome = ({allCategories}) => {
 
+    const history = useHistory()
     
     const marketplace = [
         {name:"Diseñadores Graficos",
@@ -57,18 +58,20 @@ const LogosHome = ({allCategories}) => {
         }
     ]
 
+
+    const handlerClick = (id) => {
+        history.push(`/categoria/${id}`)
+    }
     return(
         <>
         <Name>Explora el mercado</Name>
         <LogosGlobal className="divTotal">
             
-            {marketplace && marketplace.map( logo => (
-                <Link to={`/category/${logo.id}`}>
-                    <LogoCard className="divLogo" key={logo.name}>
-                        <Logo className="logo" src={logo.logo}/>
-                        <NameCard className="name">{logo.name}</NameCard>
-                    </LogoCard>
-                </Link>
+            {marketplace && marketplace.map( (logo, index) => (
+                <LogoCard key={index} onClick={() =>handlerClick(logo.id) }>
+                    <Logo src={logo.logo}/>
+                    <NameCard >{logo.name}</NameCard>
+                </LogoCard>
             ))}
         </LogosGlobal>  
         </>
