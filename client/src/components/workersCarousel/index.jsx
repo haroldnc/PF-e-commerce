@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../workersCard/index";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"
@@ -6,8 +6,25 @@ import "slick-carousel/slick/slick-theme.css"
 import LeftArrow from '../assets/images/arrowL.png'
 import RightArrow from '../assets/images/arrowR.png'
 import { Container, ImgArrow, StyledPicture, TitleCarousel, WorkerDiv } from "./workerCardsStyled";
+import axios from "axios";
+import {useSelector, useDispatch} from "react-redux"
+import {getWorkers} from "../../store/actions"
 
-export default function WorkersCarousel({profiles}){
+
+
+export default function WorkersCarousel(){
+
+    const profiles = useSelector((state)=>state.workers)
+    const dispatch = useDispatch()
+    console.log(profiles)
+
+    
+    
+
+  
+
+    
+
 
     const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
         <ImgArrow src={LeftArrow} alt="prevArrow" {...props} />
@@ -30,6 +47,10 @@ export default function WorkersCarousel({profiles}){
 
     //    const workerProfiles = profiles.map(p=>p)
 
+    useEffect(()=>{
+        dispatch(getWorkers())
+    },[])
+
     return(
         <WorkerDiv>
             <TitleCarousel>Our Best Talents</TitleCarousel>
@@ -39,17 +60,20 @@ export default function WorkersCarousel({profiles}){
                         <StyledPicture src={p.portfolio_pic}/>
                     </Container>
                 ))} */}
-                {profiles.map(p=>
+                {profiles.length?
+                profiles.map(p=>
                      <Card
-                     key={p.id}
-                     name ={`${p.name} ${p.lastName}`}
-                     profile_photo = {p.profile_photo}
-                     profession = {p.profession}
-                     services = {p.services}
-                     porfolio_pic= {p.portfolio_pic}
+                     key={p._id}
+                     name ={`${p.userId.firstName} ${p.userId.lastName}`}
+                     image = {p.userId.image}
+                     title = {p.title}
+                    
          
                      />
-                    )}
+                    )
+                    :
+                    <h3>Cargando</h3>
+                }
 
             </Slider>
         </WorkerDiv>
