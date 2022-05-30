@@ -28,7 +28,7 @@ const DataWorkers = Schema({
         require: [true, "Information is required"]
     },
     
-    languages: {
+    languages: ({
         type: String,
         // require: [true, 'Languages is required'],
         validate: {
@@ -41,7 +41,7 @@ const DataWorkers = Schema({
                 }
              }
          }
-    },
+    }),
     
     skills: {
         type: String,
@@ -61,8 +61,11 @@ const DataWorkers = Schema({
     pricePerHour: {
         type: Schema.Types.Double
     },
+    p_image:{
+        type: String
+    },
 
-    workExperience: ({
+    workExperience: {
 
      company: {
         type: String,
@@ -79,9 +82,9 @@ const DataWorkers = Schema({
         type: String,
         // require: [true, "Description is required"]
     }
-    }),
+    },
 
-    certifications :({
+    certifications :{
 
         title: {
                 type: String,
@@ -105,7 +108,7 @@ const DataWorkers = Schema({
             validate: v => /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i,
             message: props => `${props.value} is not valid url image`
             }
-        }),
+    },
         userId:{
             type: Schema.Types.ObjectId,
             ref: "User"
