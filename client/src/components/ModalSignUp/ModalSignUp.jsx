@@ -25,6 +25,7 @@ import { postUser } from "../../store/actions";
 
 const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
   const dispatch = useDispatch();
+
   return (
     <>
       {isOpenModalSignUp && (
@@ -114,6 +115,8 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               setTimeout(() => {
                 dispatch(postUser(values));
                 setSubmitting(false);
+                alert("Usuario Creado!");
+                toggleModalSignUp()
               }, 400);
             }}
           >

@@ -9,7 +9,6 @@ import { Container, Services, Name, Banner, ContainerBanner, ContainerFilter, Di
 
 const Categories = () => {
 
-  
 const history = useHistory()
  const dispatch = useDispatch()
  const category = useSelector(state => state.category)
