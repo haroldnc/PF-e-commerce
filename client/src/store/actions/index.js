@@ -23,3 +23,22 @@ export function getWorkerDetail(id){
         .then(res=>dispatch({type: "GET_WORKER_DETAIL", payload: res.data}))
     }
 }
+
+export const postUser = (payload) => async() => {
+    const response = await axios.post(`https://wixer-server.herokuapp.com/user`, payload);
+    return response;
+};
+
+export const postWorkerData = (payload) => async() => {
+    const response = await axios.post(`https://wixer-server.herokuapp.com/workers`, payload);
+    return response;
+}
+
+export const getServices = (payload) => {
+    return {type: "GET_SERVICES", payload: payload}
+}
+
+export const getAllUsers = () => dispatch => {
+    axios.get(`https://wixer-server.herokuapp.com/user`)
+    .then(res => dispatch({type: "GET_ALL_USERS", payload: res.data}))
+}

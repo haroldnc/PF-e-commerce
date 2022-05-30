@@ -20,6 +20,7 @@ export const Input = styled.input`
   background-color: transparent;
   margin-left: 1rem;
   caret-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.font}
 `;
 export const Button = styled.button`
   color: white;

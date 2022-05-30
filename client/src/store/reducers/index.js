@@ -1,9 +1,12 @@
 const initialState = {
     allCategories: [],
-    filteredServices: [],
+    allUsers: [],
+    filteredUsers: [],
+    services: [],
     category: [],
     workers:[],
-    workerDetail:{}
+    workerDetail:{},
+    users: [],
 };
   
 const rootReducer = (state = initialState, action) => {
@@ -11,12 +14,26 @@ const rootReducer = (state = initialState, action) => {
         case "GET_CATEGORIES":
             return {
                 ...state,
-                allCategories: action.payload
+                allCategories: action.payload,
+            };
+        case "GET_ALL_USERS":
+            return {
+                ...state,
+                allUsers: action.payload,
             };                          
         case "GET_CATEGORY":
             return{
                 ...state,
                 category: action.payload
+            }
+        case "GET_SERVICES":
+            const users = state.allUsers;
+            console.log(users)
+            const services = state.allCategories.map((s) => s.services);
+
+            return {
+                ...state,
+                services: services
             }
         case "FILTER_BY_CATEGORY": 
             const category = state.allCategories;
@@ -24,16 +41,16 @@ const rootReducer = (state = initialState, action) => {
 
             const filteredByCategory = category;
 
-            const filteredByService = service;
+            const filteredByService = service.map((s) => s.services);
             
             if (filteredByCategory.length > 0) {
                 return {
                     ...state
                 }
             } else if (filteredByService.length > 0) {
-                return {
-                    ...state
-                }
+                    return {
+                        ...state,
+                } 
             } else {
                 return {
                     ...state
@@ -52,6 +69,7 @@ const rootReducer = (state = initialState, action) => {
                 workerDetail: action.payload
             }
 
+            
         default: return state;
     };
 };
