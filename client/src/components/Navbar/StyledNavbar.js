@@ -15,7 +15,7 @@ export const Container = styled.header`
 `;
 
 export const Wrapper = styled.div`
-  min-width: 1150px;
+  min-width: 1100px;
   display: flex;
   justify-content: space-between;
   align-items: center;

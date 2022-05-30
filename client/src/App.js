@@ -52,9 +52,9 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/servicios/:id" component={Services} />
-          <Route exact path="/categorias" component={Categories} />
+          <Route exact path="/categoria/:id" component={Categories} />
+          <Route path="/worker/:id" component={WorkerProfile} />
         </Switch>
-        <Route path="/worker/:id" component={WorkerProfile} />
         <Footer />
         <ModalLogIn
           isOpenModalLogIn={isOpenModalLogIn}

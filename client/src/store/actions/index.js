@@ -5,7 +5,7 @@ export const getAllCategories = () => dispatch => {
     .then(res => dispatch({type: "GET_CATEGORIES", payload: res.data}))
 }
 
-export const getCAtegory = (id) => dispatch => {
+export const getCategorybyId = (id) => dispatch => {
     axios.get(`https://wixer-server.herokuapp.com/categories/${id}`)
     .then(res => dispatch({type: "GET_CATEGORY", payload: res.data}))
 }
@@ -28,6 +28,10 @@ export const postUser = (payload) => async() => {
     const response = await axios.post(`https://wixer-server.herokuapp.com/user`, payload);
     return response;
 };
+
+export const signIn = (payload) => async() => {
+    
+}
 
 export const postWorkerData = (payload) => async() => {
     const response = await axios.post(`https://wixer-server.herokuapp.com/workers`, payload);
