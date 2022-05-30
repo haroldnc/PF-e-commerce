@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-  background: white;
+  background: ${props => props.theme.colors.backgroundColorAlt};
   width: 23rem;
   height: 2.8rem;
   border-radius: 5px;
@@ -20,6 +20,7 @@ export const Input = styled.input`
   background-color: transparent;
   margin-left: 1rem;
   caret-color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.font}
 `;
 export const Button = styled.button`
   color: white;

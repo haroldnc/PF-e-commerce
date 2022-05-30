@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import {FaTimes} from "react-icons/fa";
+import {Form, Field} from 'formik'
 
 export const Container = styled.section`
   height: 100vh;
@@ -17,11 +18,11 @@ export const Container = styled.section`
   align-items: center;
 `;
 
-export const ModalBox = styled.div`
-  background: white;
+export const ModalBox = styled(Form)`
+  background: ${props => props.theme.colors.backgroundColorAlt};
   padding: 10px;
   height: 32rem;
-  width: 20rem;
+  min-width: 20rem;
   border-radius: 5px;
   box-shadow: ${(props) => props.theme.boxShadow};
   position: relative;
@@ -43,12 +44,13 @@ export const InputContainer = styled.div`
   height: 2.3rem;
   border-radius: 5px;
   margin: 1rem 0;
+  background-color: white;
 
   display: flex;
   align-items: center;
 `;
 
-export const Input = styled.input`
+export const Input = styled(Field)`
   background-color: transparent;
   height: 70%;
   width: 90%;
@@ -74,7 +76,7 @@ export const Button = styled.button`
   height: 2.3rem;
   border-radius: 5px;
   margin: 2rem 0 1rem 0;
-  color: ${(props) => props.theme.colors.backgroundColor};
+  color: white;
   cursor: pointer
 `;
 export const DivisionContainer = styled.div`
@@ -99,7 +101,7 @@ export const ButtonAlt = styled.button`
   height: 2.3rem;
   border-radius: 5px;
   margin: 1rem 0 2rem 0;
-  color: ${(props) => props.theme.colors.backgroundColor};
+  color: white;
   padding: 0 30px;
   cursor: pointer;
 
@@ -116,6 +118,7 @@ export const CloseIcon = styled(FaTimes)`
     top: 0.5rem;
     right: 0.5rem;
     font-size: 1.2rem;
+    color: ${props => props.theme.colors.font};
     cursor: pointer;
 `
 export const SignUpLink = styled.a`
@@ -123,4 +126,16 @@ export const SignUpLink = styled.a`
     font-size: 0.8rem;
     cursor: pointer;
     text-decoration: underline;
+`
+
+export const Error = styled.div`
+    width: 240px;
+    color: red;
+    font-size: 12px;
+    margin-bottom: 5px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
 `
