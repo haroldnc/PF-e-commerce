@@ -25,7 +25,7 @@ const history = useHistory()
     
     <Container>
       <ContainerBanner>
-        <Banner src={"https://images.unsplash.com/photo-1635830625698-3b9bd74671ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGRldmVsb3BlcnxlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60"} />
+        <Banner src={category.img} />
         <Name>{category.name}</Name>
       </ContainerBanner>
       <Filters/>
