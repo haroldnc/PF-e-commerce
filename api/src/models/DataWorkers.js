@@ -28,7 +28,7 @@ const DataWorkers = Schema({
         require: [true, "Information is required"]
     },
     
-    languages: ({
+    languages: [{
         type: String,
         // require: [true, 'Languages is required'],
         validate: {
@@ -41,9 +41,10 @@ const DataWorkers = Schema({
                 }
              }
          }
-    }),
+    }
+],
     
-    skills: {
+    skills: [{
         type: String,
         // require: [true, 'Skills is required'],
         validate: {
@@ -56,7 +57,8 @@ const DataWorkers = Schema({
                 }
              }
          }
-    },
+    }
+    ],
 
     pricePerHour: {
         type: Schema.Types.Double
@@ -65,26 +67,27 @@ const DataWorkers = Schema({
         type: String
     },
 
-    workExperience: {
+    workExperience: [{
 
-     company: {
-        type: String,
-        // require: [true, "Name Company is required"]
-    },
-     position: {
-        type: String,
-        // require: [true, "Position is required"]
-    },
-    //  start: (string - date) // Opcional
-    //  end: (string - date) // Opcional 
-
-     description: {
-        type: String,
-        // require: [true, "Description is required"]
+        company: {
+           type: String,
+           // require: [true, "Name Company is required"]
+       },
+        position: {
+           type: String,
+           // require: [true, "Position is required"]
+       },
+       //  start: (string - date) // Opcional
+       //  end: (string - date) // Opcional 
+   
+        description: {
+           type: String,
+           // require: [true, "Description is required"]
+       }
     }
-    },
+    ],
 
-    certifications :{
+    certifications:[{
 
         title: {
                 type: String,
@@ -107,12 +110,14 @@ const DataWorkers = Schema({
             // require: true,
             validate: v => /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i,
             message: props => `${props.value} is not valid url image`
-            }
-    },
-        userId:{
-            type: Schema.Types.ObjectId,
-            ref: "User"
         }
+    }
+    ],
+    
+    user:{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
 module.exports = model('DataWorkers',DataWorkers );
