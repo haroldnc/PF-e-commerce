@@ -26,6 +26,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 category: action.payload
             }
+        case "CLEAR_STATE": 
+            return {
+                ...state,
+                category: []
+            }
         case "GET_SERVICES":
             const users = state.allUsers;
             console.log(users)

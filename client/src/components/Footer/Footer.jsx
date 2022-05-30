@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearState } from "../../store/actions/index";
 
 import { BsFacebook } from "react-icons/bs";
 import { BsTwitter } from "react-icons/bs";
@@ -22,37 +24,33 @@ const Footer = () => {
         <InfoFooter>
           <div>
             <h4 className="tittleInfo">Categorías</h4>
-
             <CategoriesList>
-              <Link to="/categorias">
+              <Link to="/categoria/62927771a8415ffb1bf2a4c3">
                 <Li>Artes gráficas y diseño</Li>
               </Link>
-              <Link to="/categorias">
+              <Link to="/categoria/629277aaa8415ffb1bf2a4c4">
                 <Li>Marketing digital</Li>
               </Link>
-              <Link to="/categorias">
+              <Link to="/categoria/629277c0a8415ffb1bf2a4c5">
                 <Li>Redacción y traducción</Li>
               </Link>
-              <Link to="/categorias">
+              <Link to="/categoria/629277d9a8415ffb1bf2a4c6">
                 <Li>Video y animación</Li>
               </Link>
-              <Link to="/categorias">
+              <Link to="/categoria/629277eda8415ffb1bf2a4c7">
                 <Li>Música y audio</Li>
               </Link>
-              <Link to="/categorias">
+              <Link to="/categoria/629277ffa8415ffb1bf2a4c8">
                 <Li>Programación y tecnología</Li>
               </Link>
-              <Link to="/categorias">
+              <Link to="/categoria/62927811a8415ffb1bf2a4c9">
                 <Li>Datos</Li>
               </Link>
-              <Link to="/categorias">
+              <Link to="/categoria/62927820a8415ffb1bf2a4ca">
                 <Li>Negocios</Li>
               </Link>
-              <Link to="/categorias">
+              <Link to="/categoria/62927830a8415ffb1bf2a4cb">
                 <Li>Estilo de vida</Li>
-              </Link>
-              <Link to="/categorias">
-                <Li>Mapa del sitio</Li>
               </Link>
             </CategoriesList>
           </div>
