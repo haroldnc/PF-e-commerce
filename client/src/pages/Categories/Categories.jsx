@@ -6,7 +6,7 @@ const Categories = () => {
   return (
     <div>
       <Filters/>
-      <Services></Services>
+      <Services/>
     </div>
   )
 }
