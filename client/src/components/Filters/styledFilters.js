@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const Filter = styled.div `
-    margin-top: 6rem;
-    padding: 3rem;
+    padding: 1rem;
     justify-content: center;
     align-items: center;
     text-align: center;
