@@ -16,7 +16,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
 
-  console.log('workers',profiles )
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getAllUsers());

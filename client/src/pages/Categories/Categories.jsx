@@ -14,8 +14,6 @@ const history = useHistory()
  const dispatch = useDispatch()
  const category = useSelector(state => state.category)
  const {id} = useParams()
-console.log('state',category)
- console.log(id)
 
  useEffect(() => {
    dispatch(getCategorybyId(id))
