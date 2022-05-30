@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCategories, getAllUsers } from "../../store/actions/index";
+import { getAllCategories, getAllUsers,getWorkers } from "../../store/actions/index";
 
 import Carousel from '../../components/Carousel/Carousel'
 import Hero from '../../components/Hero/Hero'
@@ -12,11 +12,15 @@ import { Container, Wrapper } from "./StyledHome";
 
 const Home = () => {
   const allCategories = useSelector((state) => state.allCategories);
+  const profiles = useSelector((state)=>state.workers)
   const dispatch = useDispatch();
 
+
+  console.log('workers',profiles )
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getAllUsers());
+    dispatch(getWorkers())
   }, [dispatch]);
 
   return (
@@ -26,7 +30,7 @@ const Home = () => {
         <Carousel />
         <Presentation />
         <LogosHome allCategories={allCategories} />
-        <WorkersCarousel />
+        <WorkersCarousel profiles={profiles} />
         <Testimonials />
       </Wrapper>
     </Container>
