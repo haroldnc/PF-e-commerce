@@ -39,6 +39,7 @@ export const Right = styled.div`
 
 export const TitleContainer = styled.div`
   padding-bottom: 8px;
+  cursor: pointer;
 `
 
 export const LinksContainer = styled.ul`
