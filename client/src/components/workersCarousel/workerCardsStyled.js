@@ -7,7 +7,6 @@ padding: 10px,
 export const WorkerDiv = styled.div`
 padding-bottom: 50px; 
 margin-top: 50px;
-background-color:red;
 
 `
 
