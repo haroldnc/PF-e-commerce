@@ -5,6 +5,8 @@ import {
   LogoImg,
   StyledSpan,
   StyledName,
+  Column,
+  Row
 } from "./styledCard";
 import { Link } from "react-router-dom";
 export default function Card({
@@ -18,16 +20,14 @@ export default function Card({
   return (
     <Link to={`/worker/${id}`}>
       <Container>
-        <picture>
           <StyledPicture src={portfolioImage} alt={`${name} portfolio`} />
-        </picture>
-        <div>
-          <a href="#">
-            <LogoImg src={image} alt={`${name}'s profile pic`} />
-          </a>
-          <StyledSpan>{title}</StyledSpan>
-          <StyledName>{name}</StyledName>
-        </div>
+        <Row>
+        <LogoImg src={image} alt={`${name}'s profile pic`} />
+          <Column>
+            <StyledSpan>{title}</StyledSpan>
+            <StyledName>{name}</StyledName>
+          </Column>
+        </Row>
       </Container>
     </Link>
   );

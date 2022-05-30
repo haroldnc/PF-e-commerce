@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const CarouselDiv = styled.div `
     padding-bottom: 50px;   
+    margin-bottom: 50px
 `
 
 export const TitleCarousel = styled.h2 `

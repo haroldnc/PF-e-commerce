@@ -6,25 +6,11 @@ import "slick-carousel/slick/slick-theme.css"
 import LeftArrow from '../assets/images/arrowL.png'
 import RightArrow from '../assets/images/arrowR.png'
 import { Container, ImgArrow, StyledPicture, TitleCarousel, WorkerDiv } from "./workerCardsStyled";
-import axios from "axios";
-import {useSelector, useDispatch} from "react-redux"
-import {getWorkers} from "../../store/actions"
 
 
 
-export default function WorkersCarousel(){
 
-    const profiles = useSelector((state)=>state.workers)
-    const dispatch = useDispatch()
-    
-
-    
-    
-
-  
-
-    
-
+export default function WorkersCarousel({profiles}){
 
     const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
         <ImgArrow src={LeftArrow} alt="prevArrow" {...props} />
@@ -39,7 +25,7 @@ export default function WorkersCarousel(){
         infinite: true,
         arrows: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 3,   
         nextArrow: <SlickArrowLeft />,
         prevArrow: <SlickArrowRight />
@@ -47,9 +33,6 @@ export default function WorkersCarousel(){
 
     //    const workerProfiles = profiles.map(p=>p)
 
-    useEffect(()=>{
-        dispatch(getWorkers())
-    },[dispatch])
 
     return(
         <>
