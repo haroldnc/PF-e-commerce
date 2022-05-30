@@ -10,9 +10,11 @@ export const Container = styled.div`
     flex-wrap: wrap;
     align-content: space-around;
     align-items: flex-start;
-    margin: 25px;
+    margin: 0 50px;
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.158);
-    cursor:pointer
+    cursor:pointer;
+    background: ${props => props.theme.colors.backgroundColorAlt};
+    color: ${props => props.theme.colors.font};
 
 `
 

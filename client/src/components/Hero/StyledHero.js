@@ -8,7 +8,7 @@ export const Container = styled.section`
     align-items: center;
 `
 export const Wrapper = styled.div`
-    min-width: 1150px;
+    width: 100%;
     justify-content: space-between;
     display: flex;
 

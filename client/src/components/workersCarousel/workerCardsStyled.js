@@ -5,7 +5,6 @@ padding: 10px,
 `
 
 export const WorkerDiv = styled.div`
-margin: 50px;
 padding-bottom: 50px; 
 
 `
