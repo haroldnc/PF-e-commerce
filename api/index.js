@@ -31,6 +31,6 @@ server.use((err, req, res, next) => {
     res.status(status).send(message);
 });
 
-server.listen(process.env.PORT, () => {
+server.listen(() => {
     console.log(`Server connected in port :${process.env.PORT}`);
 });
