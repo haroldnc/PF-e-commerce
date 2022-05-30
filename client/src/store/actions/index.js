@@ -46,3 +46,8 @@ export const getAllUsers = () => dispatch => {
     axios.get(`https://wixer-server.herokuapp.com/user`)
     .then(res => dispatch({type: "GET_ALL_USERS", payload: res.data}))
 }
+
+export const getServiceById = (id) => dispatch => {
+    axios.get(`https://wixer-server.herokuapp.com/services/${id}`)
+    .then(res => dispatch({type: "GET_SERVICE_BYID", payload: res.data}))
+}
