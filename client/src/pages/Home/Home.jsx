@@ -24,6 +24,7 @@ const Home = () => {
       <Carousel />
       <Presentation />
       <LogosHome allCategories={allCategories} />
+      <WorkersCarousel/>
       <Testimonials/>
     </>
   )
