@@ -25,33 +25,15 @@ const Footer = () => {
           <div>
             <h4 className="tittleInfo">Categorías</h4>
             <CategoriesList>
-              <Link to="/categoria/62927771a8415ffb1bf2a4c3">
                 <Li>Artes gráficas y diseño</Li>
-              </Link>
-              <Link to="/categoria/629277aaa8415ffb1bf2a4c4">
                 <Li>Marketing digital</Li>
-              </Link>
-              <Link to="/categoria/629277c0a8415ffb1bf2a4c5">
                 <Li>Redacción y traducción</Li>
-              </Link>
-              <Link to="/categoria/629277d9a8415ffb1bf2a4c6">
                 <Li>Video y animación</Li>
-              </Link>
-              <Link to="/categoria/629277eda8415ffb1bf2a4c7">
                 <Li>Música y audio</Li>
-              </Link>
-              <Link to="/categoria/629277ffa8415ffb1bf2a4c8">
                 <Li>Programación y tecnología</Li>
-              </Link>
-              <Link to="/categoria/62927811a8415ffb1bf2a4c9">
                 <Li>Datos</Li>
-              </Link>
-              <Link to="/categoria/62927820a8415ffb1bf2a4ca">
                 <Li>Negocios</Li>
-              </Link>
-              <Link to="/categoria/62927830a8415ffb1bf2a4cb">
                 <Li>Estilo de vida</Li>
-              </Link>
             </CategoriesList>
           </div>
 
@@ -59,12 +41,8 @@ const Footer = () => {
             <h4 className="tittleInfo">Acerca de</h4>
 
             <AboutList>
-              <Link to="/categorias">
                 <Li>Política de privacidad</Li>
-              </Link>
-              <Link to="/categorias">
                 <Li>Términos de Servicio</Li>
-              </Link>
             </AboutList>
           </div>
 
@@ -72,12 +50,8 @@ const Footer = () => {
             <h4 className="tittleInfo">Comunidad</h4>
 
             <ComunityList>
-              <Link to="/categorias">
                 <Li>Conviértete en vendedor</Li>
-              </Link>
-              <Link to="/categorias">
                 <Li>Afiliados</Li>
-              </Link>
             </ComunityList>
           </div>
         </InfoFooter>
