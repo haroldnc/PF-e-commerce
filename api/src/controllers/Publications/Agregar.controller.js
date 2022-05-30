@@ -1,4 +1,4 @@
-const {Publications} = require('../../models/Publications');
+const Publications = require('../../models/Publications');
 const {Categories} = require('../../models/Categories')
 
 const addPublicate =  async (req, res) =>{
@@ -9,7 +9,8 @@ const addPublicate =  async (req, res) =>{
         description,
         categories
     }
-    await Publicacion.save()
+    console.log(Publications)
+    await Publications.create(Publicacion)
     res.sendStatus(201)
 }
     
