@@ -51,7 +51,7 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn }) => {
         <div>
           <HamburguerMenuIcon onClick={toggle} />
           <LinksContainer>
-            <li>Home</li>
+            
             <li>
               <button></button>
             </li>
