@@ -7,6 +7,7 @@ import Hero from '../../components/Hero/Hero'
 import Presentation from '../../components/Presentation/Presentation'
 import Testimonials from '../../components/Testimonials/Testimonials'
 import LogosHome from '../../components/LogosHome/LogosHome'
+import WorkersCarousel from '../../components/workersCarousel/index'
 
 const Home = () => {
 
