@@ -16,7 +16,7 @@ export default function WorkersCarousel(){
 
     const profiles = useSelector((state)=>state.workers)
     const dispatch = useDispatch()
-    console.log(profiles)
+    
 
     
     
@@ -49,34 +49,34 @@ export default function WorkersCarousel(){
 
     useEffect(()=>{
         dispatch(getWorkers())
-    },[])
+    },[dispatch])
 
     return(
-        <WorkerDiv>
+        <>
+        {profiles.length?
+
+            <WorkerDiv>
             <TitleCarousel>Nuestros mejores talentos</TitleCarousel>
             <Slider {...settings}>
-                {/* {workerProfiles && workerProfiles.map(p=>(
-                    <Container key={p.id}>
-                        <StyledPicture src={p.portfolio_pic}/>
-                    </Container>
-                ))} */}
-                {profiles.length?
-                profiles.map(p=>
-                     <Card
-                     key={p._id}
-                     name ={`${p.userId.firstName} ${p.userId.lastName}`}
-                     image = {p.userId.image}
-                     title = {p.title}
-                    
-         
-                     />
-                    )
-                    :
-                    <h3>Cargando</h3>
+                {
+                    profiles.map(p=>
+                        <Card
+                        key={p._id}
+                        name ={`${p.userId.firstName} ${p.userId.lastName}`}
+                        image = {p.userId.image}
+                        title = {p.title}
+                        portfolioImage = {p.p_image}
+                        id = {p._id}           
+                        />
+                        )
                 }
 
             </Slider>
         </WorkerDiv>
+        :
+        <h1>...cargando</h1>
+                    }
+        </>
 
     )
 }

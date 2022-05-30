@@ -16,6 +16,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
 import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
+import WorkerProfile from "./pages/WorkerProfile";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,6 +52,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/servicios/:id" component={Services} />
         </Switch>
+        <Route path="/worker/:id" component={WorkerProfile} />
         <Footer />
         <ModalLogIn
           isOpenModalLogIn={isOpenModalLogIn}

@@ -16,3 +16,10 @@ export function getWorkers(){
         .then(res=>dispatch({type: "GET_WORKERS", payload: res.data}))
     }
 }
+
+export function getWorkerDetail(id){
+    return dispatch=>{
+        return axios.get(`https://wixer-server.herokuapp.com/workers/${id}`)
+        .then(res=>dispatch({type: "GET_WORKER_DETAIL", payload: res.data}))
+    }
+}

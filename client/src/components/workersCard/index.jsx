@@ -1,12 +1,13 @@
 import React from "react";
 import { Container, StyledPicture, LogoImg, StyledSpan, StyledName} from "./styledCard";
-
-export default function Card({_id, name, image, title, services}){
+import {Link} from "react-router-dom"
+export default function Card({id, name, image, title, portfolioImage, services}){
     
     return(
+        <Link to={`/worker/${id}`}>
         <Container>
         <picture>
-        <StyledPicture src={image} alt={`${name} portfolio`} />
+        <StyledPicture src={portfolioImage} alt={`${name} portfolio`} />
         </picture>
         <div>
         <a href="#">
@@ -16,5 +17,6 @@ export default function Card({_id, name, image, title, services}){
         <StyledName>{name}</StyledName>
         </div> 
         </Container>
+        </Link>
     )
 }
