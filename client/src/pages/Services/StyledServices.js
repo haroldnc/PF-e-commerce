@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 export const Page = styled.div `
-    margin: 5rem 10px 0px 10px
+    margin: 8rem 10px 0px 10px
 `
 export const NameServ = styled.h1 `
     margin: 15px;
