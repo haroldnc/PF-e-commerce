@@ -16,7 +16,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
 
-  console.log('workers',profiles )
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getAllUsers());
@@ -27,7 +26,7 @@ const Home = () => {
     <Container>
       <Wrapper>
         <Hero />
-        <Carousel />
+        <Carousel allCategories={allCategories}/>
         <Presentation />
         <LogosHome allCategories={allCategories} />
         <WorkersCarousel profiles={profiles} />

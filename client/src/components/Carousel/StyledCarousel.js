@@ -31,8 +31,9 @@ export const Image = styled.img `
 
 export const NameCard = styled.h3 `
     position: absolute;
-    font-size: 20px;
-    top: 10px;
+    font-size: 18px;
+    width: 180px;
+    top: 15px;
     left: 30px;
     color: white
 `

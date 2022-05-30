@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect} from "react";
+import { useSelector,useDispatch } from 'react-redux'
 import { Cards, Page, NameServ} from './StyledServices'
 import Paginate from "../../components/Paginate/Paginate";
 import CardPublication from "../../components/CardPublication/CardPublication";
+import { getServiceById } from '../../store/actions/index'
+import { useParams } from "react-router-dom";
 
 const Services = () =>{
         
@@ -22,14 +24,18 @@ const Services = () =>{
         return obj
     }
 
-    const Publicaciones = AllServices(100)
-
+    const Publicaciones = AllServices(27)
+    const dispatch = useDispatch()
+    const service = useSelector(state => state.service)
     const servicios = useSelector(state => state.servicios)
     const [pageAnt, setPageAnt] = useState(0)
     const [pagePost, setPagePost] = useState(15)
     const [currentPage, setCurrentPage] = useState(1)
+    const { id } = useParams()
 
-    
+    useEffect(() => {
+        dispatch(getServiceById(id))
+    })
 
     let pageslice = Publicaciones.slice(pageAnt, pagePost)
 
@@ -69,7 +75,7 @@ const Services = () =>{
     return (
         <Page>
             
-            <NameServ>Nombre de servicio</NameServ>
+            <NameServ>{service.name}</NameServ>
             <Paginate 
                 pages={pages}
                 numberPages={numberPages}

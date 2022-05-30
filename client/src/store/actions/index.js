@@ -50,3 +50,8 @@ export const getAllUsers = () => dispatch => {
 export const clearState = () => {
     return {type: "CLEAR_STATE"}
 }
+
+export const getServiceById = (id) => dispatch => {
+    axios.get(`https://wixer-server.herokuapp.com/services/${id}`)
+    .then(res => dispatch({type: "GET_SERVICE_BYID", payload: res.data}))
+}

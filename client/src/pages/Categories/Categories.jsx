@@ -1,20 +1,19 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { getCategorybyId } from '../../store/actions/index'
 import CardSevices from '../../components/CardSevices/CardSevices';
+import Filters from '../../components/Filters/Filters'
 import { Container, Services, Name, Banner, ContainerBanner } from './StyledCategories'
+
 
 const Categories = () => {
 
-//  img:"https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/a523607ea55cc9551ec824d8f9acc9bb-1626176887661/Search.png"
   
-
+const history = useHistory()
  const dispatch = useDispatch()
  const category = useSelector(state => state.category)
  const {id} = useParams()
-console.log('state',category)
- console.log(id)
 
  useEffect(() => {
    dispatch(getCategorybyId(id))
@@ -23,7 +22,7 @@ console.log('state',category)
   return (
     <Container>
       <ContainerBanner>
-        <Banner src={"https://images.unsplash.com/photo-1635830625698-3b9bd74671ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGRldmVsb3BlcnxlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60"} />
+        <Banner src={category.img} />
         <Name>{category.name}</Name>
       </ContainerBanner>
       <Services>
@@ -31,7 +30,7 @@ console.log('state',category)
           <div key={s._id}>
             <CardSevices name={s.name} img={"https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/c51dbf5c160dac9bd067442911e65d16-1626181910196/Miscellaneous_2x.png"}/>
           </div>
-        )): "none"}
+        )) : "none"}
       </Services>
     </Container>
   );
