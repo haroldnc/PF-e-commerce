@@ -16,6 +16,10 @@ export const postUser = (payload) => async() => {
     return response;
 };
 
+export const signIn = (payload) => async() => {
+    
+}
+
 export const postWorkerData = (payload) => async() => {
     const response = await axios.post(`https://wixer-server.herokuapp.com/workers`, payload);
     return response;
