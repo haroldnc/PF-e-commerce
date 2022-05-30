@@ -22,7 +22,7 @@ export default function Card({
       <Container>
           <StyledPicture src={portfolioImage} alt={`${name} portfolio`} />
         <Row>
-        <LogoImg src={image} alt={`${name}'s profile pic`} />
+          <LogoImg src={image} alt={`${name}'s profile pic`} />
           <Column>
             <StyledSpan>{title}</StyledSpan>
             <StyledName>{name}</StyledName>
