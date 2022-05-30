@@ -29,7 +29,7 @@ const Filters = () => {
 
       <SelectsDiv>
         <SectionFilters onChange={(e) => handleClick(e)}>
-          <option value="select category">SELECT CATEGORY</option>
+          <option value="select category">Seleccione una categoria</option>
           {
             categories && categories
             .sort((a, b) => {
@@ -49,7 +49,7 @@ const Filters = () => {
         </SectionFilters>
 
         <SectionFilters2>
-          <option>SELECT SERVICE</option>
+          <option>Seleccione un servicio</option>
           {
             servicesC && servicesC
             .sort((a, b) => {
