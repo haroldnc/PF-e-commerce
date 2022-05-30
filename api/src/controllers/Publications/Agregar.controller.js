@@ -2,12 +2,16 @@ const Publications = require('../../models/Publications');
 const {Categories} = require('../../models/Categories')
 
 const addPublicate =  async (req, res) =>{
-    const { name, description, categories} = req.body;
+    const { title, description, img, score,service,user,price} = req.body;
     try{
     let Publicacion = { 
-        name,
+        title,
         description,
-        categories
+        price,
+        user,
+        service,
+        score,
+        img
     }
     console.log(Publications)
     await Publications.create(Publicacion)
