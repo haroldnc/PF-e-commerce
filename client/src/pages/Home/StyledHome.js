@@ -7,5 +7,6 @@ export const Container = styled.main`
     justify-content: center;
 `
 export const Wrapper = styled.div`
-    max-width: 1150px;
+    max-width: 1100px;
+    min-width: 1100px
 `
