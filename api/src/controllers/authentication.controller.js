@@ -36,4 +36,4 @@ const login = async (req, res) => {
 };
 
 
-module.exports = { login, prueba };
+module.exports = { login };
