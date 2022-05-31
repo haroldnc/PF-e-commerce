@@ -1,6 +1,9 @@
-const { Schema, model } = require('mongoose-double')('mongoose');
+const { Schema, model} = require('mongoose');
+var mongoose = require ("mongoose")
+require ("mongoose-double")(mongoose)
 
-const Workers = Schema({
+
+const DataWorkers = Schema({
 
     title: {
         type: String,
@@ -25,9 +28,9 @@ const Workers = Schema({
         require: [true, "Information is required"]
     },
     
-    languages: {
+    languages: [{
         type: String,
-        require: [true, 'Languages is required'],
+        // require: [true, 'Languages is required'],
         validate: {
             validator: (v) => /^[a-z]+$/i.test(v),
             message: props =>{
@@ -38,11 +41,12 @@ const Workers = Schema({
                 }
              }
          }
-    },
+    }
+],
     
-    skills: {
+    skills: [{
         type: String,
-        require: [true, 'Skills is required'],
+        // require: [true, 'Skills is required'],
         validate: {
             validator: (v) => /^[a-z]+$/i.test(v),
             message: props =>{
@@ -53,36 +57,41 @@ const Workers = Schema({
                 }
              }
          }
-    },
+    }
+    ],
 
     pricePerHour: {
         type: Schema.Types.Double
     },
-
-    workExperience: ({
-
-     company: {
-        type: String,
-        require: [true, "Name Company is required"]
+    p_image:{
+        type: String
     },
-     position: {
-        type: String,
-        require: [true, "Position is required"]
-    },
-    //  start: (string - date) // Opcional
-    //  end: (string - date) // Opcional 
 
-     description: {
-        type: String,
-        require: [true, "Description is required"]
+    workExperience: [{
+
+        company: {
+           type: String,
+           // require: [true, "Name Company is required"]
+       },
+        position: {
+           type: String,
+           // require: [true, "Position is required"]
+       },
+       //  start: (string - date) // Opcional
+       //  end: (string - date) // Opcional 
+   
+        description: {
+           type: String,
+           // require: [true, "Description is required"]
+       }
     }
-    }),
+    ],
 
-    certifications :({
+    certifications:[{
 
         title: {
                 type: String,
-                require: true,
+                // require: true,
                 validate: {
                 validator: (v) => /^[a-zñáéíóú\s]{3,}$/i.test(v),
                 message: props => {
@@ -98,11 +107,17 @@ const Workers = Schema({
         
         img: {
             type: String,
-            require: true,
+            // require: true,
             validate: v => /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i,
             message: props => `${props.value} is not valid url image`
-            }
-        })
+        }
+    }
+    ],
+    
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }
 })
 
-module.exports = model('Workers',Workers );
+module.exports = model('DataWorkers',DataWorkers );

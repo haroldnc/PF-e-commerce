@@ -32,37 +32,37 @@ const Testimonials = () => {
         {
             name: "Elon Musk",
             logo: "https://comextic.com/web/wp-content/uploads/2018/07/Tesla-Motors-logo.png",
-            text: "\"Es muy emocionante que Mixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Fiverr es que mientras dormimos, alguien está trabajando.\"",
+            text: "\"Es muy emocionante que Wixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Wixer es que mientras dormimos, alguien está trabajando.\"",
             image: img2
         },
         {
             name: "Bill Gates",
             logo: "https://logodownload.org/wp-content/uploads/2014/04/microsoft-logo-3.png",
-            text: "\"Es muy emocionante que Mixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Fiverr es que mientras dormimos, alguien está trabajando.\"",
+            text: "\"Es muy emocionante que Wixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Wixer es que mientras dormimos, alguien está trabajando.\"",
             image: img1
         },
         {
             name: "Jeff Bezos",
             logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png",
-            text: "\"Es muy emocionante que Mixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Fiverr es que mientras dormimos, alguien está trabajando.\"",
+            text: "\"Es muy emocionante que Wixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Wixer es que mientras dormimos, alguien está trabajando.\"",
             image: img3
         },
         {
             name: "Mark Zuckerberg",
             logo: "https://logodownload.org/wp-content/uploads/2021/10/meta-logo.png",
-            text: "\"Es muy emocionante que Mixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Fiverr es que mientras dormimos, alguien está trabajando.\"",
+            text: "\"Es muy emocionante que Wixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Wixer es que mientras dormimos, alguien está trabajando.\"",
             image: img5
         },
         {
             name: "Marcos Galperin",
             logo: "https://logodownload.org/wp-content/uploads/2018/10/mercado-libre-logo.png",
-            text: "\"Es muy emocionante que Mixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Fiverr es que mientras dormimos, alguien está trabajando.\"",
+            text: "\"Es muy emocionante que Wixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Wixer es que mientras dormimos, alguien está trabajando.\"",
             image: img4
         },
         {
             name: "Pierpaolo Barbieri",
             logo: "https://findoctor.com.ar/wp-content/uploads/2019/09/uala-logo.png",
-            text: "\"Es muy emocionante que Mixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Fiverr es que mientras dormimos, alguien está trabajando.\"",
+            text: "\"Es muy emocionante que Wixer tenga freelancers de todo el mundo. Amplía la reserva de talentos. Una de las mejores cosas de Wixer es que mientras dormimos, alguien está trabajando.\"",
             image: img6
         }
     ];
@@ -84,7 +84,7 @@ const Testimonials = () => {
             <Slider {...settings}>
                 {
                     testimonials && testimonials.map(card => (
-                        <div>
+                        <div key={card.name}>
                             <TestimonialCard>
                                 <TestimonialImage src={card.image} alt={card.name}/>
                                 <TestimonialText>

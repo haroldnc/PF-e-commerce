@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const PresentationSection = styled.div `
     display: flex;
     flex-wrap: wrap;
-    padding: 2rem;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-bottom: 100px
 `
 
 export const PresentationParagraphTittle = styled.div `

@@ -11,5 +11,4 @@ router.delete('/:id', deleteUser);
 router.post('/', createUser);
 
 
-
 module.exports = router;

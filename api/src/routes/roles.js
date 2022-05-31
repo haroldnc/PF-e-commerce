@@ -8,6 +8,6 @@ const { validarADMIN_ROLE } = require('../middlewares/validarAdminRole');
 const router = Router();
 
 router.get('/', getRoles);
-router.post('/', validarADMIN_ROLE, addRol);
+router.post('/', addRol);
 
 module.exports = router;

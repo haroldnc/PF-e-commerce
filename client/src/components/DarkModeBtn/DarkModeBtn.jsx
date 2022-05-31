@@ -1,10 +1,24 @@
 import React from 'react'
-import { Container } from './StyledDarkModeBtn'
+import { Container, MoonIcon, SunIcon } from './StyledDarkModeBtn'
 
-const DarkModeBtn = () => {
+
+const DarkModeBtn = ({theme, setTheme}) => {
+
+  const handleTheme = () => {
+    if(theme === 'light'){
+      setTheme('dark')
+    }else{
+      setTheme('light')
+    }
+  }
+
+  const icon = theme === 'light' ? <MoonIcon /> : <SunIcon />
+
   return (
-    <Container>
-
+    <Container onClick={handleTheme}>
+      {
+        icon
+      }
     </Container>
   )
 }

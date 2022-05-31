@@ -1,19 +1,20 @@
-const {Publications} = require('../../models/Publications');
+const Publications = require('../../models/Publications');
 const {Categories} = require('../../models/Categories')
 
-<<<<<<< HEAD
-const addPublicate = async (req, res) =>{
-=======
 const addPublicate =  async (req, res) =>{
->>>>>>> damian
-    const { name, description, categories} = req.body;
+    const { title, description, img, score,service,user,price} = req.body;
     try{
     let Publicacion = { 
-        name,
+        title,
         description,
-        categories
+        price,
+        user,
+        service,
+        score,
+        img
     }
-    await Publicacion.save()
+    console.log(Publications)
+    await Publications.create(Publicacion)
     res.sendStatus(201)
 }
     

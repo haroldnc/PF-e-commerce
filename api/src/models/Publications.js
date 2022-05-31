@@ -1,11 +1,9 @@
-const { Schema, model } = require('mongoose-double')('mongoose');
+const { Schema, model} = require('mongoose');
+var mongoose = require ("mongoose")
+require ("mongoose-double")(mongoose)
 
 
 const Publications = Schema({
-    idUser: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
     title:{
         type: String,
         require: [true, "title is required"]
@@ -14,22 +12,26 @@ const Publications = Schema({
         type: String,
         require: [true, "description is required"]
     },
-    categories:{
-        type: [Schema.Types.ObjectId],
-        ref: "Categories"
-    },    
+   
     price:{
         type: Schema.Types.Double,
         require: [true, "description is required"]
     },
     user:{
-        type: [Schema.Types.ObjectId],
+        type: Schema.Types.ObjectId,
         ref: "User"
     },
     service:{
-        type: [Schema.Types.ObjectId],
+        type: Schema.Types.ObjectId,
         ref: "Services"
-    }
+    },
+    img:{
+        type: String
+    },
+    score:{
+        type: Schema.Types.Double
+    },
+
 })
 
 Publications.method('toJSON', function () {
