@@ -4,6 +4,6 @@ const {upDateWorker,getWorkerById,getAllWorkers} = require("../controllers/Worke
 
 router.get("/" , getAllWorkers);
 router.get("/:id",getWorkerById );
-router.put("/id", upDateWorker);
+router.put("/:id", upDateWorker);
 
 module.exports = router;
