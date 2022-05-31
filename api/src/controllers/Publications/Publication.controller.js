@@ -40,11 +40,13 @@ function FindNeedle(haystack, needle) {
 
                 TodasDB= TodasDB.map(e =>{
                     let obj = {
-                        
-                        "title":e.dataValues.title,
-                        "description":e.dataValues.description,
-                        "categories":e.dataValues.categories
-                                                        
+                        "title":e.title,
+                        "description":e.description,
+                        "price":e.price,
+                        "user":e.user,
+                        "service":e.service,
+                        "score":e.score,
+                        "img":e.img
                     }
                     return obj
 
@@ -52,11 +54,17 @@ function FindNeedle(haystack, needle) {
             }
             else{
                 //consulta a todos los datos DB  
+                console.log("todas post",TodasDB);
                 TodasDB= TodasDB.map(e =>{
+                    console.log("todasdb post",TodasDB);
                     let obj = {
-                        "title":e.dataValues.title,
-                        "description":e.dataValues.description,
-                        "categories":e.dataValues.categories
+                        "title":e.title,
+                        "description":e.description,
+                        "price":e.price,
+                        "user":e.user,
+                        "service":e.service,
+                        "score":e.score,
+                        "img":e.img
                     }
                     return obj
                 })
