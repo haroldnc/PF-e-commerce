@@ -5,13 +5,11 @@ const upDatePost = async (req, res, next) => {
     let post = req.body;
 
     try{
-        const newPost = {
-            title: post.title,
-            description: post.description,
-            Services: post.Services
-        }
-    
-        let result = await Publications.findByIdAndUpdate(id, newPost)
+        const verificate = await Publications.findById(id)
+        if(verificate === null) res.send({msg: "not found"})
+        console.log(verificate)
+
+        const result = await Publications.findByIdAndUpdate(id, post, {new: true})
         res.send(result)
     }catch(error){
         console.log(error)
@@ -24,6 +22,9 @@ const deletePost = async (req, res, next) => {
     let {id} = req.params;
 
     try{
+        const verificate = await Publications.findById(id)
+        console.log(verificate, "holaaaaaaaa")
+        if(verificate === null) res.send({msg:"id not found"})
         await Publications.findByIdAndDelete(id)
         res.send({msg:"the post was deleted"})
     }catch(error){
