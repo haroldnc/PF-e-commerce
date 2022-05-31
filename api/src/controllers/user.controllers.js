@@ -145,16 +145,16 @@ const createUser = async (req, res) => {
             }
         });
         const mailOptions = {
-            from: "e-Commerce <",
+            from: "Wixxer <",
             to: usuario.email,
             subject: 'Confirmation of registration',
             text: 'Hello ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
-                'Thank you for registering on e-Commerce.\n' +
+                'Thank you for registering on Wixxer.\n' +
                 'To confirm your registration, please click on the following link:\n\n' +
                 'http://localhost:3000/confirmar/' + usuario._id + '\n\n' +
                 "If it doesn't work, copy and paste the link into your browser.\n\n" +
                 'Thank you,\n' +
-                'e-Commerce'
+                'Wixxer'
         };
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
