@@ -114,7 +114,7 @@ const DataWorkers = Schema({
     }
     ],
     
-    user:{
+    userId:{
         type: Schema.Types.ObjectId,
         ref: "User"
     }

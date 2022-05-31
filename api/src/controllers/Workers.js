@@ -5,10 +5,10 @@ const DataWorkers = require("../models/DataWorkers")
 const listAllWorkers = async () => {
     // console.log(User)
     // const allWorkers = await User.find({user_role:"628efa11f43fddcf2b47bfa4"}).populate("user_role", {name:1,_id:0})
-    const allWorkers = await DataWorkers.find()
+    const AllWorkers = await DataWorkers.find()
         .populate("userId", {username:0,password:0,confirm_email:0});
-    console.log(allWorkers)
-    return allWorkers
+    console.log(AllWorkers)
+    return AllWorkers
 }
 
 const getAllWorkers = async (req, res, next) => {
