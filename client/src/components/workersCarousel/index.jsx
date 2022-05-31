@@ -39,7 +39,7 @@ export default function WorkersCarousel(){
         infinite: true,
         arrows: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 3,   
         nextArrow: <SlickArrowLeft />,
         prevArrow: <SlickArrowRight />

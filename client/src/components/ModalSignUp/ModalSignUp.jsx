@@ -18,10 +18,14 @@ import {
   SubmitContainer,
   CheckBoxContainer,
   Error,
-  InputContainer, Label
+  InputContainer,
+  Label,
+  Wrapper,
 } from "./StyledModalSignUp";
 import { useDispatch } from "react-redux";
 import { postUser } from "../../store/actions";
+import user from "../../store/reducers/userReducer";
+import { register } from "../../store/actions/userActions";
 
 const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
   const dispatch = useDispatch();
@@ -112,12 +116,12 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                dispatch(postUser(values));
+                dispatch(register(values))
                 setSubmitting(false);
               }, 400);
             }}
           >
-            {isSubmitting => (
+            {(isSubmitting) => (
               <FormContainer>
                 <CloseIcon onClick={toggleModalSignUp} />
                 <h2>Create new account</h2>
@@ -190,10 +194,8 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer>
-
                   </div>
                   <div>
-                    
                     {/* <InputContainer>
                       <Label>Web</Label>
                       <Input name="web" type="text" />
@@ -201,16 +203,13 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer> */}
-                    
                   </div>
                 </InputsContainer>
                 <SubmitContainer>
                   <CheckBoxContainer>
                     {/* <Field type="checkbox" />I agree with terms and conditions */}
                   </CheckBoxContainer>
-                  <Button type="submit">
-                    Create New Account
-                  </Button>
+                  <Button type="submit">Create New Account</Button>
                   <DivisionContainer>
                     <Line />
                     Or
