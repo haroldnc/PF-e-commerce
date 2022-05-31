@@ -65,8 +65,8 @@ const upDateWorker = async (req, res, next) => {
     let data = req.body;
     
     try{
-        console.log(id)
-        console.log(data)
+        // console.log(id)
+        // console.log(data)
         const saveUser = await DataWorkers.findByIdAndUpdate(id, data, {new: true})
         res.send(saveUser)
 

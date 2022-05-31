@@ -52,11 +52,12 @@ function FindNeedle(haystack, needle) {
             }
             else{
                 //consulta a todos los datos DB  
+                console.log(TodasDB)
                 TodasDB= TodasDB.map(e =>{
                     let obj = {
-                        "title":e.dataValues.title,
-                        "description":e.dataValues.description,
-                        "categories":e.dataValues.categories
+                        "title":e.title,
+                        "description":e.description,
+                        "categories":e.categories
                     }
                     return obj
                 })
