@@ -7,7 +7,6 @@ const login = async (req, res) => {
         // validar email
         const existUser = await User.findOne({ email })
             .populate('user_role', 'name')
-
         if (!existUser) {
             return res.status(400).json({
                 ok: false,
