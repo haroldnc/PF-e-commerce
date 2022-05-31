@@ -1,3 +1,4 @@
+const Publications = require('../models/Publications');
 const Services = require('../models/Services');
 
 const getServices = async (req, res) => {
@@ -41,8 +42,21 @@ const deleteService = async (req, res) => {
    }
 }
 
+const getPostsByService = async (req, res) => {
+   const { idPublicacion } = req.body;
+
+   try {
+      const publicacion = await Publications.find({service:idPublicacion}).populate('category', { _id:0, name:1 });
+
+      res.status(200).json(publicacion);
+   } catch (error) {
+      res.status(404).json({ error: error.message });
+   }
+}
+
 module.exports = {
    getServices,
    getServicesById,
-   deleteService
+   deleteService,
+   getPostsByService
 }
