@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom'
 import {
   Container,
   HamburguerMenuIcon,
@@ -12,8 +13,10 @@ import {
 import ScrolledSearchbar from "./ScrolledSearchbar/ScrolledSearchbar";
 
 const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
 
+  const [isScrolled, setIsScrolled] = useState(false);
+  const history = useHistory()
+  
   const navScroll = () => {
     if (window.scrollY >= 220) {
       setIsScrolled(true);
@@ -30,11 +33,15 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn }) => {
     };
   });
 
+  const handleClick =() => {
+    history.push("/")
+
+  }
   return (
     <Container isScrolled={isScrolled}>
       <Wrapper>
         <Right>
-          <TitleContainer>
+          <TitleContainer onClick={handleClick}>
             <h1>wixer</h1>
           </TitleContainer>
           <div>
@@ -44,15 +51,15 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn }) => {
         <div>
           <HamburguerMenuIcon onClick={toggle} />
           <LinksContainer>
-            <li>Home</li>
+            
             <li>
               <button></button>
             </li>
             <li>
-              <SignIn onClick={toggleModalLogIn}>Log In</SignIn>
+              <SignIn onClick={toggleModalLogIn}>Iniciar sesión</SignIn>
             </li>
             <li>
-              <LogIn  onClick={toggleModalSignUp}>Sign Up</LogIn>
+              <LogIn  onClick={toggleModalSignUp}>Registrarse</LogIn>
             </li>
           </LinksContainer>
         </div>

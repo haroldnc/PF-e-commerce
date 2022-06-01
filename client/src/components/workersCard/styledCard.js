@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 export const Container = styled.div`
-    width: 270px;
+    width: 250px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@ export const Container = styled.div`
 `
 
 export const StyledPicture = styled.img`
-    width: 270px;
+    width: 100%;
     height: 230px;
     border-radius: 4px 4px 0 0;
 `
@@ -36,14 +36,31 @@ export const StyledSpan = styled.span`
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: capitalize;
-    text-align: center;
+    text-align: left;
+    font-size: 15px
 `
 
 export const StyledName = styled.span`
     margin: 2px;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: lighter;
     display: block;
-    text-align: center;
+    text-align: left;
+    margin-left: 10px
 
+`
+
+export const Row = styled.div `
+    width: 100%;
+    display: flex;
+    flex-direction:row;
+    margin-top: 15px;
+    text-align: center;
+`
+export const Column = styled.div `
+    display: flex;
+    flex-direction: column;
+    text-align: rigth,
+    background-color: blue;
+    text-aling: center;
 `

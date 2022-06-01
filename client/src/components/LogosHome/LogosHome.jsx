@@ -20,15 +20,6 @@ import {
 import { GiBookmarklet, GiShakingHands } from "react-icons/gi"; // traduccion, negocios
 import { BsClipboardData, BsPencilSquare } from "react-icons/bs"; // Data , diseño grafico
 
-// import Data from '../assets/LogosHome/Data.JPG'
-// import DiseñoGrafico from '../assets/LogosHome/Diseño.JPG'
-// import EstiloDeVida from '../assets/LogosHome/Estilo.JPG'
-// import MarketingDigital from '../assets/LogosHome/Marketing.JPG'
-// import MusicaAudio from '../assets/LogosHome/Musica.JPG'
-// import Negocios from '../assets/LogosHome/Negocios.JPG'
-// import Programacion from '../assets/LogosHome/Programacion.JPG'
-// import Traduccion from '../assets/LogosHome/Traduccion.JPG'
-// import Video from '../assets/LogosHome/Video o animacion.JPG'
 
 const LogosHome = ({ allCategories }) => {
   const history = useHistory();

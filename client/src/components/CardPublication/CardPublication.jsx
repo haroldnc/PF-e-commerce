@@ -2,7 +2,7 @@ import React from "react";
 import {IoIosStar} from 'react-icons/io'
 import { IconContext } from "react-icons";
 
-import { Card, Image, Profile, ImgProfile, NameProfile, Description, DivRating, Rating, DivPay, Staring, Pay} from './StyledCardPublication'
+import { Card, Image, Profile, ImgProfile, NameProfile, Description, DivRating, Rating, DivPay, Staring, Pay, BotonPago} from './StyledCardPublication'
 
 const CardPublication = ({pageslice}) => {
 
@@ -27,7 +27,8 @@ const CardPublication = ({pageslice}) => {
                             <Rating>{card.rating}</Rating>
                         </DivRating>
                         <DivPay>
-                            <Staring>STARING AT</Staring>
+                            <BotonPago>Contratar</BotonPago>
+                            <Staring>COMIENZA EN</Staring>
                             <Pay>US${card.pay}</Pay>
                         </DivPay>
                     </Card>

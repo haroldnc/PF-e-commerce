@@ -29,6 +29,7 @@ import { register } from "../../store/actions/userActions";
 
 const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
   const dispatch = useDispatch();
+
   return (
     <>
       {isOpenModalSignUp && (
@@ -118,6 +119,8 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               setTimeout(() => {
                 dispatch(register(values))
                 setSubmitting(false);
+                alert("Usuario Creado!");
+                toggleModalSignUp()
               }, 400);
             }}
           >

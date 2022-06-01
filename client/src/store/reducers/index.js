@@ -3,6 +3,7 @@ const initialState = {
     allUsers: [],
     filteredUsers: [],
     services: [],
+    service: {},
     category: [],
     workers:[],
     workerDetail:{},
@@ -25,6 +26,11 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 category: action.payload
+            }
+        case "CLEAR_STATE": 
+            return {
+                ...state,
+                category: []
             }
         case "GET_SERVICES":
             const users = state.allUsers;
@@ -68,8 +74,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 workerDetail: action.payload
             }
-
-            
+        case "GET_SERVICE_BYID":
+            return{
+                ...state,
+                service: action.payload
+            }
         default: return state;
     };
 };

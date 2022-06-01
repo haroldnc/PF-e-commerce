@@ -6,12 +6,13 @@ padding: 10px,
 
 export const WorkerDiv = styled.div`
 padding-bottom: 50px; 
+margin-top: 50px;
 
 `
 
 export const TitleCarousel = styled.h2 `
     margin-bottom: 30px;
-    margin-left: 25px
+   
 `
 
 export const Container = styled.div`

@@ -5,7 +5,7 @@ export const getAllCategories = () => dispatch => {
     .then(res => dispatch({type: "GET_CATEGORIES", payload: res.data}))
 }
 
-export const getCAtegory = (id) => dispatch => {
+export const getCategorybyId = (id) => dispatch => {
     axios.get(`https://wixer-server.herokuapp.com/categories/${id}`)
     .then(res => dispatch({type: "GET_CATEGORY", payload: res.data}))
 }
@@ -45,4 +45,13 @@ export const getServices = (payload) => {
 export const getAllUsers = () => dispatch => {
     axios.get(`https://wixer-server.herokuapp.com/user`)
     .then(res => dispatch({type: "GET_ALL_USERS", payload: res.data}))
+}
+
+export const clearState = () => {
+    return {type: "CLEAR_STATE"}
+}
+
+export const getServiceById = (id) => dispatch => {
+    axios.get(`https://wixer-server.herokuapp.com/services/${id}`)
+    .then(res => dispatch({type: "GET_SERVICE_BYID", payload: res.data}))
 }
