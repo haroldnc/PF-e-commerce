@@ -1,20 +1,24 @@
 const User = require("../models/User");
+const bcrypt = require('bcrypt');
+
 
 const login = async (req, res) => {
     // login comun por ahora
     const { email, password } = req.body;
     try {
         // validar email
-        const existUser = await User.findOne({ email })
+        const existEmail = await User.findOne({ email })
             .populate('user_role', 'name')
-        if (!existUser) {
+        if (!existEmail) {
             return res.status(400).json({
                 ok: false,
                 msg: 'The email is not registered'
             });
         };
         // validar password
-        if (password !== existUser.password) {
+        const validPassword = await bcrypt.compareSync(password, existEmail.password);// develve true o false
+        console.log(validPassword, 'validPassword');
+        if (!validPassword) {
             return res.status(400).json({
                 ok: false,
                 msg: 'The password is wrong'
@@ -23,7 +27,7 @@ const login = async (req, res) => {
         // respuesta
         res.json({
             ok: true,
-            usuario: existUser,
+            usuario: existEmail,
         });
     }
     catch(error){
