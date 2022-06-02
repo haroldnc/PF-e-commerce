@@ -61,16 +61,16 @@ const User = Schema({
     password: {
         type: String,
         require: [true, 'Password is required'],
-        validate: {
+        /*validate: {
             validator: (v) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
                    return 'Role name accept minimun 3 letters';
                 } else {
                    return 'Password is not valid';
-                }
+                };
             }
-        }
+        }*/
     },
     image: {
         type: String,

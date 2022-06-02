@@ -117,7 +117,7 @@ const createUser = async (req, res) => {
                 msg: 'This DNI is already registered'
             });
         };
-        // como me viene el user_role? String o Id? ===> llega id
+        //como me viene el user_role? String o Id? ===> llega id
         // const userRole = await User_roles.findOne({user_role});
         const usuario = new User({
             username,
@@ -131,16 +131,17 @@ const createUser = async (req, res) => {
             phone,
             web
         });
-        // encriptar password
-        //const salt = await bcrypt.genSalt(10);
-        //usuario.password = bcrypt.hashSync(password, salt);
-        // guardar usuario
+        // encriptar password y guardar usuario
+        const salt = await bcrypt.genSalt(10);
+        const hash = bcrypt.hashSync(password, salt);
+        usuario.password = hash;
         await usuario.save();
+
         return res.json({
             ok: true,
-            msg: "User dado de alta"
+            msg: "User dado de alta",
         })
-    } 
+    }
     catch (error) {
         console.log(error);
         res.status(500).json({
