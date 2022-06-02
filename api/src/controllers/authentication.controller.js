@@ -1,6 +1,7 @@
 const User = require("../models/User");
+const User_roles = require('../models/User_roles');
 const bcrypt = require('bcrypt');
-
+const googleVerify = require('../helpers/googleVerify');
 
 const login = async (req, res) => {
     // login comun por ahora
@@ -39,5 +40,46 @@ const login = async (req, res) => {
     };
 };
 
+const googleSignIn = async (req, res) => {
+    const googleToken = req.body.tokenId;
+    const { givenName, familyName } = req.body;
+    try {
+        const { name, email, img } = await googleVerify(googleToken);
+        const usuarioDb = await Usuario.findOne({ email });
+        // user role viene ID?
+        //const user_role = await User_roles.findOne({ name: 'user' });
+        let usuario;
+        // create user
+        if (!usuarioDb) {
+            usuario = new Usuario({
+                username: name,
+                firstName: givenName,
+                lastName: familyName,
+                email,
+                image: img,
+                password: ':)',
+                user_role: user_role._id
+            });
+        }
+        else{
+            usuario = usuarioDb;
+        }
+        await usuario.save();
+        //const token = await generateJwt(usuario.id);
+        res.json({
+            ok: true,
+            usuario
+            //token
+        });
 
-module.exports = { login };
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
+        });
+    };
+};
+
+
+module.exports = { login, googleSignIn };

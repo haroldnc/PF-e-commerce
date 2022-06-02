@@ -139,7 +139,7 @@ const createUser = async (req, res) => {
 
         return res.json({
             ok: true,
-            msg: "User dado de alta",
+            msg: "User created",
         })
     }
     catch (error) {
