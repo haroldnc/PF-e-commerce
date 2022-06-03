@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
-import { UploadImage } from "./styledPublishForm";
+import { UploadImage, PublishFormSection, InputImage, InputsDivs, Form } from "./styledPublishForm";
 
 const PublishForm = () => {
   const dispatch = useDispatch();
@@ -13,14 +13,10 @@ const PublishForm = () => {
   const categories = useSelector((state) => state.allCategories);
   const services = useSelector((state) => state.services);
   const [servicesC, setServices]= useState([]);
-
-  const handleClick = (e) => {
-    const IDcategory = e.target.value;
-    const serviceFilter = services.map((s) => {
-      return s.filter((f) => f.category === IDcategory)
-    });
-    setServices(serviceFilter);
-  }
+  const [files, setFiles] = useState([]);
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
+  
 
   const [input, setInput] = useState({
     title: "",
@@ -30,10 +26,45 @@ const PublishForm = () => {
     img: ""
   });
 
+// ----------------------- cloudinary -----------------------------
+const upLoadImage = async (e) => {
+  const files = e.target.files;
+  const data = new FormData();
+  data.append("file", files[0]);
+  data.append("upload_preset", "PGimages");
+  setLoading(true);
+
+  const res = await fetch(
+    "https://api.cloudinary.com/v1_1/dk69jry82/image/upload",
+    {
+      method: "POST",
+      body: data
+    }
+  );
+
+  const file = await res.json();
+  setImage(file.secure_url);
+  console.log(file.secure_url);
+  setInput({
+    ...input,
+    img: file.secure_url
+  })
+  setLoading(false);
+}
+
+// ---------------------- handles -----------------------------
+  const handleClick = (e) => {
+    const IDcategory = e.target.value;
+    const serviceFilter = services.map((s) => {
+      return s.filter((f) => f.category === IDcategory)
+    });
+    setServices(serviceFilter);
+  }
+
   const handleInputChange = (e) => {
     setInput({
-        ...input,
-        [e.target.name]: e.target.value
+      ...input,
+      [e.target.name]: e.target.value
     });
 
     /*
@@ -44,55 +75,10 @@ const PublishForm = () => {
     */
 };
 
-  const dropArea = document.querySelector(".drag-area");
-  const showFile = () => {
-    let fileType = file.type; //getting selected file type
-    let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
-    if(validExtensions.includes(fileType)){ //if user selected file is an image file
-      let fileReader = new FileReader(); //creating new FileReader object
-      fileReader.onload = ()=>{
-        let fileURL = fileReader.result; //passing user file source in fileURL variable
-          // UNCOMMENT THIS BELOW LINE. I GOT AN ERROR WHILE UPLOADING THIS POST SO I COMMENTED IT
-        // let imgTag = `<img src="${fileURL}" alt="image">`; //creating an img tag and passing user selected file source inside src attribute //adding that created img tag inside dropArea container
-      }
-      fileReader.readAsDataURL(file);
-    }else{
-      alert("This is not an Image File!");
-      dropArea.classList.remove("active");
-    }
-  }
-  let file;
-
-  const InputImageChange = () => {
-    file = this.files[0];
-    dropArea.classList.add("active");
-    showFile()
-  }
-
-  const ButtonClick = () => {
-    dropArea.querySelector("input").click();
-  }
-
-  const DragImage = (e) => {
-    e.preventDefault()
-    dropArea.classList.add("active");
-  }
-
-  const DragleaveImage = () => {
-    dropArea.classList.remove("active");
-  }
-
-  const DropImage = (e) => {
-    e.preventDefault(); //preventing from default behaviour
-    //getting user select file and [0] this means if user select multiple files then we'll select only the first one
-    file = e.dataTransfer.files[0];
-    showFile(); //calling function
-  }
-
   const handleSubmit = (e) => {
-    if (!input.title || !input.description || !input.price || !input.category || !input.service) return alert("You must complete the form");
-    
+  
     e.preventDefault();
+    console.log(input)
     dispatch(postPublish(input));
     setInput({
       title: "",
@@ -103,119 +89,115 @@ const PublishForm = () => {
     });
 
     alert("Your publication was created!");
-    dispatch(getServices());
-    histoy("/home");
   };
+// ---------------------------------------------------------------------
 
   useEffect(() => {
     dispatch(getServices());
   }, [dispatch]);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-      <h1>Create a new pokemon</h1>
-      <div></div>
-      <div>
+    <PublishFormSection>
+      <h1>Crea tu Publicacion!</h1>
+      <Form onSubmit={handleSubmit}>
+      <InputsDivs>
+        <h3>Titulo</h3>
           <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              onChange={handleInputChange}
-              value={input.title}
+            type="text"
+            placeholder="Name"
+            name="title"
+            onChange={handleInputChange}
+            value={input.title}
           />
           {/*errors.name && <p className={style.errors}>{errors.name}</p>*/}
-      </div>
+      </InputsDivs>
 
-      <div>
+      <InputsDivs>
+          <h3>Categoria</h3>
           <select onChange={(e) => handleClick(e)}>
               <option>CATEGORIA</option>
               {
-                  categories && categories
-                  .sort((a, b) => {
-                      if (a.name < b.name) return -1;
-                      if (a.name > b.name) return 1;
-                      return 0;
+                categories && categories
+                .sort((a, b) => {
+                    if (a.name < b.name) return -1;
+                    if (a.name > b.name) return 1;
+                    return 0;
                   }
-                  )
+                )
 
-                  .map((category) => {
-                    return (
-                      <option value={category._id} key={category._id} id={category._id}>
-                        {category.name}
-                      </option>
-                    );
+                .map((category) => {
+                  return (
+                    <option value={category._id} key={category._id} id={category._id}>
+                      {category.name}
+                    </option>
+                  );
                 })
               }
           </select>
 
           <select onChange={handleInputChange} value={input.service} name="service">
-              <option>SERVICIOS</option>
+              <option>SERVICIO</option>
               {
-                  servicesC && servicesC
-                  .sort((a, b) => {
-                      if (a.name < b.name) return -1;
-                      if (a.name > b.name) return 1;
-                      return 0;
+                servicesC && servicesC
+                .sort((a, b) => {
+                  if (a.name < b.name) return -1;
+                  if (a.name > b.name) return 1;
+                  return 0;
+                })
+                
+                .map((s) => {
+                  return s.map((ss) => {
+                    return (
+                      <option value={ss.name} id={ss.category} key={ss._id}>
+                        {ss.name}
+                      </option>
+                    )
                   })
-                  
-                  .map((s) => {
-                    return s.map((ss) => {
-                      return (
-                        <option value={ss.name} id={ss.category} key={ss._id}>
-                          {ss.name}
-                        </option>
-                      )
-                    })
-                  })
+                })
               }
           </select>
           {/*errors.type1 && <p className={style.errors}>{errors.type1}</p>*/}
-      </div>
+      </InputsDivs>
 
-      <div>
-          <input
-              type="text"
-              placeholder="Descripcion"
-              name="description"
-              onChange={handleInputChange}
-              value={input.description}
+      <InputsDivs>
+        <h3>Descripcion</h3>
+          <textarea
+            type="text"
+            placeholder="Descripcion"
+            name="description"
+            onChange={handleInputChange}
+            value={input.description}
           />
           {/*errors.height && <p className={style.errors}>{errors.height}</p>*/}
-      </div>
+      </InputsDivs>
 
-      <UploadImage>
-        <div className='drag-area' onDragOver={(e) => DragImage(e)} onDragLeave={DragleaveImage} onDrop={(e) => DropImage(e)}>
-        <AiOutlineCloudUpload className='uploadLogo'/>
-          <h4>Drop image</h4>
-          <span>OR</span>
-          <button className='buttonImage' onClick={ButtonClick}>Browse File</button>
-          <input
+      <InputImage>
+        <h3>Imagen </h3>
+          <UploadImage>
+            <AiOutlineCloudUpload className='uploadLogo'/>
+            <input
+              name="img"
               type="file"
-              placeholder="Image"
-              name="image"
-              onChange={InputImageChange}
-              value={input.img}
-          />
-        </div>
-          {/*errors.image && <p className={style.errors}>{errors.image}</p> */}
-      </UploadImage>
+              onChange={upLoadImage}
+            />
+          </UploadImage> 
+        {/*errors.image && <p className={style.errors}>{errors.image}</p> */}
+      </InputImage>
 
-      <div>
+      <InputsDivs>
+        <h3>Precio</h3>
           <input
-              type="number"
-              placeholder="Price"
-              name="price"
-              onChange={handleInputChange}
-              value={input.price}
+            type="number"
+            placeholder="Price"
+            name="price"
+            onChange={handleInputChange}
+            value={input.price}
           />
           {/*errors.weight && <p className={style.errors}>{errors.weight}</p>*/}
-      </div>
-      <button>Create</button>
-          
-  
-  </form>
-    </div>
+      </InputsDivs>
+      <button>Publicar</button>
+    </Form>
+    </PublishFormSection>
   );
 };
 
