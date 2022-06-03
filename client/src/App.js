@@ -12,6 +12,7 @@ import Home from "./pages/Home/Home";
 import Categories from "./pages/Categories/Categories";
 // import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
 import ModalLogIn from "./components/ModalLogIn/ModalLogIn";
+import Payment from "./pages/Purchase/Purchase";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
@@ -54,6 +55,7 @@ function App() {
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
+          <Route path="/compra/:id" component={Payment} />
         </Switch>
         <Footer />
         <ModalLogIn

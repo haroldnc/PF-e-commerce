@@ -11,12 +11,18 @@ import {
   Input,
   InputContainer,
   Line,
-  ModalBox,
+  FormContainer,
   Title,
+  Label,
+  InfoContainer,
 } from "./StyledModalLogIn";
 import { Formik, Field, ErrorMessage } from "formik";
+import { useDispatch } from "react-redux";
+import { signin } from "../../store/actions/userActions";
+
 
 const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
+  const dispatch = useDispatch();
   return (
     <>
       {isOpenModalLogIn && (
@@ -25,34 +31,68 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
             initialValues={{
               email: "",
               password: "",
-              checked: false,
             }}
             validate={(values) => {
               const errors = {};
               if (!values.email) {
-                errors.email = "Email is required";
+                errors.email = "Email es requerido";
               } else if (
                 !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
               ) {
-                errors.email = "Invalid email address";
+                errors.email = "Email no es valido";
               }
-              if(!values.password) {
-                errors.password = "Password is required";
-              }else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/i.test(values.password)){
-                errors.password = "Minimo 8 carateres, maximo 15, al menos una letra mayuscula, al menos una letra minuscula, al menos 1 digito, al menos un caracter especial";
+              if (!values.password) {
+                errors.password = "Contraseña es requerida";
+              } else if (
+                !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/i.test(
+                  values.password
+                )
+              ) {
+                errors.password =
+                  "Minimo 8 carateres, maximo 15, al menos una letra mayuscula, al menos una letra minuscula, al menos 1 digito, al menos un caracter especial";
               }
 
               return errors;
             }}
-            onSubmit={(values, {resetForm, setSubmitting}) => {
+            onSubmit={(values, { resetForm, setSubmitting }) => {
               resetForm();
-              setSubmitting(false)
+              setSubmitting(false);
+              dispatch(signin(values))
             }}
           >
             {(props, isSubmitting) => (
-              <ModalBox>
-                <Title>Log In</Title>
-                <InputContainer>
+              <FormContainer>
+                <Title>Ingresa</Title>
+                <InfoContainer>
+                  <InputContainer>
+                    <Label>Email</Label>
+                    <Input name="email" type="email" />
+                    <ErrorMessage name="email">
+                      {(msg) => (
+                        <Error>
+                          <p>{msg}</p>
+                        </Error>
+                      )}
+                    </ErrorMessage>
+                  </InputContainer>
+                  <InputContainer>
+                    <Label>Password</Label>
+                    <Input name="password" type="password" />
+                    <ErrorMessage name="password">
+                      {(msg) => (
+                        <Error>
+                          <p>{msg}</p>
+                        </Error>
+                      )}
+                    </ErrorMessage>
+                  </InputContainer>
+                </InfoContainer>
+                {/* <CheckBoxContainer>
+                  <Field type="checkbox" name="checked" />
+                  Recordar cuenta
+                </CheckBoxContainer> */}
+                <Button disabled={isSubmitting} type="submit">Iniciar Sesión</Button>
+                {/* <InputContainer>
                   <Input placeholder="Email" name="email" type="email" />
                 </InputContainer>
                 <ErrorMessage name="email">
@@ -70,9 +110,10 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                 </ErrorMessage>
                 <CheckBoxContainer>
                   <Field type="checkbox" name="checked" />
-                  Remember me
+                  Recordar cuenta
                 </CheckBoxContainer>
-                <Button disabled={isSubmitting}>Log In</Button>
+                <Button disabled={isSubmitting}>Iniciar Sesión</Button> */}
+
                 <DivisionContainer>
                   <Line />
                   Or
@@ -80,10 +121,10 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                 </DivisionContainer>
                 <ButtonAlt>
                   <GoogleIcon />
-                  Continue with Google
+                  Continuar con Google
                 </ButtonAlt>
                 <CloseIcon onClick={toggleModalLogIn} />
-              </ModalBox>
+              </FormContainer>
             )}
           </Formik>
         </Container>

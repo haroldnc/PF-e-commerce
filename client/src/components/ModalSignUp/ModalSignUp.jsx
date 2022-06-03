@@ -50,37 +50,37 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               const errors = {};
 
               if (!values.username) {
-                errors.username = "username is required";
+                errors.username = "Username es requerido";
               } else if (!/^[a-z]{3,}$/i.test(values.username)) {
-                errors.username = "username accept minimun 3 letters";
+                errors.username = "username acepta minimo 3 letras";
               }
 
               if (!values.firstName) {
-                errors.firstName = "firstName is required";
+                errors.firstName = "Nombre es requerido";
               } else if (!/^[a-záéíóúñ\s]{3,}$/i.test(values.firstName)) {
                 errors.firstName =
-                  "firstName only accept letters and minimun 3 letters";
+                  "Nombre solo acepta minimo 3 letras";
               }
 
               if (!values.lastName) {
-                errors.lastName = "lastName is required";
+                errors.lastName = "Apellido es requerido";
               } else if (!/^[a-záéíóúñ\s]{3,}$/i.test(values.lastName)) {
                 errors.lastName =
-                  "lastName only accept letters and minimun 3 letters";
+                  "Apellido solo acepta minimo 3 letras";
               }
 
               if (!values.email) {
-                errors.email = "email is required";
+                errors.email = "Email es requerido";
               } else if (
                 !/^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/i.test(
                   values.email
                 )
               ) {
-                errors.email = "email is not valid";
+                errors.email = "Email no es valido";
               }
 
               if (!values.password) {
-                errors.password = "password is required";
+                errors.password = "Contraseña es requerida";
               } else if (
                 !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/i.test(
                   values.password
@@ -90,16 +90,16 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                   "Min 8 carateres, max 15, al menos una letra mayuscula al menos 1 digito, un caracter especial";
               }
               if (!values.dni) {
-                errors.dni = "dni is required";
+                errors.dni = "DNI es requerido";
               }
               if (!values.phone) {
-                errors.phone = "Phone is required";
+                errors.phone = "Telefono es requerido";
               } else if (
                 !/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/i.test(
                   values.phone
                 )
               ) {
-                errors.phone = "Invalid phone number, 10 numeros only";
+                errors.phone = "Numero de telefono no valido, solo 10 numeros";
               }
               // if (
               //   !/^(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i.test(
@@ -127,7 +127,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
             {(isSubmitting) => (
               <FormContainer>
                 <CloseIcon onClick={toggleModalSignUp} />
-                <h2>Create new account</h2>
+                <h2>Crear nueva cuenta</h2>
                 <InputsContainer>
                   <div>
                     <InputContainer>
@@ -138,14 +138,14 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Name</Label>
+                      <Label>Nombre</Label>
                       <Input name="firstName" type="text" />
                       <ErrorMessage name="firstName" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Last Name</Label>
+                      <Label>Apellido</Label>
                       <Input name="lastName" type="text" />
                       <ErrorMessage name="lastName" component="div">
                         {(msg) => <Error>{msg}</Error>}
@@ -168,14 +168,14 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Password</Label>
+                      <Label>Contraseña</Label>
                       <Input name="password" type="password" />
                       <ErrorMessage name="password" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Phone</Label>
+                      <Label>Telefono</Label>
                       <Input name="phone" />
                       <ErrorMessage name="phone" component="div">
                         {(msg) => <Error>{msg}</Error>}
@@ -212,7 +212,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                   <CheckBoxContainer>
                     {/* <Field type="checkbox" />I agree with terms and conditions */}
                   </CheckBoxContainer>
-                  <Button type="submit">Create New Account</Button>
+                  <Button type="submit">Crear cuenta</Button>
                   <DivisionContainer>
                     <Line />
                     Or
@@ -220,7 +220,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                   </DivisionContainer>
                   <ButtonAlt disabled={true}>
                     <GoogleIcon />
-                    Create with Google
+                    Crear con Google
                   </ButtonAlt>
                 </SubmitContainer>
               </FormContainer>

@@ -1,16 +1,6 @@
-const initialState = {
-    allCategories: [],
-    allUsers: [],
-    filteredUsers: [],
-    services: [],
-    service: {},
-    category: [],
-    workers:[],
-    workerDetail:{},
-    users: [],
-};
+
   
-const rootReducer = (state = initialState, action) => {
+const rootReducer = (state = {}, action) => {
     switch (action.type) {
         case "GET_CATEGORIES":
             return {
@@ -78,6 +68,21 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 service: action.payload
+            }
+        case "GET_POSTS": 
+            return{
+                ...state,
+                posts: action.payload
+            }
+        case "GET_POST_SERVICE_BY_ID":
+            return{
+                ...state,
+                servicePosts: action.payload
+            }
+        case "POST_ID":
+            return{
+                ...state,
+                postDetail: action.payload,
             }
         default: return state;
     };

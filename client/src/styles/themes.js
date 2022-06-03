@@ -6,6 +6,8 @@ const lightMode = {
     font: "#000000",
     backgroundColor: "#fafafa",
     backgroundColorAlt: "white",
+    inputColor: "#fafafa",
+    borderColor: "#f1f1f1f1",
   },
   boxShadow: "0 10px 20px 0 rgba(0,0,0,.07)",
 };
@@ -18,6 +20,8 @@ const darkMode = {
     font: "#ffffff",
     backgroundColor: "#060606",
     backgroundColorAlt: "#141414",
+    inputColor: "#212121",
+    borderColor: "#3d3d3d"
   },
   boxShadow: "0 10px 20px 0 rgba(0,0,0,.07)",
 };

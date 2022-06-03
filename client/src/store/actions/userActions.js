@@ -12,6 +12,22 @@ export const register = (payload) => async(dispatch) => {
     }
 }
 
-export const signout = (payload) => async(dispatch) => {
-    
+export const signin = (payload) => async(dispatch) => {
+    dispatch({type: "USER_SIGNIN_REQ", payload: {payload}});
+
+    try{
+        const {data} = await axios.post(`https://wixer-server.herokuapp.com/auth`, payload);
+        dispatch({type: "USER_SIGNIN_SUCCESS", payload: data});
+        localStorage.setItem("userInfo", JSON.stringify(data))
+    }catch(err){
+        dispatch({
+            type: "USER_SIGNIN_FAIL",
+            payload: err,
+        }) 
+    }
+}
+
+export const signout = () => async(dispatch) => {
+    localStorage.removeItem("userInfo");
+    dispatch({type: "USER_SIGNOUT"});
 }
