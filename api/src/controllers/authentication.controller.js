@@ -1,7 +1,8 @@
 const User = require("../models/User");
 const User_roles = require('../models/User_roles');
 const bcrypt = require('bcrypt');
-const googleVerify = require('../helpers/googleVerify');
+const { googleVerify } = require('../helpers/googleVerify');
+const { generateJwt } = require('../helpers/generateJwt');
 
 const login = async (req, res) => {
     // login comun por ahora
@@ -51,14 +52,14 @@ const googleSignIn = async (req, res) => {
         let usuario;
         // create user
         if (!usuarioDb) {
-            usuario = new Usuario({
+            usuario = new User({
                 username: name,
                 firstName: givenName,
                 lastName: familyName,
                 email,
                 image: img,
                 password: ':)',
-                user_role: user_role._id
+                user_role
             });
         }
         else{
@@ -71,7 +72,6 @@ const googleSignIn = async (req, res) => {
             usuario
             //token
         });
-
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -81,5 +81,16 @@ const googleSignIn = async (req, res) => {
     };
 };
 
+const renewToken = async (req, res) => {
+    const uid = req.uid;
+    const token = await generateJwt(uid);
+    const usuario = await User.findById(uid).populate('user_role', 'name');
+    res.json({
+        ok: true,
+        usuario,
+        token
+    });
+};
 
-module.exports = { login, googleSignIn };
+
+module.exports = { login, googleSignIn, renewToken };
