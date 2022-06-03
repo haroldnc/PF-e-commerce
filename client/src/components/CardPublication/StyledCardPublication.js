@@ -42,7 +42,8 @@ export const Description = styled.h2 `
     margin-right: 15px;
     text-align: left;
     font-size: 17px;
-    font-weight: 500;
+    font-weight: 400;
+    height: 68px;
 `
 export const DivRating = styled.div `
     display:flex;
@@ -82,4 +83,20 @@ export const Pay = styled.h1 `
     font-size: 22px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.664);
+`
+
+export const BotonPago = styled.button `
+    margin-right: 68px;
+    padding: 3px;
+    border-radius: 5px;
+    background-color: ${(props) => props.theme.colors.secondary};
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+    font-family: 'puppin', sans-serif;
+
+    &:hover {
+        background-color: ${(props) => props.theme.colors.primary};
+    }
 `

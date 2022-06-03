@@ -56,10 +56,10 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn }) => {
               <button></button>
             </li>
             <li>
-              <SignIn onClick={toggleModalLogIn}>Log In</SignIn>
+              <SignIn onClick={toggleModalLogIn}>Iniciar sesión</SignIn>
             </li>
             <li>
-              <LogIn  onClick={toggleModalSignUp}>Sign Up</LogIn>
+              <LogIn  onClick={toggleModalSignUp}>Registrarse</LogIn>
             </li>
           </LinksContainer>
         </div>

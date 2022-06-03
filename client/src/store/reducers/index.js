@@ -79,6 +79,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 service: action.payload
             }
+        case "POST_PUBLISH_OF_SERVICE":
+            return{
+                ...state,
+                service: action.payload
+            }
         default: return state;
     };
 };
