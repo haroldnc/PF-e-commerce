@@ -40,6 +40,7 @@ function FindNeedle(haystack, needle) {
 
                 TodasDB= TodasDB.map(e =>{
                     let obj = {
+                        "id":e.id,
                         "title":e.title,
                         "description":e.description,
                         "price":e.price,
@@ -58,6 +59,7 @@ function FindNeedle(haystack, needle) {
                 TodasDB= TodasDB.map(e =>{
                     console.log("todasdb post",TodasDB);
                     let obj = {
+                        "id":e.id,
                         "title":e.title,
                         "description":e.description,
                         "price":e.price,
