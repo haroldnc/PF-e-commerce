@@ -92,7 +92,6 @@ export const InputsDivs = styled.div`
   }
 `;
 
-
 export const UploadImage = styled.div`
   border: 2px dashed ${(props) => props.theme.colors.font};
   border-radius: 5px;
@@ -115,4 +114,3 @@ export const UploadImage = styled.div`
     margin-bottom: 1rem;
   }
 `;
-

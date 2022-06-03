@@ -13,7 +13,7 @@ const PublishForm = () => {
   const categories = useSelector((state) => state.allCategories);
   const services = useSelector((state) => state.services);
   const [servicesC, setServices]= useState([]);
-  const [files, setFiles] = useState([]);
+  const [errors, setErrors] = useState({ name: "" });
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
   
@@ -62,17 +62,15 @@ const upLoadImage = async (e) => {
   }
 
   const handleInputChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value
-    });
+  setInput({
+    ...input,
+    [e.target.name]: e.target.value
+  });
 
-    /*
-    setErrors(validateForm({
-        ...input,
-        [e.target.name]: e.target.value
-    }));
-    */
+  setErrors(validateForm({
+    ...input,
+    [e.target.name]: e.target.value
+  }));
 };
 
   const handleSubmit = (e) => {
@@ -104,12 +102,12 @@ const upLoadImage = async (e) => {
         <h3>Titulo</h3>
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Title"
             name="title"
             onChange={handleInputChange}
             value={input.title}
           />
-          {/*errors.name && <p className={style.errors}>{errors.name}</p>*/}
+          {errors.title && <p>{errors.title}</p>}
       </InputsDivs>
 
       <InputsDivs>
@@ -136,7 +134,7 @@ const upLoadImage = async (e) => {
           </select>
 
           <select onChange={handleInputChange} value={input.service} name="service">
-              <option>SERVICIO</option>
+              <option value="servicio">SERVICIO</option>
               {
                 servicesC && servicesC
                 .sort((a, b) => {
@@ -148,7 +146,7 @@ const upLoadImage = async (e) => {
                 .map((s) => {
                   return s.map((ss) => {
                     return (
-                      <option value={ss.name} id={ss.category} key={ss._id}>
+                      <option value={ss._id} id={ss.category} key={ss._id}>
                         {ss.name}
                       </option>
                     )
@@ -156,7 +154,7 @@ const upLoadImage = async (e) => {
                 })
               }
           </select>
-          {/*errors.type1 && <p className={style.errors}>{errors.type1}</p>*/}
+          {errors.service && <p>{errors.service}</p>}
       </InputsDivs>
 
       <InputsDivs>
@@ -168,7 +166,7 @@ const upLoadImage = async (e) => {
             onChange={handleInputChange}
             value={input.description}
           />
-          {/*errors.height && <p className={style.errors}>{errors.height}</p>*/}
+          {errors.description && <p>{errors.description}</p>}
       </InputsDivs>
 
       <InputImage>
@@ -181,7 +179,7 @@ const upLoadImage = async (e) => {
               onChange={upLoadImage}
             />
           </UploadImage> 
-        {/*errors.image && <p className={style.errors}>{errors.image}</p> */}
+        {errors.img && <p>{errors.img}</p>}
       </InputImage>
 
       <InputsDivs>
@@ -193,12 +191,42 @@ const upLoadImage = async (e) => {
             onChange={handleInputChange}
             value={input.price}
           />
-          {/*errors.weight && <p className={style.errors}>{errors.weight}</p>*/}
+          {errors.price && <p>{errors.weight}</p>}
       </InputsDivs>
       <button>Publicar</button>
     </Form>
     </PublishFormSection>
   );
+};
+
+export function validateForm(input) {
+  let errors = {};
+
+  if (!input.title) {
+    errors.title = "Name is required";
+  } else if (!/^[A-Za-z]+$/.test(input.title)) {
+    errors.title = "Name must be plain text";
+  };
+
+  if (!input.img) {
+    errors.img = "Image is required";
+  };
+
+  if (input.service === "servicio") {
+    errors.service = "Service can not be empty";
+  };
+
+  if (!input.description) {
+    errors.description = "Description is required";
+  };
+
+  if (!input.price) {
+    errors.price = "Price is required";
+  } else if (!/^([1-9]\d{0,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(input.price)) {
+    errors.price = "El precio tiene que ser minimo 1";
+  };
+
+  return errors;
 };
 
 export default PublishForm;
