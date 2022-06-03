@@ -14,7 +14,7 @@ const validarJwt = (req, res, next) => {
         // cada ves q pase seteo en req el usuario decodificado del token
         // y el token mismo para poder usarlo en el resto de las rutas
         // que necesite el usuario autenticado 
-        //y no tenga que volver a pasarlo por headers en cada ruta 
+        // y no tenga que volver a pasarlo por headers en cada ruta 
         const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         req.uid = user.id;
         next();
