@@ -16,7 +16,7 @@ const Scoremodel = Schema({
       ref: "Publication",
     
     },
-    User: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: "User"
     },
