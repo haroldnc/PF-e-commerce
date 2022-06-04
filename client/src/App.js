@@ -19,6 +19,8 @@ import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
+import ServicesDetail from "./pages/ServicesDetail";
+
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,6 +58,7 @@ function App() {
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
           <Route path="/publicar" component={PublishService} />
+          <Route path="/posts/detail" component={ServicesDetail}/>
         </Switch>
         <Footer />
         <ModalLogIn
