@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon -L",
-    "test": "mocha --recursive --timeout 10000 --exit"
+    "test": "mocha --recursive --timeout 10000 --exit",
+    "bash": "node ./src/utils/backend-bash.js"
   },
   "author": "",
   "license": "ISC",
