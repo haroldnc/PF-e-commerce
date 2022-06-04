@@ -1,7 +1,7 @@
 const User = require("../models/User.js");
 const User_roles = require('../models/User_roles');
 const Publications = require('../models/Publications');
-//const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt');
 
 const getUserById = async (req, res) => {
@@ -90,6 +90,7 @@ const createUser = async (req, res) => {
     try {
         // validar si nickname, email, telefono y dni ya existen.
         const existUserName = await User.findOne({ username });
+   
         if (existUserName) { 
             return res.status(400).json({
                 ok: false,
@@ -97,14 +98,14 @@ const createUser = async (req, res) => {
             });
         };
         const existEmail = await User.findOne({ email });
-        if (existEmail) { 
+         if (existEmail) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This email is already registered'
             });
         };
         const existPhone = await User.findOne({ phone });
-        if (existPhone) { 
+         if (existPhone) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This phone is already registered'
@@ -116,9 +117,10 @@ const createUser = async (req, res) => {
                 ok: false,
                 msg: 'This DNI is already registered'
             });
-        };
+        }
         //como me viene el user_role? String o Id? ===> llega id
         // const userRole = await User_roles.findOne({user_role});
+        
         const usuario = new User({
             username,
             firstName,
@@ -131,16 +133,45 @@ const createUser = async (req, res) => {
             phone,
             web
         });
+
         // encriptar password y guardar usuario
         const salt = await bcrypt.genSalt(10);
         const hash = bcrypt.hashSync(password, salt);
         usuario.password = hash;
         await usuario.save();
 
+        // enviar email de confirmacion de registro
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'nachoburgos1995@gmail.com',
+                pass: 'mtlsdatewtbcwhbf'
+            }
+        });
+        const mailOptions = {
+            from: "Wixxer <",
+            to: usuario.email,
+            subject: 'Confirmation of registration',
+            text: 'Hello ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
+                'Thank you for registering on Wixxer.\n' +
+                'To confirm your registration, please click on the following link:\n\n' +
+                'http://localhost:3000/confirmar/' + usuario._id + '\n\n' +
+                "If it doesn't work, copy and paste the link into your browser.\n\n" +
+                'Thank you,\n' +
+                'Wixxer  Team'
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
         return res.json({
             ok: true,
             msg: "User created",
         })
+    
     }
     catch (error) {
         console.log(error);

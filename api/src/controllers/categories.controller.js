@@ -19,10 +19,10 @@ const getCategories = async (req, res) => {
 }
 
 const getCategoryById = async (req, res) => {
-   const { idCategory } = req.params;
+   const { id } = req.params;
 
    try {
-      const category = await Categories.findById(idCategory).populate({path: 'services'});
+      const category = await Categories.findById(id).populate({path: 'services'});
 
       res.status(200).json(category);
    } catch (error) {
@@ -31,26 +31,14 @@ const getCategoryById = async (req, res) => {
 }
 
 const addCategory = async (req, res) => {
-   const { id } = req.query;
+   const { name, img, phrase } = req.body;
 
    try {
-      if (id) {
-         const { services } = req.body;
+      if (!name) throw new Error('"name" is required');
+      if (!img) throw new Error('"img" is required');
+      if (!phrase) throw new Error('"phrase" is required');
 
-         if (!Array.isArray(services) || !services.length) throw new Error('Services not found');
-
-         await Services.insertMany( services.map(s => {
-            return { ...s, category: id }
-         }));
-      } else {
-         const { name, img, phrase } = req.body;
-
-         if (!name) throw new Error('"name" is required');
-         if (!img) throw new Error('"img" is required');
-         if (!phrase) throw new Error('"phrase" is required');
-   
-         await Categories.create({ name, img, phrase });
-      }
+      await Categories.create({ name, img, phrase });
 
       res.status(200).json({ msg: 'Category created successfully' });
    } catch (error) {
@@ -59,13 +47,11 @@ const addCategory = async (req, res) => {
 }
 
 const updateCategory = async (req, res) => {
-   const { id } = req.query;
+   const { id } = req.params;
    const { name, img, phrase } = req.body;
 
    try {
-      if (!id) throw new Error('Category ID is required');
-
-      await Categories.updateOne({ _id: id }, { name, img, phrase });
+      await Categories.findByIdAndUpdate(id, { name, img, phrase });
 
       res.status(200).json({ msg: 'Category updated successfully' });
    } catch (error) {
@@ -73,32 +59,12 @@ const updateCategory = async (req, res) => {
    }
 }
 
-const updateService = async (req, res) => {
-   const { idCategory } = req.params;
-   const { idService } = req.query
-   const { name, img, category } = req.body;
-
-   try {
-      if (!idService) throw new Error('Service ID is required');
-
-      await Services.findByIdAndUpdate({ _id: idService ,category: idCategory }, {
-         name,
-         img,
-         category
-      });
-
-      res.status(200).json({ msg: 'Service updated successfully' });
-   } catch (error) {
-      res.status(422).json({ error: error.message })
-   }
-}
-
 const deleteCategory = async (req, res) => {
-   const { idCategory } = req.params;
+   const { id } = req.params;
 
    try {
-      await Categories.findByIdAndDelete(idCategory);
-      await Services.deleteMany({category: idCategory});
+      await Categories.findByIdAndDelete(id);
+      await Services.deleteMany({category: id});
 
       res.status(200).json({ msg: 'Category deleted successfully' })
    } catch(error) {
@@ -111,6 +77,5 @@ module.exports = {
    getCategoryById,
    addCategory,
    updateCategory,
-   updateService,
    deleteCategory
 }
