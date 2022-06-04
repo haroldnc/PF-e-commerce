@@ -90,31 +90,29 @@ const createUser = async (req, res) => {
     try {
         // validar si nickname, email, telefono y dni ya existen.
         const existUserName = await User.findOne({ username });
-        const existEmail = await User.findOne({ email });
-        const existPhone = await User.findOne({ phone });
-        const existDni = await User.findOne({ dni });
+   
         if (existUserName) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This username is already registered'
             });
-        }
-        
-        else if (existEmail) { 
+        };
+        const existEmail = await User.findOne({ email });
+         if (existEmail) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This email is already registered'
             });
-        }
-        
-        else if (existPhone) { 
+        };
+        const existPhone = await User.findOne({ phone });
+         if (existPhone) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This phone is already registered'
             });
-        }
-        
-        else if (existDni) { 
+        };
+        const existDni = await User.findOne({ dni });
+        if (existDni) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This DNI is already registered'
@@ -122,7 +120,7 @@ const createUser = async (req, res) => {
         }
         //como me viene el user_role? String o Id? ===> llega id
         // const userRole = await User_roles.findOne({user_role});
-        else {
+        
         const usuario = new User({
             username,
             firstName,
@@ -173,7 +171,7 @@ const createUser = async (req, res) => {
             ok: true,
             msg: "User created",
         })
-    }
+    
     }
     catch (error) {
         console.log(error);
