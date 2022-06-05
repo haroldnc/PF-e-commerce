@@ -92,12 +92,12 @@ export function getUserById (id){
     }
 }
 
-export function getPostById(id){
-    return dispatch =>{
-        return axios.get(`https://wixer-server.herokuapp.com/posts/${id}`)
-        .then(res=>dispatch({type: "GET_POST_BY_ID", payload: res.data}))
-    }
-}
+// export function getPostById(id){
+//     return dispatch =>{
+//         return axios.get(`https://wixer-server.herokuapp.com/posts/${id}`)
+//         .then(res=>dispatch({type: "GET_POST_BY_ID", payload: res.data}))
+//     }
+// }
 
 export function getAllPosts(){
     return dispatch =>{
