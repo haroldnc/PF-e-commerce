@@ -52,6 +52,7 @@ const Footer = () => {
             <ComunityList>
                 <Li>Conviértete en vendedor</Li>
                 <Li>Afiliados</Li>
+                <Link to="/publicar"><Li>Publicar</Li></Link>
             </ComunityList>
           </div>
         </InfoFooter>
