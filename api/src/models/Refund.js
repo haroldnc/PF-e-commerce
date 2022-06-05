@@ -11,6 +11,12 @@ const Refund = Schema({
         type: String,
         require: [true, "currency is requered"]
     },
+    date:{
+        type: String
+    },
+    time:{
+        type: String
+    },
     status: {
         type: String,
     },

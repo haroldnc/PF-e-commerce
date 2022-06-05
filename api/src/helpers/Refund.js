@@ -1,4 +1,5 @@
 const stripe = require("stripe")(process.env.API_KEY_STRIPE) 
+const Refund = require("../models/Refund")
 
 
 
@@ -9,7 +10,17 @@ const CreateRefund = async (req, res, next) => {
         const refund = await stripe.refunds.create({
             payment_intent,
         });
-        res.json(refund)
+        let time = new Date().toLocaleTimeString()
+        let date = new Date().toLocaleDateString()
+        const dataRefund = await Refund.create(
+            {
+                amount: refund.amount,
+                currency: refund.currency,
+                date: date,
+                time: time,
+                status: refund.status
+            })
+        res.json(dataRefund)
     }catch(error){
         if(error.code === "charge_already_refunded") res.json({msg: "el reembolso ya fue efectuado"})
         if(error.code === "resource_missing") res.json({msg: "la transaccion no existe"})
@@ -30,21 +41,18 @@ const RetrievReund = async (req,res, next) =>{
     }
 }
 
-// const UpDateRefund = async (req,res,next) =>{
-//     try{
-//         let {order_id, refund_id} = req.body
-//         const refund = await stripe.refunds.update(
-//             refund_id,
-//             {metadata: {order_id}}
-//         );
-
-//         res.send(refund)
-//     }catch(error){
-//         next(error)
-//     }
-// }
+const getAllRefund = async (req,res,next) =>{
+    try{
+        const allRefundund = await Refund.find()
+        if(allRefundund.length === 0 ) res.json({msg: "not found refund"})
+        res.send(allRefundund)
+    }catch(error){
+        next(error)
+    }
+}
 
 module.exports = {
     CreateRefund, 
     RetrievReund,
+    getAllRefund
 }
