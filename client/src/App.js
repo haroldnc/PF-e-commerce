@@ -20,6 +20,8 @@ import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
+import ServicesDetail from "./pages/ServicesDetail";
+
 import { useSelector, useDispatch } from "react-redux";
 
 function App() {
@@ -65,6 +67,7 @@ function App() {
           <Route path="/worker/:id" component={WorkerProfile} />
           <Route path="/compra/:id" component={Payment} />
           <Route path="/publicar" component={PublishService} />
+          <Route path="/posts/detail/:id" component={ServicesDetail}/>
         </Switch>
         <Footer />
         <ModalLogIn

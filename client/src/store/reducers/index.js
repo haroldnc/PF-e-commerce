@@ -1,3 +1,17 @@
+const initialState = {
+    allCategories: [],
+    allUsers: [],
+    filteredUsers: [],
+    services: [],
+    service: {},
+    category: [],
+    workers:[],
+    workerDetail:{},
+    users: [],
+    userDetail:{},
+    post: {},
+    allPost:[]
+};
 
   
 const rootReducer = (state = {}, action) => {
@@ -88,6 +102,22 @@ const rootReducer = (state = {}, action) => {
             return{
                 ...state,
                 service: action.payload
+            }
+        case "GET_USER_BY_ID":
+            return{
+                ...state,
+                userDetail: action.payload
+            }
+
+        case "GET_POST_BY_ID":
+            return{
+                ...state,
+                post: action.payload
+            }
+        case "GET_ALL_POSTS":
+            return{
+                ...state,
+                allPost:action.payload
             }
         default: return state;
     };

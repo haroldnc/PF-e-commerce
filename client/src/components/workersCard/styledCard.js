@@ -60,7 +60,7 @@ export const Row = styled.div `
 export const Column = styled.div `
     display: flex;
     flex-direction: column;
-    text-align: rigth,
+    /* text-align: rigth; */
     background-color: blue;
-    text-aling: center;
+    text-align: center;
 `
