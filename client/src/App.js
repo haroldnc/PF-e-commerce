@@ -20,12 +20,9 @@ import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
-<<<<<<< HEAD
 import ServicesDetail from "./pages/ServicesDetail";
 
-=======
 import { useSelector, useDispatch } from "react-redux";
->>>>>>> front
 
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);

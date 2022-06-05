@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const initialState = {
     allCategories: [],
     allUsers: [],
@@ -13,9 +12,7 @@ const initialState = {
     post: {},
     allPost:[]
 };
-=======
 
->>>>>>> front
   
 const rootReducer = (state = {}, action) => {
     switch (action.type) {

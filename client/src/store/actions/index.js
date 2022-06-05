@@ -84,7 +84,6 @@ export const getServiceById = (id) => dispatch => {
 export const postPublish = (payload) => async() => {
     return {type: "POST_PUBLISH_OF_SERVICE", payload: payload}
 }
-<<<<<<< HEAD
 
 export function getUserById (id){
     return dispatch =>{
@@ -106,5 +105,3 @@ export function getAllPosts(){
         .then(res=>dispatch({type: "GET_ALL_POSTS", payload: res.data}))
     }
 }
-=======
->>>>>>> front
