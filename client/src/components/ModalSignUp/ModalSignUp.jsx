@@ -26,9 +26,30 @@ import { useDispatch } from "react-redux";
 import { postUser } from "../../store/actions";
 import user from "../../store/reducers/userReducer";
 import { register } from "../../store/actions/userActions";
+import GoogleLogin from "react-google-login";
+import axios from "axios";
 
 const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
   const dispatch = useDispatch();
+  const clientGoogle =
+    "796413127660-tgktohi6gqfm0n183g1kqp6lqehl6ncq.apps.googleusercontent.com";
+
+  const handleGoogleLogin = async (googleData) => {
+    try {
+      const dataGoogle = await axios.post(`https://wixer-server.herokuapp.com/user`, {
+        tokenId: googleData.tokenId,
+        givenName: googleData.profileObj.givenName,
+        familyName: googleData.profileObj.familyName,
+      });
+      const finallyGoogle = await dataGoogle.data;
+      localStorage.setItem("token", JSON.stringify(finallyGoogle.token));
+      // navigate("/home");
+    } catch (error) {
+      console.log(error);
+      alert("error no se pudo ingresar", error);
+    }
+  };
+
 
   return (
     <>
@@ -37,14 +58,14 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
           <Formik
             initialValues={{
               firstName: "",
-              lastName: "",
+              // lastName: "",
               username: "",
-              email: "",
-              password: "",
-              dni: "",
-              phone: "",
-              // web: "",
-              user_role: "",
+              // email: "",
+              // password: "",
+              // dni: "",
+              // phone: "",
+              // // web: "",
+              // user_role: "",
             }}
             validate={(values) => {
               const errors = {};
@@ -58,15 +79,13 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               if (!values.firstName) {
                 errors.firstName = "Nombre es requerido";
               } else if (!/^[a-záéíóúñ\s]{3,}$/i.test(values.firstName)) {
-                errors.firstName =
-                  "Nombre solo acepta minimo 3 letras";
+                errors.firstName = "Nombre solo acepta minimo 3 letras";
               }
 
               if (!values.lastName) {
                 errors.lastName = "Apellido es requerido";
               } else if (!/^[a-záéíóúñ\s]{3,}$/i.test(values.lastName)) {
-                errors.lastName =
-                  "Apellido solo acepta minimo 3 letras";
+                errors.lastName = "Apellido solo acepta minimo 3 letras";
               }
 
               if (!values.email) {
@@ -117,10 +136,10 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                dispatch(register(values))
+                dispatch(register(values));
                 setSubmitting(false);
                 alert("Usuario Creado!");
-                toggleModalSignUp()
+                toggleModalSignUp();
               }, 400);
             }}
           >
@@ -144,7 +163,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer>
-                    <InputContainer>
+                    {/* <InputContainer>
                       <Label>Apellido</Label>
                       <Input name="lastName" type="text" />
                       <ErrorMessage name="lastName" component="div">
@@ -196,7 +215,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       <ErrorMessage name="user_role" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
-                    </InputContainer>
+                    </InputContainer> */}
                   </div>
                   <div>
                     {/* <InputContainer>
@@ -218,10 +237,36 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                     Or
                     <Line />
                   </DivisionContainer>
-                  <ButtonAlt disabled={true}>
+                  <GoogleLogin
+                    // clientId={clientGoogle}
+                    // onSuccess={handleGoogleLogin}
+                    // onFailure={handleGoogleLogin}
+                    render={(renderProps) => (
+                      <ButtonAlt disabled={true}>
+                        <GoogleIcon
+                        // onClick={renderProps.onClick}
+                        // disabled={renderProps.disabled}
+                        />
+                        Crear con Google
+                      </ButtonAlt>
+                      // <ButtonGoogle
+                      //   onClick={renderProps.onClick}
+                      //   disabled={renderProps.disabled}
+                      // >
+                      //   <FcGoogle
+                      //     style={{
+                      //       width: "33px",
+                      //       height: "33px",
+                      //       marginTop: "6px",
+                      //     }}
+                      //   />
+                      // </ButtonGoogle>
+                    )}
+                  />
+                  {/* <ButtonAlt disabled={true}>
                     <GoogleIcon />
                     Crear con Google
-                  </ButtonAlt>
+                  </ButtonAlt> */}
                 </SubmitContainer>
               </FormContainer>
             )}

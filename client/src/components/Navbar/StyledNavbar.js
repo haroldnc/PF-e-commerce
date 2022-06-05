@@ -101,3 +101,20 @@ export const HamburguerMenuIcon = styled(GiHamburgerMenu)`
     display: flex;
   }
 `
+export const UserInfo = styled.div`
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+`
+export const UserRole = styled.span`
+  color: #13e300;
+  font-size: 14px;
+`
+export const Profile = styled.div`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 99999px;
+  background-color: grey;
+  cursor: pointer;
+`

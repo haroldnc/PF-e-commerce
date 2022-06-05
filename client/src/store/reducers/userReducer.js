@@ -1,4 +1,4 @@
-export const user = (state = {}, action) => {
+export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case "USER_REGISTER_REQ":
       return { loading: true };

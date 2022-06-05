@@ -19,10 +19,32 @@ import {
 import { Formik, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { signin } from "../../store/actions/userActions";
-
+import { GoogleLogin } from "react-google-login";
+import axios from "axios";
 
 const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
   const dispatch = useDispatch();
+  const clientGoogle =
+    "796413127660-tgktohi6gqfm0n183g1kqp6lqehl6ncq.apps.googleusercontent.com";
+
+  const handleGoogleLogin = async (googleData) => {
+    try {
+      const dataGoogle = await axios.post(
+        `https://wixer-server.herokuapp.com/user`,
+        {
+          tokenId: googleData.tokenId,
+          givenName: googleData.profileObj.givenName,
+          familyName: googleData.profileObj.familyName,
+        }
+      );
+      const finallyGoogle = await dataGoogle.data;
+      localStorage.setItem("token", JSON.stringify(finallyGoogle.token));
+      // navigate("/home");
+    } catch (error) {
+      console.log(error);
+      alert("error no se pudo ingresar", error);
+    }
+  };
   return (
     <>
       {isOpenModalLogIn && (
@@ -57,7 +79,7 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
             onSubmit={(values, { resetForm, setSubmitting }) => {
               resetForm();
               setSubmitting(false);
-              dispatch(signin(values))
+              dispatch(signin(values));
             }}
           >
             {(props, isSubmitting) => (
@@ -91,7 +113,9 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                   <Field type="checkbox" name="checked" />
                   Recordar cuenta
                 </CheckBoxContainer> */}
-                <Button disabled={isSubmitting} type="submit">Iniciar Sesión</Button>
+                <Button disabled={isSubmitting} type="submit">
+                  Iniciar Sesión
+                </Button>
                 {/* <InputContainer>
                   <Input placeholder="Email" name="email" type="email" />
                 </InputContainer>
@@ -119,10 +143,37 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                   Or
                   <Line />
                 </DivisionContainer>
-                <ButtonAlt>
+                <GoogleLogin
+                  clientId={clientGoogle}
+                  onSuccess={handleGoogleLogin}
+                  onFailure={handleGoogleLogin}
+                  render={(renderProps) => (
+                    <ButtonAlt
+                      // disabled={true}
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
+                      <GoogleIcon />
+                      Crear con Google
+                    </ButtonAlt>
+                    // <button
+                    //   onClick={renderProps.onClick}
+                    //   disabled={renderProps.disabled}
+                    // >
+                    //   {/* <FcGoogle
+                    //     style={{
+                    //       width: "33px",
+                    //       height: "33px",
+                    //       marginTop: "6px",
+                    //     }}
+                    //   /> */}
+                    // </button>
+                  )}
+                />
+                {/* <ButtonAlt>
                   <GoogleIcon />
                   Continuar con Google
-                </ButtonAlt>
+                </ButtonAlt> */}
                 <CloseIcon onClick={toggleModalLogIn} />
               </FormContainer>
             )}

@@ -20,8 +20,12 @@ import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
+  const userSignIn = useSelector((state) => state.userSignIn);
+  const {userInfo} = userSignIn;
+
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useDarkMode();
 
@@ -40,6 +44,8 @@ function App() {
     setIsOpenModalLogIn(!isOpenModalLogIn);
   };
 
+  console.log(userInfo)
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={themes[themeMode]}>
@@ -49,6 +55,7 @@ function App() {
           toggleModalSignUp={toggleModalSignUp}
           isOpenModalLogIn={isOpenModalLogIn}
           toggleModalLogIn={toggleModalLogIn}
+          userInfo={userInfo}
         />
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Switch>
