@@ -63,9 +63,9 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo }) => {
               <Profile onClick={handleToggle}>
                 
               </Profile>
-              {
-                isOpen && <ProfileBox isOpen={isOpen}/>
-              }
+              
+                <ProfileBox isOpen={isOpen}/>
+              
               <ProfileBox />
             </UserInfo>
           ) : (
