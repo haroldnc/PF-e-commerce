@@ -10,29 +10,44 @@ import PostDetailCard from "../../components/PostDetailCard";
 
 export default function ServicesDetail(){
     
+
+    const {id} = useParams()
     const dispatch = useDispatch()
     const post = useSelector((state)=>state.post)
     const user = useSelector((state)=>state.userDetail)
     const workers = useSelector((state)=>state.workers)
     const arrayOfPosts = useSelector((state)=>state.allPost)
+    var author
     
-    const userPost= arrayOfPosts.filter(p=>p.user==="62950e52471fa510d2a2f906")
-//    console.log(userPost)
+    // console.log(workers)
+    // console.log(user.username)
+    // console.log(post.title)
 
-    const filteredWorker = workers.filter(w=>w.userId.uid === user.uid)
-    console.log(filteredWorker)
+    const userPost= arrayOfPosts.filter(p=>p.user===post.user)
+    //    console.log(userPost)
+
+    const filteredWorker = workers.filter(w=>w.userId.uid === post.user)
+    // console.log(filteredWorker)
+    //  console.log(filteredWorker[0]._id)
+
+    
 
 
     useEffect(()=>{
-        dispatch(getPostById("629a87433f8d0083d6ec08e4"))
-        dispatch(getUserById("62950e52471fa510d2a2f906"))
+        dispatch(getPostById(id))
+        if(post.user){
+            dispatch(getUserById(post.user))
+
+        }
+        
         dispatch(getAllPosts())
         dispatch(getWorkers())
-    }, [dispatch])
+    }, [dispatch, id, post.user])
+
 
     return(
         <>
-        { post.title?
+        { post.title && user.username?
 
             <Parent>
             <DetailContainer>
@@ -42,11 +57,11 @@ export default function ServicesDetail(){
                     <ProfileImg src={user.image} />
                     </Link>
                     <span>Publicado por: </span>
-                    <ProfileLink to={`/worker/${filteredWorker[0]._id}`}>
+                    <ProfileLink to={`/home`}>
                     <span>{user.username}</span>
                     </ProfileLink>
                 </UserInfo>
-                <PostPicture src="https://s3.amazonaws.com/www-inside-design/uploads/2019/11/Designer-Confidential-1080x1080-Instagram-810x810.png" alt="designer presentation" />
+                <PostPicture src={post.img} alt="designer presentation" />
                 <DescriptionContainer>
                     <h3>Acerca de mi trabajo</h3>
                     <p>

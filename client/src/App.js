@@ -58,7 +58,7 @@ function App() {
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
           <Route path="/publicar" component={PublishService} />
-          <Route path="/posts/detail" component={ServicesDetail}/>
+          <Route path="/posts/detail/:id" component={ServicesDetail}/>
         </Switch>
         <Footer />
         <ModalLogIn
