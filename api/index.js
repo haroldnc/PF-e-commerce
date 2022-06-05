@@ -11,7 +11,8 @@ var cors = require('cors')
 dbConnection();
 
 //settings
-//server.set('port', process.env.PORT || 4000);
+
+server.set('port', process.env.PORT || 4000);
 
 //middlewares
 server.use(morgan('dev'));
@@ -30,3 +31,6 @@ server.use((err, req, res, next) => {
     res.status(status).send(message);
 });
 
+server.listen(process.env.PORT, () => {
+    console.log(`Server connected in port :${process.env.PORT}`);
+});

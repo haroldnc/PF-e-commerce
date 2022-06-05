@@ -15,7 +15,7 @@ const Hero = () => {
     <Container>
       <Wrapper>
         <Left>
-            <Title>Bienvenido a <span>Wixer</span><br />donde puedes conectar <br /> con el trabajo que necesitas</Title>
+            <Title>Bienvenido a <span>Wixxer</span><br />donde puedes conectar <br /> con el trabajo que necesitas</Title>
             <Searchbar />
         </Left>
         <Right>

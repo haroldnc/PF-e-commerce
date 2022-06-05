@@ -12,6 +12,7 @@ import Home from "./pages/Home/Home";
 import Categories from "./pages/Categories/Categories";
 // import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
 import ModalLogIn from "./components/ModalLogIn/ModalLogIn";
+import Payment from "./pages/Purchase/Purchase";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
@@ -19,8 +20,12 @@ import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
+import { useSelector, useDispatch } from "react-redux";
 
 function App() {
+  const userSignIn = useSelector((state) => state.userSignIn);
+  const {userInfo} = userSignIn;
+
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useDarkMode();
 
@@ -39,6 +44,8 @@ function App() {
     setIsOpenModalLogIn(!isOpenModalLogIn);
   };
 
+  console.log(userInfo)
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={themes[themeMode]}>
@@ -48,6 +55,7 @@ function App() {
           toggleModalSignUp={toggleModalSignUp}
           isOpenModalLogIn={isOpenModalLogIn}
           toggleModalLogIn={toggleModalLogIn}
+          userInfo={userInfo}
         />
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Switch>
@@ -55,6 +63,7 @@ function App() {
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
+          <Route path="/compra/:id" component={Payment} />
           <Route path="/publicar" component={PublishService} />
         </Switch>
         <Footer />
