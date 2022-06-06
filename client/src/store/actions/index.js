@@ -70,12 +70,6 @@ export const getPostsByServiceId = (id) => (dispatch) => {
   axios.get(`http://wixer-server.herokuapp.com/posts/service/${id}`).then((res) => dispatch({type: "GET_POST_SERVICE_BY_ID", payload: res.data}))
 }
 
-export const getPostById = (id) => (dispatch) => {
-  axios
-    .get(`http://wixer-server.herokuapp.com/posts/${id}`)
-    .then((res) => dispatch({ type: "GET_POST_ID", payload: res.data }));
-};
-
 export const getServiceById = (id) => dispatch => {
     axios.get(`https://wixer-server.herokuapp.com/services/${id}`)
     .then(res => dispatch({type: "GET_SERVICE_BYID", payload: res.data}))
