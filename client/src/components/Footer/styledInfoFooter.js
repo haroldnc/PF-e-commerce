@@ -4,7 +4,9 @@ export const Container = styled.footer`
   width: 100%;
   display: flex;
   justify-content:center;
-`;
+
+  ${({ruta}) => ruta === "admin" ? `visibility:hidden`: `none`}
+`
 
 export const InfoFooter = styled.div`
   background-color: ${(props) => props.theme.colors.backgroundColor};

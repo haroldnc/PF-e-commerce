@@ -52,7 +52,9 @@ function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={themes[themeMode]}>
-        <Navbar
+
+
+      <Navbar
           toggle={toggle}
           isOpenModalSignUp={isOpenModalSignUp}
           toggleModalSignUp={toggleModalSignUp}

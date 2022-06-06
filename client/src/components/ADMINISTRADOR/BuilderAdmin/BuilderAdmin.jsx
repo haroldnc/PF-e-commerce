@@ -23,7 +23,7 @@ const BuildAdmin = ({lateral, setLateral, setRender}) => {
             <DivName>
                 <NameMenu>Builder</NameMenu>
             </DivName>
-            <Menudiv onClick={() => handleClick("Categorías")}>
+            <Menudiv onClick={() => handleClick("Editar Categorías")}>
             <IconContext.Provider value={{size:"20px"}}>
                         <div>
                             <BiCategoryAlt/>
@@ -31,7 +31,7 @@ const BuildAdmin = ({lateral, setLateral, setRender}) => {
                     </IconContext.Provider>
                 <Namediv>Categorias</Namediv>
             </Menudiv>
-            <Menudiv onClick={() => handleClick("Servicios")}>
+            <Menudiv onClick={() => handleClick("Editar Servicios")}>
             <IconContext.Provider value={{size:"20px"}}>
                         <div>
                             <MdOutlineCategory/>

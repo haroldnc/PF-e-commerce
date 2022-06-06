@@ -6,7 +6,7 @@ export const ContainerAdmin = styled.div `
 `
 
 export const Screen = styled.div `
-    background-color: rgba(0, 0, 0, 0.048);
+    background-color: ${props => props.theme.colors.backgroundColor};
     width: 100%;
     height: 100%;
     margin-left: 60px;

@@ -1,14 +1,17 @@
 import React, {useState} from "react";
 import { ContainerAdmin, Screen } from './Admin.js'
 
-import NavAdmin from '../../components/NavAdmin/NavAdmin.jsx'
-import LateralNavAdmin from '../../components/LateralNavAdmin/LateralNavAdmin.jsx'
-import Dasboard from '../../components/Dashboard/Dashboard.jsx'
-import MenuAdmin from "../../components/MenuAdmin/MenuAdmin.jsx";
-import AdminRegistrados from '../../components/AdminRegistrados/AdminRegistrados.jsx'
-import BuildAdmin from '../../components/BuilderAdmin/BuilderAdmin.jsx'
-import FormAdminCategory from '../../components/FormAdminCategory/FormAdminCategory.jsx'
-import FormAdminServices from "../../components/FormAdminService/FormAdminService.jsx";
+import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
+import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
+import Dasboard from '../../components/ADMINISTRADOR/Dashboard/Dashboard.jsx'
+import MenuAdmin from "../../components/ADMINISTRADOR/MenuAdmin/MenuAdmin.jsx";
+import AdminRegistrados from '../../components/ADMINISTRADOR/AdminRegistrados/AdminRegistrados.jsx'
+import BuildAdmin from '../../components/ADMINISTRADOR/BuilderAdmin/BuilderAdmin.jsx'
+import FormAdminCategory from '../../components/ADMINISTRADOR/FormAdminCategory/FormAdminCategory.jsx'
+import FormAdminServices from "../../components/ADMINISTRADOR/FormAdminService/FormAdminService.jsx";
+import AdminWorkers from "../../components/ADMINISTRADOR/AdminWorkers/AdminWorkers.jsx";
+import Categorias from "../../components/ADMINISTRADOR/Categorias/Categorias.jsx";
+import DataAdmin from "../../components/ADMINISTRADOR/DataAdmin/DataAdmin.jsx";
 
 const Admin = () => {
 
@@ -25,18 +28,24 @@ const Admin = () => {
         showLateral = <MenuAdmin  lateral={lateral} setLateral={setLateral} setRender={setRender}/>
     }else if(lateral.panel === "Builder" && lateral.show){
         showLateral = <BuildAdmin lateral={lateral} setLateral={setLateral} setRender={setRender}/>
-    }else{
-        showLateral = null
+    }else if(lateral.panel === "Data" && lateral.show){
+        showLateral = <DataAdmin lateral={lateral} setLateral={setLateral} setRender={setRender}/>
     }
 
     if(render === "Dashboard"){
         showScreen = <Dasboard />
     }else if(render === "Registrados"){
         showScreen = <AdminRegistrados/>
-    }else if(render === "Categorías"){
+    }else if(render === "Editar Categorías"){
         showScreen = <FormAdminCategory/>
-    }else if(render === "Servicios"){
+    }else if(render === "Editar Servicios"){
         showScreen = <FormAdminServices />
+    }else if( render === "Workers"){
+        showScreen = <AdminWorkers/>
+    }else if(render === "Categorías"){
+        showScreen = <Categorias/>
+    }else if(render === "Servicios"){
+        
     }
 
     return (
