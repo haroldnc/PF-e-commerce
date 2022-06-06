@@ -84,3 +84,24 @@ export const getServiceById = (id) => dispatch => {
 export const postPublish = (payload) => async() => {
     return {type: "POST_PUBLISH_OF_SERVICE", payload: payload}
 }
+
+export function getUserById (id){
+    return dispatch =>{
+        return axios.get(`https://wixer-server.herokuapp.com/user/${id}`)
+        .then(res=>dispatch({type: "GET_USER_BY_ID", payload: res.data}))
+    }
+}
+
+export function getPostById(id){
+    return dispatch =>{
+        return axios.get(`https://wixer-server.herokuapp.com/posts/${id}`)
+        .then(res=>dispatch({type: "GET_POST_BY_ID", payload: res.data}))
+    }
+}
+
+export function getAllPosts(){
+    return dispatch =>{
+        return axios.get(`https://wixer-server.herokuapp.com/posts`)
+        .then(res=>dispatch({type: "GET_ALL_POSTS", payload: res.data}))
+    }
+}
