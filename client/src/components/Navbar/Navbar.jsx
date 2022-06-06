@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory , useParams } from "react-router-dom";
 import {
   Container,
   HamburguerMenuIcon,
@@ -21,6 +21,8 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
   const [isScrolled, setIsScrolled] = useState(false);
   const history = useHistory();
 
+  const ruta = (window.location.href).substr(-5)
+  
   const navScroll = () => {
     if (window.scrollY >= 220) {
       setIsScrolled(true);
@@ -47,7 +49,7 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
 
   
   return (
-    <Container isScrolled={isScrolled}>
+    <Container isScrolled={isScrolled} ruta={ruta}>
       <Wrapper>
         <Right>
           <TitleContainer onClick={handleClick}>

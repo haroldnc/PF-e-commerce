@@ -1,3 +1,5 @@
+import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
+
 const initialState = {
     allCategories: [],
     allUsers: [],
@@ -12,8 +14,8 @@ const initialState = {
     post: {},
     allPost:[]
 };
+//habia un objeto en initialstate
 
-  
 const rootReducer = (state = {}, action) => {
     switch (action.type) {
         case "GET_CATEGORIES":

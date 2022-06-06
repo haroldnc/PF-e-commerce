@@ -18,8 +18,10 @@ import { Li } from "./styledInfoFooter.js";
 //import { tittleInfoFooter } from "./styledInfoFooter.js";
 
 const Footer = () => {
+
+  const ruta = (window.location.href).substr(-5)
   return (
-    <Container>
+    <Container ruta={ruta}>
       <Wrapper>
         <InfoFooter>
           <div>

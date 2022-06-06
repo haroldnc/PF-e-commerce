@@ -12,13 +12,11 @@ export const getCategorybyId = (id) => (dispatch) => {
     .then((res) => dispatch({ type: "GET_CATEGORY", payload: res.data }));
 };
 
-export function getWorkers() {
-  return (dispatch) => {
-    return axios
-      .get("https://wixer-server.herokuapp.com/workers")
-      .then((res) => dispatch({ type: "GET_WORKERS", payload: res.data }));
-  };
-}
+export const getWorkers = () => (dispatch) => {
+  axios
+    .get("https://wixer-server.herokuapp.com/workers")
+    .then((res) => dispatch({ type: "GET_WORKERS", payload: res.data }));
+};
 
 export function getWorkerDetail(id) {
   return (dispatch) => {
@@ -29,6 +27,14 @@ export function getWorkerDetail(id) {
       );
   };
 }
+
+export const postCategories = (body) => async () => {
+  const response = await axios.post(
+    `https://wixer-server.herokuapp.com/categories`,
+    body
+  );
+  return response;
+};
 
 export const postUser = (payload) => async () => {
   const response = await axios.post(
@@ -63,39 +69,47 @@ export const clearState = () => {
 };
 
 export const getPosts = () => (dispatch) => {
-  axios.get(`http://wixer-server.herokuapp.com/posts`).then((res) => dispatch({ type: "GET_POSTS", payload: res.data}))
-}
+  axios
+    .get(`http://wixer-server.herokuapp.com/posts`)
+    .then((res) => dispatch({ type: "GET_POSTS", payload: res.data }));
+};
 
 export const getPostsByServiceId = (id) => (dispatch) => {
-  axios.get(`http://wixer-server.herokuapp.com/posts/service/${id}`).then((res) => dispatch({type: "GET_POST_SERVICE_BY_ID", payload: res.data}))
+  axios
+    .get(`http://wixer-server.herokuapp.com/posts/service/${id}`)
+    .then((res) =>
+      dispatch({ type: "GET_POST_SERVICE_BY_ID", payload: res.data })
+    );
+};
+
+export const getServiceById = (id) => (dispatch) => {
+  axios
+    .get(`https://wixer-server.herokuapp.com/services/${id}`)
+    .then((res) => dispatch({ type: "GET_SERVICE_BYID", payload: res.data }));
+};
+
+export const postPublish = (payload) => async () => {
+  return { type: "POST_PUBLISH_OF_SERVICE", payload: payload };
+};
+
+export function getUserById(id) {
+  return (dispatch) => {
+    return axios
+      .get(`https://wixer-server.herokuapp.com/user/${id}`)
+      .then((res) => dispatch({ type: "GET_USER_BY_ID", payload: res.data }));
+  };
 }
 
-export const getServiceById = (id) => dispatch => {
-    axios.get(`https://wixer-server.herokuapp.com/services/${id}`)
-    .then(res => dispatch({type: "GET_SERVICE_BYID", payload: res.data}))
+export function getAllPosts() {
+  return (dispatch) => {
+    return axios
+      .get(`https://wixer-server.herokuapp.com/posts`)
+      .then((res) => dispatch({ type: "GET_ALL_POSTS", payload: res.data }));
+  };
 }
 
-export const postPublish = (payload) => async() => {
-    return {type: "POST_PUBLISH_OF_SERVICE", payload: payload}
-}
-
-export function getUserById (id){
-    return dispatch =>{
-        return axios.get(`https://wixer-server.herokuapp.com/user/${id}`)
-        .then(res=>dispatch({type: "GET_USER_BY_ID", payload: res.data}))
-    }
-}
-
-export function getPostById(id){
-    return dispatch =>{
-        return axios.get(`https://wixer-server.herokuapp.com/posts/${id}`)
-        .then(res=>dispatch({type: "GET_POST_BY_ID", payload: res.data}))
-    }
-}
-
-export function getAllPosts(){
-    return dispatch =>{
-        return axios.get(`https://wixer-server.herokuapp.com/posts`)
-        .then(res=>dispatch({type: "GET_ALL_POSTS", payload: res.data}))
-    }
-}
+export const getPostById = (id) => (dispatch) => {
+  axios
+    .get(`http://wixer-server.herokuapp.com/posts/${id}`)
+    .then((res) => dispatch({ type: "GET_POST_ID", payload: res.data }));
+};

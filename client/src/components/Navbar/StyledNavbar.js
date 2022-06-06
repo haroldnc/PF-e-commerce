@@ -12,6 +12,8 @@ export const Container = styled.header`
   position: fixed;
   z-index: 100;
   font-weight: 600;
+
+  ${({ruta}) => ruta === "admin" ? `visibility: hidden` : `none`}
 `;
 
 export const Wrapper = styled.div`

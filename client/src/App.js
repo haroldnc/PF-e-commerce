@@ -1,5 +1,17 @@
 import { useState } from "react";
 
+
+
+//PAyment Element
+
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+import ReactDOM from 'react-dom';
+
+//
+
+import CheckoutForm from "./components/CheckoutForm";
+
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../src/styles/global";
 import { themes } from "../src/styles/themes";
@@ -25,6 +37,10 @@ import ServicesDetail from "./pages/ServicesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
 import ModalSignOut from "./components/ModalSignOut/ModalSignOut";
+
+
+
+ // const stripePromise = loadStripe("pk_test_51L5zjMHq6KUjuv7IIFciLODh9WoDWs5rnmbUrfSZVOfMMWN67dB15Ricdwoi8UNFfuIHL6lgzSTocRXWlYa7aBSA00oP1VlFMI");
 
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
@@ -54,11 +70,23 @@ function App() {
   };
 
   console.log(userInfo);
+  const options = {
+    // passing the client secret obtained in step 2
+    clientSecret: '{{CLIENT_SECRET}}',
+    // Fully customizable with appearance API.
+    appearance: {/*...*/},
+
+    }
+
+  // console.log(userInfo)
+
 
   return (
     <BrowserRouter>
       <ThemeProvider theme={themes[themeMode]}>
-        <Navbar
+
+
+      <Navbar
           toggle={toggle}
           isOpenModalSignUp={isOpenModalSignUp}
           toggleModalSignUp={toggleModalSignUp}
@@ -69,7 +97,7 @@ function App() {
           userInfo={userInfo}
         />
         <Sidebar isOpen={isOpen} toggle={toggle} />
-        <Switch>
+        <Switch>    
           <Route exact path="/" component={Home} />
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />
@@ -78,6 +106,10 @@ function App() {
           <Route path="/publicar" component={PublishService} />
           <Route exact path="/admin" component={Admin} />
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
+          {/* <Elements stripe={stripePromise}>
+            <CheckoutForm />
+        </Elements> */}
+          <Route path="/checkout" component={Payment}/>
         </Switch>
         <Footer />
         <ModalLogIn
