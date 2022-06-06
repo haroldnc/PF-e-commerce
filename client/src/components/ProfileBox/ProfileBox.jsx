@@ -1,12 +1,12 @@
 import React from 'react'
 import { Container } from './StyledProfileBox'
 
-const ProfileBox = ({isOpen}) => {
+const ProfileBox = ({isOpen,toggleModalSignOut, handleToggle}) => {
   return (
     <Container isOpen={isOpen}>
-        <ul>
-                  <li>Profile</li>
-                  <li>Sign Out</li>
+        <ul onClick={handleToggle}>
+                  <li>Perfil</li>
+                  <li onClick={toggleModalSignOut} >Cerrar sesión</li>
                 </ul>
     </Container>
   )

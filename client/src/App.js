@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../src/styles/global";
 import { themes } from "../src/styles/themes";
 
-import Services from './pages/Services/Services'
+import Services from "./pages/Services/Services";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -21,15 +21,16 @@ import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
 import { useSelector, useDispatch } from "react-redux";
+import ModalSignOut from "./components/ModalSignOut/ModalSignOut";
 
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
-  const {userInfo} = userSignIn;
+  const { userInfo } = userSignIn;
 
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useDarkMode();
 
-  const themeMode = theme === 'light' ? 'light' : 'dark';
+  const themeMode = theme === "light" ? "light" : "dark";
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -37,14 +38,19 @@ function App() {
 
   const [isOpenModalSignUp, setIsOpenModalSignUp] = useState(false);
   const [isOpenModalLogIn, setIsOpenModalLogIn] = useState(false);
+  const [isOpenModalSignOut, setIsOpenModalSignOut] = useState(false);
+
   const toggleModalSignUp = () => {
     setIsOpenModalSignUp(!isOpenModalSignUp);
   };
   const toggleModalLogIn = () => {
     setIsOpenModalLogIn(!isOpenModalLogIn);
   };
+  const toggleModalSignOut = () => {
+    setIsOpenModalSignOut(!isOpenModalSignOut);
+  };
 
-  console.log(userInfo)
+  console.log(userInfo);
 
   return (
     <BrowserRouter>
@@ -55,6 +61,8 @@ function App() {
           toggleModalSignUp={toggleModalSignUp}
           isOpenModalLogIn={isOpenModalLogIn}
           toggleModalLogIn={toggleModalLogIn}
+          isOpenModalSignOut={isOpenModalSignOut}
+          toggleModalSignOut={toggleModalSignOut}
           userInfo={userInfo}
         />
         <Sidebar isOpen={isOpen} toggle={toggle} />
@@ -76,7 +84,12 @@ function App() {
           isOpenModalSignUp={isOpenModalSignUp}
           toggleModalSignUp={toggleModalSignUp}
         />
-        <DarkModeBtn theme={theme} setTheme={setTheme}/>
+        <ModalSignOut
+          isOpenModalSignOut={isOpenModalSignOut}
+          toggleModalSignOut={toggleModalSignOut}
+        />
+
+        <DarkModeBtn theme={theme} setTheme={setTheme} />
         <GlobalStyle />
       </ThemeProvider>
     </BrowserRouter>

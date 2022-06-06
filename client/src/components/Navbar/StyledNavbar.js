@@ -115,6 +115,9 @@ export const Profile = styled.div`
   width: 2rem;
   height: 2rem;
   border-radius: 99999px;
-  background-color: grey;
+  background: url(${props => props.img});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   cursor: pointer;
 `
