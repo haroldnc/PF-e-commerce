@@ -10,27 +10,34 @@ export const SignInLink = styled.a`
 export const FormContainer = styled(Form)`
     background-color: ${props => props.theme.colors.backgroundColorAlt};
     border-radius: 5px;
-    min-height: 80%;
-    min-width: 35%;
+    min-height: 70%;
+    min-width: 38%;
     padding: 10px;
     display: flex;
     align-items:center;
     flex-direction: column;
     position: relative;
+
+    h2{
+    margin-top: 1rem;
+  }
 `
 export const InputsContainer = styled.div`
     display: flex;
+    width: 100%;
     justify-content: center;
-    gap: 1rem;
+    gap: 10px;
     margin-top: 1rem;
 `
+
+
 export const Input = styled(Field)`
     padding:10px;
     border-radius: 5px;
-    border: 1px solid #f1f1f1f1;
+    border: 1px solid ${props => props.theme.colors.borderColor};
     height: 2rem;
     width: 13rem;
-    background-color: ${props => props.theme.colors.backgroundColor};
+    background-color: ${props => props.theme.colors.inputColor};
     margin-bottom: 5px;
     color: ${props => props.theme.colors.font};
 `
@@ -61,4 +68,5 @@ export const Label = styled.label`
     color: ${props => props.theme.colors.primary};
     font-weight: 600;
     font-size: 14px;
+    margin-bottom: 3px;
 `
