@@ -46,9 +46,9 @@ const googleSignIn = async (req, res) => {
     const { givenName, familyName } = req.body;
     try {
         const { name, email, img } = await googleVerify(googleToken);
-        const usuarioDb = await Usuario.findOne({ email });
+        const usuarioDb = await User.findOne({ email });
         // user role viene ID?
-        //const user_role = await User_roles.findOne({ name: 'user' });
+        const user_role = await User_roles.findOne({ name: 'user' });
         let usuario;
         // create user
         if (!usuarioDb) {
@@ -59,7 +59,7 @@ const googleSignIn = async (req, res) => {
                 email,
                 image: img,
                 password: ':)',
-                user_role
+                user_role: user_role._id
             });
         }
         else{
