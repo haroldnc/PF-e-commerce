@@ -80,29 +80,7 @@ const User = Schema({
     user_role: {
         type: Schema.Types.ObjectId,
         ref: 'User_roles'  
-    },
-    dni: {
-        type: String,
-        require: [true, 'DNI number is required'],
-    },
-    phone: {
-        type: String,
-        require: [true, 'Phone number is required'],
-        validate: {
-            validator: (v) => /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/i.test(v),
-            message: props => `Phone number is not valid`
-        }
-    },
-    web: {
-        type: String,
-        validate: {
-            validator: (v) => /^(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i.test(v),
-            message: props => `Web is not valid`
-        }
-    },
-    linkedin: {
-        type: String 
-    },
+    },    
     punctuation: {
         type: Number,
         default: 0
