@@ -161,8 +161,8 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                         className="field-select"
                       >
                         <option>Elige tu rol</option>
-                        <option value="628eefd607fe8bf42fb6a5f5">User</option>
-                        <option value="628ef02007fe8bf42fb6a5f8">Worker</option>
+                        <option value="user">User</option>
+                        <option value="worker">Worker</option>
                       </Field>
                       <ErrorMessage name="user_role" component="div">
                         {(msg) => <Error>{msg}</Error>}
