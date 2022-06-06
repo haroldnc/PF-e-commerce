@@ -106,12 +106,14 @@ const rootReducer = (state = {}, action) => {
                 service: action.payload
             }
         case "GET_USER_BY_ID":
+            console.log(action.payload)
             return{
                 ...state,
                 userDetail: action.payload
+                
             }
 
-        case "GET_POST_BY_ID":
+        case "GET_POST_ID":
             return{
                 ...state,
                 post: action.payload

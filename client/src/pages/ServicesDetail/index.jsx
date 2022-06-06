@@ -12,34 +12,38 @@ export default function ServicesDetail(){
     
 
     const {id} = useParams()
-    console.log(id)
+    // console.log(id)
     const dispatch = useDispatch()
     const post = useSelector((state)=>state.post)
     const user = useSelector((state)=>state.userDetail)
     const workers = useSelector((state)=>state.workers)
-    const arrayOfPosts = useSelector((state)=>state.allPost)
-    var author
-    console.log(user)
-    console.log(post)
+    var arrayOfPosts = []
+    arrayOfPosts = useSelector((state)=>state.allPost)
+    var userPost = []
+    // var author
+    // console.log(user)
+    // console.log(post)
     
     // console.log(workers)
     // console.log(user.username)
     // console.log(post.title)
+        if(arrayOfPosts.length ){
+            userPost= arrayOfPosts.filter(p=>p.user==="6292a98a9eea6ea8eb75c1d2")
 
-    const userPost= arrayOfPosts.filter(p=>p.user==="6292a98a9eea6ea8eb75c1d2")
+        }
     //    console.log(userPost)
 
     const filteredWorker = workers.filter(w=>w.userId.uid === "6292a98a9eea6ea8eb75c1d2")
     // console.log(filteredWorker)
     //  console.log(filteredWorker[0]._id)
-    console.log(post.user)
+    // console.log(post.user)
 
     
 
     
 
     
-    useEffect(()=>{
+    //useEffect(()=>{
         dispatch(getPostById(id))
     
         dispatch(getUserById("6292a98a9eea6ea8eb75c1d2"))
@@ -48,7 +52,8 @@ export default function ServicesDetail(){
         
         dispatch(getAllPosts())
         dispatch(getWorkers())
-    }, [dispatch, id, post.user])
+    //}, [dispatch, id])
+
     
 
 
