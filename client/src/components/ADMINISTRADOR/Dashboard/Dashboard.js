@@ -27,19 +27,22 @@ export const Usuarios = styled.div `
 `
 
 export const CardsDatos = styled.div `
-    background-color: white;
+    background-color: ${props => props.theme.colors.backgroundColorAlt};
     width: 95%;
     margin: 15px;
     border-radius: 15px;
     padding: 20px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.425);
 
 `
 
 export const Tabla = styled.div `
-    background-color: white;
+    background-color: ${props => props.theme.colors.backgroundColorAlt};
     width: 50%;
     margin: 15px;
     border-radius: 15px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.425);
+
 `
 export const Datos = styled.div `
     width: 50%;
@@ -48,3 +51,9 @@ export const Datos = styled.div `
     grid-template-columns: repeat(2, 1fr);
 `
 
+export const ImgProv = styled.img `
+    margin-top:10px;
+    margin-left:10px;
+    width: 90%;
+    height: 90%
+`

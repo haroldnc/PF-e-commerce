@@ -14,6 +14,7 @@ export const DivProfile = styled.div `
     flex-direction: row;
     align-items: center;
     margin-left: 40px;
+    width:190px;
 `
 
 
@@ -26,11 +27,13 @@ export const ProfilePicture = styled.img `
 export const Worker = styled.h1 `
     font-size: 16px;
     font-weight: 400;
-    color: rgba(0, 0, 0, 0.356);
-    
-    background-color: ${ ((props) => props.theme.colors.secondary)};
+    color: white;
+    width:70px;
+    text-align: center;
     padding: 5px;
- 
+    border-radius: 10px;
+    
+    ${({role}) => role === "worker" ? `background-color: #05668d;`: `background-color: #00a896`}
 `
 
 export const UserName = styled.h1 `
@@ -44,8 +47,16 @@ export const Correo = styled.h1 `
     font-size: 16px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.356);
-    margin-right: 10px;
-    
+    width: 220px;
+    text-align: center;
+
+`
+
+export const Phone = styled.h1 `
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.356);
+    width:150px;
 
 `
 

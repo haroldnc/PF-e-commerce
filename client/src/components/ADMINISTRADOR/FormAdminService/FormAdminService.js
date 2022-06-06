@@ -11,9 +11,10 @@ export const NameC = styled.h1 `
 export const ContainerFormCategory = styled.div `
     width: 98%;
     height: 100%;
-    background-color:white;
+    background-color: ${props => props.theme.colors.backgroundColorAlt};;
     margin: 15px;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.151);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.425);
+
 `
 
 export const FormCategory = styled.div `

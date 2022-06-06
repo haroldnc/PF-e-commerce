@@ -6,9 +6,11 @@ export const ContainerNavAdmin = styled.div `
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: ${props => props.theme.colors.backgroundColorAlt};;
     width: 100%;
     height: 60px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.425);
+
     
 `
 

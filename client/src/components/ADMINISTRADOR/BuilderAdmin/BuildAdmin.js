@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const ContainerMenu = styled.div `
     width: 300px;
-    background-color: white;
+    background-color: ${props => props.theme.colors.backgroundColorAlt};;
     border: 1px solid rgba(0, 0, 0, 0.123);
     margin-left:60px;
 

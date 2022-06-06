@@ -41,12 +41,27 @@ export const IconBuilder = styled.div `
     background-color: #00a896;
     ` :`none`}
 `
+export const IconData = styled.div `
+    width: 100%;
+    height: 60px;
+    padding:20px;
+    cursor: pointer;
+    
+
+    ${({lateral}) => lateral === "Data" ? `
+    background-color: #00a896;
+    ` :`none`}
+`
 
 export const Icon = styled.div `
     width: 100%;
     height: 60px;
     padding:20px;
     cursor: pointer;
+
+    ${({lateral}) => lateral === "Admin" ? `
+    background-color: #00a896;
+    ` :`none`}
 `
 
 

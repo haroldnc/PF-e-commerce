@@ -1,8 +1,14 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { getAllCategories, postCategories } from "../../../store/actions";
 
+import Swal from 'sweetalert2'
 import { ContainerFormCategory, NameC, FormCategory, DivInput, Btn, LabelC, InputC, SelectC, SpanC } from './FormAdminCategory'
 
 const FormAdminCategory = () => {
+
+    const dispatch = useDispatch()
+    const Categorias = useSelector(state => state.allCategories) 
 
     const[ estado, setEstado ] = useState({
         name:"",
@@ -17,9 +23,13 @@ const FormAdminCategory = () => {
     })
 
     const[ selectEliminar , setSetEliminar] = useState("")
+    const[ selectModificar, setSetModificar ] = useState("")
 
     
-    console.log('renderice')
+    useEffect(() => {
+        dispatch(getAllCategories())
+    },[])
+
     const handleChange = (e) => {
         setEstado({
             ...estado,
@@ -33,6 +43,11 @@ const FormAdminCategory = () => {
             [e.target.name]: e.target.value
         })
     }
+
+    const handleModificar = (e) =>{
+        setSetModificar(e.target.value)
+    }
+
     const handleEliminar = (e) => {
         setSetEliminar(e.target.value)
         console.log(selectEliminar)
@@ -40,6 +55,27 @@ const FormAdminCategory = () => {
 
     const submitCrear = (e) => {
         e.preventDefault()
+        if(estado.name && estado.img && estado.phrase){
+            // postCategories(estado)
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'La categoría ha sido creada correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            setEstado({
+                name:"",
+                img:"",
+                phrase:""
+            })
+        }else{Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tienes algun dato erróneo!',
+            footer: ''
+          })
+        }
     }
 
     const submitModificar = (e) => {
@@ -100,9 +136,13 @@ const FormAdminCategory = () => {
             <FormCategory>
                 <DivInput>
                     <LabelC>¿Que categoría deseas modificar?</LabelC>
-                    <SelectC> 
+                    <SelectC onChange={(e) => handleModificar(e)}> 
                         <option>Selecciona una categoría</option>
-
+                        {
+                            Categorias && Categorias.map( c => (
+                                <option key={c._id}value={c._id}>{c.name}</option>
+                            ))
+                        }
                     </SelectC>
                 </DivInput>
                 <form onSubmit={(e) => submitModificar(e)}>
@@ -147,9 +187,13 @@ const FormAdminCategory = () => {
             <FormCategory>
                 <DivInput>
                     <LabelC>¿Que categoría deseas eliminar?</LabelC>
-                    <SelectC onChange={() => handleEliminar()}> 
+                    <SelectC onChange={(e) => handleEliminar(e)}> 
                         <option>Selecciona una categoría</option>
-
+                        {
+                            Categorias && Categorias.map( c => (
+                                <option key={c._id}value={c._id}>{c.name}</option>
+                            ))
+                        }
                     </SelectC>
                     <Btn onClick={(e) => submitEliminar(e)}>ELIMINAR</Btn>
                 </DivInput>

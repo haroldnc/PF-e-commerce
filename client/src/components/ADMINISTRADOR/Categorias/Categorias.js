@@ -24,13 +24,29 @@ export const User = styled.h1 `
     font-size: 15px;
     font-weight: 700;
     color: rgba(0, 0, 0, 0.356);
-    margin-left: 50px
+    margin-left: 50px;
+    margin-left: 40px;
+    width:270px;
+
+
 `
 
 export const Corr = styled.h1 `
     font-size: 15px;
     font-weight: 700;
     color: rgba(0, 0, 0, 0.356);
+    width: 220px;
+    text-align: center;
+
+
+`
+
+export const Tel = styled.h1 `
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.356);
+    text-align: center;
+    width:150px;
 
 `
 
@@ -38,6 +54,8 @@ export const Role = styled.h1 `
     font-size: 15px;
     font-weight: 700;
     color: rgba(0, 0, 0, 0.356);
-    margin-right: 240px;
+    margin-right: 100px;
+    width:250px;
+    text-align: center;
 `
 

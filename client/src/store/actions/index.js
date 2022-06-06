@@ -12,13 +12,11 @@ export const getCategorybyId = (id) => (dispatch) => {
     .then((res) => dispatch({ type: "GET_CATEGORY", payload: res.data }));
 };
 
-export function getWorkers() {
-  return (dispatch) => {
-    return axios
-      .get("https://wixer-server.herokuapp.com/workers")
+export const getWorkers = () => dispatch => {
+    axios.get("https://wixer-server.herokuapp.com/workers")
       .then((res) => dispatch({ type: "GET_WORKERS", payload: res.data }));
-  };
-}
+};
+
 
 export function getWorkerDetail(id) {
   return (dispatch) => {
@@ -28,6 +26,14 @@ export function getWorkerDetail(id) {
         dispatch({ type: "GET_WORKER_DETAIL", payload: res.data })
       );
   };
+}
+
+export const postCategories = (body) => async () => {
+  const response = await axios.post(
+    `https://wixer-server.herokuapp.com/categories`,
+    body
+  );
+  return response
 }
 
 export const postUser = (payload) => async () => {
@@ -92,12 +98,6 @@ export function getUserById (id){
     }
 }
 
-export function getPostById(id){
-    return dispatch =>{
-        return axios.get(`https://wixer-server.herokuapp.com/posts/${id}`)
-        .then(res=>dispatch({type: "GET_POST_BY_ID", payload: res.data}))
-    }
-}
 
 export function getAllPosts(){
     return dispatch =>{

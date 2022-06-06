@@ -1,13 +1,13 @@
 import React from "react";
 
-import { ContainerMenu, NameMenu, DivName, Menudiv, Namediv } from './BuildAdmin'
+import { ContainerMenu, NameMenu, DivName, Menudiv, Namediv } from './DataAdmin'
 
-import { BiCategoryAlt } from 'react-icons/bi'
-import { MdOutlineCategory } from 'react-icons/md'
+import { BsFileEarmarkPostFill, BsFileEarmarkPost } from 'react-icons/bs'
+import { MdPostAdd } from 'react-icons/md'
 import { IconContext } from 'react-icons'
 
+const DataAdmin = ({lateral, setLateral, setRender}) => {
 
-const BuildAdmin = ({lateral, setLateral, setRender}) => {
 
     const handleClick = (dato) => {
         setRender(dato)
@@ -18,30 +18,37 @@ const BuildAdmin = ({lateral, setLateral, setRender}) => {
         console.log('cambia')
     }
 
-    return (
-        <ContainerMenu>
+    return(
+        <ContainerMenu >
             <DivName>
-                <NameMenu>Builder</NameMenu>
+                <NameMenu>Data</NameMenu>
             </DivName>
             <Menudiv onClick={() => handleClick("Categorías")}>
             <IconContext.Provider value={{size:"20px"}}>
                         <div>
-                            <BiCategoryAlt/>
+                            <BsFileEarmarkPostFill/>
                         </div>
                     </IconContext.Provider>
-                <Namediv>Categorias</Namediv>
+                <Namediv>Categorías</Namediv>
             </Menudiv>
             <Menudiv onClick={() => handleClick("Servicios")}>
             <IconContext.Provider value={{size:"20px"}}>
                         <div>
-                            <MdOutlineCategory/>
+                            <BsFileEarmarkPost/>
                         </div>
                     </IconContext.Provider>
                 <Namediv>Servicios</Namediv>
             </Menudiv>
-        
+            <Menudiv onClick={() => handleClick("Publicaciones")}>
+            <IconContext.Provider value={{size:"20px"}}>
+                        <div>
+                            <MdPostAdd/>
+                        </div>
+                    </IconContext.Provider>
+                <Namediv>Publicaciones</Namediv>
+            </Menudiv>
         </ContainerMenu>
     )
 }
 
-export default BuildAdmin
+export default DataAdmin

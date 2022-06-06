@@ -1,5 +1,5 @@
 import React from "react";
-import { ContainerLateralNav, LateralDiv,Icons, Icon, IconMenu, IconBuilder } from './LateralNavAdmin.js'
+import { ContainerLateralNav, LateralDiv,Icons, Icon, IconMenu, IconBuilder, IconData } from './LateralNavAdmin.js'
 
 import { AiOutlineMenu, AiOutlinePlus } from 'react-icons/ai'
 import { IconContext } from "react-icons";
@@ -62,14 +62,14 @@ const LateralNavAdmin = ({lateral, setLateral}) => {
                         </div>
                     </IconContext.Provider>
                 </IconBuilder>
-                <Icon>
+                <IconData onClick={() => handlerClick("Data")} lateral={lateral.panel}>
                     <IconContext.Provider value={{size:"20px", color: "white"}}>
                         <div>
                             <MdOutlineDynamicFeed/>
                         </div>
                     </IconContext.Provider>
-                </Icon>
-                <Icon>
+                </IconData>
+                <Icon onClick={() => handlerClick("Admin")} lateral={lateral.panel}>
                     <IconContext.Provider value={{size:"20px", color: "white"}}>
                         <div>
                             <FcBusinessman/>
