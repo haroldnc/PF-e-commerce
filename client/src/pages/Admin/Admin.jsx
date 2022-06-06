@@ -12,6 +12,7 @@ import FormAdminServices from "../../components/ADMINISTRADOR/FormAdminService/F
 import AdminWorkers from "../../components/ADMINISTRADOR/AdminWorkers/AdminWorkers.jsx";
 import Categorias from "../../components/ADMINISTRADOR/Categorias/Categorias.jsx";
 import DataAdmin from "../../components/ADMINISTRADOR/DataAdmin/DataAdmin.jsx";
+import AdminUser from "../../components/ADMINISTRADOR/AdminUser/AdminUser.jsx";
 
 const Admin = () => {
 
@@ -30,6 +31,8 @@ const Admin = () => {
         showLateral = <BuildAdmin lateral={lateral} setLateral={setLateral} setRender={setRender}/>
     }else if(lateral.panel === "Data" && lateral.show){
         showLateral = <DataAdmin lateral={lateral} setLateral={setLateral} setRender={setRender}/>
+    }else if(lateral.panel === "Admin" && lateral.show){
+        showLateral = <AdminUser lateral={lateral} setLateral={setLateral} setRender={setRender}/>
     }
 
     if(render === "Dashboard"){

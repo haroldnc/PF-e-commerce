@@ -58,6 +58,10 @@ export const Icon = styled.div `
     height: 60px;
     padding:20px;
     cursor: pointer;
+
+    ${({lateral}) => lateral === "Admin" ? `
+    background-color: #00a896;
+    ` :`none`}
 `
 
 

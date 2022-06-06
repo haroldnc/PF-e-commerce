@@ -15,7 +15,6 @@ const BuildAdmin = ({lateral, setLateral, setRender}) => {
             ...lateral,
             show: false
         })
-        console.log('cambia')
     }
 
     return (

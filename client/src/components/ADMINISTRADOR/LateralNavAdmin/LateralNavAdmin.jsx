@@ -69,7 +69,7 @@ const LateralNavAdmin = ({lateral, setLateral}) => {
                         </div>
                     </IconContext.Provider>
                 </IconData>
-                <Icon>
+                <Icon onClick={() => handlerClick("Admin")} lateral={lateral.panel}>
                     <IconContext.Provider value={{size:"20px", color: "white"}}>
                         <div>
                             <FcBusinessman/>
