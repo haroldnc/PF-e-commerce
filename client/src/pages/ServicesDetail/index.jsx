@@ -18,6 +18,7 @@ export default function ServicesDetail(){
     const workers = useSelector((state)=>state.workers)
     const arrayOfPosts = useSelector((state)=>state.allPost)
     var author
+    console.log(user)
     
     // console.log(workers)
     // console.log(user.username)
@@ -26,28 +27,32 @@ export default function ServicesDetail(){
     const userPost= arrayOfPosts.filter(p=>p.user===post.user)
     //    console.log(userPost)
 
-    const filteredWorker = workers.filter(w=>w.userId.uid === post.user)
+    const filteredWorker = workers.filter(w=>w.userId.uid === "6292a98a9eea6ea8eb75c1d2")
     // console.log(filteredWorker)
     //  console.log(filteredWorker[0]._id)
+    console.log(post.user)
 
     
 
+    
 
+    
     useEffect(()=>{
         dispatch(getPostById(id))
-        if(post.user){
-            dispatch(getUserById(post.user))
+    
+        dispatch(getUserById("6292a98a9eea6ea8eb75c1d2"))
 
-        }
+
         
         dispatch(getAllPosts())
         dispatch(getWorkers())
     }, [dispatch, id, post.user])
+    
 
 
     return(
         <>
-        { post.title && user.username?
+        { post.title && post.user && user.username?
 
             <Parent>
             <DetailContainer>

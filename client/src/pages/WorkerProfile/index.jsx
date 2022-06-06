@@ -38,7 +38,7 @@ export default function WorkerProfile (){
 
     return(
         <>{
-            worker.aboutMe ?
+            worker.aboutMe && arrayOfPost.length?
             <div>
 
             <Container>

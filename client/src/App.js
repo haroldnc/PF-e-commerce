@@ -1,5 +1,16 @@
 import { useState } from "react";
 
+
+
+//PAyment Element
+
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+//
+
+import CheckoutForm from "./components/PaymentComponent";
+
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../src/styles/global";
 import { themes } from "../src/styles/themes";
@@ -24,6 +35,10 @@ import ServicesDetail from "./pages/ServicesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
 
+
+
+// const stripePromise = loadStripe('pk_test_wk6O7Cc5k3McBIG2Hut2irGs');
+
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
   const {userInfo} = userSignIn;
@@ -46,7 +61,14 @@ function App() {
     setIsOpenModalLogIn(!isOpenModalLogIn);
   };
 
-  console.log(userInfo)
+  // const options = {
+  //   // passing the client secret obtained in step 2
+  //   clientSecret: '{{CLIENT_SECRET}}',
+  //   // Fully customizable with appearance API.
+  //   appearance: {/*...*/},
+  // };
+
+  // console.log(userInfo)
 
   return (
     <BrowserRouter>
@@ -80,6 +102,9 @@ function App() {
           toggleModalSignUp={toggleModalSignUp}
         />
         <DarkModeBtn theme={theme} setTheme={setTheme}/>
+        {/* <Elements stripe={stripePromise} options={options}>
+            <CheckoutForm />
+        </Elements> */}
         <GlobalStyle />
       </ThemeProvider>
     </BrowserRouter>
