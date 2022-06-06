@@ -5,12 +5,12 @@ const User = Schema({
         type: String,
         require: [true, 'Username is required'],
         validate: {
-            validator: (v) => /^[a-z]{3,}$/i.test(v),
+            validator: (v) => /^[a-záéíóúñ\s]{3,}$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
                    return 'Role name accept minimun 3 letters';
                 } else {
-                   return 'First name only accept letters';
+                   return 'Username only accept letters';
                 }
              }
          }
@@ -75,7 +75,8 @@ const User = Schema({
     image: {
         type: String,
         validate: v => /(http)?s?:?(\/\/[^"']*\.(?:png|jpg|jpeg|gif|png|svg))/i,
-        message: props => `${props.value} is not valid url image`
+        message: props => `${props.value} is not valid url image`,
+        default: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"
     },
     user_role: {
         type: Schema.Types.ObjectId,

@@ -135,15 +135,8 @@ const createUser = async (req, res) => {
 
         if (user_role === 'worker'){
             await DataWorkers.create({
-                title: "Mi titulo",
-                aboutMe: "Sobre mi",
-                textInfo: "Informacion extra",
-                pricePerHour: 0,
-                p_image: "http://algunaimagen.com/imagen.png",
                 dni,
                 phone,
-                web: "http://miweb.com",
-                linkedin: "",
                 userId: usuario._id
             })
         }

@@ -7,7 +7,7 @@ const DataWorkers = Schema({
 
     title: {
         type: String,
-        require: [true, 'Position or Category is required'],
+        //require: [true, 'Position or Category is required'],
         validate: {
             validator: (v) => /^[a-záéíóúñ\s]+$/i.test(v),
             message: props =>{
@@ -17,15 +17,18 @@ const DataWorkers = Schema({
                    return 'Position or Category only accept letters';
                 }
              }
-         }
+         },
+        default: ""
     },
     aboutMe: {
         type: String,
-        require: [true, "AboutMe is required"]
+        //require: [true, "AboutMe is required"]
+        default: ""
     },
     textInfo: {
         type: String,
-        require: [true, "Information is required"]
+        //require: [true, "Information is required"]
+        default: ""
     },
     
     languages: [{
@@ -61,10 +64,12 @@ const DataWorkers = Schema({
     ],
 
     pricePerHour: {
-        type: Schema.Types.Double
+        type: Schema.Types.Double,
+        default: 0
     },
     p_image:{
-        type: String
+        type: String,
+        default: "https://media.istockphoto.com/photos/programmer-controlling-the-statistics-of-the-site-picture-id1139938843?k=20&m=1139938843&s=612x612&w=0&h=nJSMJEvTGin4vsBZpTAmpFgE_-y5J-mPTzRAZ03lCjk="
     },
 
     workExperience: [{
@@ -127,13 +132,15 @@ const DataWorkers = Schema({
     },
     web: {
         type: String,
-        validate: {
+        /*validate: {
             validator: (v) => /^(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i.test(v),
             message: props => `Web is not valid`
-        }
+        },*/
+        default: ""
     },
     linkedin: {
-        type: String 
+        type: String,
+        default: ""
     },
     userId:{
         type: Schema.Types.ObjectId,
