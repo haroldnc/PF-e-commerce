@@ -17,7 +17,6 @@ export default function ServicesDetail(){
     const user = useSelector((state)=>state.userDetail)
     const workers = useSelector((state)=>state.workers)
     const arrayOfPosts = useSelector((state)=>state.allPost)
-    var author
     
     // console.log(workers)
     // console.log(user.username)

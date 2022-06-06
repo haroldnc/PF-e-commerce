@@ -46,7 +46,6 @@ function App() {
     setIsOpenModalLogIn(!isOpenModalLogIn);
   };
 
-  console.log(userInfo)
 
   return (
     <BrowserRouter>
