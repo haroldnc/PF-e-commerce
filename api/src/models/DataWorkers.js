@@ -9,7 +9,7 @@ const DataWorkers = Schema({
         type: String,
         require: [true, 'Position or Category is required'],
         validate: {
-            validator: (v) => /^[a-z]+$/i.test(v),
+            validator: (v) => /^[a-záéíóúñ\s]+$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
                    return 'Position or Category accept minimun 3 letters';
@@ -32,7 +32,7 @@ const DataWorkers = Schema({
         type: String,
         // require: [true, 'Languages is required'],
         validate: {
-            validator: (v) => /^[a-z]+$/i.test(v),
+            validator: (v) => /^[a-záéíóúñ\s]+$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
                    return 'Languages accept minimun 3 letters';
@@ -48,7 +48,7 @@ const DataWorkers = Schema({
         type: String,
         // require: [true, 'Skills is required'],
         validate: {
-            validator: (v) => /^[a-z]+$/i.test(v),
+            validator: (v) => /^[a-záéíóúñ\s]+$/i.test(v),
             message: props =>{
                 if (props.value.length < 3){
                    return 'Skills accept minimun 3 letters';
