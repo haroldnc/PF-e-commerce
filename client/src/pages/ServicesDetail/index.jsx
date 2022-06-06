@@ -12,6 +12,7 @@ export default function ServicesDetail(){
     
 
     const {id} = useParams()
+    console.log(id)
     const dispatch = useDispatch()
     const post = useSelector((state)=>state.post)
     const user = useSelector((state)=>state.userDetail)
@@ -19,12 +20,13 @@ export default function ServicesDetail(){
     const arrayOfPosts = useSelector((state)=>state.allPost)
     var author
     console.log(user)
+    console.log(post)
     
     // console.log(workers)
     // console.log(user.username)
     // console.log(post.title)
 
-    const userPost= arrayOfPosts.filter(p=>p.user===post.user)
+    const userPost= arrayOfPosts.filter(p=>p.user==="6292a98a9eea6ea8eb75c1d2")
     //    console.log(userPost)
 
     const filteredWorker = workers.filter(w=>w.userId.uid === "6292a98a9eea6ea8eb75c1d2")
