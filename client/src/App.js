@@ -20,13 +20,10 @@ import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
-<<<<<<< HEAD
 import Admin from './pages/Admin/Admin.jsx'
-=======
 import ServicesDetail from "./pages/ServicesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
->>>>>>> bc1cccd4e4747fc848584238cf565a18d4830049
 
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
@@ -71,11 +68,8 @@ function App() {
           <Route path="/worker/:id" component={WorkerProfile} />
           <Route path="/compra/:id" component={Payment} />
           <Route path="/publicar" component={PublishService} />
-<<<<<<< HEAD
           <Route exact path="/admin" component={Admin} />
-=======
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
->>>>>>> bc1cccd4e4747fc848584238cf565a18d4830049
         </Switch>
         <Footer />
         <ModalLogIn
