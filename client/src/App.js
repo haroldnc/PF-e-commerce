@@ -31,6 +31,7 @@ import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
+import Admin from './pages/Admin/Admin.jsx'
 import ServicesDetail from "./pages/ServicesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -89,6 +90,7 @@ function App() {
           <Route path="/worker/:id" component={WorkerProfile} />
           <Route path="/compra/:id" component={Payment} />
           <Route path="/publicar" component={PublishService} />
+          <Route exact path="/admin" component={Admin} />
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
         </Switch>
         <Footer />
