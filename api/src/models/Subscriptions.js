@@ -1,14 +1,14 @@
 const { Schema, model } = require('mongoose');
 
-const Suscriptions = Schema({
+const Subscriptions = Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
-    v: {
+    },
+    __v: {
        type: Number,
        select: false
     }
 });
 
-module.exports = model('Suscriptions', Suscriptions);
+module.exports = model('Subscriptions', Subscriptions);

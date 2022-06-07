@@ -47,7 +47,7 @@ const googleSignIn = async (req, res) => {
     try {
         const { name, email, img } = await googleVerify(googleToken);
         const usuarioDb = await User.findOne({ email });
-        // user role viene ID?
+        // user_role seteo unverified por default
         const user_role = await User_roles.findOne({ name: 'user' });
         let usuario;
         // create user
