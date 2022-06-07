@@ -87,7 +87,7 @@ const upLoadImage = async (e) => {
       price: "",
       service: "",
       img: "",
-      user: ``
+      user: "``"
     });
 
     alert("Your publication was created!");
