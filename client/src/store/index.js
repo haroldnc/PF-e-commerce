@@ -21,6 +21,9 @@ const initialState = {
   posts: [],
   servicePosts: [],
   postDetail: [],
+  userDetail:{},
+  post: {},
+  allPost:[] 
 };
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

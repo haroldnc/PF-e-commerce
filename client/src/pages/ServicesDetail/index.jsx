@@ -28,12 +28,12 @@ export default function ServicesDetail(){
     // console.log(user.username)
     // console.log(post.title)
         if(arrayOfPosts.length ){
-            userPost= arrayOfPosts.filter(p=>p.user==="6292a98a9eea6ea8eb75c1d2")
+            userPost= arrayOfPosts.filter(p=>p.user===post.user)
 
         }
     //    console.log(userPost)
 
-    const filteredWorker = workers.filter(w=>w.userId.uid === "6292a98a9eea6ea8eb75c1d2")
+    const filteredWorker = workers.filter(w=>w.userId.uid === post.user)
     // console.log(filteredWorker)
     //  console.log(filteredWorker[0]._id)
     // console.log(post.user)
@@ -43,16 +43,16 @@ export default function ServicesDetail(){
     
 
     
-    //useEffect(()=>{
+    useEffect(()=>{
         dispatch(getPostById(id))
     
-        dispatch(getUserById("6292a98a9eea6ea8eb75c1d2"))
+        dispatch(getUserById(post.user))
 
 
         
         dispatch(getAllPosts())
         dispatch(getWorkers())
-    //}, [dispatch, id])
+    }, [dispatch, id, post.user])
 
     
 
@@ -69,7 +69,7 @@ export default function ServicesDetail(){
                     <ProfileImg src={user.image} />
                     </Link>
                     <span>Publicado por: </span>
-                    <ProfileLink to={`/home`}>
+                    <ProfileLink to={`/worker/${filteredWorker[0]._id}`}>
                     <span>{user.username}</span>
                     </ProfileLink>
                 </UserInfo>
