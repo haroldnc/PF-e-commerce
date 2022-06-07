@@ -6,6 +6,6 @@ const router = Router()
 
 router.get('/:publicationId', getScores)
 router.get('/:publicationId/:userId', getScore)
-router.set('/:publicationId',setScore)
+router.post('/:publicationId',setScore)
 
 module.exports = router;
