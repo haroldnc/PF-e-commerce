@@ -88,8 +88,10 @@ export const getServiceById = (id) => (dispatch) => {
     .then((res) => dispatch({ type: "GET_SERVICE_BYID", payload: res.data }));
 };
 
-export const postPublish = (payload) => async () => {
-  return { type: "POST_PUBLISH_OF_SERVICE", payload: payload };
+export const postPublish = (post) => async (dispatch) => {
+  axios
+    .post(`http://wixer-server.herokuapp.com/posts`, post)
+    .then((res) => dispatch({ type: "POST_PUBLISH_OF_SERVICE", payload: res.payload }));
 };
 
 export function getUserById(id) {

@@ -102,8 +102,7 @@ const rootReducer = (state = {}, action) => {
             }
         case "POST_PUBLISH_OF_SERVICE":
             return{
-                ...state,
-                service: action.payload
+                ...state
             }
         case "GET_USER_BY_ID":
             return{

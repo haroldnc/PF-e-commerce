@@ -12,6 +12,8 @@ const PublishForm = () => {
   const histoy = useHistory();
   const categories = useSelector((state) => state.allCategories);
   const services = useSelector((state) => state.services);
+  const userLogged = useSelector((state) => state.services);
+
   const [servicesC, setServices]= useState([]);
   const [errors, setErrors] = useState({ name: "" });
   const [image, setImage] = useState("");
@@ -23,7 +25,8 @@ const PublishForm = () => {
     description: "",
     price: "",
     service: "",
-    img: ""
+    img: "",
+    user: ``
   });
 
 // ----------------------- cloudinary -----------------------------
@@ -83,7 +86,8 @@ const upLoadImage = async (e) => {
       description: "",
       price: "",
       service: "",
-      img: ""
+      img: "",
+      user: ``
     });
 
     alert("Your publication was created!");
