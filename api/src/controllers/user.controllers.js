@@ -1,5 +1,6 @@
 const User = require("../models/User.js");
 const User_roles = require('../models/User_roles');
+const DataWorkers = require('../models/DataWorkers');
 const Publications = require('../models/Publications');
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt');
@@ -104,14 +105,14 @@ const createUser = async (req, res) => {
                 msg: 'This email is already registered'
             });
         };
-        const existPhone = await User.findOne({ phone });
+        const existPhone = await DataWorkers.findOne({ phone });
          if (existPhone) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This phone is already registered'
             });
         };
-        const existDni = await User.findOne({ dni });
+        const existDni = await DataWorkers.findOne({ dni });
         if (existDni) { 
             return res.status(400).json({
                 ok: false,
@@ -119,7 +120,8 @@ const createUser = async (req, res) => {
             });
         }
         //como me viene el user_role? String o Id? ===> llega id
-        // const userRole = await User_roles.findOne({user_role});
+        const userRole = await User_roles.findOne({name: user_role});
+        console.log(userRole);
         
         const usuario = new User({
             username,
@@ -127,12 +129,17 @@ const createUser = async (req, res) => {
             lastName,
             email,
             password,
-            user_role,
-            image,
-            dni,
-            phone,
-            web
+            user_role: userRole._id,
+            image
         });
+
+        if (user_role === 'worker'){
+            await DataWorkers.create({
+                dni,
+                phone,
+                userId: usuario._id
+            })
+        }
 
         // encriptar password y guardar usuario
         const salt = await bcrypt.genSalt(10);
