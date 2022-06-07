@@ -12,27 +12,31 @@ export default function ServicesDetail(){
     
 
     const {id} = useParams()
-    console.log(id)
+    // console.log(id)
     const dispatch = useDispatch()
     const post = useSelector((state)=>state.post)
     const user = useSelector((state)=>state.userDetail)
     const workers = useSelector((state)=>state.workers)
-    const arrayOfPosts = useSelector((state)=>state.allPost)
-    var author
-    console.log(user)
-    console.log(post)
+    var arrayOfPosts = []
+    arrayOfPosts = useSelector((state)=>state.allPost)
+    var userPost = []
+    // var author
+    // console.log(user)
+    // console.log(post)
     
     // console.log(workers)
     // console.log(user.username)
     // console.log(post.title)
+        if(arrayOfPosts.length ){
+            userPost= arrayOfPosts.filter(p=>p.user===post.user)
 
-    const userPost= arrayOfPosts.filter(p=>p.user==="6292a98a9eea6ea8eb75c1d2")
+        }
     //    console.log(userPost)
 
-    const filteredWorker = workers.filter(w=>w.userId.uid === "6292a98a9eea6ea8eb75c1d2")
+    const filteredWorker = workers.filter(w=>w.userId.uid === post.user)
     // console.log(filteredWorker)
     //  console.log(filteredWorker[0]._id)
-    console.log(post.user)
+    // console.log(post.user)
 
     
 
@@ -42,13 +46,14 @@ export default function ServicesDetail(){
     useEffect(()=>{
         dispatch(getPostById(id))
     
-        dispatch(getUserById("6292a98a9eea6ea8eb75c1d2"))
+        dispatch(getUserById(post.user))
 
 
         
         dispatch(getAllPosts())
         dispatch(getWorkers())
     }, [dispatch, id, post.user])
+
     
 
 
@@ -64,7 +69,7 @@ export default function ServicesDetail(){
                     <ProfileImg src={user.image} />
                     </Link>
                     <span>Publicado por: </span>
-                    <ProfileLink to={`/home`}>
+                    <ProfileLink to={`/worker/${filteredWorker[0]._id}`}>
                     <span>{user.username}</span>
                     </ProfileLink>
                 </UserInfo>

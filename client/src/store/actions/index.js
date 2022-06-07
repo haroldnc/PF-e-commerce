@@ -64,6 +64,11 @@ export const getAllUsers = () => (dispatch) => {
     .then((res) => dispatch({ type: "GET_ALL_USERS", payload: res.data }));
 };
 
+export const getAllUsersAllPAginate = () => dispatch => {
+  axios.get(`https://wixer-server.herokuapp.com/user?page=1&limit=100`)
+  .then((res) => dispatch({ type: "GET_ALL_USERS_PAGESALL", payload: res.data }))
+}
+
 export const clearState = () => {
   return { type: "CLEAR_STATE" };
 };

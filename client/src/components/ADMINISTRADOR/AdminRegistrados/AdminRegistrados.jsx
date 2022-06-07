@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
 import { useDispatch, useSelector} from 'react-redux'
-import { getAllUsers } from "../../../store/actions/index.js";
+import { getAllUsersAllPAginate } from "../../../store/actions/index.js";
 
 import CardAdminR from '../CardAdminR/CardAdminR.jsx'
 
@@ -10,11 +10,11 @@ const AdminRegistrados = () => {
 
     const dispatch = useDispatch() 
 
-    const allUsers = useSelector( state => state.allUsers)
+    const allUsers = useSelector( state => state.allUsersPaginate)
     console.log('selector',allUsers.users )
 
     useEffect( () => {
-        dispatch(getAllUsers())
+        dispatch(getAllUsersAllPAginate())
     },[])
 
     return (

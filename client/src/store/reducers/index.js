@@ -3,6 +3,7 @@ import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
 const initialState = {
     allCategories: [],
     allUsers: [],
+    allUsersPaginate: {},
     filteredUsers: [],
     services: [],
     service: {},
@@ -27,7 +28,12 @@ const rootReducer = (state = {}, action) => {
             return {
                 ...state,
                 allUsers: action.payload,
-            };                          
+            };
+        case "GET_ALL_USERS_PAGESALL":
+            return {
+                ...state,
+                allUsersPaginate: action.payload,
+            }                  
         case "GET_CATEGORY":
             return{
                 ...state,
@@ -105,12 +111,14 @@ const rootReducer = (state = {}, action) => {
                 ...state
             }
         case "GET_USER_BY_ID":
+            console.log(action.payload)
             return{
                 ...state,
                 userDetail: action.payload
+                
             }
 
-        case "GET_POST_BY_ID":
+        case "GET_POST_ID":
             return{
                 ...state,
                 post: action.payload
