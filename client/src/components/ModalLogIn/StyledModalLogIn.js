@@ -41,6 +41,7 @@ export const Title = styled.h2`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 // export const Input = styled(Field)`
@@ -153,4 +154,5 @@ export const Input = styled(Field)`
   background-color: ${(props) => props.theme.colors.inputColor};
   margin-bottom: 5px;
   color: ${(props) => props.theme.colors.font};
+  width: 100%;
 `;

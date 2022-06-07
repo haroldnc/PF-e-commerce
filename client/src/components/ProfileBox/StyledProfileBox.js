@@ -21,5 +21,7 @@ export const Container = styled.div`
 
     li{
         cursor: pointer;
+        margin: 5px 0;
+        font-weight: 500;
     }
 `

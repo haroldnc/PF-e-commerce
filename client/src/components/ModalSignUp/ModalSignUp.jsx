@@ -23,33 +23,14 @@ import {
   Wrapper,
 } from "./StyledModalSignUp";
 import { useDispatch } from "react-redux";
-import { postUser } from "../../store/actions";
-import user from "../../store/reducers/userReducer";
-import { register } from "../../store/actions/userActions";
-import GoogleLogin from "react-google-login";
+import {register} from "../../store/actions/userActions";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
 import axios from "axios";
+import { gapi } from "gapi-script";
+import { postUser } from "../../store/actions";
 
 const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
   const dispatch = useDispatch();
-  const clientGoogle =
-    "796413127660-tgktohi6gqfm0n183g1kqp6lqehl6ncq.apps.googleusercontent.com";
-
-  const handleGoogleLogin = async (googleData) => {
-    try {
-      const dataGoogle = await axios.post(`https://wixer-server.herokuapp.com/user`, {
-        tokenId: googleData.tokenId,
-        givenName: googleData.profileObj.givenName,
-        familyName: googleData.profileObj.familyName,
-      });
-      const finallyGoogle = await dataGoogle.data;
-      localStorage.setItem("token", JSON.stringify(finallyGoogle.token));
-      // navigate("/home");
-    } catch (error) {
-      console.log(error);
-      alert("error no se pudo ingresar", error);
-    }
-  };
-
 
   return (
     <>
@@ -58,14 +39,13 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
           <Formik
             initialValues={{
               firstName: "",
-              // lastName: "",
+              lastName: "",
               username: "",
-              // email: "",
-              // password: "",
-              // dni: "",
-              // phone: "",
-              // // web: "",
-              // user_role: "",
+              email: "",
+              password: "",
+              dni: "",
+              phone: "",
+              user_role: "",
             }}
             validate={(values) => {
               const errors = {};
@@ -120,13 +100,6 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               ) {
                 errors.phone = "Numero de telefono no valido, solo 10 numeros";
               }
-              // if (
-              //   !/^(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i.test(
-              //     values.web
-              //   )
-              // ) {
-              //   errors.web = "web needs to be an url string";
-              // }
 
               if (!values.user_role) {
                 errors.user_role = "Es obligatorio elegir un tipo de usuario";
@@ -135,12 +108,8 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                dispatch(register(values));
-                setSubmitting(false);
-                alert("Usuario Creado!");
-                toggleModalSignUp();
-              }, 400);
+              setSubmitting(false);
+                dispatch(register(values))
             }}
           >
             {(isSubmitting) => (
@@ -162,23 +131,14 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       <ErrorMessage name="firstName" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
+                      <InputContainer>
+                        <Label>Apellido</Label>
+                        <Input name="lastName" type="text" />
+                        <ErrorMessage name="lastName" component="div">
+                          {(msg) => <Error>{msg}</Error>}
+                        </ErrorMessage>
+                      </InputContainer>
                     </InputContainer>
-                    {/* <InputContainer>
-                      <Label>Apellido</Label>
-                      <Input name="lastName" type="text" />
-                      <ErrorMessage name="lastName" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
-                    <InputContainer>
-                      <Label>DNI</Label>
-                      <Input name="dni" type="text" />
-                      <ErrorMessage name="dni" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
-                  </div>
-                  <div>
                     <InputContainer>
                       <Label>Email</Label>
                       <Input name="email" type="email" />
@@ -194,14 +154,6 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Telefono</Label>
-                      <Input name="phone" />
-                      <ErrorMessage name="phone" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
-
-                    <InputContainer>
                       <Label>Rol de usuario</Label>
                       <Field
                         component="select"
@@ -215,29 +167,43 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       <ErrorMessage name="user_role" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
-                    </InputContainer> */}
-                  </div>
-                  <div>
-                    {/* <InputContainer>
-                      <Label>Web</Label>
-                      <Input name="web" type="text" />
-                      <ErrorMessage name="web" component="div">
+                    </InputContainer>
+                    
+                    <InputContainer>
+                      <Label>DNI</Label>
+                      <Input name="dni" type="text" />
+                      <ErrorMessage name="dni" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
-                    </InputContainer> */}
+                    </InputContainer>
+                  </div>
+                  <div>
+                    
+                    <InputContainer>
+                      <Label>Telefono</Label>
+                      <Input name="phone" />
+                      <ErrorMessage name="phone" component="div">
+                        {(msg) => <Error>{msg}</Error>}
+                      </ErrorMessage>
+                    </InputContainer>
+
+                    
+                  </div>
+                  <div>
+
                   </div>
                 </InputsContainer>
                 <SubmitContainer>
                   <CheckBoxContainer>
                     {/* <Field type="checkbox" />I agree with terms and conditions */}
                   </CheckBoxContainer>
-                  <Button type="submit">Crear cuenta</Button>
+                  <button  type="submit">Submit</button>
                   <DivisionContainer>
                     <Line />
                     Or
                     <Line />
                   </DivisionContainer>
-                  <GoogleLogin
+                  {/* <GoogleLogin
                     // clientId={clientGoogle}
                     // onSuccess={handleGoogleLogin}
                     // onFailure={handleGoogleLogin}
@@ -262,7 +228,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       //   />
                       // </ButtonGoogle>
                     )}
-                  />
+                  /> */}
                   {/* <ButtonAlt disabled={true}>
                     <GoogleIcon />
                     Crear con Google

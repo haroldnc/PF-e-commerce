@@ -19,18 +19,34 @@ import {
 import { Formik, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { signin } from "../../store/actions/userActions";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { gapi } from "gapi-script";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
-  const clientGoogle =
-    "796413127660-tgktohi6gqfm0n183g1kqp6lqehl6ncq.apps.googleusercontent.com";
+
+  gapi.load("client:auth2", () => {
+    gapi.client.init({
+      clientId:
+        "599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com",
+      plugin_name: "chat",
+    });
+  });
+
+  // const handleGoogleLogin = (response) => {
+  //   console.log(response);
+  //   console.log(response.profileObj);
+  // };
 
   const handleGoogleLogin = async (googleData) => {
+    console.log(googleData);
+    console.log(googleData.profileObj);
     try {
       const dataGoogle = await axios.post(
-        `https://wixer-server.herokuapp.com/user`,
+        `https://wixer-server.herokuapp.com/auth/google`,
         {
           tokenId: googleData.tokenId,
           givenName: googleData.profileObj.givenName,
@@ -39,12 +55,24 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
       );
       const finallyGoogle = await dataGoogle.data;
       localStorage.setItem("token", JSON.stringify(finallyGoogle.token));
-      // navigate("/home");
+      //navigate("/home");
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
       alert("error no se pudo ingresar", error);
     }
   };
+  const logout = (response) => {
+    gapi.auth2.getAuthInstance().signOut();
+    console.log(response);
+    console.log("logout");
+  };
+
+  const handleResetPage = () => {
+    setTimeout(() => {
+      history.go(0);
+    }, 1000);
+  };
+
   return (
     <>
       {isOpenModalLogIn && (
@@ -80,6 +108,7 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
               resetForm();
               setSubmitting(false);
               dispatch(signin(values));
+              handleResetPage();
             }}
           >
             {(props, isSubmitting) => (
@@ -144,32 +173,18 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                   <Line />
                 </DivisionContainer>
                 <GoogleLogin
-                  clientId={clientGoogle}
+                  clientId="599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com"
+                  buttonText="Login"
                   onSuccess={handleGoogleLogin}
                   onFailure={handleGoogleLogin}
-                  render={(renderProps) => (
-                    <ButtonAlt
-                      // disabled={true}
-                      onClick={renderProps.onClick}
-                      disabled={renderProps.disabled}
-                    >
-                      <GoogleIcon />
-                      Crear con Google
-                    </ButtonAlt>
-                    // <button
-                    //   onClick={renderProps.onClick}
-                    //   disabled={renderProps.disabled}
-                    // >
-                    //   {/* <FcGoogle
-                    //     style={{
-                    //       width: "33px",
-                    //       height: "33px",
-                    //       marginTop: "6px",
-                    //     }}
-                    //   /> */}
-                    // </button>
-                  )}
+                  cookiePolicy={"single_host_origin"}
                 />
+                <GoogleLogout
+                  clientId="599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com"
+                  buttonText="Logout"
+                  onLogoutSuccess={logout}
+                />
+
                 {/* <ButtonAlt>
                   <GoogleIcon />
                   Continuar con Google

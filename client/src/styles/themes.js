@@ -18,7 +18,7 @@ const darkMode = {
     secondary: "#00a896",
     secondaryLighter: "#79dabc",
     font: "#ffffff",
-    backgroundColor: "#060606",
+    backgroundColor: "#141414",
     backgroundColorAlt: "#141414",
     inputColor: "#212121",
     borderColor: "#3d3d3d"

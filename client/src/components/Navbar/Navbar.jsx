@@ -16,7 +16,7 @@ import {
 import ScrolledSearchbar from "./ScrolledSearchbar/ScrolledSearchbar";
 import ProfileBox from "../ProfileBox/ProfileBox";
 
-const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo }) => {
+const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleModalSignOut }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const history = useHistory();
@@ -46,6 +46,8 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo }) => {
   const handleClick = () => {
     history.push("/");
   };
+
+  
   return (
     <Container isScrolled={isScrolled} ruta={ruta}>
       <Wrapper>
@@ -60,13 +62,13 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo }) => {
         <div>
           {userInfo && userInfo ? (
             <UserInfo>
-              {userInfo.usuario.user_role.name === "user" && (<UserRole>Usuario</UserRole>)}
-              {userInfo.usuario.user_role.name === "worker" && (<UserRole>Worker</UserRole>)}
-              <Profile onClick={handleToggle}>
+              {userInfo.usuario.user_role.name && userInfo.usuario.user_role.name === "user" && (<UserRole>Usuario</UserRole>)}
+              {userInfo.usuario.user_role.name  && userInfo.usuario.user_role.name === "worker" && (<UserRole>Worker</UserRole>)}
+              <Profile onClick={handleToggle}  img={userInfo.usuario.image}>
                 
               </Profile>
               
-                <ProfileBox isOpen={isOpen}/>
+                <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle}/>
               
               <ProfileBox />
             </UserInfo>
