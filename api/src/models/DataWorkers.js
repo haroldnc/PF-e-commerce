@@ -146,6 +146,10 @@ const DataWorkers = Schema({
         type: Schema.Types.Double,
         default: 0
     },
+    subscribed: {
+        type: Boolean,
+        default: false
+    },
     userId:{
         type: Schema.Types.ObjectId,
         ref: "User"
