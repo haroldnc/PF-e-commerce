@@ -142,6 +142,10 @@ const DataWorkers = Schema({
         type: String,
         default: ""
     },
+    score: {
+        type: Schema.Types.Double,
+        default: 0
+    },
     userId:{
         type: Schema.Types.ObjectId,
         ref: "User"
