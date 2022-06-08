@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { postPublish, getServices } from "../../store/actions/index";
+import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 
 import { AiOutlineCloudUpload } from "react-icons/ai";
@@ -9,10 +10,11 @@ import { UploadImage, PublishFormSection, InputImage, InputsDivs, Form } from ".
 
 const PublishForm = () => {
   const dispatch = useDispatch();
-  const histoy = useHistory();
+  const history = useHistory();
   const categories = useSelector((state) => state.allCategories);
   const services = useSelector((state) => state.services);
-  const userLogged = useSelector((state) => state.services);
+//  const userLogged = useSelector((state) => state.userSignIn);
+ // const userID = userLogged.userInfo.uid;
 
   const [servicesC, setServices]= useState([]);
   const [errors, setErrors] = useState({ name: "" });
@@ -26,7 +28,7 @@ const PublishForm = () => {
     price: "",
     service: "",
     img: "",
-    user: ``
+  //  user: `${userID}`
   });
 
 // ----------------------- cloudinary -----------------------------
@@ -77,20 +79,35 @@ const upLoadImage = async (e) => {
 };
 
   const handleSubmit = (e) => {
-  
+    if (!input.title || !input.description || !input.price || !input.service) {  
+      e.preventDefault()
+
+      return Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Error',
+      text: 'Complete todos los campos del formulario',
+    })
+  }
     e.preventDefault();
     console.log(input)
-    dispatch(postPublish(input));
+  //  dispatch(postPublish(input));
     setInput({
       title: "",
       description: "",
       price: "",
       service: "",
       img: "",
-      user: "``"
+      user: ``
     });
-
-    alert("Your publication was created!");
+    
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Genial',
+      text: 'Tu publicacion a sido creada correctamente',
+    })
+    history.push('/')
   };
 // ---------------------------------------------------------------------
 
@@ -195,7 +212,7 @@ const upLoadImage = async (e) => {
             onChange={handleInputChange}
             value={input.price}
           />
-          {errors.price && <p>{errors.weight}</p>}
+          {errors.price && <p>{errors.price}</p>}
       </InputsDivs>
       <button>Publicar</button>
     </Form>
@@ -226,7 +243,7 @@ export function validateForm(input) {
 
   if (!input.price) {
     errors.price = "Price is required";
-  } else if (!/^([1-9]\d{0,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(input.price)) {
+  } else if (input.price <= 0) {
     errors.price = "El precio tiene que ser minimo 1";
   };
 
