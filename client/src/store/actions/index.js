@@ -64,6 +64,11 @@ export const getAllUsers = () => (dispatch) => {
     .then((res) => dispatch({ type: "GET_ALL_USERS", payload: res.data }));
 };
 
+export const getAllUsersAllPAginate = () => dispatch => {
+  axios.get(`https://wixer-server.herokuapp.com/user?page=1&limit=100`)
+  .then((res) => dispatch({ type: "GET_ALL_USERS_PAGESALL", payload: res.data }))
+}
+
 export const clearState = () => {
   return { type: "CLEAR_STATE" };
 };
@@ -88,8 +93,10 @@ export const getServiceById = (id) => (dispatch) => {
     .then((res) => dispatch({ type: "GET_SERVICE_BYID", payload: res.data }));
 };
 
-export const postPublish = (payload) => async () => {
-  return { type: "POST_PUBLISH_OF_SERVICE", payload: payload };
+export const postPublish = (post) => async (dispatch) => {
+  axios
+    .post(`http://wixer-server.herokuapp.com/posts`, post)
+    .then((res) => dispatch({ type: "POST_PUBLISH_OF_SERVICE", payload: res.payload }));
 };
 
 export function getUserById(id) {

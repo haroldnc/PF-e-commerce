@@ -1,6 +1,6 @@
 import React,{ useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { getAllUsers, getWorkers, getPosts } from '../../../store/actions/index.js'
+import { getAllUsersAllPAginate, getWorkers, getPosts } from '../../../store/actions/index.js'
 import { Doughnut } from 'react-chartjs-2'
 
 import { ContainerDashboard, Number, Name, Usuarios, CardsDatos, Tabla, Datos, ImgProv } from './Dashboard.js'
@@ -16,13 +16,13 @@ const Dasboard = () => {
 
     const dispatch = useDispatch()
 
-    const Registrados = useSelector(state => state.allUsers)
+    const Registrados = useSelector(state => state.allUsersPaginate)
     const Workers = useSelector(state => state.workers)
     const Posts = useSelector(state => state.posts)
-    console.log(Posts)
+    console.log('registrado',Registrados)
 
     useEffect(() => {
-        dispatch(getAllUsers())
+        dispatch(getAllUsersAllPAginate())
         dispatch(getWorkers())
         dispatch(getPosts())
     },[])
@@ -61,7 +61,7 @@ const Dasboard = () => {
                             <CgProfile/>
                         </div>
                     </IconContext.Provider>
-                    <Number>{Registrados.length === 0 ? "Cargando..." : Registrados.users.length  }</Number>
+                    <Number>{Registrados === undefined ? "Cargando..." : Registrados.users.length}</Number>
                     <Name>Registrados</Name>
                 </CardsDatos>
                 <CardsDatos>
