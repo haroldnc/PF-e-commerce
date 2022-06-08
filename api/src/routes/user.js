@@ -34,7 +34,7 @@ router.post('/',
     check('user_role', 'User type is required').not().isEmpty(),
     validarCampos
 ], createUser);
-router.post('/confirm', confirmRegister);
+router.post('/confirm/:id', confirmRegister);
 
 
 module.exports = router;
