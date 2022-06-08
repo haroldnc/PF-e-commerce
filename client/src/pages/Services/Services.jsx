@@ -43,7 +43,7 @@ const Services = () => {
   useEffect(() => {
     dispatch(getServiceById(id));
     dispatch(getPostsByServiceId(id));
-  });
+  }, [dispatch, id]);
 
   let pageslice = servicePosts.slice(pageAnt, pagePost);
 
