@@ -106,9 +106,7 @@ function App() {
           <Route path="/publicar" component={PublishService} />
           <Route exact path="/admin" component={Admin} />
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
-          {/* <Elements stripe={stripePromise}>
-            <CheckoutForm />
-        </Elements> */}
+          <Route path="/search" />
           <Route path="/checkout" component={Payment}/>
         </Switch>
         <Footer />

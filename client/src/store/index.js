@@ -23,7 +23,8 @@ const initialState = {
   postDetail: [],
   userDetail:{},
   post: {},
-  allPost:[] 
+  allPost:[],
+  queryPosts:{}
 };
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

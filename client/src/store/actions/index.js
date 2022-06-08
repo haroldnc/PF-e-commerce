@@ -120,3 +120,10 @@ export const getPostById = (id) => (dispatch) => {
     .get(`http://wixer-server.herokuapp.com/posts/${id}`)
     .then((res) => dispatch({ type: "GET_POST_ID", payload: res.data }));
 };
+
+
+export const getPostByQuery = (query) => (dispatch) => {
+  axios
+    .get(`http://wixer-server.herokuapp.com/posts?title=${query}`)
+    .then((res) => dispatch({ type: "GET_POST_BY_QUERY", payload: res.data }));
+};
