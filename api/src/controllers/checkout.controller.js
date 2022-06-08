@@ -25,8 +25,8 @@ const createCheckoutSession = async (req, res) => {
          cancel_url: `${domainURL}`
       });
 
-      //res.redirect(303, sessions.url);
-      res.status(200).json(session);
+      res.redirect(303, sessions.url);
+      //res.status(200).json(session);
    } catch(error) {
       res.status(400).json({ error: error.message });
    }
