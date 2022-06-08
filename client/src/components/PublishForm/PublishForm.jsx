@@ -13,8 +13,8 @@ const PublishForm = () => {
   const history = useHistory();
   const categories = useSelector((state) => state.allCategories);
   const services = useSelector((state) => state.services);
-//  const userLogged = useSelector((state) => state.userSignIn);
- // const userID = userLogged.userInfo.uid;
+  const userLogged = useSelector((state) => state.userSignIn);
+  const userID = userLogged.userInfo.uid;
 
   const [servicesC, setServices]= useState([]);
   const [errors, setErrors] = useState({ name: "" });
@@ -28,7 +28,7 @@ const PublishForm = () => {
     price: "",
     service: "",
     img: "",
-  //  user: `${userID}`
+    user: `${userID}`
   });
 
 // ----------------------- cloudinary -----------------------------
@@ -91,7 +91,7 @@ const upLoadImage = async (e) => {
   }
     e.preventDefault();
     console.log(input)
-  //  dispatch(postPublish(input));
+    dispatch(postPublish(input));
     setInput({
       title: "",
       description: "",
