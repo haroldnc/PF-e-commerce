@@ -31,7 +31,7 @@ export const InfoFooter = styled.div`
 
 export const Wrapper = styled.div`
   min-width: 1100px;
-  border-top: 1px solid #f2f2f2; 
+  border-top: 1px solid ${props => props.theme.colors.borderColor}; 
 `;
 
 export const LastInfoFooter = styled.div`

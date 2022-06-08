@@ -75,7 +75,7 @@ const Testimonials = () => {
         slidesToShow: 1,
         slidesToScroll: 1,   
         nextArrow: <ArrowRight style={{ padding: "30px" }}/>,
-        prevArrow: <ArrowLeft/>
+        prevArrow: <ArrowLeft/>,
     };
 
     return (
