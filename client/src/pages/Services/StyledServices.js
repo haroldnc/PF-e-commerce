@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     min-width: 1100px;
 `
 
-export const NameServ = styled.h1 `
+export const NameServ = styled.h2 `
     font-family: 'Poppins', sans-serif;
     color: 01103;
 `

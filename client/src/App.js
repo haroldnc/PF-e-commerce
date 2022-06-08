@@ -39,6 +39,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ModalSignOut from "./components/ModalSignOut/ModalSignOut";
 import Confirm from "./pages/Confirm/Confirm";
 import LogInConfirm from "./pages/LogInConfirm/LogInConfirm";
+import Wishlist from "./pages/Wishlist/Wishlist";
 
 
 
@@ -114,6 +115,7 @@ function App() {
           <Route path="/checkout" component={Payment}/>
           <Route path="/confirmar/:id" component={Confirm} />
           <Route path="/iniciar-sesion" component={LogInConfirm} />
+          <Route path="/lista-favoritos" component={Wishlist} />
         </Switch>
         <Footer />
         <ModalLogIn

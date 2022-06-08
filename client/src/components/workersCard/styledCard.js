@@ -2,16 +2,16 @@ import styled from 'styled-components'
 
 
 export const Container = styled.div`
-    width: 250px;
+    min-width: 20rem;
+    min-height:19rem;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    padding: 0px 9px 8px;
     flex-wrap: wrap;
     align-content: space-around;
     align-items: flex-start;
-    margin: 0 50px;
-    box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.158);
+    margin: 15px 50px;
+    box-shadow: ${props => props.theme.boxShadow};
     cursor:pointer;
     background: ${props => props.theme.colors.backgroundColorAlt};
     color: ${props => props.theme.colors.font};
@@ -28,7 +28,7 @@ export const LogoImg = styled.img`
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    margin: 3px 2px 1px;
+    margin: 0 10px
 `
 
 export const StyledSpan = styled.span`
@@ -61,6 +61,5 @@ export const Column = styled.div `
     display: flex;
     flex-direction: column;
     /* text-align: rigth; */
-    background-color: blue;
     text-align: center;
 `
