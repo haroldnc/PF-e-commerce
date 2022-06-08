@@ -1,6 +1,13 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getUserById, getAllUsers, upDateUser, deleteUser, createUser } = require('../controllers/user.controllers')
+const { 
+    getUserById, 
+    getAllUsers, 
+    upDateUser, 
+    deleteUser, 
+    createUser, 
+    confirmRegister 
+} = require('../controllers/user.controllers')
 
 const { validarCampos } = require('../middlewares/validar.campos');
 const {validarADMIN_ROLE} = require('../middlewares/validarAdminRole')
@@ -27,6 +34,7 @@ router.post('/',
     check('user_role', 'User type is required').not().isEmpty(),
     validarCampos
 ], createUser);
+router.post('/confirm', confirmRegister);
 
 
 module.exports = router;
