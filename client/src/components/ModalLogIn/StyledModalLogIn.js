@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
 import { Form, Field } from "formik";
+import GoogleLogin from "react-google-login";
 
 export const Container = styled.section`
   height: 100vh;

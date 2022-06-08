@@ -23,14 +23,63 @@ import {
   Wrapper,
 } from "./StyledModalSignUp";
 import { useDispatch } from "react-redux";
-import {register} from "../../store/actions/userActions";
+import { register } from "../../store/actions/userActions";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import axios from "axios";
 import { gapi } from "gapi-script";
 import { postUser } from "../../store/actions";
+import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleResetPage = () => {
+    setTimeout(() => {
+      history.go(0);
+    }, 1000);
+  };
+
+  gapi.load("client:auth2", () => {
+    gapi.client.init({
+      clientId:
+        "599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com",
+      plugin_name: "chat",
+    });
+  });
+
+  // const handleGoogleLogin = (response) => {
+  //   console.log(response);
+  //   console.log(response.profileObj);
+  // };
+
+  const handleGoogleLogin = async (googleData) => {
+    console.log(googleData);
+    console.log(googleData.profileObj);
+    try {
+      const dataGoogle = await axios.post(
+        `https://wixer-server.herokuapp.com/auth/google`,
+        {
+          tokenId: googleData.tokenId,
+          givenName: googleData.profileObj.givenName,
+          familyName: googleData.profileObj.familyName,
+        }
+      );
+      const finallyGoogle = await dataGoogle.data;
+      localStorage.setItem("userInfo", JSON.stringify(finallyGoogle.usuario));
+      handleResetPage();
+      //navigate("/home");
+    } catch (error) {
+      console.log(error.response);
+      alert("error no se pudo ingresar", error);
+    }
+  };
+  const logout = (response) => {
+    gapi.auth2.getAuthInstance().signOut();
+    console.log(response);
+    console.log("logout");
+  };
 
   return (
     <>
@@ -107,9 +156,18 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
 
               return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={(values, { setSubmitting, resetForm }) => {
               setSubmitting(false);
-                dispatch(register(values))
+              dispatch(register(values));
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Formulario completado con exito!',
+                text: 'Verifique su email para confirmar su cuenta.',
+                showConfirmButton: false,
+                timer: 30000
+              })
+              toggleModalSignUp();
             }}
           >
             {(isSubmitting) => (
@@ -139,6 +197,24 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                         </ErrorMessage>
                       </InputContainer>
                     </InputContainer>
+
+                    <InputContainer>
+                      <Label>Rol de usuario</Label>
+                      <Field
+                        component="select"
+                        name="user_role"
+                        className="field-select"
+                      >
+                        <option>Elige tu rol</option>
+                        <option value="user">User</option>
+                        <option value="worker">Worker</option>
+                      </Field>
+                      <ErrorMessage name="user_role" component="div">
+                        {(msg) => <Error>{msg}</Error>}
+                      </ErrorMessage>
+                    </InputContainer>
+                  </div>
+                  <div>
                     <InputContainer>
                       <Label>Email</Label>
                       <Input name="email" type="email" />
@@ -154,21 +230,13 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Rol de usuario</Label>
-                      <Field
-                        component="select"
-                        name="user_role"
-                        className="field-select"
-                      >
-                        <option>Elige tu rol</option>
-                        <option value="628eefd607fe8bf42fb6a5f5">User</option>
-                        <option value="628ef02007fe8bf42fb6a5f8">Worker</option>
-                      </Field>
-                      <ErrorMessage name="user_role" component="div">
+                      <Label>Telefono</Label>
+                      <Input name="phone" />
+                      <ErrorMessage name="phone" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer>
-                    
+
                     <InputContainer>
                       <Label>DNI</Label>
                       <Input name="dni" type="text" />
@@ -177,32 +245,33 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       </ErrorMessage>
                     </InputContainer>
                   </div>
-                  <div>
-                    
-                    <InputContainer>
-                      <Label>Telefono</Label>
-                      <Input name="phone" />
-                      <ErrorMessage name="phone" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
-
-                    
-                  </div>
-                  <div>
-
-                  </div>
+                  <div></div>
                 </InputsContainer>
                 <SubmitContainer>
                   <CheckBoxContainer>
                     {/* <Field type="checkbox" />I agree with terms and conditions */}
                   </CheckBoxContainer>
-                  <button  type="submit">Submit</button>
+                  <Button type="submit">Submit</Button>
                   <DivisionContainer>
                     <Line />
                     Or
                     <Line />
                   </DivisionContainer>
+
+                  <GoogleLogin
+                  clientId="599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com"
+                  onSuccess={handleGoogleLogin}
+                  onFailure={handleGoogleLogin}
+                  cookiePolicy={"single_host_origin"}
+                  render={(renderProps) => (
+                    <ButtonAlt  onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}>
+                      <GoogleIcon />
+                      Continuar con Google
+                    </ButtonAlt>
+                  )}
+                />
+
                   {/* <GoogleLogin
                     // clientId={clientGoogle}
                     // onSuccess={handleGoogleLogin}
