@@ -9,6 +9,12 @@ const router = Router();
 
 router.get('/:id', getUserById);
 router.get('/', getAllUsers);
+/*router.get('/', 
+[
+    validarJwt,
+    validarADMIN_ROLE
+],
+getAllUsers);*/
 router.put('/:id', upDateUser);
 router.delete('/:id', deleteUser);
 router.post('/',
@@ -19,8 +25,6 @@ router.post('/',
     check('email', 'Email is required and must be valid').not().isEmpty().isEmail(),
     check('password', 'The password is required and must be valid').not().isEmpty(),
     check('user_role', 'User type is required').not().isEmpty(),
-    check('dni', 'The DNI is required').not().isEmpty(),
-    check('phone', 'The phone is required').not().isEmpty(),
     validarCampos
 ], createUser);
 

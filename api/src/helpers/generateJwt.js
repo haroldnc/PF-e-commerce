@@ -20,6 +20,6 @@ const generateJwt = (id) => {
             }
         );
     });
-;}
+};
 
 module.exports = { generateJwt };

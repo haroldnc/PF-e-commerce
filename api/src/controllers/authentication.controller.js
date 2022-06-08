@@ -19,13 +19,14 @@ const login = async (req, res) => {
         };
         // validar password
         const validPassword = await bcrypt.compareSync(password, existEmail.password);// develve true o false
-        console.log(validPassword, 'validPassword');
         if (!validPassword) {
             return res.status(400).json({
                 ok: false,
                 msg: 'The password is wrong'
             });
         };
+        // generar jwt
+        const token = await generateJwt(existEmail.id);
         // respuesta
         res.json({
             ok: true,
@@ -46,12 +47,12 @@ const googleSignIn = async (req, res) => {
     const { givenName, familyName } = req.body;
     try {
         const { name, email, img } = await googleVerify(googleToken);
-        const usuarioDb = await User.findOne({ email });
-        // user_role seteo unverified por default
+        const usuarioDb = await User.findOne({ email });// busca si existe el email
+        // user_role seteo user por default
         const user_role = await User_roles.findOne({ name: 'user' });
         let usuario;
         // create user
-        if (!usuarioDb) {
+        if (!usuarioDb) {// si no existe el email crea una cuenta nueva
             usuario = new User({
                 username: name,
                 firstName: givenName,
@@ -63,14 +64,14 @@ const googleSignIn = async (req, res) => {
             });
         }
         else{
-            usuario = usuarioDb;
+            usuario = usuarioDb;// si existe el email continua con la cuenta existente 
         }
-        await usuario.save();
-        //const token = await generateJwt(usuario.id);
+        await usuario.save();// debe ir dentro del if?
+        const token = await generateJwt(usuario.id);
         res.json({
             ok: true,
-            usuario
-            //token
+            usuario,
+            token
         });
     } catch (error) {
         console.log(error);
