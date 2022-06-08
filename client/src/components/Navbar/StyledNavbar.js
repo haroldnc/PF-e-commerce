@@ -12,6 +12,8 @@ export const Container = styled.header`
   position: fixed;
   z-index: 100;
   font-weight: 600;
+
+  ${({ruta}) => ruta === "admin" ? `visibility: hidden` : `none`}
 `;
 
 export const Wrapper = styled.div`
@@ -99,4 +101,24 @@ export const HamburguerMenuIcon = styled(GiHamburgerMenu)`
   @media (max-width: 768px) {
     display: flex;
   }
+`
+export const UserInfo = styled.div`
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+`
+export const UserRole = styled.span`
+  color: #13e300;
+  font-size: 14px;
+`
+export const Profile = styled.div`
+  width: 2rem;
+  height: 2rem;
+  border-radius: 99999px;
+  background: url(${props => props.img});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
 `

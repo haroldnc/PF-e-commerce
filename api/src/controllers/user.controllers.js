@@ -89,7 +89,7 @@ const createUser = async (req, res) => {
     // agregar usuario  
     const { username, firstName, lastName, email, password, image, user_role, dni, phone, web} = req.body;
     try {
-        // validar si nickname, email, telefono y dni ya existen.
+        // validar si nickname y email ya existen.
         const existUserName = await User.findOne({ username });
    
         if (existUserName) { 
@@ -105,7 +105,7 @@ const createUser = async (req, res) => {
                 msg: 'This email is already registered'
             });
         };
-        const existPhone = await DataWorkers.findOne({ phone });
+        /*const existPhone = await DataWorkers.findOne({ phone });
          if (existPhone) { 
             return res.status(400).json({
                 ok: false,
@@ -118,7 +118,7 @@ const createUser = async (req, res) => {
                 ok: false,
                 msg: 'This DNI is already registered'
             });
-        }
+        }*/
         //como me viene el user_role? String o Id? ===> llega id
         const userRole = await User_roles.findOne({name: user_role});
         console.log(userRole);
@@ -162,7 +162,7 @@ const createUser = async (req, res) => {
             text: 'Hello ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
                 'Thank you for registering on Wixxer.\n' +
                 'To confirm your registration, please click on the following link:\n\n' +
-                'http://localhost:3000/confirmar/' + usuario._id + '\n\n' +
+                'http://localhost:3000/confirm/' + usuario._id + '\n\n' +
                 "If it doesn't work, copy and paste the link into your browser.\n\n" +
                 'Thank you,\n' +
                 'Wixxer  Team'
@@ -177,7 +177,8 @@ const createUser = async (req, res) => {
         return res.json({
             ok: true,
             msg: "User created",
-        })
+            usuario
+        });
     
     }
     catch (error) {
@@ -189,6 +190,31 @@ const createUser = async (req, res) => {
     };
 };
 
+const confirmRegister = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'User not found'
+            }); // si no existe el usuario
+        };
+        const userConfirmed = await User.findByIdAndUpdate(id, { confirm_email: true }, { new: true });
+        return res.json({
+            ok: true,
+            msg: 'User confirmed',
+            userConfirmed
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
+        });
+    };
+};
 
 
-module.exports = {getUserById, getAllUsers, upDateUser, deleteUser, createUser};
+
+module.exports = {getUserById, getAllUsers, upDateUser, deleteUser, createUser, confirmRegister};

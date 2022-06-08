@@ -6,6 +6,7 @@ export const Card = styled.div `
     height: 348px;
     border: 1px solid rgba(0, 0, 0, 0.089);
     cursor: pointer;
+    border-radius: 5px;
 
     &:hover{
         border: 1px solid #00a896;  
@@ -22,7 +23,7 @@ export const Profile = styled.div `
     flex-direction: row;
     align-items: center;
     padding: 10px;
-    margin: -5px 0px -2px 8px
+    margin: -5px 0px -2px 8px;
 `
 
 export const ImgProfile = styled.img `

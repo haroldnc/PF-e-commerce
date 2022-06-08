@@ -18,9 +18,15 @@ import {
   SubmitContainer,
   CheckBoxContainer,
   Error,
-  InputContainer, Label
+  InputContainer,
+  Label,
+  Wrapper,
 } from "./StyledModalSignUp";
 import { useDispatch } from "react-redux";
+import {register} from "../../store/actions/userActions";
+import { GoogleLogin, GoogleLogout } from "react-google-login";
+import axios from "axios";
+import { gapi } from "gapi-script";
 import { postUser } from "../../store/actions";
 
 const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
@@ -38,44 +44,41 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               password: "",
               dni: "",
               phone: "",
-              // web: "",
               user_role: "",
             }}
             validate={(values) => {
               const errors = {};
 
               if (!values.username) {
-                errors.username = "username is required";
+                errors.username = "Username es requerido";
               } else if (!/^[a-z]{3,}$/i.test(values.username)) {
-                errors.username = "username accept minimun 3 letters";
+                errors.username = "username acepta minimo 3 letras";
               }
 
               if (!values.firstName) {
-                errors.firstName = "firstName is required";
+                errors.firstName = "Nombre es requerido";
               } else if (!/^[a-záéíóúñ\s]{3,}$/i.test(values.firstName)) {
-                errors.firstName =
-                  "firstName only accept letters and minimun 3 letters";
+                errors.firstName = "Nombre solo acepta minimo 3 letras";
               }
 
               if (!values.lastName) {
-                errors.lastName = "lastName is required";
+                errors.lastName = "Apellido es requerido";
               } else if (!/^[a-záéíóúñ\s]{3,}$/i.test(values.lastName)) {
-                errors.lastName =
-                  "lastName only accept letters and minimun 3 letters";
+                errors.lastName = "Apellido solo acepta minimo 3 letras";
               }
 
               if (!values.email) {
-                errors.email = "email is required";
+                errors.email = "Email es requerido";
               } else if (
                 !/^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/i.test(
                   values.email
                 )
               ) {
-                errors.email = "email is not valid";
+                errors.email = "Email no es valido";
               }
 
               if (!values.password) {
-                errors.password = "password is required";
+                errors.password = "Contraseña es requerida";
               } else if (
                 !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/i.test(
                   values.password
@@ -85,24 +88,17 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                   "Min 8 carateres, max 15, al menos una letra mayuscula al menos 1 digito, un caracter especial";
               }
               if (!values.dni) {
-                errors.dni = "dni is required";
+                errors.dni = "DNI es requerido";
               }
               if (!values.phone) {
-                errors.phone = "Phone is required";
+                errors.phone = "Telefono es requerido";
               } else if (
                 !/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/i.test(
                   values.phone
                 )
               ) {
-                errors.phone = "Invalid phone number, 10 numeros only";
+                errors.phone = "Numero de telefono no valido, solo 10 numeros";
               }
-              // if (
-              //   !/^(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i.test(
-              //     values.web
-              //   )
-              // ) {
-              //   errors.web = "web needs to be an url string";
-              // }
 
               if (!values.user_role) {
                 errors.user_role = "Es obligatorio elegir un tipo de usuario";
@@ -111,16 +107,14 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                dispatch(postUser(values));
-                setSubmitting(false);
-              }, 400);
+              setSubmitting(false);
+                dispatch(register(values))
             }}
           >
-            {isSubmitting => (
+            {(isSubmitting) => (
               <FormContainer>
                 <CloseIcon onClick={toggleModalSignUp} />
-                <h2>Create new account</h2>
+                <h2>Crear nueva cuenta</h2>
                 <InputsContainer>
                   <div>
                     <InputContainer>
@@ -131,28 +125,19 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Name</Label>
+                      <Label>Nombre</Label>
                       <Input name="firstName" type="text" />
                       <ErrorMessage name="firstName" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
+                      <InputContainer>
+                        <Label>Apellido</Label>
+                        <Input name="lastName" type="text" />
+                        <ErrorMessage name="lastName" component="div">
+                          {(msg) => <Error>{msg}</Error>}
+                        </ErrorMessage>
+                      </InputContainer>
                     </InputContainer>
-                    <InputContainer>
-                      <Label>Last Name</Label>
-                      <Input name="lastName" type="text" />
-                      <ErrorMessage name="lastName" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
-                    <InputContainer>
-                      <Label>DNI</Label>
-                      <Input name="dni" type="text" />
-                      <ErrorMessage name="dni" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
-                  </div>
-                  <div>
                     <InputContainer>
                       <Label>Email</Label>
                       <Input name="email" type="email" />
@@ -161,20 +146,12 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Password</Label>
+                      <Label>Contraseña</Label>
                       <Input name="password" type="password" />
                       <ErrorMessage name="password" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer>
-                    <InputContainer>
-                      <Label>Phone</Label>
-                      <Input name="phone" />
-                      <ErrorMessage name="phone" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
-
                     <InputContainer>
                       <Label>Rol de usuario</Label>
                       <Field
@@ -190,36 +167,71 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer>
-
+                    
+                    <InputContainer>
+                      <Label>DNI</Label>
+                      <Input name="dni" type="text" />
+                      <ErrorMessage name="dni" component="div">
+                        {(msg) => <Error>{msg}</Error>}
+                      </ErrorMessage>
+                    </InputContainer>
                   </div>
                   <div>
                     
-                    {/* <InputContainer>
-                      <Label>Web</Label>
-                      <Input name="web" type="text" />
-                      <ErrorMessage name="web" component="div">
+                    <InputContainer>
+                      <Label>Telefono</Label>
+                      <Input name="phone" />
+                      <ErrorMessage name="phone" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
-                    </InputContainer> */}
+                    </InputContainer>
+
                     
+                  </div>
+                  <div>
+
                   </div>
                 </InputsContainer>
                 <SubmitContainer>
                   <CheckBoxContainer>
                     {/* <Field type="checkbox" />I agree with terms and conditions */}
                   </CheckBoxContainer>
-                  <Button type="submit">
-                    Create New Account
-                  </Button>
+                  <button  type="submit">Submit</button>
                   <DivisionContainer>
                     <Line />
                     Or
                     <Line />
                   </DivisionContainer>
-                  <ButtonAlt disabled={true}>
+                  {/* <GoogleLogin
+                    // clientId={clientGoogle}
+                    // onSuccess={handleGoogleLogin}
+                    // onFailure={handleGoogleLogin}
+                    render={(renderProps) => (
+                      <ButtonAlt disabled={true}>
+                        <GoogleIcon
+                        // onClick={renderProps.onClick}
+                        // disabled={renderProps.disabled}
+                        />
+                        Crear con Google
+                      </ButtonAlt>
+                      // <ButtonGoogle
+                      //   onClick={renderProps.onClick}
+                      //   disabled={renderProps.disabled}
+                      // >
+                      //   <FcGoogle
+                      //     style={{
+                      //       width: "33px",
+                      //       height: "33px",
+                      //       marginTop: "6px",
+                      //     }}
+                      //   />
+                      // </ButtonGoogle>
+                    )}
+                  /> */}
+                  {/* <ButtonAlt disabled={true}>
                     <GoogleIcon />
-                    Create with Google
-                  </ButtonAlt>
+                    Crear con Google
+                  </ButtonAlt> */}
                 </SubmitContainer>
               </FormContainer>
             )}

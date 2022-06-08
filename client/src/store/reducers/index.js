@@ -1,6 +1,9 @@
+import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
+
 const initialState = {
     allCategories: [],
     allUsers: [],
+    allUsersPaginate: {},
     filteredUsers: [],
     services: [],
     service: {},
@@ -8,9 +11,13 @@ const initialState = {
     workers:[],
     workerDetail:{},
     users: [],
+    userDetail:{},
+    post: {},
+    allPost:[]
 };
-  
-const rootReducer = (state = initialState, action) => {
+//habia un objeto en initialstate
+
+const rootReducer = (state = {}, action) => {
     switch (action.type) {
         case "GET_CATEGORIES":
             return {
@@ -21,7 +28,12 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 allUsers: action.payload,
-            };                          
+            };
+        case "GET_ALL_USERS_PAGESALL":
+            return {
+                ...state,
+                allUsersPaginate: action.payload,
+            }                  
         case "GET_CATEGORY":
             return{
                 ...state,
@@ -78,6 +90,43 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 service: action.payload
+            }
+        case "GET_POSTS": 
+            return{
+                ...state,
+                posts: action.payload
+            }
+        case "GET_POST_SERVICE_BY_ID":
+            return{
+                ...state,
+                servicePosts: action.payload
+            }
+        case "POST_ID":
+            return{
+                ...state,
+                postDetail: action.payload,
+            }
+        case "POST_PUBLISH_OF_SERVICE":
+            return{
+                ...state
+            }
+        case "GET_USER_BY_ID":
+            console.log(action.payload)
+            return{
+                ...state,
+                userDetail: action.payload
+                
+            }
+
+        case "GET_POST_ID":
+            return{
+                ...state,
+                post: action.payload
+            }
+        case "GET_ALL_POSTS":
+            return{
+                ...state,
+                allPost:action.payload
             }
         default: return state;
     };

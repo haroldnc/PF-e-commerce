@@ -71,9 +71,9 @@ function FindNeedle(haystack, needle) {
                     return obj
                 })
             }
-            res.json(TodasDB)
+            res.json({Publications:TodasDB})
         }
-        else res.json({Publications:TodasDB.length})
+        else res.json({Publications:TodasDB})
     }
     catch(error){
         next(error);
