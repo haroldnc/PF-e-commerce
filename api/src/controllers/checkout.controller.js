@@ -5,12 +5,12 @@ const getCheckoutSession = async (req, res) => {
    const { sessionId } = req.query;
    const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-   res.status.json(session);
+   res.status(200).json(session);
 }
 
 const createCheckoutSession = async (req, res) => {
    const domainURL = process.env.DOMAIN;
-   const { priceId } = req.body;
+   const { priceId, workerId } = req.body;
 
    try{
       const session = await stripe.checkout.sessions.create({
@@ -21,7 +21,7 @@ const createCheckoutSession = async (req, res) => {
                quantity: 1
             }
          ],
-         success_url: `${domainURL}`,
+         success_url: `${domainURL}/paysuccess?s={CHECKOUT_SESSION_ID}&w=${workerId}`,
          cancel_url: `${domainURL}`
       });
 
