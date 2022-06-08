@@ -25,6 +25,7 @@ import Categories from "./pages/Categories/Categories";
 // import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
 import ModalLogIn from "./components/ModalLogIn/ModalLogIn";
 import Payment from "./pages/Purchase/Purchase";
+import Profile from "./pages/Profile/Profile.jsx";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
@@ -106,6 +107,7 @@ function App() {
           <Route path="/publicar" component={PublishService} />
           <Route exact path="/admin" component={Admin} />
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
+          <Route exact path="/profile/:id" component={Profile} />
           {/* <Elements stripe={stripePromise}>
             <CheckoutForm />
         </Elements> */}
