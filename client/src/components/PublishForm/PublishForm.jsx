@@ -225,8 +225,6 @@ export function validateForm(input) {
 
   if (!input.title) {
     errors.title = "Name is required";
-  } else if (!/^[A-Za-z]+$/.test(input.title)) {
-    errors.title = "Name must be plain text";
   };
 
   if (!input.img) {
