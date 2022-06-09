@@ -120,3 +120,13 @@ export const getPostById = (id) => (dispatch) => {
     .get(`http://wixer-server.herokuapp.com/posts/${id}`)
     .then((res) => dispatch({ type: "GET_POST_ID", payload: res.data }));
 };
+
+
+export const PostPayment = (body) =>  dispatch =>{
+  axios.post(`http://wixer-server.herokuapp.com/checkout`, body)
+  .then(res => dispatch({type: "PAYMENT" , payload: res.data}))
+   
+}
+
+
+  
