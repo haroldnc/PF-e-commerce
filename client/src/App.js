@@ -25,6 +25,7 @@ import Categories from "./pages/Categories/Categories";
 // import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
 import ModalLogIn from "./components/ModalLogIn/ModalLogIn";
 import Payment from "./pages/Purchase/Purchase";
+import Profile from "./pages/Profile/Profile.jsx";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import ModalSignUp from "./components/ModalSignUp/ModalSignUp";
@@ -39,12 +40,18 @@ import { useSelector, useDispatch } from "react-redux";
 import ModalSignOut from "./components/ModalSignOut/ModalSignOut";
 import SearchResults from "./pages/SearchResults";
 
+import Confirm from "./pages/Confirm/Confirm";
+import LogInConfirm from "./pages/LogInConfirm/LogInConfirm";
+import Wishlist from "./pages/Wishlist/Wishlist";
+import PaymentSuccess from './pages/PaymenSuccess/PaymentSuccess.jsx'
 
 
  // const stripePromise = loadStripe("pk_test_51L5zjMHq6KUjuv7IIFciLODh9WoDWs5rnmbUrfSZVOfMMWN67dB15Ricdwoi8UNFfuIHL6lgzSTocRXWlYa7aBSA00oP1VlFMI");
 
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
+  const isOpenPayment = useSelector(state => state.isOpenModalPayment)
+
   const { userInfo } = userSignIn;
 
   const [isOpen, setIsOpen] = useState(false);
@@ -69,6 +76,8 @@ function App() {
   const toggleModalSignOut = () => {
     setIsOpenModalSignOut(!isOpenModalSignOut);
   };
+
+  
 
   console.log(userInfo);
   const options = {
@@ -99,7 +108,7 @@ function App() {
         />
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Switch>    
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Home}/>
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
@@ -108,7 +117,15 @@ function App() {
           <Route exact path="/admin" component={Admin} />
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
           <Route path="/search" component={SearchResults}/>
+          <Route exact path="/profile/:id" component={Profile} />
+          {/* <Elements stripe={stripePromise}>
+            <CheckoutForm />
+        </Elements> */}
           <Route path="/checkout" component={Payment}/>
+          <Route path="/confirmar/:id" component={Confirm} />
+          <Route path="/iniciar-sesion" component={LogInConfirm} />
+          <Route path="/lista-favoritos" component={Wishlist} />
+          <Route exact path="/paysuccess" component={PaymentSuccess} />
         </Switch>
         <Footer />
         <ModalLogIn
@@ -124,7 +141,7 @@ function App() {
           isOpenModalSignOut={isOpenModalSignOut}
           toggleModalSignOut={toggleModalSignOut}
         />
-
+        
         <DarkModeBtn theme={theme} setTheme={setTheme} />
         <GlobalStyle />
       </ThemeProvider>

@@ -1,21 +1,6 @@
-import React from "react";
-import {
-  Button,
-  ButtonAlt,
-  CheckBoxContainer,
-  CloseIcon,
-  Container,
-  DivisionContainer,
-  Error,
-  GoogleIcon,
-  Input,
-  InputContainer,
-  Line,
-  FormContainer,
-  Title,
-  Label,
-  InfoContainer,
-} from "./StyledModalLogIn";
+import React from 'react'
+import ModalLogIn from '../../components/ModalLogIn/ModalLogIn'
+import { Button, Container, Error, FormContainer, InfoContainer, Input, InputContainer, Label, Title } from './StyledLogInConfirm'
 import { Formik, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { signin } from "../../store/actions/userActions";
@@ -25,13 +10,14 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
-  const history = useHistory();
+const LogInConfirm = () => {
+    const history = useHistory();
   const dispatch = useDispatch();
 
   const handleResetPage = () => {
     setTimeout(() => {
-      history.go(0);
+      history.push('/');
+      window.location.reload();
     }, 1000);
   };
 
@@ -76,10 +62,8 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
   };
 
   return (
-    <>
-      {isOpenModalLogIn && (
-        <Container>
-          <Formik
+    <Container>
+        <Formik
             initialValues={{
               email: "",
               password: "",
@@ -118,7 +102,6 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                 showConfirmButton: false,
                 timer: 1500
               })
-              toggleModalLogIn();
             }}
           >
             {(props, isSubmitting) => (
@@ -177,11 +160,7 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                 </CheckBoxContainer>
                 <Button disabled={isSubmitting}>Iniciar Sesión</Button> */}
 
-                <DivisionContainer>
-                  <Line />
-                  Or
-                  <Line />
-                </DivisionContainer>
+
                 {/* <GoogleLogin
                   clientId="599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com"
                   buttonText="Login"
@@ -194,29 +173,12 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                   buttonText="Logout"
                   onLogoutSuccess={logout}
                 /> */}
-                <GoogleLogin
-                  clientId="599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com"
-                  onSuccess={handleGoogleLogin}
-                  onFailure={handleGoogleLogin}
-                  cookiePolicy={"single_host_origin"}
-                  render={(renderProps) => (
-                    <ButtonAlt  onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}>
-                      <GoogleIcon />
-                      Continuar con Google
-                    </ButtonAlt>
-                  )}
-                  
-                />
-
-                <CloseIcon onClick={toggleModalLogIn} />
+            
               </FormContainer>
             )}
           </Formik>
-        </Container>
-      )}
-    </>
-  );
-};
+    </Container>
+  )
+}
 
-export default ModalLogIn;
+export default LogInConfirm

@@ -33,6 +33,7 @@ const Services = () => {
   const Publicaciones = AllServices(27);
   const dispatch = useDispatch();
   const service = useSelector((state) => state.service);
+  console.log(service)
   const servicePosts = useSelector((state) => state.servicePosts);
   const [pageAnt, setPageAnt] = useState(0);
   const [pagePost, setPagePost] = useState(15);
@@ -42,7 +43,7 @@ const Services = () => {
   useEffect(() => {
     dispatch(getServiceById(id));
     dispatch(getPostsByServiceId(id));
-  });
+  }, [dispatch, id]);
 
   let pageslice = servicePosts.slice(pageAnt, pagePost);
 
@@ -77,24 +78,31 @@ const Services = () => {
     setCurrentPage(page);
   };
 
-  return (
-    <Page>
-      <Wrapper>
-        <NameServ>{service.name}</NameServ>
+  if (service) {
+    return (
+      <Page>
+        <Wrapper>
+          <NameServ>{service?.name}</NameServ>
 
-        <Grid>
-          <CardPublication pageslice={pageslice} />
-        </Grid>
-        <Paginate
-          pages={pages}
-          numberPages={numberPages}
-          nextPage={nextPage}
-          prevPage={prevPage}
-          currentPage={currentPage}
-        />
-      </Wrapper>
-    </Page>
-  );
+          <Grid>
+            <CardPublication pageslice={pageslice} />
+          </Grid>
+          <Paginate
+            pages={pages}
+            numberPages={numberPages}
+            nextPage={nextPage}
+            prevPage={prevPage}
+            currentPage={currentPage}
+          />
+        </Wrapper>
+      </Page>
+    );
+  }else{
+    return (
+      <div>
+        Nada
+      </div>)
+  }
 };
 
 export default Services;

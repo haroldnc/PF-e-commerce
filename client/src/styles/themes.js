@@ -7,7 +7,7 @@ const lightMode = {
     backgroundColor: "#fafafa",
     backgroundColorAlt: "white",
     inputColor: "#fafafa",
-    borderColor: "#f1f1f1f1",
+    borderColor: "#f2f2f2",
   },
   boxShadow: "0 10px 20px 0 rgba(0,0,0,.07)",
 };
@@ -19,7 +19,7 @@ const darkMode = {
     secondaryLighter: "#79dabc",
     font: "#ffffff",
     backgroundColor: "#141414",
-    backgroundColorAlt: "#141414",
+    backgroundColorAlt: "#242424",
     inputColor: "#212121",
     borderColor: "#3d3d3d"
   },

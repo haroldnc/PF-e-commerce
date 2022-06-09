@@ -18,8 +18,8 @@ export const signin = (payload) => async(dispatch) => {
 
     try{
         const {data} = await axios.post(`https://wixer-server.herokuapp.com/auth`, payload);
-        dispatch({type: "USER_SIGNIN_SUCCESS", payload: data});
-        localStorage.setItem("userInfo", JSON.stringify(data))
+        dispatch({type: "USER_SIGNIN_SUCCESS", payload: data.usuario});
+        localStorage.setItem("userInfo", JSON.stringify(data.usuario))
     }catch(err){
         dispatch({
             type: "USER_SIGNIN_FAIL",

@@ -43,6 +43,8 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
     };
   });
 
+
+
   const handleClick = () => {
     history.push("/");
   };
@@ -62,10 +64,11 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
         <div>
           {userInfo && userInfo ? (
             <UserInfo>
-              {userInfo.usuario.user_role.name && userInfo.usuario.user_role.name === "user" && (<UserRole>Usuario</UserRole>)}
-              {userInfo.usuario.user_role.name  && userInfo.usuario.user_role.name === "worker" && (<UserRole>Worker</UserRole>)}
-              <Profile onClick={handleToggle}  img={userInfo.usuario.image}>
-                
+              {userInfo.user_role.name || userInfo.user_role === "user" ? (<UserRole>Usuario</UserRole>) : (<UserRole>Worker</UserRole>)}
+              {/* {userInfo.user_role && userInfo.user_role  === "user" && (<UserRole>Usuario</UserRole>)} */}
+              {/* {userInfo.user_role.name  && userInfo.user_role === "worker" && (<UserRole>Worker</UserRole>)} */}
+              {/* {userInfo.user_role  && userInfo.user_role === "worker" && (<UserRole>Worker</UserRole>)} */}
+              <Profile onClick={handleToggle}  img={userInfo.image}>
               </Profile>
               
                 <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle}/>

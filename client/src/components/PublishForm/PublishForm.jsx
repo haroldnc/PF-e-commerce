@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { postPublish, getServices } from "../../store/actions/index";
+import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
-import { UploadImage, PublishFormSection, InputImage, InputsDivs, Form } from "./styledPublishForm";
+import { UploadImage, PublishFormSection, InputImage, InputsDivs, Form, Errors } from "./styledPublishForm";
 
 const PublishForm = () => {
   const dispatch = useDispatch();
-  const histoy = useHistory();
+  const history = useHistory();
   const categories = useSelector((state) => state.allCategories);
   const services = useSelector((state) => state.services);
-  const userLogged = useSelector((state) => state.services);
+  const userLogged = useSelector((state) => state.userSignIn);
+  const userID = userLogged.userInfo.uid;
 
   const [servicesC, setServices]= useState([]);
   const [errors, setErrors] = useState({ name: "" });
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(false);
-  
 
   const [input, setInput] = useState({
     title: "",
@@ -26,7 +27,7 @@ const PublishForm = () => {
     price: "",
     service: "",
     img: "",
-    user: ``
+    user: `${userID}`
   });
 
 // ----------------------- cloudinary -----------------------------
@@ -77,7 +78,16 @@ const upLoadImage = async (e) => {
 };
 
   const handleSubmit = (e) => {
-  
+    if (!input.title || !input.description || !input.price || !input.service) {  
+      e.preventDefault()
+
+      return Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Error',
+      text: 'Complete todos los campos del formulario',
+    })
+  }
     e.preventDefault();
     console.log(input)
     dispatch(postPublish(input));
@@ -87,10 +97,16 @@ const upLoadImage = async (e) => {
       price: "",
       service: "",
       img: "",
-      user: "``"
+      user: ``
     });
-
-    alert("Your publication was created!");
+    
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Genial',
+      text: 'Tu publicacion a sido creada correctamente',
+    })
+    history.push('/')
   };
 // ---------------------------------------------------------------------
 
@@ -100,18 +116,17 @@ const upLoadImage = async (e) => {
 
   return (
     <PublishFormSection>
-      <h1>Crea tu Publicacion!</h1>
       <Form onSubmit={handleSubmit}>
       <InputsDivs>
         <h3>Titulo</h3>
           <input
             type="text"
-            placeholder="Title"
+            placeholder="Titulo"
             name="title"
             onChange={handleInputChange}
             value={input.title}
           />
-          {errors.title && <p>{errors.title}</p>}
+          {errors.title && <Errors>{errors.title}</Errors>}
       </InputsDivs>
 
       <InputsDivs>
@@ -158,7 +173,7 @@ const upLoadImage = async (e) => {
                 })
               }
           </select>
-          {errors.service && <p>{errors.service}</p>}
+          {errors.service && <Errors>{errors.service}</Errors>}
       </InputsDivs>
 
       <InputsDivs>
@@ -170,7 +185,7 @@ const upLoadImage = async (e) => {
             onChange={handleInputChange}
             value={input.description}
           />
-          {errors.description && <p>{errors.description}</p>}
+          {errors.description && <Errors>{errors.description}</Errors>}
       </InputsDivs>
 
       <InputImage>
@@ -183,19 +198,19 @@ const upLoadImage = async (e) => {
               onChange={upLoadImage}
             />
           </UploadImage> 
-        {errors.img && <p>{errors.img}</p>}
+        {errors.img && <Errors>{errors.img}</Errors>}
       </InputImage>
 
       <InputsDivs>
         <h3>Precio</h3>
           <input
             type="number"
-            placeholder="Price"
+            placeholder="Precio"
             name="price"
             onChange={handleInputChange}
             value={input.price}
           />
-          {errors.price && <p>{errors.weight}</p>}
+          {errors.price && <Errors>{errors.price}</Errors>}
       </InputsDivs>
       <button>Publicar</button>
     </Form>
@@ -207,26 +222,24 @@ export function validateForm(input) {
   let errors = {};
 
   if (!input.title) {
-    errors.title = "Name is required";
-  } else if (!/^[A-Za-z]+$/.test(input.title)) {
-    errors.title = "Name must be plain text";
+    errors.title = "El titulo es requerido";
   };
 
   if (!input.img) {
-    errors.img = "Image is required";
+    errors.img = "La imagen es requerida";
   };
 
   if (input.service === "servicio") {
-    errors.service = "Service can not be empty";
+    errors.service = "El servicio es requerido";
   };
 
   if (!input.description) {
-    errors.description = "Description is required";
+    errors.description = "La descripcion es requerida";
   };
 
   if (!input.price) {
-    errors.price = "Price is required";
-  } else if (!/^([1-9]\d{0,2}|1[0-9]{1,2}|2[0-4][0-9]|25[0-5])$/.test(input.price)) {
+    errors.price = "El precio es requerido";
+  } else if (input.price <= 0) {
     errors.price = "El precio tiene que ser minimo 1";
   };
 
