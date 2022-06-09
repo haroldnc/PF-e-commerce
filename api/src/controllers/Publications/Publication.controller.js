@@ -33,6 +33,7 @@ function FindNeedle(haystack, needle) {
                 //hacer consulta por coincidencia del title:
                 
                 TodasDB = TodasDB.filter(gDb =>{
+                    console.log("gDb",gDb);
                     if(FindNeedle(gDb.title,title)>-1){
                         return gDb
                     }
