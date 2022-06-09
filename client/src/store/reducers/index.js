@@ -14,7 +14,7 @@ const initialState = {
     userDetail:{},
     post: {},
     allPost:[],
-    queryPosts: {}
+    queryPosts: []
 };
 //habia un objeto en initialstate
 
@@ -130,10 +130,10 @@ const rootReducer = (state = {}, action) => {
                 allPost:action.payload
             }
 
-        case GET_POST_BY_QUERY:
+        case "GET_POST_BY_QUERY":
             return{
                 ...state,
-                queryPosts: action.payload
+                queryPosts: action.payload.Publications
             }
 
 

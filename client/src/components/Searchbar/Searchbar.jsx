@@ -13,11 +13,8 @@ const Searchbar = () => {
   const onSearch = () =>{
     if(data.length){
       dispatch(getPostByQuery(data))
-      setData("")
     }
-    else{
-      alert("Escribe el nombre del servicio que necesitas en la barra de busqueda")
-    }
+    
   }
 
   const handleChange = (e)=>{
@@ -27,9 +24,13 @@ const Searchbar = () => {
   return (
     <Container>
         <Input onChange={handleChange} placeholder="Busca aquí ..."/>
-        <Link to={"/search"}>
-        <Button onClick={onSearch()}>Buscar</Button>
-        </Link>
+        { data?
+          <Link to={"/search"}>
+          <Button onClick={onSearch}>Buscar</Button>
+          </Link>
+          :
+          <Button onClick={onSearch}>Buscar</Button>
+        }
     </Container>
   )
 }
