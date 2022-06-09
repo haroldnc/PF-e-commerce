@@ -13,7 +13,7 @@ const createCheckoutSession = async (req, res) => {
 
    try{
       if(!priceId) throw new Error('"priceId" is required!');
-      if(!workerId) throw new Error('"workerId" is required!');
+      if(!userId) throw new Error('"userId" is required!');
 
       const session = await stripe.checkout.sessions.create({
          mode: "subscription",
@@ -27,8 +27,8 @@ const createCheckoutSession = async (req, res) => {
          cancel_url: `${domainURL}/cancel_subs?u=${userId}`
       });
 
-      res.redirect(303, sessions.url);
-      //res.status(200).json(session);
+      //res.redirect(303, session.url);
+      res.status(200).json({ url: session.url });
    } catch(error) {
       res.status(400).json({ error: error.message });
    }
