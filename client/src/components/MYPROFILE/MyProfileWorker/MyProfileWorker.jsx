@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ContainerWorker,
          ContainerIzq, 
          ContainerDer,
@@ -31,14 +32,17 @@ import { ContainerWorker,
          BtnCancel
          } from './MyProfileWorker'
 
+
+
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
 import { MdOutlineEmail } from 'react-icons/md'
 import { GiSmartphone } from 'react-icons/gi'
 
 
-const MyProfileWorker = ({profile, username}) => {
+const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
 
+    const dispatch = useDispatch()
     const [ Formularios, setFormularios ] = useState({
         titulo: false,
         descripcion: false,
@@ -55,13 +59,17 @@ const MyProfileWorker = ({profile, username}) => {
             ...Formularios,
             [dato] : !Formularios[dato]
         })
-        console.log(Formularios)
     }
 
     const RedirectLink = (url) => {
         window.location.href = url
     }
 
+    const handleClickPayment = () => {
+        toggleModalPayment()   
+    }
+
+   
 
     return(
         <ContainerWorker>
@@ -105,7 +113,7 @@ const MyProfileWorker = ({profile, username}) => {
                                 <Div>
                                     <Unsuscribe>Inactivo</Unsuscribe>
                                 </Div>
-                                <BtnPay>PAGAR SUSCRIPCIÓN </BtnPay>
+                                <BtnPay onClick={() => handleClickPayment()}>PAGAR SUSCRIPCIÓN </BtnPay>
                             </div>
 
                         }
@@ -170,8 +178,8 @@ const MyProfileWorker = ({profile, username}) => {
                         {
                         profile.languages.length === 0 ?<InfoProfile>Agrega tus idiomas ...</InfoProfile>: 
                             <DivResult>
-                                {profile.languages.map( l => (
-                                    <MapRow>
+                                {profile.languages.map( (l, index )=> (
+                                    <MapRow key={index}>
                                         <InfoProf>{l.idioma}</InfoProf>
                                         <Level>-   {l.level}</Level>
                                     </MapRow>
@@ -212,8 +220,8 @@ const MyProfileWorker = ({profile, username}) => {
                     {
                         profile.skills.length === 0 ?<InfoProfile>Agrega tus habilidades ...</InfoProfile>: 
                             <DivResult>
-                                {profile.skills.map( s => (
-                                    <MapRow>
+                                {profile.skills.map( (s, index) => (
+                                    <MapRow key={index}>
                                         <InfoProf>{s.idioma}</InfoProf>
                                         <Level>-   {s.level}</Level>
                                     </MapRow>
@@ -245,7 +253,7 @@ const MyProfileWorker = ({profile, username}) => {
                         : null
                     }
                     <Linea></Linea>
-                    <br/>
+                    {/* <br/>
                     <Row>
                         <Titulos>Certificacón</Titulos>
                         <BtnForms onClick={() => toggleForms("certificacion")}>Agregar nuevo</BtnForms>
@@ -258,7 +266,7 @@ const MyProfileWorker = ({profile, username}) => {
                         <BtnForms onClick={() => toggleForms("experiencia")}>Agregar nuevo</BtnForms>
                     </Row>
                     <InfoProfile>{profile.aboutMe}</InfoProfile>
-                    <Linea></Linea>
+                    <Linea></Linea> */}
                     <br/>
                     <Row>
                         <Titulos>Linkedin</Titulos>
