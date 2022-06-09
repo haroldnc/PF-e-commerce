@@ -37,6 +37,7 @@ import ServicesDetail from "./pages/ServicesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
 import ModalSignOut from "./components/ModalSignOut/ModalSignOut";
+import SearchResults from "./pages/SearchResults";
 
 
 
@@ -106,7 +107,7 @@ function App() {
           <Route path="/publicar" component={PublishService} />
           <Route exact path="/admin" component={Admin} />
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
-          <Route path="/search" />
+          <Route path="/search" component={SearchResults}/>
           <Route path="/checkout" component={Payment}/>
         </Switch>
         <Footer />
