@@ -1,11 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import MyProfileWorker from '../../components/MYPROFILE/MyProfileWorker/MyProfileWorker.jsx'
 
 import { ContainerProfile } from './Profile'
+import ModalPayment from '../../components/ModalPayment/ModalPayment.jsx'
 
 const Profile = () => {
 
+    const [ isOpenPayment, setIsOpenPayment ] = useState(false)
 
+    const toggleModalPayment = () => {
+        setIsOpenPayment(!isOpenPayment)
+    }
     const profile= {
         "languages":[{"idioma":"Ingles", "level": "Medio"}, {"idioma":"Ingles", "level": "Medio"}],
         "skills":[],
@@ -38,7 +43,16 @@ const Profile = () => {
 
     return (
         <ContainerProfile>
-            <MyProfileWorker profile={profile} username={username}/>
+            <MyProfileWorker 
+                    profile={profile} 
+                    username={username}
+                    toggleModalPayment={toggleModalPayment}
+                />
+            <ModalPayment 
+                 isOpenPayment={isOpenPayment}
+                 toggleModalPayment={toggleModalPayment}
+                 profile={profile.userId.uid}
+            />
         </ContainerProfile>
     )
 }
