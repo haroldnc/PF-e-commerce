@@ -69,11 +69,11 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
       alert("error no se pudo ingresar", error);
     }
   };
-  const logout = (response) => {
-    gapi.auth2.getAuthInstance().signOut();
-    console.log(response);
-    console.log("logout");
-  };
+  // const logout = (response) => {
+  //   gapi.auth2.getAuthInstance().signOut();
+  //   console.log(response);
+  //   console.log("logout");
+  // };
 
   return (
     <>

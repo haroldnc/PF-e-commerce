@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getUserById } from "../../store/actions";
+import { getConfirmUser, getUserById } from "../../store/actions";
 import {
   Button,
   ConfirMessageContainer,
@@ -15,10 +15,15 @@ const Confirm = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userDetail);
+  console.log(user)
 
   useEffect(() => {
       dispatch(getUserById(id));
-  });
+  }, [dispatch, id]);
+
+  const handleConfirmUser = () => {
+    dispatch(getConfirmUser(id))
+  }
 
   return (
     <>
@@ -35,7 +40,7 @@ const Confirm = () => {
             </Text>
             <div>
               <Link to="/iniciar-sesion">
-                <Button>Confirmar</Button>
+                <Button onClick={handleConfirmUser}>Confirmar</Button>
               </Link>
             </div>
           </ConfirMessageContainer>

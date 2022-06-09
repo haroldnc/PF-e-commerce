@@ -120,3 +120,8 @@ export const getPostById = (id) => (dispatch) => {
     .get(`http://wixer-server.herokuapp.com/posts/${id}`)
     .then((res) => dispatch({ type: "GET_POST_ID", payload: res.data }));
 };
+
+export const getConfirmUser = (id) => (dispatch) => {
+  axios.post(`https://wixer-server.herokuapp.com/user/confirm/${id}`)
+  .then((res) => dispatch({type: "GET_CONFIRM_USER ", payload: res.data}))
+} 

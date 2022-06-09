@@ -62,7 +62,7 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
           </div>
         </Right>
         <div>
-          {userInfo && userInfo ? (
+          {userInfo && userInfo.confirm_email === true  ? (
             <UserInfo>
               {userInfo.user_role.name || userInfo.user_role === "user" ? (<UserRole>Usuario</UserRole>) : (<UserRole>Worker</UserRole>)}
               {/* {userInfo.user_role && userInfo.user_role  === "user" && (<UserRole>Usuario</UserRole>)} */}

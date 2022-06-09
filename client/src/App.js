@@ -115,7 +115,7 @@ function App() {
             <CheckoutForm />
         </Elements> */}
           <Route path="/checkout" component={Payment}/>
-          <Route path="/confirmar/:id" component={Confirm} />
+          <Route path="/confirm/:id" component={Confirm} />
           <Route path="/iniciar-sesion" component={LogInConfirm} />
           <Route path="/lista-favoritos" component={Wishlist} />
         </Switch>
