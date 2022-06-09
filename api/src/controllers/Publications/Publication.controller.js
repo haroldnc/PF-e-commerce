@@ -4,7 +4,7 @@ const User= require('../../models/User.js')
 
 //buscador para buscar may o min
 function FindNeedle(haystack, needle) {
-    
+    console.log("log haystack",haystack,needle);
     let indice=0, z='', j=0
     for(let i=0; i < haystack.length; i++){
         if((haystack[i] == needle[j])||(haystack[i].toLowerCase() == needle[j].toLowerCase())||(haystack[i].toLowerCase() == needle[j].toLowerCase())){
@@ -28,7 +28,7 @@ function FindNeedle(haystack, needle) {
         TodasDB = (await Publications.find({ include: [Categories, User] }))
         console.log("await post",TodasDB);
         console.log("await post",TodasDB.length);
-        if(TodasDB.length!==0){
+        if(TodasDB.length > 0){
             if(title && title != '') {
                 //hacer consulta por coincidencia del title:
                 
@@ -37,7 +37,7 @@ function FindNeedle(haystack, needle) {
                         return gDb
                     }
                 })
-
+                    console.log("log de todas bb",TodasDB);
                 TodasDB= TodasDB.map(e =>{
                     let obj = {
                         "id":e.id,
