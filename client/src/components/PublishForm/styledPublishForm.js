@@ -114,3 +114,8 @@ export const UploadImage = styled.div`
     margin-bottom: 1rem;
   }
 `;
+
+export const Errors = styled.p`
+  color: red;
+  margin-top: 1rem;
+`;
