@@ -9,16 +9,16 @@ const { validarCampos } = require('../middlewares/validar.campos');
 
 const router = Router()
 
-router.get("/", 
+router.get("/", getAll);
+router.get("/:id", getId)
+router.get("/service/:idService", getPostsByService);
+router.post("/",
 [
     check('title', 'Title is required').not().isEmpty(),
     check('description', 'Description is required').not().isEmpty(),
     check('price', 'Price name is required').not().isEmpty(),
     validarCampos
-], getAll);
-router.get("/:id", getId)
-router.get("/service/:idService", getPostsByService);
-router.post("/", addPublicate)
+], addPublicate)
 router.put("/:id", upDatePost )
 router.delete("/:id", deletePost)
 
