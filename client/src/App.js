@@ -108,6 +108,7 @@ function App() {
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Switch>    
           <Route exact path="/" component={Home}/>
+          <Route exact path="/paysuccess" component={PaymentSuccess} />
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
@@ -124,7 +125,6 @@ function App() {
           <Route path="/confirmar/:id" component={Confirm} />
           <Route path="/iniciar-sesion" component={LogInConfirm} />
           <Route path="/lista-favoritos" component={Wishlist} />
-          <Route exact path="/paysuccess" component={PaymentSuccess} />
         </Switch>
         <Footer />
         <ModalLogIn
