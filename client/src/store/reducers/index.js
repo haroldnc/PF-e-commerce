@@ -15,7 +15,9 @@ const initialState = {
     userDetail:{},
     post: {},
     allPost:[],
-    queryPosts: []
+    queryPosts: [],
+    allTransactions: [],
+    transactionById: []
 };
 //habia un objeto en initialstate
 
@@ -113,13 +115,10 @@ const rootReducer = (state = {}, action) => {
                 ...state
             }
         case "GET_USER_BY_ID":
-            console.log(action.payload)
             return{
                 ...state,
                 userDetail: action.payload
-                
             }
-
         case "GET_POST_ID":
             return{
                 ...state,
@@ -136,12 +135,19 @@ const rootReducer = (state = {}, action) => {
                 ...state,
                 queryPosts: action.payload.Publications
             }
-
-
         case  "PAYMENT":
-            console.log(action.payload)
             window.location.href = action.payload.url
-            
+        case "GET_ALL_TRANSACTIONS":
+            return {
+                ...state,
+                allTransactions: action.payload
+            }
+        case "GET_TRANSACTIONS_BYID":
+            console.log('payload',action.payload)
+            return {
+                ...state,
+                transactionById: action.payload
+            }
         default: return state;
     };
 };
