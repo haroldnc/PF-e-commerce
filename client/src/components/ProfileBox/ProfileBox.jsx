@@ -6,8 +6,11 @@ const ProfileBox = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
 
   const history = useHistory()
 
+  //62a29a4bfb1c43631f420701
+
+  // console.log('usuario',userInfo.username)
   const handleClick = () => {
-    history.push(`/profile/${userInfo.uid}`)
+    history.push(`/profile/${userInfo.uid}?us=${userInfo.username}`)
   }
   return (
     <Container isOpen={isOpen}>

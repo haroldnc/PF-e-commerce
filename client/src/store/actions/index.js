@@ -138,4 +138,12 @@ export const PostTransaction = (body) => {
 }
 
 
+export const PutInfoWorker = (body,id) => async () => {
+  await axios.put(`http://wixer-server.herokuapp.com/workers/${id}`, body)
+}
+
+export const PutInfoUser = (body,id) => async () => {  
+  await axios.put(`http://wixer-server.herokuapp.com/user/${id}`, body)
+}
+
   

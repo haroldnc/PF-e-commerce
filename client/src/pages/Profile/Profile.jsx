@@ -1,17 +1,37 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import MyProfileWorker from '../../components/MYPROFILE/MyProfileWorker/MyProfileWorker.jsx'
 
 import { ContainerProfile } from './Profile'
 import ModalPayment from '../../components/ModalPayment/ModalPayment.jsx'
+import { getWorkerDetail } from '../../store/actions/index'
 
 const Profile = () => {
 
+    const { id } = useParams()
+    const dispatch = useDispatch()
     const [ isOpenPayment, setIsOpenPayment ] = useState(false)
+    const profile = useSelector(state => state.workerDetail)
+
+
+    let query = window.location.search.substring(1);
+    let vars = query.split("&");
+    let pair =[]
+    for (let i=0 ; i < vars.length ; i++) {
+        pair.push(vars[i].split("=")) 
+     }
+
 
     const toggleModalPayment = () => {
         setIsOpenPayment(!isOpenPayment)
     }
-    const profile= {
+
+    useEffect(() => {
+        dispatch(getWorkerDetail(id))
+    }, [])
+
+    const profileHARD= {
         "languages":[{"idioma":"Ingles", "level": "Medio"}, {"idioma":"Ingles", "level": "Medio"}],
         "skills":[],
         "_id":"62927183a8415ffb1bf2a4c1",
@@ -39,10 +59,15 @@ const Profile = () => {
         "certifications":[]
      }
 
-     const username = "fran"
+    const username = pair[0][1]
+
+    console.log(profile)
 
     return (
-        <ContainerProfile>
+        <>
+        {   
+            Object.entries(profile).length !== 0 ?
+            <ContainerProfile>
             <MyProfileWorker 
                     profile={profile} 
                     username={username}
@@ -53,7 +78,10 @@ const Profile = () => {
                  toggleModalPayment={toggleModalPayment}
                  profile={profile.userId.uid}
             />
-        </ContainerProfile>
+        </ContainerProfile> :
+        <h2>Cargando...</h2>
+        }
+        </>
     )
 }
 
