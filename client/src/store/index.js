@@ -24,6 +24,7 @@ const initialState = {
   userDetail:{},
   post: {},
   allPost:[],
+  wishlist: [],
   queryPosts:[]
 };
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
@@ -53,6 +53,7 @@ function App() {
 
   const { userInfo } = userSignIn;
 
+
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useDarkMode();
 
@@ -87,7 +88,7 @@ function App() {
 
     }
 
-  // console.log(userInfo)
+  console.log("Hola", userInfo)
 
 
   return (
@@ -105,10 +106,12 @@ function App() {
           toggleModalSignOut={toggleModalSignOut}
           userInfo={userInfo}
         />
+
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Switch>    
           <Route exact path="/" component={Home}/>
           <Route exact path="/paysuccess" component={PaymentSuccess} />
+          <Route exact path="/" component={Home} userInfo={userInfo}/>
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
@@ -122,15 +125,17 @@ function App() {
             <CheckoutForm />
         </Elements> */}
           <Route path="/checkout" component={Payment}/>
-          <Route path="/confirmar/:id" component={Confirm} />
+          <Route path="/confirm/:id" component={Confirm} />
           <Route path="/iniciar-sesion" component={LogInConfirm} />
           <Route path="/lista-favoritos" component={Wishlist} />
+          <Route exact path="/paysuccess" component={PaymentSuccess} />
         </Switch>
         <Footer />
         <ModalLogIn
           isOpenModalLogIn={isOpenModalLogIn}
           toggleModalLogIn={toggleModalLogIn}
           isOpenModalSignUp={isOpenModalSignUp}
+          userInfo={userInfo}
         />
         <ModalSignUp
           isOpenModalSignUp={isOpenModalSignUp}

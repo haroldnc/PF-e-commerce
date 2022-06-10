@@ -123,6 +123,24 @@ export const getPostById = (id) => (dispatch) => {
 };
 
 
+export const getConfirmUser = (id) => (dispatch) => {
+  axios.post(`https://wixer-server.herokuapp.com/user/confirm/${id}`)
+  .then((res) => dispatch({type: "GET_CONFIRM_USER ", payload: res.data}))
+} 
+
+export const addToWishlist = (payload) => {
+  return {
+    type: "ADD_TO_WISHLIST",
+    payload,
+  }
+}
+export const removeWishlist = (payload) => {
+  return {
+    type: "REMOVE_WISHLIST",
+    payload,
+  }
+}
+
 export const getPostByQuery = (query) => (dispatch) => {
   axios
     .get(`https://wixer-server.herokuapp.com/posts?title=${query}`)
@@ -147,6 +165,8 @@ export const GetTransactionById = (id) => dispatch => {
   axios.get(`http://wixer-server.herokuapp.com/transactions/${id}`)
   .then(res => dispatch({type: "GET_TRANSACTIONS_BYID", payload: res.data}))
 }
+
+
 
 export const PutInfoWorker = (body,id) => async () => {
   await axios.put(`http://wixer-server.herokuapp.com/workers/${id}`, body)

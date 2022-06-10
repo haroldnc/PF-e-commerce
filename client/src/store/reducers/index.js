@@ -17,11 +17,12 @@ const initialState = {
     allPost:[],
     queryPosts: [],
     allTransactions: [],
-    transactionById: []
+    transactionById: [],
+    queryPosts: []
 };
 //habia un objeto en initialstate
 
-const rootReducer = (state = {}, action) => {
+const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case "GET_CATEGORIES":
             return {
@@ -130,6 +131,13 @@ const rootReducer = (state = {}, action) => {
                 allPost:action.payload
             }
 
+        case "ADD_TO_WISHLIST":
+
+            return{
+                ...state,
+                wishlist: state.wishlist.concat(action.payload),
+            }
+
         case "GET_POST_BY_QUERY":
             return{
                 ...state,
@@ -148,6 +156,12 @@ const rootReducer = (state = {}, action) => {
                 ...state,
                 transactionById: action.payload
             }
+
+
+        case  "PAYMENT":
+            console.log(action.payload)
+            window.location.href = action.payload.url
+            
         default: return state;
     };
 };
