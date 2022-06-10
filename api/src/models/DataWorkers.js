@@ -7,7 +7,7 @@ const DataWorkers = Schema({
 
     title: {
         type: String,
-        //require: [true, 'Position or Category is required'],
+        /*require: [true, 'Position or Category is required'],
         validate: {
             validator: (v) => /^[a-záéíóúñ\s]+$/i.test(v),
             message: props =>{
@@ -17,7 +17,7 @@ const DataWorkers = Schema({
                    return 'Position or Category only accept letters';
                 }
              }
-         },
+         }*/,
         default: ""
     },
     aboutMe: {
