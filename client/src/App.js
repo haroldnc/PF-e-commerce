@@ -50,7 +50,6 @@ import PaymentSuccess from './pages/PaymenSuccess/PaymentSuccess.jsx'
 
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
-  const isOpenPayment = useSelector(state => state.isOpenModalPayment)
 
   const { userInfo } = userSignIn;
 
@@ -79,7 +78,7 @@ function App() {
 
   
 
-  console.log(userInfo);
+  console.log('user info',userInfo);
   const options = {
     // passing the client secret obtained in step 2
     clientSecret: '{{CLIENT_SECRET}}',
