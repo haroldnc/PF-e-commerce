@@ -32,17 +32,18 @@ export default function WorkersCarousel({profiles}){
        }
 
     //    const workerProfiles = profiles.map(p=>p)
+    const availableProfiles = profiles.filter(person=> person.userId)
 
 
     return(
         <>
-        {profiles.length?
+        {availableProfiles.length?
 
             <WorkerDiv>
             <TitleCarousel>Nuestros mejores talentos</TitleCarousel>
             <Slider {...settings}>
                 {
-                    profiles.map(p=>
+                    availableProfiles.map(p=>
                         <Card
                         key={p._id}
                         name ={`${p.userId.firstName} ${p.userId.lastName}`}
