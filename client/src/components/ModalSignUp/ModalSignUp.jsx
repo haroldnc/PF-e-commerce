@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   ButtonAlt,
   CloseIcon,
   Container,
   DivisionContainer,
-  ModalBox,
-  Title,
   GoogleIcon,
   Line,
 } from "../ModalLogIn/StyledModalLogIn";
@@ -20,20 +18,24 @@ import {
   Error,
   InputContainer,
   Label,
-  Wrapper,
 } from "./StyledModalSignUp";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../store/actions/userActions";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import axios from "axios";
 import { gapi } from "gapi-script";
-import { postUser } from "../../store/actions";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import { getAllUsersAllPAginate } from "../../store/actions";
 
 const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
   const dispatch = useDispatch();
+  const allUsers = useSelector((state) => state.allUsersPaginate);
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(getAllUsersAllPAginate());
+  }, [dispatch]);
 
   const handleResetPage = () => {
     setTimeout(() => {
@@ -75,11 +77,11 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
       alert("error no se pudo ingresar", error);
     }
   };
-  const logout = (response) => {
-    gapi.auth2.getAuthInstance().signOut();
-    console.log(response);
-    console.log("logout");
-  };
+  // const logout = (response) => {
+  //   gapi.auth2.getAuthInstance().signOut();
+  //   console.log(response);
+  //   console.log("logout");
+  // };
 
   return (
     <>
@@ -102,7 +104,14 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               if (!values.username) {
                 errors.username = "Username es requerido";
               } else if (!/^[a-z]{3,}$/i.test(values.username)) {
-                errors.username = "username acepta minimo 3 letras";
+                errors.username = "Username acepta minimo 3 letras";
+              } else if (
+                allUsers.users &&
+                allUsers.users
+                  .map((u) => u.username)
+                  .includes(values.username) === true
+              ) {
+                errors.username = "Username ya en uso";
               }
 
               if (!values.firstName) {
@@ -115,6 +124,14 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                 errors.lastName = "Apellido es requerido";
               } else if (!/^[a-záéíóúñ\s]{3,}$/i.test(values.lastName)) {
                 errors.lastName = "Apellido solo acepta minimo 3 letras";
+              }
+
+              if (
+                allUsers.users &&
+                allUsers.users.map((u) => u.email).includes(values.email) ===
+                  true
+              ) {
+                errors.email = "Email ya registrado";
               }
 
               if (!values.email) {
@@ -160,13 +177,13 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               setSubmitting(false);
               dispatch(register(values));
               Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Formulario completado con exito!',
-                text: 'Verifique su email para confirmar su cuenta.',
+                position: "center",
+                icon: "success",
+                title: "Formulario completado con exito!",
+                text: "Verifique su email para confirmar su cuenta.",
                 showConfirmButton: false,
-                timer: 30000
-              })
+                timer: 30000,
+              });
               toggleModalSignUp();
             }}
           >
@@ -197,22 +214,6 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                         </ErrorMessage>
                       </InputContainer>
                     </InputContainer>
-
-                    <InputContainer>
-                      <Label>Rol de usuario</Label>
-                      <Field
-                        component="select"
-                        name="user_role"
-                        className="field-select"
-                      >
-                        <option>Elige tu rol</option>
-                        <option value="user">User</option>
-                        <option value="worker">Worker</option>
-                      </Field>
-                      <ErrorMessage name="user_role" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
                   </div>
                   <div>
                     <InputContainer>
@@ -230,17 +231,17 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                       </ErrorMessage>
                     </InputContainer>
                     <InputContainer>
-                      <Label>Telefono</Label>
-                      <Input name="phone" />
-                      <ErrorMessage name="phone" component="div">
-                        {(msg) => <Error>{msg}</Error>}
-                      </ErrorMessage>
-                    </InputContainer>
-
-                    <InputContainer>
-                      <Label>DNI</Label>
-                      <Input name="dni" type="text" />
-                      <ErrorMessage name="dni" component="div">
+                      <Label>Rol de usuario</Label>
+                      <Field
+                        component="select"
+                        name="user_role"
+                        className="field-select"
+                      >
+                        <option>Elige tu rol</option>
+                        <option value="user">User</option>
+                        <option value="worker">Worker</option>
+                      </Field>
+                      <ErrorMessage name="user_role" component="div">
                         {(msg) => <Error>{msg}</Error>}
                       </ErrorMessage>
                     </InputContainer>
@@ -259,18 +260,20 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                   </DivisionContainer>
 
                   <GoogleLogin
-                  clientId="599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com"
-                  onSuccess={handleGoogleLogin}
-                  onFailure={handleGoogleLogin}
-                  cookiePolicy={"single_host_origin"}
-                  render={(renderProps) => (
-                    <ButtonAlt  onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}>
-                      <GoogleIcon />
-                      Continuar con Google
-                    </ButtonAlt>
-                  )}
-                />
+                    clientId="599255604366-6eb57uhcee9ss6dc2h10ceiis7tqhd3k.apps.googleusercontent.com"
+                    onSuccess={handleGoogleLogin}
+                    onFailure={handleGoogleLogin}
+                    cookiePolicy={"single_host_origin"}
+                    render={(renderProps) => (
+                      <ButtonAlt
+                        onClick={renderProps.onClick}
+                        disabled={renderProps.disabled}
+                      >
+                        <GoogleIcon />
+                        Continuar con Google
+                      </ButtonAlt>
+                    )}
+                  />
 
                   {/* <GoogleLogin
                     // clientId={clientGoogle}

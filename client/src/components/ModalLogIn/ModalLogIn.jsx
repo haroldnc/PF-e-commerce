@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   ButtonAlt,
@@ -17,23 +17,29 @@ import {
   InfoContainer,
 } from "./StyledModalLogIn";
 import { Formik, Field, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { signin } from "../../store/actions/userActions";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { gapi } from "gapi-script";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { getAllUsersAllPAginate } from "../../store/actions";
 
 const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const allUsers = useSelector((state) => state.allUsersPaginate);
 
   const handleResetPage = () => {
     setTimeout(() => {
       history.go(0);
     }, 1000);
   };
+
+  useEffect(() => {
+    dispatch(getAllUsersAllPAginate());
+  }, [dispatch]);
 
   gapi.load("client:auth2", () => {
     gapi.client.init({
@@ -86,13 +92,19 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
             }}
             validate={(values) => {
               const errors = {};
+
+              
+
               if (!values.email) {
                 errors.email = "Email es requerido";
               } else if (
                 !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
               ) {
                 errors.email = "Email no es valido";
+              } else if(allUsers.users && allUsers.users.map((u) => u.email).includes(values.email) === false){
+                errors.email = "Email no existe, por favor ingrese un mail correcto"
               }
+
               if (!values.password) {
                 errors.password = "Contraseña es requerida";
               } else if (
@@ -110,15 +122,15 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
               resetForm();
               setSubmitting(false);
               dispatch(signin(values));
-              handleResetPage();
-              Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Inicio de sesión exitoso!',
-                showConfirmButton: false,
-                timer: 1500
-              })
-              toggleModalLogIn();
+              // handleResetPage();
+              // // Swal.fire({
+              // //   position: 'center',
+              // //   icon: 'success',
+              // //   title: 'Inicio de sesión exitoso!',
+              // //   showConfirmButton: false,
+              // //   timer: 1500
+              // // })
+              // toggleModalLogIn();
             }}
           >
             {(props, isSubmitting) => (
@@ -200,15 +212,15 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                   onFailure={handleGoogleLogin}
                   cookiePolicy={"single_host_origin"}
                   render={(renderProps) => (
-                    <ButtonAlt  onClick={renderProps.onClick}
-                    disabled={renderProps.disabled}>
+                    <ButtonAlt
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                    >
                       <GoogleIcon />
                       Continuar con Google
                     </ButtonAlt>
                   )}
-                  
                 />
-
                 <CloseIcon onClick={toggleModalLogIn} />
               </FormContainer>
             )}

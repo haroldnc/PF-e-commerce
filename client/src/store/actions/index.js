@@ -125,3 +125,16 @@ export const getConfirmUser = (id) => (dispatch) => {
   axios.post(`https://wixer-server.herokuapp.com/user/confirm/${id}`)
   .then((res) => dispatch({type: "GET_CONFIRM_USER ", payload: res.data}))
 } 
+
+export const addToWishlist = (payload) => {
+  return {
+    type: "ADD_TO_WISHLIST",
+    payload,
+  }
+}
+export const removeWishlist = (payload) => {
+  return {
+    type: "REMOVE_WISHLIST",
+    payload,
+  }
+}

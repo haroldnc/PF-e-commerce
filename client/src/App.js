@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
@@ -50,6 +50,7 @@ function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
   const { userInfo } = userSignIn;
 
+
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useDarkMode();
 
@@ -72,8 +73,6 @@ function App() {
   const toggleModalSignOut = () => {
     setIsOpenModalSignOut(!isOpenModalSignOut);
   };
-
-  console.log(userInfo);
   const options = {
     // passing the client secret obtained in step 2
     clientSecret: '{{CLIENT_SECRET}}',
@@ -82,7 +81,7 @@ function App() {
 
     }
 
-  // console.log(userInfo)
+  console.log("Hola", userInfo)
 
 
   return (
@@ -100,9 +99,10 @@ function App() {
           toggleModalSignOut={toggleModalSignOut}
           userInfo={userInfo}
         />
+
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Switch>    
-          <Route exact path="/" component={Home}/>
+          <Route exact path="/" component={Home} userInfo={userInfo}/>
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
@@ -124,6 +124,7 @@ function App() {
           isOpenModalLogIn={isOpenModalLogIn}
           toggleModalLogIn={toggleModalLogIn}
           isOpenModalSignUp={isOpenModalSignUp}
+          userInfo={userInfo}
         />
         <ModalSignUp
           isOpenModalSignUp={isOpenModalSignUp}

@@ -36,7 +36,7 @@ export default function WorkersCarousel({profiles}){
 
     return(
         <>
-        {profiles.length?
+        {/* {profiles.length?
 
             <WorkerDiv>
             <TitleCarousel>Nuestros mejores talentos</TitleCarousel>
@@ -58,7 +58,7 @@ export default function WorkersCarousel({profiles}){
         </WorkerDiv>
         :
         <h1>...cargando</h1>
-                    }
+                    } */}
         </>
 
     )

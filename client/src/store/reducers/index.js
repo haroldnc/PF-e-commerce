@@ -128,6 +128,14 @@ const rootReducer = (state = {}, action) => {
                 ...state,
                 allPost:action.payload
             }
+
+        case "ADD_TO_WISHLIST":
+
+            return{
+                ...state,
+                wishlist: state.wishlist.concat(action.payload),
+            }
+
         default: return state;
     };
 };

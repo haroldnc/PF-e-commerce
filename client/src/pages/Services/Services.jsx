@@ -35,10 +35,13 @@ const Services = () => {
   const service = useSelector((state) => state.service);
   console.log(service)
   const servicePosts = useSelector((state) => state.servicePosts);
+  const userSignIn = useSelector((state) => state.userSignIn);
+  const { userInfo } = userSignIn;
   const [pageAnt, setPageAnt] = useState(0);
   const [pagePost, setPagePost] = useState(15);
   const [currentPage, setCurrentPage] = useState(1);
   const { id } = useParams();
+  console.log(userInfo)
 
   useEffect(() => {
     dispatch(getServiceById(id));
@@ -85,7 +88,7 @@ const Services = () => {
           <NameServ>{service?.name}</NameServ>
 
           <Grid>
-            <CardPublication pageslice={pageslice} />
+            <CardPublication pageslice={pageslice} userInfo={userInfo} />
           </Grid>
           <Paginate
             pages={pages}
