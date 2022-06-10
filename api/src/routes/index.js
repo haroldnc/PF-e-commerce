@@ -11,5 +11,7 @@ router.use('/auth', require('./authentication'));
 router.use('/refund', require('./refund'));
 router.use('/checkout', require('./checkout'));
 router.use('/Scores', require('./Scores'));
+router.use('/subscriptions', require('./subscriptions'));
+router.use('/transactions', require('./transactions'));
 
 module.exports = router;

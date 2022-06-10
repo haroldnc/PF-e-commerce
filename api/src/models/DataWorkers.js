@@ -7,7 +7,7 @@ const DataWorkers = Schema({
 
     title: {
         type: String,
-        //require: [true, 'Position or Category is required'],
+        /*require: [true, 'Position or Category is required'],
         validate: {
             validator: (v) => /^[a-záéíóúñ\s]+$/i.test(v),
             message: props =>{
@@ -17,7 +17,7 @@ const DataWorkers = Schema({
                    return 'Position or Category only accept letters';
                 }
              }
-         },
+         },*/
         default: ""
     },
     aboutMe: {
@@ -32,18 +32,22 @@ const DataWorkers = Schema({
     },
     
     languages: [{
-        type: String,
-        // require: [true, 'Languages is required'],
-        validate: {
-            validator: (v) => /^[a-záéíóúñ\s]+$/i.test(v),
-            message: props =>{
-                if (props.value.length < 3){
-                   return 'Languages accept minimun 3 letters';
-                } else {
-                   return 'Languages only accept letters';
+        name: {
+            type: String,
+            validate: {
+                validator: (v) => /^[a-záéíóúñ\s]+$/i.test(v),
+                message: props =>{
+                    if (props.value.length < 3){
+                        return 'Languages accept minimun 3 letters';
+                    } else {
+                        return 'Languages only accept letters';
+                    }
                 }
-             }
-         }
+            }
+        },
+        nivel: {
+            type: String
+        }
     }
 ],
     
@@ -149,6 +153,10 @@ const DataWorkers = Schema({
     subscribed: {
         type: Boolean,
         default: false
+    },
+    subscription_type: {
+        type: Schema.Types.ObjectId,
+        ref: 'Subscriptions'
     },
     userId:{
         type: Schema.Types.ObjectId,

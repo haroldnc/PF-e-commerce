@@ -8,8 +8,22 @@ const bcrypt = require('bcrypt');
 const getUserById = async (req, res) => {
     const { id } = req.params;
     try {
-        const user = await User.findById(id);
-        res.json(user)
+        const user = await User.findById(id)
+            .populate('user_role', 'name')
+        console.log(user)    
+        if(user.user_role.name === 'worker'){
+            const dataWorker = await DataWorkers.findOne({'userId': id})
+            res.json({
+                ok: true,
+                user,
+                dataWorker
+            });
+        }else{
+            res.json({
+                ok: true,
+                user,
+            });
+        };
     } catch (error) {
         console.log(error)
         res.status(500).json({
