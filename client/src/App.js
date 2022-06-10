@@ -38,6 +38,8 @@ import ServicesDetail from "./pages/ServicesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
 import ModalSignOut from "./components/ModalSignOut/ModalSignOut";
+import SearchResults from "./pages/SearchResults";
+
 import Confirm from "./pages/Confirm/Confirm";
 import LogInConfirm from "./pages/LogInConfirm/LogInConfirm";
 import Wishlist from "./pages/Wishlist/Wishlist";
@@ -114,6 +116,7 @@ function App() {
           <Route path="/publicar" component={PublishService} />
           <Route exact path="/admin" component={Admin} />
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
+          <Route path="/search" component={SearchResults}/>
           <Route exact path="/profile/:id" component={Profile} />
           {/* <Elements stripe={stripePromise}>
             <CheckoutForm />

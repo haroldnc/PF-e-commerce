@@ -15,6 +15,7 @@ const initialState = {
     userDetail:{},
     post: {},
     allPost:[],
+    queryPosts: []
 };
 //habia un objeto en initialstate
 
@@ -129,6 +130,14 @@ const rootReducer = (state = {}, action) => {
                 ...state,
                 allPost:action.payload
             }
+
+        case "GET_POST_BY_QUERY":
+            return{
+                ...state,
+                queryPosts: action.payload.Publications
+            }
+
+
         case  "PAYMENT":
             console.log(action.payload)
             window.location.href = action.payload.url

@@ -122,6 +122,11 @@ export const getPostById = (id) => (dispatch) => {
 };
 
 
+export const getPostByQuery = (query) => (dispatch) => {
+  axios
+    .get(`http://wixer-server.herokuapp.com/posts?title=${query}`)
+    .then((res) => dispatch({ type: "GET_POST_BY_QUERY", payload: res.data }));
+};
 export const PostPayment = (body) =>  dispatch =>{
   axios.post(`http://wixer-server.herokuapp.com/checkout`, body)
   .then(res => dispatch({type: "PAYMENT" , payload: res.data}))
