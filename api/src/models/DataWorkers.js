@@ -17,7 +17,7 @@ const DataWorkers = Schema({
                    return 'Position or Category only accept letters';
                 }
              }
-         }*/,
+         },*/
         default: ""
     },
     aboutMe: {
