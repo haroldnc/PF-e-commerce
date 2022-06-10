@@ -232,10 +232,18 @@ Permite obtener un array de trabajadores con la siguiente estructura:
          "lastName":"Navarro",
          "email":"harold.mth95@gmail.com",
          "image":"https://i.pinimg.com/564x/84/aa/0d/84aa0dadd6cbd869bf40397a1a59e4cb.jpg",
-         "dni":"71706175",
-         "phone":"051934972209",
          "user_role":"628ef02007fe8bf42fb6a5f8",
          "uid":"62926fb4a8415ffb1bf2a4bc"
+      },
+      "dni":"987478382",
+      "phone":"004836638",
+      "score": 0,
+      "linkedin": "",
+      "web": "",
+      "subscribed": false,
+      "subscription_type": {
+         "_id": "3763sdvyuqw8387hsdghj",
+         "name": "Standard"
       },
       "workExperience":[],
       "certifications":[]
@@ -254,11 +262,19 @@ Permite obtener un array de trabajadores con la siguiente estructura:
          "email":"correo@algo.com",
          "image":"https://as01.epimg.net/meristation/imagenes/2021/10/13/noticias/1634126519_319188_1634129698_noticia_normal.jpg",
          "user_role":"628ef02007fe8bf42fb6a5f8",
-         "dni":"987478382",
-         "phone":"004836638",
          "punctuation":0,
          "firstName":"fran",
          "uid":"6292a98a9eea6ea8eb75c1d2"
+      },
+      "dni":"987478382",
+      "phone":"004836638",
+      "score": 0,
+      "linkedin": "",
+      "web": "",
+      "subscribed": false,
+      "subscription_type": {
+         "_id": "3763sdvyuqw8387hsdghj",
+         "name": "Standard"
       },
       "workExperience":[],
       "certifications":[]
@@ -285,11 +301,19 @@ Permite obtener un array de trabajadores con `title` como parte de su título pr
          "email":"correo@algo.com",
          "image":"https://as01.epimg.net/meristation/imagenes/2021/10/13/noticias/1634126519_319188_1634129698_noticia_normal.jpg",
          "user_role":"628ef02007fe8bf42fb6a5f8",
-         "dni":"987478382",
-         "phone":"004836638",
          "punctuation":0,
          "firstName":"fran",
          "uid":"6292a98a9eea6ea8eb75c1d2"
+      },
+      "dni":"987478382",
+      "phone":"004836638",
+      "score": 0,
+      "linkedin": "",
+      "web": "",
+      "subscribed": false,
+      "subscription_type": {
+         "_id": "3763sdvyuqw8387hsdghj",
+         "name": "Standard"
       },
       "workExperience":[],
       "certifications":[]
@@ -315,15 +339,93 @@ Permite obtener un trabajador por `id` con la siguiente estructura:
       "email":"correo@algo.com",
       "image":"https://as01.epimg.net/meristation/imagenes/2021/10/13/noticias/1634126519_319188_1634129698_noticia_normal.jpg",
       "user_role":"628ef02007fe8bf42fb6a5f8",
-      "dni":"987478382",
-      "phone":"004836638",
       "punctuation":0,
       "firstName":"fran",
       "uid":"6292a98a9eea6ea8eb75c1d2"
    },
+   "dni":"987478382",
+   "phone":"004836638",
+   "score": 0,
+   "linkedin": "",
+   "web": "",
+   "subscribed": false,
+   "subscription_type": {
+      "_id": "3763sdvyuqw8387hsdghj",
+      "name": "Standard"
+   },
    "workExperience":[],
    "certifications":[]
 }
+```
+
+#### `GET --> /workers/subscriptions/:name`
+
+Permite obtener un array de trabajadores suscritos al plan `name`:
+```json
+[
+   {
+      "languages":[],
+      "skills":[],
+      "_id":"6292a98a9eea6ea8eb75c1d4",
+      "title":"Full Stack Web Developer",
+      "aboutMe":"Algo sobre mi",
+      "textInfo":"mas informacion",
+      "pricePerHour":100,
+      "p_image":"https://cdn-media-1.freecodecamp.org/images/1*Aq7TXpuzXp8lTX0Dhxw_DQ.png",
+      "userId":{
+         "lastName":"gimenez",
+         "email":"correo@algo.com",
+         "image":"https://as01.epimg.net/meristation/imagenes/2021/10/13/noticias/1634126519_319188_1634129698_noticia_normal.jpg",
+         "user_role":"628ef02007fe8bf42fb6a5f8",
+         "punctuation":0,
+         "firstName":"fran",
+         "uid":"6292a98a9eea6ea8eb75c1d2"
+      },
+      "dni":"987478382",
+      "phone":"004836638",
+      "score": 0,
+      "linkedin": "",
+      "web": "",
+      "subscribed": false,
+      "subscription_type": {
+         "_id": "3763sdvyuqw8387hsdghj",
+         "name": "Standard"
+      },
+      "workExperience":[],
+      "certifications":[]
+   },
+   {
+      "languages":[],
+      "skills":[],
+      "_id":"6292a98a9eea6ea8eb75c1d4",
+      "title":"Full Stack Web Developer",
+      "aboutMe":"Algo sobre mi",
+      "textInfo":"mas informacion",
+      "pricePerHour":100,
+      "p_image":"https://cdn-media-1.freecodecamp.org/images/1*Aq7TXpuzXp8lTX0Dhxw_DQ.png",
+      "userId":{
+         "lastName":"gimenez",
+         "email":"correo@algo.com",
+         "image":"https://as01.epimg.net/meristation/imagenes/2021/10/13/noticias/1634126519_319188_1634129698_noticia_normal.jpg",
+         "user_role":"628ef02007fe8bf42fb6a5f8",
+         "punctuation":0,
+         "firstName":"fran",
+         "uid":"6292a98a9eea6ea8eb75c1d2"
+      },
+      "dni":"987478382",
+      "phone":"004836638",
+      "score": 0,
+      "linkedin": "",
+      "web": "",
+      "subscribed": false,
+      "subscription_type": {
+         "_id": "3763sdvyuqw8387hsdghj",
+         "name": "Standard"
+      },
+      "workExperience":[],
+      "certifications":[]
+   }
+]
 ```
 
 #### `PUT --> /workers/:id`
@@ -340,7 +442,14 @@ Permite modificar los datos laborales de un trabajador por `id`. Lo datos deben 
    "pricePerHour":100,
    "p_image":"https://cdn-media-1.freecodecamp.org/images/1*Aq7TXpuzXp8lTX0Dhxw_DQ.png",
    "workExperience":[],
-   "certifications":[]
+   "certifications":[],
+   "dni":"987478382",
+   "phone":"004836638",
+   "score": 0,
+   "linkedin": "",
+   "web": "",
+   "subscribed": false,
+   "subscription_type": "3763sdvyuqw8387hsdghj",
 }
 ```
 
@@ -633,6 +742,152 @@ Al hacer una petición `GET` a `/posts` se obtiene un array con las publicacione
       "service":"62929cfa3758d5ae01a198cf",
       "score":0,
       "img":"https://s3.amazonaws.com/www-inside-design/uploads/2019/11/Designer-Confidential-1080x1080-Instagram-810x810.png"
+   }
+]
+```
+
+#### `GET --> /posts?title=og`
+
+Retorna un array de las publicaciones que tienen `title` en su título con el siguiente formato:
+```json
+[
+   {
+      "id":"62963d3011cb25260d8fc628",
+      "title":"Fotografo",
+      "description":"Tomando fotografia",
+      "price":100,
+      "user":"62926fb4a8415ffb1bf2a4bc",
+      "service":"62929cfa3758d5ae01a198cf",
+      "score":0,
+      "img":""
+   },
+   {
+      "id":"629a84413f8d0083d6ec08d5",
+      "title":"Logo e identidad de marca",
+      "description":"Diseños profesionales en el mismo día de tu pedido y acordes a tu presupuesto. ",
+      "price":100,
+      "user":"62926fb4a8415ffb1bf2a4bc",
+      "service":"62929cfa3758d5ae01a198cf",
+      "score":0,
+      "img":"https://s3.amazonaws.com/www-inside-design/uploads/2019/11/Designer-Confidential-1080x1080-Instagram-810x810.png"
+   }
+]
+```
+
+#### `GET --> /posts/:id`
+
+Permite obtener una publicación específica por el `id`. Por ejemplo, `/posts/629a856a3f8d0083d6ec08dc` con el siguiente esquema:
+```json
+{
+   "_id":"629a856a3f8d0083d6ec08dc",
+   "title":"Diseño de aplicaciones y sitios web",
+   "description":"Diseños profesionales en el mismo día de tu pedido y acordes a tu presupuesto. ",
+   "price":200,
+   "user":"62950e52471fa510d2a2f906",
+   "service":"62929cfa3758d5ae01a198cf",
+   "img":"https://s3.amazonaws.com/www-inside-design/uploads/2019/11/Designer-Confidential-1080x1080-Instagram-810x810.png",
+   "score":0
+}
+```
+
+#### `GET --> /posts/service/:id`
+
+Permite obtener todas las publicaciones de un servicio especificado por su `id`. Por ejemplo, `/posts/service/62929cfa3758d5ae01a198cf` con el siguiente esquema:
+```json
+[
+   {
+      "_id":"62963d3011cb25260d8fc628",
+      "title":"Fotografo",
+      "description":"Tomando fotografia",
+      "price":100,
+      "user":{
+         "_id":"62926fb4a8415ffb1bf2a4bc",
+         "firstName":"Harold",
+         "lastName":"Navarro"
+      },
+      "service":{
+         "_id":"62929cfa3758d5ae01a198cf",
+         "name":"Diseño de aplicaciones y sitios web"
+      },
+      "img":"",
+      "score":0
+   },
+   {
+      "_id":"629a61151c4eece6e397630e",
+      "title":"Front end",
+      "description":"hago paginas",
+      "price":100,
+      "user":{
+         "_id":"62926dd33625d29449bc17a4",
+         "firstName":"Alejandro",
+         "lastName":"Cardenas"
+      },
+      "service":{
+         "_id":"62929cfa3758d5ae01a198cf",
+         "name":"Diseño de aplicaciones y sitios web"
+      },
+      "img":"",
+      "score":0
+   }
+]
+```
+
+#### `POST --> /posts`
+
+Permite crear una nueva publicación asociada a un usuario y servicio. Los parámetros serán enviados por `body` con la siguiente estructura:
+```json
+{
+   "title": "titulo del post",
+   "description": "alguna descripción",
+   "img": "url de la imagen",
+   "score": 0,
+   "service": "Id del servicio asociado",
+   "user": "Id del user asociado",
+   "price": 1000
+}
+```
+
+#### `PUT --> /posts/:id`
+
+Permite actualizar una publicación pasada por el `id`. Los parámetros son opcionales (enviar sólo los que serán modificados) y serán enviados por `body` con la siguiente estructura:
+```json
+{
+   "title": "titulo del post",
+   "description": "alguna descripción",
+   "img": "url de la imagen",
+   "score": 0,
+   "service": "Id del servicio asociado",
+   "price": 1000
+}
+```
+
+#### `DELETE --> /posts/:id`
+
+Permite eliminar una publicación especificada por `id`.
+
+Si la publicación se eliminó con éxito deben recibir el siguiente resultado:
+```json
+{
+   "msg": "the post was deleted"
+}
+```
+
+## Ruta subscriptions
+
+#### `GET --> /subscriptions`
+
+Al hacer una petición `GET` a `/subscriptions` se obtiene un array con los tipos de planes existentes con el siguiente formato:
+```json
+[
+   {
+      "_id":"62963d3011cb25260d8fc628",
+      "name":"Standard",
+      "priceId":"price_12324erewtrewr"
+   },
+   {
+      "_id":"629a61151c4eece6e397630e",
+      "name":"Premium",
+      "priceId":"price_sadhhgjb1243dhgds"
    }
 ]
 ```
