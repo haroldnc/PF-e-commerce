@@ -60,7 +60,8 @@ const googleSignIn = async (req, res) => {
                 email,
                 image: img,
                 password: ':)',
-                user_role: user_role._id
+                user_role: user_role._id,
+                confirm_email:true
             });
         }
         else{
