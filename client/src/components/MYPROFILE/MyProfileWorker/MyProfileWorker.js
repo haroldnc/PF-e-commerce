@@ -152,7 +152,7 @@ export const Titulos = styled.h1 `
 export const BtnForms = styled.button `
     color: ${props => props.theme.colors.secondary};
     font-size: 12px;
-    background-color: white;
+    background-color: transparent;
     cursor:pointer;
     font-family: 'Poppins', sans-serif;
 

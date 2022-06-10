@@ -94,8 +94,6 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
               username: "",
               email: "",
               password: "",
-              dni: "",
-              phone: "",
               user_role: "",
             }}
             validate={(values) => {
@@ -154,18 +152,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
                 errors.password =
                   "Min 8 carateres, max 15, al menos una letra mayuscula al menos 1 digito, un caracter especial";
               }
-              if (!values.dni) {
-                errors.dni = "DNI es requerido";
-              }
-              if (!values.phone) {
-                errors.phone = "Telefono es requerido";
-              } else if (
-                !/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/i.test(
-                  values.phone
-                )
-              ) {
-                errors.phone = "Numero de telefono no valido, solo 10 numeros";
-              }
+              
 
               if (!values.user_role) {
                 errors.user_role = "Es obligatorio elegir un tipo de usuario";

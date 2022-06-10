@@ -38,16 +38,19 @@ import ServicesDetail from "./pages/ServicesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
 import ModalSignOut from "./components/ModalSignOut/ModalSignOut";
+import SearchResults from "./pages/SearchResults";
+
 import Confirm from "./pages/Confirm/Confirm";
 import LogInConfirm from "./pages/LogInConfirm/LogInConfirm";
 import Wishlist from "./pages/Wishlist/Wishlist";
-
+import PaymentSuccess from './pages/PaymenSuccess/PaymentSuccess.jsx'
 
 
  // const stripePromise = loadStripe("pk_test_51L5zjMHq6KUjuv7IIFciLODh9WoDWs5rnmbUrfSZVOfMMWN67dB15Ricdwoi8UNFfuIHL6lgzSTocRXWlYa7aBSA00oP1VlFMI");
 
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
+
   const { userInfo } = userSignIn;
 
 
@@ -73,6 +76,10 @@ function App() {
   const toggleModalSignOut = () => {
     setIsOpenModalSignOut(!isOpenModalSignOut);
   };
+
+  
+
+  console.log('user info',userInfo);
   const options = {
     // passing the client secret obtained in step 2
     clientSecret: '{{CLIENT_SECRET}}',
@@ -110,6 +117,7 @@ function App() {
           <Route path="/publicar" component={PublishService} />
           <Route exact path="/admin" component={Admin} />
           <Route path="/posts/detail/:id" component={ServicesDetail}/>
+          <Route path="/search" component={SearchResults}/>
           <Route exact path="/profile/:id" component={Profile} />
           {/* <Elements stripe={stripePromise}>
             <CheckoutForm />
@@ -118,6 +126,7 @@ function App() {
           <Route path="/confirm/:id" component={Confirm} />
           <Route path="/iniciar-sesion" component={LogInConfirm} />
           <Route path="/lista-favoritos" component={Wishlist} />
+          <Route exact path="/paysuccess" component={PaymentSuccess} />
         </Switch>
         <Footer />
         <ModalLogIn
@@ -134,7 +143,7 @@ function App() {
           isOpenModalSignOut={isOpenModalSignOut}
           toggleModalSignOut={toggleModalSignOut}
         />
-
+        
         <DarkModeBtn theme={theme} setTheme={setTheme} />
         <GlobalStyle />
       </ThemeProvider>

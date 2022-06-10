@@ -15,7 +15,7 @@ export default function WorkerProfile (){
 
 
     function getUserPosts(wrkr, postArr){
-        if(wrkr.aboutMe !== undefined){
+        if(wrkr.aboutMe !== undefined && postArr.length){
             userPost = postArr.filter(p=>p.user===wrkr.userId.uid)
             console.log(userPost)
             return userPost
@@ -38,22 +38,51 @@ export default function WorkerProfile (){
 
     return(
         <>{
-            worker.aboutMe && arrayOfPost.length?
+            worker._id?
             <div>
 
             <Container>
             <Div1>
                 <ProfilePic src={worker.userId.image} alt="" />
-                <Price>{`$${worker.pricePerHour}/hora`}</Price>
+                {worker.pricePerHour?
+                    <Price>{`${worker.pricePerHour}/hora`}</Price>
+                    :
+                    <Price>n/a</Price>
+                }
             </Div1>
             <Div2>
-                <SubTitle>{`${worker.userId.firstName}`}</SubTitle>
-                <h4>{worker.title}</h4>
-                <DescriptionArea>{worker.aboutMe}</DescriptionArea>
+                {worker.userId.firstName?
+                    <SubTitle>{`${worker.userId.firstName}`}</SubTitle>
+
+                :
+                    <SubTitle>🤖</SubTitle>
+                }
+                {worker.title?
+                    <h4>{worker.title}</h4>
+                :
+                    <h4>👷‍♂️en construcción</h4>
+
+                }
+                {worker.aboutMe?
+                    <DescriptionArea>{worker.aboutMe}</DescriptionArea>
+                    :
+                    <DescriptionArea>Ups... aun no tenemos mucha información de este usuario</DescriptionArea>
+
+                }
             </Div2>
             <Div3>
-                <HireButton>{`Contacta a ${worker.userId.firstName}`}</HireButton>
+                {worker.userId.firstName?
+                    <HireButton>{`Contacta a ${worker.userId.firstName}`}</HireButton>
+                :
+                    <HireButton>Contacta a este profesional</HireButton>
+
+                }
+
+                {worker.userId.firstName && worker.userId.lastName?
                 <DescriptionArea>{`Hazle algunas preguntas a ${worker.userId.firstName} ${worker.userId.lastName} para llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de ${worker.userId.firstName}`}.</DescriptionArea>
+                :
+                <DescriptionArea>Hazle algunas preguntas a este profesional antes de llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de este usuario.</DescriptionArea>
+                }
             </Div3>
         </Container>
             <PostsTitle>Publicaciones que ha hecho este usuario:</PostsTitle>

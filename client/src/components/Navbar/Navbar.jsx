@@ -64,14 +64,14 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
         <div>
           {userInfo && userInfo.confirm_email === true  ? (
             <UserInfo>
-              {userInfo.user_role.name || userInfo.user_role === "user" ? (<UserRole>Usuario</UserRole>) : (<UserRole>Worker</UserRole>)}
+              {userInfo.user_role.name && userInfo.user_role.name === "user" ? (<UserRole>Usuario</UserRole>) : (<UserRole>Worker</UserRole>)}
               {/* {userInfo.user_role && userInfo.user_role  === "user" && (<UserRole>Usuario</UserRole>)} */}
               {/* {userInfo.user_role.name  && userInfo.user_role === "worker" && (<UserRole>Worker</UserRole>)} */}
               {/* {userInfo.user_role  && userInfo.user_role === "worker" && (<UserRole>Worker</UserRole>)} */}
               <Profile onClick={handleToggle}  img={userInfo.image}>
               </Profile>
               
-                <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle}/>
+                <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
               
               <ProfileBox />
             </UserInfo>

@@ -1,3 +1,4 @@
+import { GiConsoleController } from "react-icons/gi";
 import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
     users: [],
     userDetail:{},
     post: {},
-    allPost:[]
+    allPost:[],
+    queryPosts: []
 };
 //habia un objeto en initialstate
 
@@ -136,6 +138,17 @@ const rootReducer = (state = {}, action) => {
                 wishlist: state.wishlist.concat(action.payload),
             }
 
+        case "GET_POST_BY_QUERY":
+            return{
+                ...state,
+                queryPosts: action.payload.Publications
+            }
+
+
+        case  "PAYMENT":
+            console.log(action.payload)
+            window.location.href = action.payload.url
+            
         default: return state;
     };
 };
