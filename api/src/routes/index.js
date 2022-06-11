@@ -13,5 +13,6 @@ router.use('/checkout', require('./checkout'));
 router.use('/Scores', require('./Scores'));
 router.use('/subscriptions', require('./subscriptions'));
 router.use('/transactions', require('./transactions'));
+router.use('/favorites', require('./favorites'));
 
 module.exports = router;
