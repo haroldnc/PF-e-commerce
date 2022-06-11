@@ -85,18 +85,25 @@ const upDateUser =  (req, res) => {
 
 const deleteUser = async (req, res) => {
     const { id } = req.params
-    // borrar publicaciones del usuario
-    await User.findByIdAndDelete(id);
-    return new Promise((resolve, reject) => {
-        Publications.deleteMany({ 'idUser': id }, (err, result) => {
-            if (err) reject(err);
-            resolve(result);
+    try {
+        const user = await User.findByIdAndDelete(id) // borra el usuario
+                        .poulate ('user_role', 'name');
+        console.log(user);
+        if(user.user_role.name === 'worker'){
+        await Publications.deleteMany({ 'idUser': id }); // borra las publicaciones del usuario
+        await DataWorkers.deleteMany({ 'idUser': id }); // borra los datos del trabajador
+        };
+        res.status(200).json({
+            ok: true,
+            msg: 'User deleted'
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
         });
-    })
-    .then(result => {
-        res.json(result);
-    })
-    .catch(e => console.log(e));
+    };
 };
 
 const createUser = async (req, res) => {
@@ -176,7 +183,7 @@ const createUser = async (req, res) => {
             text: 'Hello ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
                 'Thank you for registering on Wixxer.\n' +
                 'To confirm your registration, please click on the following link:\n\n' +
-                'http://localhost:3000/confirm/' + usuario._id + '\n\n' +
+                `${process.env.DOMAIN}/confirm/` + usuario._id + '\n\n' +
                 "If it doesn't work, copy and paste the link into your browser.\n\n" +
                 'Thank you,\n' +
                 'Wixxer  Team'
