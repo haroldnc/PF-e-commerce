@@ -35,7 +35,7 @@ export const Wrapper = styled.div`
 `;
 
 export const LastInfoFooter = styled.div`
-margin: 1rem 0;
+  margin: 1rem 0;
   background-color: ${(props) => props.theme.colors.backgroundColor};
   display: flex;
   justify-content: space-between;
@@ -77,7 +77,7 @@ margin: 1rem 0;
   }
 
   .footerCopyright {
-    padding: 1rem;
+    padding-right: 1rem;
   }
 `;
 
@@ -103,6 +103,15 @@ export const Li = styled.li`
     transition: 0.5s;
   }
 
+  a {
+    color: ${(props) => props.theme.colors.font};
+  }
+
+  a:hover {
+    color: ${(props) => props.theme.colors.secondary};
+    transition: 0.5s;
+  }
+
   @media screen and (max-width: 660px) {
   }
 `;
@@ -113,5 +122,14 @@ export const tittleInfoFooter = styled.h4`
     justify-content: center;
     align-items: center;
     text-align: center;
+  }
+`;
+
+export const Redes = styled.a`
+  color: ${(props) => props.theme.colors.font};
+
+  &:hover {
+    color: ${(props) => props.theme.colors.secondary};
+    transition: 0.5s;
   }
 `;
