@@ -46,8 +46,8 @@ const addTransaction = async (req, res) => {
          sessionId,
          amount: session.amount_total/100,
          reason,
-         date: new Date(subscription.current_period_start),
-         expiration: new Date(subscription.current_period_end),
+         date: new Date(subscription.current_period_start*1000),
+         expiration: new Date(subscription.current_period_end*1000),
          payment_method: {
             network: payment.card.brand,
             end_digits: payment.card["last4"]
