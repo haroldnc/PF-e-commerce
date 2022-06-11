@@ -86,10 +86,11 @@ const upDateUser =  (req, res) => {
 const deleteUser = async (req, res) => {
     const { id } = req.params
     try {
-        const user = await User.findByIdAndDelete(id) // borra el usuario
-                        .poulate ('user_role', 'name');
+        const user = await User.findByIdAndDelete(id); // borra el usuario
         console.log(user);
-        if(user.user_role.name === 'worker'){
+
+        const role = await User_roles.findById(user.user_role);
+        if(role.name === 'worker'){
         await Publications.deleteMany({ 'idUser': id }); // borra las publicaciones del usuario
         await DataWorkers.deleteMany({ 'idUser': id }); // borra los datos del trabajador
         };

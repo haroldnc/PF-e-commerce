@@ -3,12 +3,22 @@ const Favorites = require('../models/Favorites');
 const addFavorite = async (req, res) => {
     const { idUser, idPublication } = req.body;
     try {
-        const favorite = await Favorites.create({ idUser, idPublication });
-        res.status(200).json({ 
-            ok: true,
-            msg: 'Favorite added successfully',
-            favorite
-        });
+        // validar si existe una publicacion con ese id
+        const publication = await Favorites.findById(idPublication);
+        if (!publication) {
+            const favorite = await Favorites.create({ idUser, idPublication });
+            res.status(200).json({ 
+                ok: true,
+                msg: 'Favorite added successfully',
+                favorite
+            });
+        }
+        else{
+            res.status(400).json({ 
+                ok: false,
+                msg: 'This publication is already in favorites'
+            });
+        };
     } catch (error) {
         res.status(422).json({ 
             ok: false,
