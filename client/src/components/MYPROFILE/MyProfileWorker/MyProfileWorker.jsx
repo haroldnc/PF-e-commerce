@@ -29,10 +29,13 @@ import { ContainerWorker,
          InfoContainerDer,
          FormsDiv,
          BtnAccept,
-         BtnCancel
+         BtnCancel,
+         Cancelar,
+         Historial
          } from './MyProfileWorker'
 
 import { PutInfoWorker, getWorkerDetail } from '../../../store/actions/index'
+import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
@@ -41,10 +44,11 @@ import { GiSmartphone } from 'react-icons/gi'
 import { keyframes } from "styled-components";
 
 
-const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
+const MyProfileWorker = ({profile, toggleModalPayment}) => {
 
     const dispatch = useDispatch()
     const [ image , setImage ] = useState("")
+    const [ panel , setPanel ] = useState("historial")
     const [ Formularios, setFormularios ] = useState({
         title: false,
         aboutMe: false,
@@ -64,23 +68,31 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
         web: "",
         image:""
     })
-
     const [ infoWorker , setInfoWorker ] = useState({
-        title: profile.title,
-        aboutMe: profile.aboutMe,
-        languages: profile.languages,
-        skills: profile.skills,
-        linkedin: profile.linkedin,
-        web: profile.web,
-        image: profile.userId.image
+        title: profile.dataWorker.title,
+        aboutMe: profile.dataWorker.aboutMe,
+        languages: profile.dataWorker.languages,
+        skills: profile.dataWorker.skills,
+        linkedin: profile.dataWorker.linkedin,
+        web: profile.dataWorker.web,
+        image: profile.user.image
     })
-
     const toggleForms = (dato) => {
         setFormularios({
             ...Formularios,
             [dato] : !Formularios[dato]
         })
     }
+
+    let showPanel = null
+    if(profile.dataWorker.subscribed){
+        if(panel === "historial"){
+            showPanel = <HistorialPayProfile id={profile.user.uid}/>
+        }
+    }else{
+        showPanel = "No hay nada"
+    }
+    
 
     const RedirectLink = (url) => {
         window.open(url)
@@ -99,8 +111,8 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
 
    const hamdlePut = (e, key) => {
        e.preventDefault()
-       dispatch(PutInfoWorker({ [key] : Changes[key] } , profile._id ))
-       dispatch(getWorkerDetail(profile._id))
+       dispatch(PutInfoWorker({ [key] : Changes[key] } , profile.dataWorker._id ))
+       dispatch(getWorkerDetail(profile.dataWorker._id))
        setInfoWorker({...infoWorker , [key] : Changes[key] })
        setFormularios({ ...Formularios , [key] : !Formularios[key] })
         setChanges({...Changes,[key] : ""})
@@ -120,7 +132,6 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "PGimages");
-    // setLoading(true);
   
     const res = await fetch(
       "https://api.cloudinary.com/v1_1/dk69jry82/image/upload",
@@ -146,7 +157,7 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
             <ContainerIzq>
                 <ImageContainer>
                     <ImageProfile src={infoWorker.image} alt="img"/>
-                    <Username>{username}</Username>
+                    <Username>{profile.user.username}</Username>
                     <VistaPrevia>Vista previa del perfil de Wixxer</VistaPrevia>
                     <Linea></Linea>
                     <DivName>
@@ -155,7 +166,7 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
                                 <CgProfile/>
                             </div>
                         </IconContext.Provider>
-                        <Name>{profile.userId.firstName}  {profile.userId.lastName}</Name>
+                        <Name>{profile.user.firstName}  {profile.user.lastName}</Name>
                     </DivName>
                     <DivOther>
                         <IconContext.Provider value={{size:"20px", color: "rgba(0, 0, 0, 0.596)"}}>
@@ -163,7 +174,7 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
                                 <MdOutlineEmail/>
                             </div>
                         </IconContext.Provider>
-                        <EmailPhone>{profile.userId.email}</EmailPhone>
+                        <EmailPhone>{profile.user.email}</EmailPhone>
                     </DivOther>
                     <DivOther>
                         <IconContext.Provider value={{size:"20px", color: "rgba(0, 0, 0, 0.596)"}}>
@@ -171,13 +182,16 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
                                 <GiSmartphone/>
                             </div>
                         </IconContext.Provider>
-                        <EmailPhone>{profile.phone}</EmailPhone>
+                        <EmailPhone>{profile.dataWorker.phone}</EmailPhone>
                     </DivOther>
                         {
-                            profile.subscribed ? 
+                            profile.dataWorker.subscribed ? 
+                            <div style={{width: "100%"}}>
                                 <Div>
                                     <Subscribe>Activo</Subscribe>
                                 </Div>
+                                <Historial>Historial de pago</Historial>
+                            </div>
                                 :
                             <div style={{width: "100%"}}>
                                 <Div>
@@ -195,7 +209,7 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
                         <Titulos>Titulo</Titulos>
                         <BtnForms onClick={() => toggleForms("title")}>Editar Titulo</BtnForms>
                     </Row>
-                    <InfoProfile>{profile.title.length === 0 ? "Agrega tu titulo ..." : infoWorker.title}</InfoProfile>
+                    <InfoProfile>{infoWorker.title.length === 0 ? "Agrega tu titulo ..." : infoWorker.title}</InfoProfile>
                     {
                         Formularios.title ?
                             <FormsDiv>
@@ -220,7 +234,7 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
                         <Titulos>Descripcón</Titulos>
                         <BtnForms onClick={() => toggleForms("aboutMe")}>Editar Descripcón</BtnForms>
                     </Row>
-                    <InfoProfile>{profile.aboutMe.length === 0 ? "Agregar descripción ..." : infoWorker.aboutMe}</InfoProfile>
+                    <InfoProfile>{infoWorker.aboutMe.length === 0 ? "Agregar descripción ..." : infoWorker.aboutMe}</InfoProfile>
                     { Formularios.aboutMe ?
                     <FormsDiv>
                         <form>
@@ -246,7 +260,7 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
                         <BtnForms onClick={() => toggleForms("idiomas")}>Agregar nuevo</BtnForms>
                     </Row>
                         {
-                        profile.languages.length === 0 ?<InfoProfile>Agrega tus idiomas ...</InfoProfile>: 
+                        infoWorker.languages.length === 0 ?<InfoProfile>Agrega tus idiomas ...</InfoProfile>: 
                             <DivResult>
                                 {profile.languages.map( (l, index )=> (
                                     <MapRow key={index}>
@@ -288,7 +302,7 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
                         <BtnForms onClick={() => toggleForms("habilidades")}>Agregar nuevo</BtnForms>
                     </Row>
                     {
-                        profile.skills.length === 0 ?<InfoProfile>Agrega tus habilidades ...</InfoProfile>: 
+                        infoWorker.skills.length === 0 ?<InfoProfile>Agrega tus habilidades ...</InfoProfile>: 
                             <DivResult>
                                 {profile.skills.map( (s, index) => (
                                     <MapRow key={index}>
@@ -403,7 +417,7 @@ const MyProfileWorker = ({profile, username, toggleModalPayment}) => {
             </ContainerIzq>
             <ContainerDer>
                 <InfoContainerDer>
-                    prueba
+                    {showPanel}
                 </InfoContainerDer>
             </ContainerDer>
         </ContainerWorker>

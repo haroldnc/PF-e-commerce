@@ -15,12 +15,12 @@ import {
 } from "./StyledNavbar";
 import ScrolledSearchbar from "./ScrolledSearchbar/ScrolledSearchbar";
 import ProfileBox from "../ProfileBox/ProfileBox";
+import ProfileBoxUser from "../ProfileBoxUser/ProfileBoxUser";
 
 const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleModalSignOut }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const history = useHistory();
-
   const ruta = (window.location.href).substr(-5)
   
   const navScroll = () => {
@@ -43,10 +43,9 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
     };
   });
 
-
-
   const handleClick = () => {
     history.push("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   
@@ -64,6 +63,7 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
         <div>
           {userInfo && userInfo.confirm_email === true  ? (
             <UserInfo>
+
               {userInfo.user_role.name && userInfo.user_role.name  === "user"  && (<UserRole>Usuario</UserRole>)}
               {userInfo.user_role.name && userInfo.user_role.name  === "worker"  && (<UserRole>Worker</UserRole>)}
               {userInfo.user_role === "628eefd607fe8bf42fb6a5f5" && <UserRole>Usuario</UserRole>}
@@ -71,10 +71,21 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
 
               <Profile onClick={handleToggle}  img={userInfo.image}>
               </Profile>
+
+              {/* {userInfo.user_role.name && userInfo.user_role.name === "user" ? (<UserRole>Usuario</UserRole>) : (<UserRole>Worker</UserRole>)}
+              {/* {userInfo.user_role && userInfo.user_role  === "user" && (<UserRole>Usuario</UserRole>)} */}
+              {/* {userInfo.user_role.name  && userInfo.user_role === "worker" && (<UserRole>Worker</UserRole>)} */}
+              {/* {userInfo.user_role  && userInfo.user_role === "worker" && (<UserRole>Worker</UserRole>)} */}
+              {/* <Profile onClick={handleToggle}  img={userInfo.image}/>  */}
+
               
+              {
+                userInfo.user_role.name && userInfo.user_role.name === "worker" ?
                 <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
+                :
+                <ProfileBoxUser isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
+              }
               
-              <ProfileBox />
             </UserInfo>
           ) : (
             <LinksContainer>

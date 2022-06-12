@@ -4,6 +4,7 @@ export const ContainerWorker = styled.div `
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
 
 `
 
@@ -330,3 +331,28 @@ export const BtnAccept = styled.button `
         
     }
 `
+export const Historial = styled.p `
+    margin-top: 15px;
+    text-align: right;
+    margin-right:40px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color:rgba(0, 0, 0, 0.247);
+
+    &:hover{
+    color: rgba(0, 0, 0, 0.596);
+    }
+
+
+`
+export const Cancelar = styled.p `
+    margin-top:  10px;
+    text-align: right;
+    margin-right:40px;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+
+`
+

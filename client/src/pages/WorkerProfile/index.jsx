@@ -38,12 +38,17 @@ export default function WorkerProfile (){
 
     return(
         <>{
-            worker._id?
+            worker.userId !== null?
             <div>
 
             <Container>
             <Div1>
-                <ProfilePic src={worker.userId.image} alt="" />
+                {worker.userId?
+                    <ProfilePic src={worker.userId.image} alt="" />
+
+                :
+                    <Price> Este usuario no ha agregado una imagen</Price>
+                }
                 {worker.pricePerHour?
                     <Price>{`${worker.pricePerHour}/hora`}</Price>
                     :
@@ -51,7 +56,7 @@ export default function WorkerProfile (){
                 }
             </Div1>
             <Div2>
-                {worker.userId.firstName?
+                {worker.userId ?
                     <SubTitle>{`${worker.userId.firstName}`}</SubTitle>
 
                 :
@@ -71,14 +76,14 @@ export default function WorkerProfile (){
                 }
             </Div2>
             <Div3>
-                {worker.userId.firstName?
+                {worker.userId?
                     <HireButton>{`Contacta a ${worker.userId.firstName}`}</HireButton>
                 :
                     <HireButton>Contacta a este profesional</HireButton>
 
                 }
 
-                {worker.userId.firstName && worker.userId.lastName?
+                {worker.userId?
                 <DescriptionArea>{`Hazle algunas preguntas a ${worker.userId.firstName} ${worker.userId.lastName} para llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de ${worker.userId.firstName}`}.</DescriptionArea>
                 :
                 <DescriptionArea>Hazle algunas preguntas a este profesional antes de llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de este usuario.</DescriptionArea>
@@ -99,7 +104,7 @@ export default function WorkerProfile (){
         </ProfileCardsContainer>
             </div>
         :
-        <h1>Cargando...</h1>
+        <h1>Los datos se están cargando o este usuario no tiene datos válidos, espere.</h1>
         }
         </>
     )

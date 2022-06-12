@@ -108,6 +108,8 @@ function App() {
         
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Switch>    
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/paysuccess" component={PaymentSuccess} />
           <Route exact path="/" component={Home} userInfo={userInfo}/>
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />

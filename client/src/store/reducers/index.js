@@ -15,11 +15,14 @@ const initialState = {
     userDetail:{},
     post: {},
     allPost:[],
+    queryPosts: [],
+    allTransactions: [],
+    transactionById: [],
     queryPosts: []
 };
 //habia un objeto en initialstate
 
-const rootReducer = (state = {}, action) => {
+const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case "GET_CATEGORIES":
             return {
@@ -113,13 +116,10 @@ const rootReducer = (state = {}, action) => {
                 ...state
             }
         case "GET_USER_BY_ID":
-            console.log(action.payload)
             return{
                 ...state,
                 userDetail: action.payload
-                
             }
-
         case "GET_POST_ID":
             return{
                 ...state,
@@ -153,6 +153,19 @@ const rootReducer = (state = {}, action) => {
             return{
                 ...state,
                 queryPosts: action.payload.Publications
+            }
+        case  "PAYMENT":
+            window.location.href = action.payload.url
+        case "GET_ALL_TRANSACTIONS":
+            return {
+                ...state,
+                allTransactions: action.payload
+            }
+        case "GET_TRANSACTIONS_BYID":
+            console.log('payload',action.payload)
+            return {
+                ...state,
+                transactionById: action.payload
             }
 
 

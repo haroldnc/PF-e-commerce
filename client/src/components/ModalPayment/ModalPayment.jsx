@@ -15,7 +15,6 @@ const ModalPayment = ({isOpenPayment, toggleModalPayment, profile}) => {
             priceId: "price_1L7x3lHq6KUjuv7INGxAtLq3"
         }))
 
-        console.log(response)
     }
 
 

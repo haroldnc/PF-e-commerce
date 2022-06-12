@@ -8,14 +8,16 @@ import MyProfileWorker from '../../components/MYPROFILE/MyProfileWorker/MyProfil
 
 import { ContainerProfile } from './Profile'
 import ModalPayment from '../../components/ModalPayment/ModalPayment.jsx'
-import { getWorkerDetail } from '../../store/actions/index'
+import { getUserById, getWorkerDetail } from '../../store/actions/index'
+import MyProfileUser from '../../components/MYPROFILE/MyProfileUser/MyProfileUser.jsx'
 
 const Profile = () => {
 
     const { id } = useParams()
     const dispatch = useDispatch()
     const [ isOpenPayment, setIsOpenPayment ] = useState(false)
-    const profile = useSelector(state => state.workerDetail)
+    const profile = useSelector(state => state.userDetail)
+
 
 
     let query = window.location.search.substring(1);
@@ -32,56 +34,70 @@ const Profile = () => {
 
     useEffect(() => {
         dispatch(getWorkerDetail(id))
+        dispatch(getUserById(id))
     }, [dispatch, id])
 
     const profileHARD= {
-        "languages":[{"idioma":"Ingles", "level": "Medio"}, {"idioma":"Ingles", "level": "Medio"}],
-        "skills":[],
-        "_id":"62927183a8415ffb1bf2a4c1",
-        "title":"Full Stack Developer",
-        "aboutMe":"Soy un joven estusiasta y autodidacta, con ganas de superarse...",
-        "textInfo":"Mi información....",
-        "pricePerHour":10,
-        "p_image":"https://www.springboard.com/blog/wp-content/uploads/2019/07/sb-blog-programming.png",
-        "web": "",
-        "subscribed": false,
-        "linkedin": "https://www.linkedin.com/in/mateo-monsalve-medina-153407137/",
-        "phone":"051934972209",
-        "userId": {
-           "punctuation":0,
-           "firstName":"Harold",
-           "lastName":"Navarro",
-           "email":"harold.mth95@gmail.com",
-           "image":"https://i.pinimg.com/564x/84/aa/0d/84aa0dadd6cbd869bf40397a1a59e4cb.jpg",
-           "dni":"71706175",
-           
-           "user_role":"628ef02007fe8bf42fb6a5f8",
-           "uid":"62926fb4a8415ffb1bf2a4bc"
+        "ok": true,
+        "user": {
+            "username": "mateoworker",
+            "firstName": "Mateo",
+            "lastName": "Monsalve",
+            "email": "mateoworkerprueba@gmail.com",
+            "image": "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+            "user_role": {
+            "_id": "628ef02007fe8bf42fb6a5f8",
+            "name": "worker"
+            },
+            "punctuation": 0,
+            "confirm_email": false,
+            "uid": "62a29a4bfb1c43631f420700"
         },
-        "workExperience":[],
-        "certifications":[]
-     }
+        "dataWorker": {
+            "_id": "62a29a4bfb1c43631f420701",
+            "title": "Desarrollador Full Stack",
+            "aboutMe": "Soy desarrollador Full Stack ...",
+            "textInfo": "",
+            "skills": [],
+            "pricePerHour": 0,
+            "p_image": "https://media.istockphoto.com/photos/programmer-controlling-the-statistics-of-the-site-picture-id1139938843?k=20&m=1139938843&s=612x612&w=0&h=nJSMJEvTGin4vsBZpTAmpFgE_-y5J-mPTzRAZ03lCjk=",
+            "dni": "103546884",
+            "phone": "3333333333",
+            "web": "https://www.linkedin.com/in/mateo-monsalve-medina-153407137/",
+            "linkedin": "https://www.linkedin.com/in/mateo-monsalve-medina-153407137/",
+            "score": 0,
+            "subscribed": true,
+            "userId": "62a29a4bfb1c43631f420700",
+            "languages": [],
+            "workExperience": [],
+            "certifications": [],
+            "__v": 0
+        }
+    }
 
-    const username = pair[0][1]
 
-    console.log(profile)
-
+    let TypeProfile = null
+    console.log('user',profile)
+    if( Object.entries(profile).length !== 0 ){
+        if(profile.user.user_role.name === "worker"){
+            TypeProfile = <MyProfileWorker profile={profile} toggleModalPayment={toggleModalPayment}/>
+        }else{
+            TypeProfile = <MyProfileUser profile={profile} toggleModalPayment={toggleModalPayment} />
+        }
+    }
+    
     return (
         <>
         {   
             Object.entries(profile).length !== 0 ?
             <ContainerProfile>
-            <MyProfileWorker 
-                    profile={profile} 
-                    username={username}
+                {TypeProfile}
+                <ModalPayment 
+                    isOpenPayment={isOpenPayment}
                     toggleModalPayment={toggleModalPayment}
+                    profile={profile.user.uid}
                 />
-            <ModalPayment 
-                 isOpenPayment={isOpenPayment}
-                 toggleModalPayment={toggleModalPayment}
-                 profile={profile.userId.uid}
-            />
-        </ContainerProfile> :
+            </ContainerProfile> :
         <h2>Cargando...</h2>
         }
         </>

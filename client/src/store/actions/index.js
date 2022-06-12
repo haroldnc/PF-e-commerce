@@ -1,4 +1,5 @@
 import axios from "axios";
+import { GiAxeInLog } from "react-icons/gi";
 
 export const getAllCategories = () => (dispatch) => {
   axios
@@ -168,16 +169,29 @@ export const PostPayment = (body) => (dispatch) => {
     .then((res) => dispatch({ type: "PAYMENT", payload: res.data }));
 };
 
-export const PostTransaction = (body) => {
-  axios
-    .post(`http://wixer-server.herokuapp.com/transactions`, body)
-    .then((res) => res);
-};
+
+export const PostTransaction = (body) => async () => {
+  await axios.post(`http://wixer-server.herokuapp.com/transactions`, body)
+}
+
+export const GetAllTransaction = () => dispatch => {
+  axios.get(`http://wixer-server.herokuapp.com/transactions`)
+  .then(res => dispatch({type: "GET_ALL_TRANSACTIONS", payload: res.data}))
+}
+
+export const GetTransactionById = (id) => dispatch => {
+  console.log('Funciono transacit')
+  axios.get(`http://wixer-server.herokuapp.com/transactions/${id}`)
+  .then(res => dispatch({type: "GET_TRANSACTIONS_BYID", payload: res.data}))
+}
+
 
 export const PutInfoWorker = (body, id) => async () => {
   await axios.put(`http://wixer-server.herokuapp.com/workers/${id}`, body);
 };
 
-export const PutInfoUser = (body, id) => async () => {
-  await axios.put(`http://wixer-server.herokuapp.com/user/${id}`, body);
-};
+export const PutInfoUser = (body,id) => async () => {  
+  await axios.put(`http://wixer-server.herokuapp.com/user/${id}`, body)
+}
+
+

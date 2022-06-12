@@ -1,25 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { clearState } from "../../store/actions/index";
+import { useSelector } from "react-redux";
 
 import { BsFacebook } from "react-icons/bs";
-import { BsTwitter } from "react-icons/bs";
-import { BsInstagram } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
 //import { BiWorld } from 'react-icons/bi';
 
-import { Container, InfoFooter, Wrapper } from "./styledInfoFooter.js";
+import { Container, InfoFooter, Wrapper, Redes } from "./styledInfoFooter.js";
 import { LastInfoFooter } from "./styledInfoFooter.js";
 import { CategoriesList } from "./styledInfoFooter.js";
 import { AboutList } from "./styledInfoFooter.js";
-import { ComunityList } from "./styledInfoFooter.js";
 import { Li } from "./styledInfoFooter.js";
 //import { tittleInfoFooter } from "./styledInfoFooter.js";
 
 const Footer = () => {
-
+  const categories = useSelector((state) => state.allCategories);
   const ruta = (window.location.href).substr(-5)
+
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <Container ruta={ruta}>
       <Wrapper>
@@ -27,15 +28,24 @@ const Footer = () => {
           <div>
             <h4 className="tittleInfo">Categorías</h4>
             <CategoriesList>
-                <Li>Artes gráficas y diseño</Li>
-                <Li>Marketing digital</Li>
-                <Li>Redacción y traducción</Li>
-                <Li>Video y animación</Li>
-                <Li>Música y audio</Li>
-                <Li>Programación y tecnología</Li>
-                <Li>Datos</Li>
-                <Li>Negocios</Li>
-                <Li>Estilo de vida</Li>
+            {
+              categories && categories
+              .sort((a, b) => {
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
+                return 0;
+              })
+
+              .map((category) => {
+                return (
+                  <Link to={`/categoria/${category._id}`} key={category._id} onClick={scrollUp}>
+                    <Li>
+                      {category.name}
+                    </Li>
+                  </Link>
+                );
+              })
+            }
             </CategoriesList>
           </div>
 
@@ -43,37 +53,24 @@ const Footer = () => {
             <h4 className="tittleInfo">Acerca de</h4>
 
             <AboutList>
-                <Li>Política de privacidad</Li>
-                <Li>Términos de Servicio</Li>
+                <Li><a href="https://drive.google.com/file/d/1JIEUwBY85VKJSy4D0lAYeX6IJmDb6omO/view?usp=sharing" target="_blank" rel="noreferrer">Política de privacidad</a></Li>
             </AboutList>
-          </div>
-
-          <div>
-            <h4 className="tittleInfo">Comunidad</h4>
-
-            <ComunityList>
-                <Li>Conviértete en vendedor</Li>
-                <Li>Afiliados</Li>
-                <Link to="/publicar"><Li>Publicar</Li></Link>
-            </ComunityList>
           </div>
         </InfoFooter>
 
         <LastInfoFooter>
           <LastInfoFooter useFlex>
-            <Link to="/">
+            <Link to="/" onClick={scrollUp}>
               <h2 className="footerCopyright" id="footerLogo">
-                Wixer
+                Wixxer
               </h2>
             </Link>
-            <p className="footerCopyright">© 2022 Wixer, All rights reserved</p>
+            <p className="footerCopyright">© 2022 Wixxer, All rights reserved</p>
           </LastInfoFooter>
 
           <LastInfoFooter useFlex>
-            <BsFacebook className="socials" />
-            <BsTwitter className="socials" />
-            <BsInstagram className="socials" />
-            <BsLinkedin className="socials" />
+            <Redes href="https://www.facebook.com/Wixxer-Argentina-108869201854960" target="_blank" rel="noreferrer"><BsFacebook className="socials" /></Redes>
+            <Redes href="https://www.linkedin.com/company/wixxer" target="_blank" rel="noreferrer"><BsLinkedin className="socials"/></Redes>
             {/*<p className='socials'><BiWorld/> Español</p>*/}
           </LastInfoFooter>
         </LastInfoFooter>

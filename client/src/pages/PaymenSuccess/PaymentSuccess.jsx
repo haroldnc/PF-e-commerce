@@ -13,16 +13,17 @@ const PaymentSuccess = () => {
     for (let i=0 ; i < vars.length ; i++) {
         pair.push(vars[i].split("=")) 
      }
-     console.log('query', pair[2][1])
 
      const dispatch = useDispatch()
-    //  useEffect(() => {
-    //     dispatch(PostTransaction({
-    //         sessionId: pair[1][1],
-    //         reason: "alguna razón",
-    //         user: pair[2][1]
-    //     }))
-    //  },[])
+
+     useEffect(() => {
+        dispatch(PostTransaction({
+            sessionId: pair[1][1],
+            reason: "alguna razón",
+            user: pair[2][1]
+        }))
+     },[])
+
 
     return (
         <ContainerSuccess>
@@ -33,10 +34,10 @@ const PaymentSuccess = () => {
                     <TextPrimary>Ahora podrás ofrecer tus servicios por nuestra plataforma</TextPrimary>
                     <Text>Recuerda completar todos los campos necesarios, tener tu perfil mas atractivo y asi atraer mas clientes</Text>
                     <div style={{display:"flex", justifyContent:"center", marginTop:"25px"}}>
-                        <Link to={`/chao`}>
+                        <Link to={`/profile/${pair[2][1]}`}>
                             <BtnProfile>Completa tu perfil</BtnProfile>
                         </Link>
-                        <Link to={`/hola`}>
+                        <Link to={`/publicar`}>
                             <BtnPublish>Publica tu primer servicio</BtnPublish>
                         </Link>
                     </div>
