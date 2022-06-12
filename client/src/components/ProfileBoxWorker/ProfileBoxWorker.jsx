@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Container } from './styledProfileBoxUser'
+import { Container } from './styledProfileBoxWorker'
 
 const ProfileBoxWorker = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
   const history = useHistory()
