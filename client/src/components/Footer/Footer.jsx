@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { BsFacebook } from "react-icons/bs";
-import { BsTwitter } from "react-icons/bs";
-import { BsInstagram } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
 //import { BiWorld } from 'react-icons/bi';
 
@@ -12,13 +10,17 @@ import { Container, InfoFooter, Wrapper, Redes } from "./styledInfoFooter.js";
 import { LastInfoFooter } from "./styledInfoFooter.js";
 import { CategoriesList } from "./styledInfoFooter.js";
 import { AboutList } from "./styledInfoFooter.js";
-import { ComunityList } from "./styledInfoFooter.js";
 import { Li } from "./styledInfoFooter.js";
 //import { tittleInfoFooter } from "./styledInfoFooter.js";
 
 const Footer = () => {
   const categories = useSelector((state) => state.allCategories);
   const ruta = (window.location.href).substr(-5)
+
+  const scrollUp = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <Container ruta={ruta}>
       <Wrapper>
@@ -36,7 +38,7 @@ const Footer = () => {
 
               .map((category) => {
                 return (
-                  <Link to={`/categoria/${category._id}`} key={category._id}>
+                  <Link to={`/categoria/${category._id}`} key={category._id} onClick={scrollUp}>
                     <Li>
                       {category.name}
                     </Li>
@@ -54,20 +56,11 @@ const Footer = () => {
                 <Li><a href="https://drive.google.com/file/d/1JIEUwBY85VKJSy4D0lAYeX6IJmDb6omO/view?usp=sharing" target="_blank" rel="noreferrer">Política de privacidad</a></Li>
             </AboutList>
           </div>
-
-          <div>
-            <h4 className="tittleInfo">Comunidad</h4>
-
-            <ComunityList>
-                <Li>Afiliados</Li>
-                <Link to="/publicar"><Li>Publicar</Li></Link>
-            </ComunityList>
-          </div>
         </InfoFooter>
 
         <LastInfoFooter>
           <LastInfoFooter useFlex>
-            <Link to="/">
+            <Link to="/" onClick={scrollUp}>
               <h2 className="footerCopyright" id="footerLogo">
                 Wixxer
               </h2>
@@ -76,9 +69,7 @@ const Footer = () => {
           </LastInfoFooter>
 
           <LastInfoFooter useFlex>
-            <BsFacebook className="socials" />
-            <BsTwitter className="socials" />
-            <BsInstagram className="socials" />
+            <Redes href="https://www.facebook.com/Wixxer-Argentina-108869201854960" target="_blank" rel="noreferrer"><BsFacebook className="socials" /></Redes>
             <Redes href="https://www.linkedin.com/company/wixxer" target="_blank" rel="noreferrer"><BsLinkedin className="socials"/></Redes>
             {/*<p className='socials'><BiWorld/> Español</p>*/}
           </LastInfoFooter>

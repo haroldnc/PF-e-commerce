@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Container } from './StyledProfileBox'
+import { Container } from './styledProfileBoxUser'
 
 const ProfileBox = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
   const history = useHistory()
@@ -16,7 +16,6 @@ const ProfileBox = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
     <Container isOpen={isOpen}>
       <ul onClick={handleToggle}>
         <li onClick={() => handleClick()}>Perfil</li>
-        <li><Link to="/publicar">Publicar</Link></li>
         <li onClick={toggleModalSignOut} >Cerrar sesión</li>
       </ul>
     </Container>
