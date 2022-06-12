@@ -25,19 +25,21 @@ export default function WorkersCarousel({profiles}){
         infinite: true,
         arrows: true,
         speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 3,   
+        slidesToShow: 2,
+        slidesToScroll: 1,   
         nextArrow: <SlickArrowLeft />,
         prevArrow: <SlickArrowRight />
        }
 
     //    const workerProfiles = profiles.map(p=>p)
     const availableProfiles = profiles.filter(person=> person.userId)
+    console.log(profiles)
+    console.log(availableProfiles)
 
 
     return(
         <>
-        {/* {profiles.length?
+        
         {availableProfiles.length?
 
             <WorkerDiv>
@@ -60,7 +62,7 @@ export default function WorkersCarousel({profiles}){
         </WorkerDiv>
         :
         <h1>...cargando</h1>
-                    } */}
+                    } 
         </>
 
     )

@@ -6,6 +6,7 @@ import MyProfileWorker from '../../components/MYPROFILE/MyProfileWorker/MyProfil
 import { ContainerProfile } from './Profile'
 import ModalPayment from '../../components/ModalPayment/ModalPayment.jsx'
 import { getUserById } from '../../store/actions/index'
+import MyProfileUser from '../../components/MYPROFILE/MyProfileUser/MyProfileUser.jsx'
 
 const Profile = () => {
 
@@ -71,16 +72,22 @@ const Profile = () => {
     }
 
 
-
+    let TypeProfile = null
+    console.log('user',profile)
+    if( Object.entries(profile).length !== 0 ){
+        if(profile.user.user_role.name === "worker"){
+            TypeProfile = <MyProfileWorker profile={profile} toggleModalPayment={toggleModalPayment}/>
+        }else{
+            TypeProfile = <MyProfileUser profile={profile} toggleModalPayment={toggleModalPayment} />
+        }
+    }
+    
     return (
         <>
         {   
             Object.entries(profile).length !== 0 ?
             <ContainerProfile>
-                <MyProfileWorker 
-                        profile={profile} 
-                        toggleModalPayment={toggleModalPayment}
-                    />
+                {TypeProfile}
                 <ModalPayment 
                     isOpenPayment={isOpenPayment}
                     toggleModalPayment={toggleModalPayment}

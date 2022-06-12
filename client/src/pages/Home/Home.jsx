@@ -22,9 +22,9 @@ const Home = ({ userInfo }) => {
 
   console.log('errr',profiles)
   useEffect(() => {
+    dispatch(getWorkers());
     dispatch(getAllCategories());
     dispatch(getAllUsers());
-    dispatch(getWorkers());
   }, [dispatch]);
 
 
