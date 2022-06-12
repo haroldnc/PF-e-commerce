@@ -28,24 +28,24 @@ const Footer = () => {
           <div>
             <h4 className="tittleInfo">Categorías</h4>
             <CategoriesList>
-            {
-              categories && categories
-              .sort((a, b) => {
-                if (a.name < b.name) return -1;
-                if (a.name > b.name) return 1;
-                return 0;
-              })
+              {
+                categories && categories
+                .sort((a, b) => {
+                  if (a.name < b.name) return -1;
+                  if (a.name > b.name) return 1;
+                  return 0;
+                })
 
-              .map((category) => {
-                return (
-                  <Link to={`/categoria/${category._id}`} key={category._id} onClick={scrollUp}>
-                    <Li>
-                      {category.name}
-                    </Li>
-                  </Link>
-                );
-              })
-            }
+                .map((category) => {
+                  return (
+                    <Link to={`/categoria/${category._id}`} key={category._id} onClick={scrollUp}>
+                      <Li>
+                        {category.name}
+                      </Li>
+                    </Link>
+                  );
+                })
+              }
             </CategoriesList>
           </div>
 
