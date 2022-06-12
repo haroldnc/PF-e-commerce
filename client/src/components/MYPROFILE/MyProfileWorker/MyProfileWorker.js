@@ -85,6 +85,7 @@ export const VistaPrevia = styled.button `
     border: 1px solid  rgba(0, 0, 0, 0.247);
     color:rgba(0, 0, 0, 0.247);
     font-family: 'Poppins', sans-serif;
+    transition: .3s ease;
 
 
     :hover{
@@ -244,6 +245,8 @@ export const BtnPay = styled.button `
     border-radius: 15px;
     color: white;
     cursor: pointer;
+  transition: .3s ease;
+
 
     &:hover{
         background-color: ${props => props.theme.colors.secondary}; 

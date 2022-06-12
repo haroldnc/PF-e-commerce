@@ -63,7 +63,7 @@ console.log(localId)
             ?
             filterCategoryFooter.map(f => f.services.map( s => (
               <div key={s._id}>
-                <CardSevices id={s._id} name={s.name} img={"https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/c51dbf5c160dac9bd067442911e65d16-1626181910196/Miscellaneous_2x.png"}/>
+                <CardSevices id={s._id} name={s.name} img={s.img?s.img:"https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/c51dbf5c160dac9bd067442911e65d16-1626181910196/Miscellaneous_2x.png"}/>
               </div>
             )))
             :
@@ -71,7 +71,7 @@ console.log(localId)
           }
           {filterCategoty.length > 0 ? filterCategoty.map(f => f.services.map( s => (
             <div key={s._id}>
-              <CardSevices id={s._id} name={s.name} img={"https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/c51dbf5c160dac9bd067442911e65d16-1626181910196/Miscellaneous_2x.png"}/>
+              <CardSevices id={s._id} name={s.name} img={s.img?s.img:"https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/attachments/generic_asset/asset/c51dbf5c160dac9bd067442911e65d16-1626181910196/Miscellaneous_2x.png"}/>
             </div>
           ))) 
           : 

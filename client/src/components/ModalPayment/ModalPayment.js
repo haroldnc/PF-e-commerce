@@ -13,6 +13,8 @@ export const ContainerPayment = styled.div `
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: .3s ease;
+
 
     ${({isOpenPayment}) => isOpenPayment ? "none" : `visibility: hidden`}
 `
@@ -36,39 +38,83 @@ export const BtnPayment = styled.button `
 export const Payment = styled.div `
     background-color: white;
     width: 50%;
-    height: 50%;
+    height: 85%;
     border-radius: 25px;
     padding: 25px;
+
 
     
 `
 export const Divglob = styled.div `
     display: flex;
     flexDirection: row;
-    height: 100%;
-    background-color: ${props => props.theme.colors.borderColor};
-    border-radius: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.247);
+    margin-top:20px;
+    height:90%;
+
+`
+
+export const Title = styled.h1 `
+    margin-top: 15px;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
 
 `
 
 export const DivPlan = styled.div `
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-left:1px solid rgba(0, 0, 0, 0.247);
+    border:1px solid rgba(0, 0, 0, 0.247);
+    background-color: ${props => props.theme.colors.borderColor};
+    margin-left: 10px;
+    margin-right: 10px;
+
 
 `
 
+
 export const CloseX = styled.button `
-    position: absolute;
     top: 26%;
     left: 26%;
     background-color: transparent;
     font-weight: 400;
     cursor:pointer;
+    width: 15%;
+    margin-left: 42%;
+    font-family: 'Poppins', sans-serif;
+    color:  rgba(0, 0, 0, 0.596);
+
+`
+export const TitlelGlobal = styled.h1 `
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    font-weight: 200;
+    text-align: center;
+
+` 
+
+export const Price = styled.h1 `
+    margin-top: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 50px;
+    font-weight:400;
+    margin-right: -10px;
+    margin-top: 10px;
+    
+`
+export const Linea = styled.div `
+    width:80%;
+    height:2px;
+    background-color: rgba(0, 0, 0, 0.247);
+
 `
 
+export const Benefit = styled.p `
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: rgba(39, 39, 39, 0.753);
+    font-family: 'Poppins', sans-serif;
+
+`
 

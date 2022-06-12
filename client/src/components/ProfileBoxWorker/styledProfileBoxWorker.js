@@ -19,9 +19,10 @@ export const Container = styled.div`
         text-align: center;
     }
 
-    li{
+    li {
         cursor: pointer;
         margin: 5px 0;
         font-weight: 500;
+        color: ${(props) => props.theme.colors.font};
     }
 `
