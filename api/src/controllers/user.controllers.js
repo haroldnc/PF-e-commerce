@@ -86,14 +86,14 @@ const upDateUser =  (req, res) => {
 const deleteUser = async (req, res) => {
     const { id } = req.params
     try {
-        const user = await User.findByIdAndDelete(id); // borra el usuario
-        console.log(user);
+        const user = await User.findById(id).populate('user_role','name'); // borra el usuario
 
-        const role = await User_roles.findById(user.user_role);
-        if(role.name === 'worker'){
-        await Publications.deleteMany({ 'idUser': id }); // borra las publicaciones del usuario
-        await DataWorkers.deleteMany({ 'idUser': id }); // borra los datos del trabajador
+        if(user.user_role.name === 'worker'){
+            await Publications.deleteMany({ user: id }); // borra las publicaciones del usuario
+            await DataWorkers.deleteOne({ userId: id }); // borra los datos del trabajador
         };
+
+        await User.findByIdAndDelete(id);
         res.status(200).json({
             ok: true,
             msg: 'User deleted'

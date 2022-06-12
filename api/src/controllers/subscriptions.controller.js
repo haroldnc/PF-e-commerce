@@ -57,7 +57,7 @@ const changeSubscriptionsStatus = async (req, res) => {
 
 		await DataWorkers.update({ userId: id }, {
 			subscribed,
-			subscription_type: subscribed? subs._id : null
+			subscription_type: subs._id
 		});
 		res.status(200).json({ msg: 'Subscriptions updated  successfully' })
 	} catch(error) {
@@ -82,8 +82,7 @@ const cancelSubscription = async (req, res) => {
 		});
 
 		await DataWorkers.update({ userId: id }, {
-			subscribed: false,
-			subscription_type: null
+			subscribed: false
 		});
 
 		res.status(200).json({ msg: `The Subscription ${period_end?'will be cancelled at the end of the period':'was cancelled'}`})
