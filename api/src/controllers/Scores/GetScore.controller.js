@@ -33,7 +33,7 @@ const getScores = async (req, res) => {
         return res.status(404);
     }
 }
-
+//promedio de score de 1 worker
 const getScore = async (req, res) => {
     const { publicationId, userId } = req.params;
 
@@ -47,7 +47,41 @@ const getScore = async (req, res) => {
         return res.sendStatus(404);
     }
 }
+
+const getScoresWorker = async (req, res) => {
+    const { publicationId } = req.params;
+    const { filterCriteria } = req.query;
+    
+    let scoreAverage = 0;
+    let scores = [];
+    let limit = 5;
+      
+    try {
+        if (filterCriteria === 'all') {
+            scores = await Scoremodel.find({ publication: userId }).limit(limit);
+        }
+        if (filterCriteria === 'positive') {
+            scores = await Scoremodel.find({ publication: userId, score: { $gt: 2 }}).limit(limit);
+        }
+        if (filterCriteria === 'negative') {
+            scores = await Scoremodel.find({ publication: userId, score: { $lt: 3 } }).limit(limit);
+        }
+
+        let reScores = await Scoremodel.find({ publication: userId });
+            
+        //calcular el promedio
+        const sum = reScores.reduce((partial_sum, r) => partial_sum + r.score, 0);
+        scoreAverage = (sum / reScores.length).toFixed(1);
+
+        return res.json({ scores, scoreAverage, totalScores: reScores.length });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(404);
+    }
+}
 module.exports = {
     getScores,
-    getScore
+    getScore,
+    getScoresWorker
 };

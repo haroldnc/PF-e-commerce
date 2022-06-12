@@ -12,9 +12,7 @@ const Scoremodel = Schema({
       required: [true, "falta message"],
     },
     score: {
-      type: Schema.Types.Double,
-      ref: "Publication",
-    
+      type: Schema.Types.Double  
     },
     user: {
         type: Schema.Types.ObjectId,
@@ -23,6 +21,10 @@ const Scoremodel = Schema({
     publication: {
         type: Schema.Types.ObjectId,
         ref: "Publication"
+    },
+    userId:{
+      type: Schema.Types.ObjectId,
+      ref: "User"
     },
 })
 Scoremodel.method('toJSON', function () {

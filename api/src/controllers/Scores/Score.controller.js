@@ -4,7 +4,7 @@ const Publications = require("../../models/Publications.js");
 
     const setScore = async (req,res, next) => {
         const { user, publicationId, title, score, message } = req.body;
-
+//idworker
         try {
             const ScoreExists = await Scoremodel.find({ user, publication});
             //Valido que se contrato el servicio por el autor de la puntuacion 
