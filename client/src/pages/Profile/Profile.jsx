@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+
+
+
 import MyProfileWorker from '../../components/MYPROFILE/MyProfileWorker/MyProfileWorker.jsx'
 
 import { ContainerProfile } from './Profile'
@@ -29,7 +32,7 @@ const Profile = () => {
 
     useEffect(() => {
         dispatch(getWorkerDetail(id))
-    }, [])
+    }, [dispatch, id])
 
     const profileHARD= {
         "languages":[{"idioma":"Ingles", "level": "Medio"}, {"idioma":"Ingles", "level": "Medio"}],

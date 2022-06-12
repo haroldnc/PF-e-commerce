@@ -33,7 +33,6 @@ const Services = () => {
   const Publicaciones = AllServices(27);
   const dispatch = useDispatch();
   const service = useSelector((state) => state.service);
-  console.log(service)
   const servicePosts = useSelector((state) => state.servicePosts);
   const userSignIn = useSelector((state) => state.userSignIn);
   const { userInfo } = userSignIn;
@@ -41,7 +40,6 @@ const Services = () => {
   const [pagePost, setPagePost] = useState(15);
   const [currentPage, setCurrentPage] = useState(1);
   const { id } = useParams();
-  console.log(userInfo)
 
   useEffect(() => {
     dispatch(getServiceById(id));

@@ -131,11 +131,22 @@ const rootReducer = (state = {}, action) => {
                 allPost:action.payload
             }
 
+        case "GET_WISHLIST":
+            return{
+                ...state,
+                wishlist: action.payload
+            }
+
+            case "GET_WISHLIST_BY_ID":
+                return{
+                    ...state,
+                    userWishlist: action.payload
+                }   
+
         case "ADD_TO_WISHLIST":
 
             return{
                 ...state,
-                wishlist: state.wishlist.concat(action.payload),
             }
 
         case "GET_POST_BY_QUERY":

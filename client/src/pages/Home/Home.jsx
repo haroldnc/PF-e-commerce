@@ -27,12 +27,15 @@ const Home = ({ userInfo }) => {
     dispatch(getWorkers());
   }, [dispatch]);
 
-
+  
+  
 
   return (
+    
     <Container>
       <Wrapper>
 
+  {userInfo && userInfo.confirm_email === false && alert("Tienes que confirmar tu mail para poder iniciar sesi")}
         <Hero />
         <Carousel allCategories={allCategories} />
         <Presentation />
