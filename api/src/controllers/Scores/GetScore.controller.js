@@ -49,7 +49,7 @@ const getScore = async (req, res) => {
 }
 
 const getScoresWorker = async (req, res) => {
-    const { publicationId } = req.params;
+    const { userId } = req.params;
     const { filterCriteria } = req.query;
     
     let scoreAverage = 0;
