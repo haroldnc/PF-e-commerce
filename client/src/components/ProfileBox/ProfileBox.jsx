@@ -9,18 +9,25 @@ const ProfileBox = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
 
   // console.log('usuario',userInfo.username)
   const handleClick = () => {
-    history.push(`/profile/${userInfo.uid}`)
+
+    history.push(`/profile/${userInfo.uid}?us=${userInfo.username}`);
+  };
+  const handleGoFavs = () => {
+    history.push(`/favoritos/${userInfo.uid}`);
   }
-  
+
+
   return (
     <Container isOpen={isOpen}>
       <ul onClick={handleToggle}>
         <li onClick={() => handleClick()}>Perfil</li>
+        <li onClick={() => handleGoFavs()}>Favoritos</li>
+        <li onClick={toggleModalSignOut}>Cerrar sesión</li>
         <li><Link to="/publicar">Publicar</Link></li>
         <li onClick={toggleModalSignOut} >Cerrar sesión</li>
       </ul>
     </Container>
-  )
-}
+  );
+};
 
-export default ProfileBox
+export default ProfileBox;

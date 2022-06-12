@@ -69,8 +69,16 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
         }
       );
       const finallyGoogle = await dataGoogle.data;
-      localStorage.setItem("userInfo", JSON.stringify(finallyGoogle.usuario));
+      dispatch(register(finallyGoogle.data))
+      localStorage.setItem("userInfo", JSON.stringify(finallyGoogle));
       handleResetPage();
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Inicio de sesión exitoso!',
+        showConfirmButton: false,
+        timer: 1500
+      })
       //navigate("/home");
     } catch (error) {
       console.log(error.response);
@@ -162,6 +170,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
             }}
             onSubmit={(values, { setSubmitting, resetForm }) => {
               setSubmitting(false);
+              resetForm();
               dispatch(register(values));
               Swal.fire({
                 position: "center",

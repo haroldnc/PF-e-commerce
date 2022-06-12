@@ -1,9 +1,8 @@
-import styled, {css} from "styled-components";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import styled from "styled-components";
 
-export const Card = styled.div`
+export const Container = styled.div`
   margin: 15px;
-  width: 16rem;
+  width: 15.5rem;
   border: 1px solid rgba(0, 0, 0, 0.089);
   border-radius: 5px;
   background-color: ${(props) => props.theme.colors.backgroundColorAlt};
@@ -14,39 +13,53 @@ export const Card = styled.div`
   position: relative;
 `;
 
-export const Image = styled.img`
+export const Image = styled.div`
   width: 100%;
-  height: 51%;
+  height: 10rem;
+  background: url(${props => props.img});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 `;
+
+export const Title = styled.h2`
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 18px;
+`
 
 export const Profile = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 10px;
-  margin: -5px 0px -2px 8px;
 `;
 
 export const ImgProfile = styled.img`
-  width: 10%;
-  height: 10%;
-  border-radius: 20px;
+  width: 2rem;
+  height:2rem;
+  border-radius: 9999px;
 `;
 
-export const NameProfile = styled.p`
+export const NameProfile = styled.h2`
   margin-left: 10px;
-  font-size: 18px;
-  font-family: "puppin";
-  font-weight: 800;
+  font-size: 15px;
+  font-weight: 500;
 `;
+
+export const DescriptionContainer = styled.div`
+  min-height: 6rem;
+`
+
 export const Description = styled.h2`
   margin-left: 15px;
   margin-right: 15px;
   text-align: left;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
   height: 68px;
 `;
+
 export const DivRating = styled.div`
   display: flex;
   flex-direction: row;
@@ -73,16 +86,16 @@ export const DivPay = styled.div`
 `;
 
 export const Staring = styled.p`
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.253);
+  font-size: 10px;
+  color: ${props => props.theme.colors.font};
 `;
 
-export const Pay = styled.h1`
+export const Pay = styled.h2`
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
-  font-size: 22px;
-  font-weight: 400;
+  font-size: 17px;
+  font-weight: 500;
   color: rgba(0, 0, 0, 0.664);
 `;
 
@@ -91,6 +104,7 @@ export const PriceContainer = styled.div`
   align-items: center;
   justify-content: center;
   margin-right: 10px;
+  flex-direction: column;
 `;
 
 export const BotonPago = styled.button`
@@ -100,7 +114,7 @@ export const BotonPago = styled.button`
   padding: 3px;
   border-radius: 5px;
   background-color: ${(props) => props.theme.colors.primary};
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   color: white;
   padding: 5px;
@@ -111,34 +125,4 @@ export const BotonPago = styled.button`
   &:hover {
     background-color: ${(props) => props.theme.colors.secondary};
   }
-`;
-export const HeartContainer = styled.div`
-  position: absolute;
-  width: 1.7rem;
-  height: 1.7rem;
-  z-index: 10;
-  top: 0px;
-  right: 5px;
-  background-color: ${(props) => props.theme.colors.backgroundColorAlt};
-  backdrop-filter: blur(5px);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  box-shadow: ${(props) => props.theme.boxShadow};
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-export const HeartOutline = styled(AiOutlineHeart)`
-  color: ${(props) => props.theme.colors.font};
-  font-size: 1.5rem;
-  font-weight: 900;
-  cursor: pointer;
-`;
-
-export const HeartFill = styled(AiFillHeart)`
-  color: red;
-  font-size: 1.5rem;
-  font-weight: 900;
-  cursor: pointer;
 `;

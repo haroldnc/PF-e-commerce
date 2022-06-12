@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+
+
+
 import MyProfileWorker from '../../components/MYPROFILE/MyProfileWorker/MyProfileWorker.jsx'
 
 import { ContainerProfile } from './Profile'
 import ModalPayment from '../../components/ModalPayment/ModalPayment.jsx'
-import { getUserById } from '../../store/actions/index'
+import { getUserById, getWorkerDetail } from '../../store/actions/index'
 import MyProfileUser from '../../components/MYPROFILE/MyProfileUser/MyProfileUser.jsx'
 import ModalCancelPayment from '../../components/ModalCancelPayment/ModalCancelPayment.jsx'
 import TypeCancel from '../../components/ModalCancelPayment/TypeCancel/TypeCancel.jsx'
@@ -45,8 +48,9 @@ const Profile = () => {
     }
 
     useEffect(() => {
+        dispatch(getWorkerDetail(id))
         dispatch(getUserById(id))
-    }, [])
+    }, [dispatch, id])
 
     const profileHARD= {
         "ok": true,

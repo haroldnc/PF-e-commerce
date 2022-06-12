@@ -69,6 +69,13 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
       const finallyGoogle = await dataGoogle.data;
       localStorage.setItem("userInfo", JSON.stringify(finallyGoogle.usuario));
       handleResetPage();
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Inicio de sesión exitoso!',
+        showConfirmButton: false,
+        timer: 1500
+      })
       //navigate("/home");
     } catch (error) {
       console.log(error.response);
@@ -122,15 +129,16 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
               resetForm();
               setSubmitting(false);
               dispatch(signin(values));
-              // handleResetPage();
-              // // Swal.fire({
-              // //   position: 'center',
-              // //   icon: 'success',
-              // //   title: 'Inicio de sesión exitoso!',
-              // //   showConfirmButton: false,
-              // //   timer: 1500
-              // // })
-              // toggleModalLogIn();
+              handleResetPage();
+              toggleModalLogIn();
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Inicio de sesión exitoso!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              
             }}
           >
             {(props, isSubmitting) => (
@@ -216,6 +224,7 @@ const ModalLogIn = ({ isOpenModalLogIn, toggleModalLogIn }) => {
                       onClick={renderProps.onClick}
                       disabled={renderProps.disabled}
                     >
+                    
                       <GoogleIcon />
                       Continuar con Google
                     </ButtonAlt>

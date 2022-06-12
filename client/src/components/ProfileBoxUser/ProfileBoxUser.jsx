@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Container } from './styledProfileBoxUser'
 
-const ProfileBox = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
+const ProfileBoxUser = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
   const history = useHistory()
 
   //62a29a4bfb1c43631f420701
@@ -19,7 +19,7 @@ const ProfileBox = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
         <li onClick={toggleModalSignOut} >Cerrar sesión</li>
       </ul>
     </Container>
-  )
-}
+  );
+};
 
-export default ProfileBox
+export default ProfileBoxUser;
