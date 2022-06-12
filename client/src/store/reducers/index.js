@@ -32,7 +32,7 @@ const rootReducer = (state = initialState, action) => {
         case "GET_ALL_USERS":
             return {
                 ...state,
-                allUsers: action.payload,
+                allUsers: action.payload.users,
             };
         case "GET_ALL_USERS_PAGESALL":
             return {

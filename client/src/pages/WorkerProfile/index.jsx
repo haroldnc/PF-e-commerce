@@ -11,11 +11,12 @@ export default function WorkerProfile (){
     const dispatch = useDispatch()
     const worker = useSelector((state)=>state.workerDetail)
     const arrayOfPost = useSelector((state)=>state.allPost)
+    console.log(arrayOfPost)
     var userPost = []
 
 
     function getUserPosts(wrkr, postArr){
-        if(wrkr.aboutMe !== undefined && postArr.length){
+        if(wrkr._id && postArr.length){
             userPost = postArr.filter(p=>p.user===wrkr.userId.uid)
             console.log(userPost)
             return userPost
@@ -31,6 +32,7 @@ export default function WorkerProfile (){
     }, [dispatch, id])
     
     getUserPosts(worker, arrayOfPost)
+    // console.log(getUserPosts(worker, arrayOfPost))
     // console.log(worker)
     // console.log(arrayOfPost)
     // const userPost= arrayOfPost.filter(p=>p.user===worker.userId.uid)
