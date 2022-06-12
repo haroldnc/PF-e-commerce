@@ -46,6 +46,7 @@ import Wishlist from "./pages/Wishlist/Wishlist";
 import PaymentSuccess from './pages/PaymenSuccess/PaymentSuccess.jsx'
 import Swal from "sweetalert2";
 import Favourites from "./pages/Favourites/Favourites";
+import PostComments from "./components/PostComments/PostComments";
 
 
  // const stripePromise = loadStripe("pk_test_51L5zjMHq6KUjuv7IIFciLODh9WoDWs5rnmbUrfSZVOfMMWN67dB15Ricdwoi8UNFfuIHL6lgzSTocRXWlYa7aBSA00oP1VlFMI");
@@ -129,6 +130,7 @@ function App() {
           <Route path="/lista-favoritos" component={Wishlist} />
           <Route exact path="/paysuccess" component={PaymentSuccess} />
           <Route path="/favoritos/:id" component={Favourites} userInfo={userInfo} />
+          <Route path="/comentar" component={PostComments}/>
         </Switch>
         <Footer />
         <ModalLogIn

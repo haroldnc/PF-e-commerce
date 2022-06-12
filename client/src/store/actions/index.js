@@ -194,6 +194,14 @@ export const PutInfoUser = (body,id) => async () => {
   await axios.put(`http://wixer-server.herokuapp.com/user/${id}`, body)
 }
 
+export const postComments = (comment) => async (dispatch) => {
+  axios
+    .post(`http://wixer-server.herokuapp.com/:publicationId`, comment)
+    .then((res) =>
+      dispatch({ type: "POST_COMMENT", payload: res.payload })
+    );
+};
+
 export const workerSubscibed = (body,id) => async() => {
   await axios.put(`http://wixer-server.herokuapp.com/subscriptions/${id}`, body)
 }

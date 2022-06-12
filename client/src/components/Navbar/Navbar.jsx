@@ -15,7 +15,7 @@ import {
 } from "./StyledNavbar";
 import ScrolledSearchbar from "./ScrolledSearchbar/ScrolledSearchbar";
 import ProfileBox from "../ProfileBox/ProfileBox";
-import ProfileBoxUser from "../ProfileBoxUser/ProfileBoxUser";
+import ProfileBoxWorker from "../ProfileBoxWorker/ProfileBoxWorker";
 
 const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleModalSignOut }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -80,10 +80,10 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
 
               
               {
-                userInfo.user_role.name && userInfo.user_role.name === "worker" ?
+                userInfo.user_role.name && userInfo.user_role.name === "user" ?
                 <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
                 :
-                <ProfileBoxUser isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
+                <ProfileBoxWorker isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
               }
               
             </UserInfo>
