@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { ContainerWorker,
          ContainerIzq, 
          ContainerDer,
@@ -36,6 +37,7 @@ import { ContainerWorker,
 
 import { PutInfoWorker, getWorkerDetail } from '../../../store/actions/index'
 import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
+import ProfileInactive from '../ProfileInactive/ProfileInactive.jsx'
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
@@ -44,8 +46,9 @@ import { GiSmartphone } from 'react-icons/gi'
 import { keyframes } from "styled-components";
 
 
-const MyProfileWorker = ({profile, toggleModalPayment}) => {
+const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}) => {
 
+    const history = useHistory()
     const dispatch = useDispatch()
     const [ image , setImage ] = useState("")
     const [ panel , setPanel ] = useState("historial")
@@ -87,12 +90,15 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
     let showPanel = null
     if(profile.dataWorker.subscribed){
         if(panel === "historial"){
-            showPanel = <HistorialPayProfile id={profile.user.uid}/>
+            showPanel = <HistorialPayProfile id={profile.user.uid} toggleModalPaymentCancel={toggleModalPaymentCancel}/>
         }
     }else{
-        showPanel = "No hay nada"
+        showPanel = <ProfileInactive toggleModalPayment={toggleModalPayment}/>
     }
     
+    const handleClickVista = () => {
+        history.push(`/worker/${profile.dataWorker._id}`)
+    }
 
     const RedirectLink = (url) => {
         window.open(url)
@@ -158,7 +164,7 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
                 <ImageContainer>
                     <ImageProfile src={infoWorker.image} alt="img"/>
                     <Username>{profile.user.username}</Username>
-                    <VistaPrevia>Vista previa del perfil de Wixxer</VistaPrevia>
+                    <VistaPrevia onClick={handleClickVista}>Vista previa del perfil de Wixxer</VistaPrevia>
                     <Linea></Linea>
                     <DivName>
                         <IconContext.Provider value={{size:"20px", color: "rgba(0, 0, 0, 0.596)"}}>

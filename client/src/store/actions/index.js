@@ -201,3 +201,16 @@ export const postComments = (comment) => async (dispatch) => {
       dispatch({ type: "POST_COMMENT", payload: res.payload })
     );
 };
+
+export const workerSubscibed = (body,id) => async() => {
+  await axios.put(`http://wixer-server.herokuapp.com/subscriptions/${id}`, body)
+}
+  
+export const cancelSubscription = (body,id) => async () => {
+  await axios.put(`http://wixer-server.herokuapp.com/subscriptions/cancel/${id}`, body)
+}
+
+export const changeSubscription = (body,id) => async() => {
+  await axios.post(`http://wixer-server.herokuapp.com/subscriptions/change/${id}`, body)
+}
+
