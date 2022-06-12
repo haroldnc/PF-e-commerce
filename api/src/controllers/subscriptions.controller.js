@@ -57,7 +57,7 @@ const changeSubscriptionsStatus = async (req, res) => {
 
 		await DataWorkers.update({ userId: id }, {
 			subscribed,
-			subscription_type: subscribed? null : subs._id
+			subscription_type: subscribed? subs._id : null
 		});
 		res.status(200).json({ msg: 'Subscriptions updated  successfully' })
 	} catch(error) {
