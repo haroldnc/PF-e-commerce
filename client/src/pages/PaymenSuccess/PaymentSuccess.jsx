@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import {Link} from 'react-router-dom'
-import { PostTransaction } from '../../store/actions/index'
+import { PostTransaction, workerSubscibed } from '../../store/actions/index'
 
 import { ContainerSuccess, Congrats, TextPrimary, Text,  BtnProfile, BtnPublish } from './paymentSuccess'
 
@@ -16,12 +16,25 @@ const PaymentSuccess = () => {
 
      const dispatch = useDispatch()
 
+     let price=""
+     if(pair[0][1].slice(-1) === "E"){
+        price = "Standard"
+     }else{
+        price = "Premium"
+     }
+
+     console.log('price',price)
+
      useEffect(() => {
         dispatch(PostTransaction({
             sessionId: pair[1][1],
-            reason: "alguna razón",
+            reason: price,
             user: pair[2][1]
         }))
+        dispatch(workerSubscibed({
+            "priceId": pair[0][1],
+            "subscribed": true 
+        }, pair[2][1]))
      },[])
 
 
