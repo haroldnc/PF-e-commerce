@@ -211,6 +211,6 @@ export const cancelSubscription = (body,id) => async () => {
 }
 
 export const changeSubscription = (body,id) => async() => {
-  await axios.post(`http://wixer-server.herokuapp.com/subscriptions/change/${id}`, body)
+  await axios.put(`http://wixer-server.herokuapp.com/subscriptions/change/${id}`, body)
 }
 
