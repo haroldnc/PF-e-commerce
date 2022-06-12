@@ -11,6 +11,26 @@ export const Form = styled.form`
     text-align: center;
     padding-left: 20rem;
     padding-right: 20rem;
+
+    @media screen and (max-width: 1001px) {
+        padding-left: 10rem;
+        padding-right: 10rem;
+    }
+
+    @media screen and (max-width: 679px) {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    @media screen and (max-width: 511px) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media screen and (max-width: 346px) {
+        padding-left: 0.1rem;
+        padding-right: 0.1rem;
+    }
 `
 
 export const CommentBody = styled.div`

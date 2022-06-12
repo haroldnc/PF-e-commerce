@@ -5,6 +5,16 @@ export const PublishFormSection = styled.div`
   padding: 5rem;
   justify-content: center;
   text-align: center;
+
+  @media screen and (max-width: 563px) {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  @media screen and (max-width: 454px) {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 `;
 
 export const Form = styled.form`
@@ -37,6 +47,46 @@ export const InputImage = styled.div`
   h3 {
     margin-bottom: 1rem;
   }
+
+  @media screen and (max-width: 1068px) {
+    padding: 0 17rem 0 17rem;
+  }
+  
+  @media screen and (max-width: 1000px) {
+    padding: 0 16rem 0 16rem;
+  }
+
+  @media screen and (max-width: 967px) {
+    padding: 0 13.5rem 0 13.5rem;
+  }
+
+  @media screen and (max-width: 894px) {
+    padding: 0 11.5rem 0 10.1rem;
+  }
+
+  @media screen and (max-width: 811px) {
+    padding: 0 9.5rem 0 9.5rem;
+  }
+
+  @media screen and (max-width: 765px) {
+    padding: 0 6.8rem 0 6.8rem;
+  }
+
+  @media screen and (max-width: 678px) {
+    padding: 0 4.8rem 0 4.8rem;
+  }
+
+  @media screen and (max-width: 609px) {
+    padding: 0 2.8rem 0 2.8rem;
+  }
+
+  @media screen and (max-width: 546px) {
+    padding: 0 0.8rem 0 0.8rem;
+  }
+
+  @media screen and (max-width: 352px) {
+    padding: 0;
+  }
 `;
 
 export const InputsDivs = styled.div`
@@ -53,6 +103,11 @@ export const InputsDivs = styled.div`
     outline: none;
     width: 21rem;
     height: 10rem;
+
+    @media screen and (max-width: 410px) {
+      width: 17rem;
+      height: 10rem;
+    }
   }
 
   textarea:focus {

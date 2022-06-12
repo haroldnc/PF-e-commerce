@@ -11,6 +11,7 @@ const PostComments = () => {
     //const userLogged = useSelector((state) => state.userSignIn);
     //const userID = userLogged.userInfo.uid;
     //const { publicationId } = useParams();
+    // /comentar/:publicationId
 
     const [rating, setRating] = useState(0);
 
@@ -87,7 +88,7 @@ const PostComments = () => {
                 </div>
 
                 <CommentBody>
-                    <Rating onClick={handleRating} ratingValue={rating} className="stars"/>
+                    <Rating onClick={handleRating} ratingValue={rating} className="stars" fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}/>
                     <Inputs>
                         <input type="text" name='title' placeholder="Titulo" value={input.title} onChange={handleInputChange}></input>
                         <br></br>
