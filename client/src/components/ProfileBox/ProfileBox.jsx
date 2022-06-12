@@ -22,8 +22,6 @@ const ProfileBox = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => {
       <ul onClick={handleToggle}>
         <li onClick={() => handleClick()}>Perfil</li>
         <li onClick={() => handleGoFavs()}>Favoritos</li>
-        <li onClick={toggleModalSignOut}>Cerrar sesión</li>
-        <li><Link to="/publicar">Publicar</Link></li>
         <li onClick={toggleModalSignOut} >Cerrar sesión</li>
       </ul>
     </Container>
