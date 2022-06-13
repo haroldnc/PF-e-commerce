@@ -4,15 +4,17 @@ import { IconContext } from "react-icons";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-const Card = ({ title, img, description, price, service, id, userInfo, profile_img, firstName, lastName, rating }) => {
+const Card = ({ title, img, description, price, service, id, userPost,userInfo, profile_img, firstName, lastName, rating }) => {
 
-  const fullName = userInfo.firstName + " " + userInfo.lastName
+  const fullName = userPost.firstName + " " + userPost.lastName //el nombre del usuario que hizo el post
+
+  console.log(userPost)
 
   return (
     <Container>
       <Image img={img} />
             <Profile>
-              <ImgProfile src={userInfo.image} />
+              <ImgProfile src={userPost.image} />
               <NameProfile>{fullName}</NameProfile>
             </Profile>
       <Title>{title}</Title>

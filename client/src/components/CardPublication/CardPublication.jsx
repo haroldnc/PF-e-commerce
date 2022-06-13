@@ -40,7 +40,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
   const handleIcon = (idUser, idPublication) => {
     dispatch(addToWishlist(idUser, idPublication));
   };
-  console.log(pageslice,userInfo)
+  console.log(pageslice)
 
   return (
     <>
@@ -55,7 +55,8 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
             id={card.id}
             description={card.description}
             rating={card.rating}
-            userInfo={userInfo}
+            userPost={card.user}
+            userInfo
           />
           // <Card key={card.id}>
           //   <HeartContainer onClick={() => handleIcon(userInfo.uid, card._id)}>
