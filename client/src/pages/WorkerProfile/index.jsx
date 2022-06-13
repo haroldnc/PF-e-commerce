@@ -17,7 +17,7 @@ export default function WorkerProfile (){
 
     function getUserPosts(wrkr, postArr){
         if(wrkr._id && postArr.length){
-            userPost = postArr.filter(p=>p.user===wrkr.userId.uid)
+            userPost = postArr.filter(p=>p.user.uid===wrkr.userId.uid)
             console.log(userPost)
             return userPost
         }
@@ -98,7 +98,7 @@ export default function WorkerProfile (){
             {
                 userPost.length?
                 userPost.map(p=>(
-                    <ProfilePostDetailCard key={p.id} title={p.title} img={p.img} id={p.id} />
+                    <ProfilePostDetailCard key={p._id} title={p.title} img={p.img} id={p._id} />
                 ))
                 :
                 <h4>...cargando datos</h4>
