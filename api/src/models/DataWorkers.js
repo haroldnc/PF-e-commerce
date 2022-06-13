@@ -162,8 +162,7 @@ const DataWorkers = Schema({
     },
     userId:{
         type: Schema.Types.ObjectId,
-        ref: "User",
-        default: mongoose.Types.ObjectId("62a6dd77e56b6f3e0ad916cd")
+        ref: "User"
     }
 })
 

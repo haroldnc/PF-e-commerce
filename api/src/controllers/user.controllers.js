@@ -159,6 +159,8 @@ const createUser = async (req, res) => {
             await DataWorkers.create({
                 dni,
                 phone,
+                subscribed: false,
+                subscription_type: "62a6dd77e56b6f3e0ad916cd",
                 userId: usuario._id
             })
         }
