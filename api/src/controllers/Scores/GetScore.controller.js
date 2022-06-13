@@ -1,16 +1,18 @@
 const Scoremodel = require ("../../models/Scores.js");
 const Publications = require("../../models/Publications.js");
+const User =require ("../../models/User.js");
+
 
 const getScores = async (req, res) => {
     const { publicationId } = req.params;
     const { filterCriteria } = req.query;
-    
+    console.log("log filterCriteria",filterCriteria);
     let scoreAverage = 0;
     let scores = [];
     let limit = 5;
       
     try {
-        if (filterCriteria === 'all') {
+        if (filterCriteria === 'all' || filterCriteria === undefined) {
             scores = await Scoremodel.find({ publication: publicationId }).limit(limit);
         }
         if (filterCriteria === 'positive') {
@@ -19,7 +21,17 @@ const getScores = async (req, res) => {
         if (filterCriteria === 'negative') {
             scores = await Scoremodel.find({ publication: publicationId, score: { $lt: 3 } }).limit(limit);
         }
-
+        for (let i = 0; i < scores.length; i++) {
+            const usuario = await User.findById(scores[i].user)
+            const St = {
+                "title":scores[i].title,
+                "message":scores[i].message,
+                "score":scores[i].score,
+                "user":usuario.firstName + " " + usuario.lastName
+            } 
+            scores[i] = St
+        } 
+        
         let reScores = await Scoremodel.find({ publication: publicationId });
             
         //calcular el promedio
@@ -40,7 +52,17 @@ const getScore = async (req, res) => {
     try {
         const ScoreExists = await Scoremodel.find({ publication: publicationId, user: userId });
 
-        return res.json(ScoreExists);
+    for (let i = 0; i < ScoreExists.length; i++) {
+        const usuario = await User.findById(ScoreExists[i].user)
+        const St = {
+            "title":ScoreExists[i].title,
+            "message":ScoreExists[i].message,
+            "score":ScoreExists[i].score,
+            "user":usuario.firstName + " " + usuario.lastName
+        } 
+        ScoreExists[i] = St
+    }      
+    return res.json(ScoreExists);
 
     } catch (error) {
         console.log(error);
