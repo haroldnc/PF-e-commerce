@@ -18,6 +18,10 @@ const tables = {
          "textInfo",
          "pricePerHour",
          "p_image",
+         "dni",
+         "phone",
+         "web",
+         "linkedin",
          "userId"
       ]
    },
@@ -51,10 +55,6 @@ const tables = {
          "password",
          "image",
          "user_role",
-         "dni",
-         "phone",
-         "web",
-         "linkedin",
          "punctuation",
          "confirm_email"
       ]
