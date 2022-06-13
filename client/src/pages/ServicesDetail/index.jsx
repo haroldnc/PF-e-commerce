@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { Parent, DetailContainer, BuyContainer, ProfileImg, PostPicture, UserInfo, DescriptionContainer, ContactButton, HireButton, SubTitle, SubTitle2, ProfileLink } from "./styled_Services_Detail";
 import {Link, useParams} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers } from "../../store/actions";
+import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers, clearServiceDetail } from "../../store/actions";
 import PostDetailCard from "../../components/PostDetailCard";
 
 
@@ -51,13 +51,22 @@ export default function ServicesDetail(){
         dispatch(getUserById(post.user))
         dispatch(getAllPosts())
         dispatch(getWorkers())
+
+     
+
+
+        // return ()=>{
+        //     dispatch(clearServiceDetail())
+        // }
         
        
         
 
 
         
-     },[dispatch, id, post.user])
+    },[dispatch, id, post.user])
+    
+    
 
     
 

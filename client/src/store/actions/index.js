@@ -77,6 +77,11 @@ export const clearState = () => {
   return { type: "CLEAR_STATE" };
 };
 
+
+export const clearServiceDetail = () => {
+  return { type: "CLEAR_SERVICE_DETAIL" };
+};
+
 export const getPosts = () => (dispatch) => {
   axios
     .get(`http://wixer-server.herokuapp.com/posts`)
