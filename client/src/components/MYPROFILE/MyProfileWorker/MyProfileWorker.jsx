@@ -112,6 +112,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         history.push(`/worker/${profile.dataWorker._id}`)
     }
 
+    console.log('perfiluser',profile )
     const RedirectLink = (url) => {
         window.open(url)
     }
@@ -161,7 +162,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
   }
 
   const handleChangeImage = () => {
-    dispatch(PutInfoUser({ image : image }))
+    dispatch(PutInfoUser({ image : image },profile.dataWorker.userId ))
     setShowBtn(!showBtn)
   }
 
