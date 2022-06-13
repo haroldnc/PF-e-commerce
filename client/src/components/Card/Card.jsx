@@ -12,7 +12,9 @@ const Card = ({ title, img, description, price, service, id, userPost,userInfo, 
 
   return (
     <Container>
+      <Link to={`/posts/detail/${id}`}>
       <Image img={img} />
+      </Link>
             <Profile>
               <ImgProfile src={userPost.image} />
               <NameProfile>{fullName}</NameProfile>
