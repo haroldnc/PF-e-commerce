@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 
 const Card = ({ title, img, description, price, service, id, userInfo, profile_img, firstName, lastName, rating }) => {
 
-  const fullName = firstName + " " + lastName
+  const fullName = userInfo.firstName + " " + userInfo.lastName
 
   return (
     <Container>
       <Image img={img} />
             <Profile>
-              <ImgProfile src={profile_img} />
+              <ImgProfile src={userInfo.image} />
               <NameProfile>{fullName}</NameProfile>
             </Profile>
       <Title>{title}</Title>
