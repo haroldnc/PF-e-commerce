@@ -130,7 +130,7 @@ function App() {
           <Route path="/lista-favoritos" component={Wishlist} />
           <Route exact path="/paysuccess" component={PaymentSuccess} />
           <Route path="/favoritos/:id" component={Favourites} userInfo={userInfo} />
-          <Route path="/comentar" component={PostComments}/>
+          <Route path="/comentar/:publicationId" component={PostComments}/>
         </Switch>
         <Footer />
         <ModalLogIn
