@@ -14,8 +14,8 @@ export default function ServicesDetail(){
     const {id} = useParams()
     // console.log(id)
     const dispatch = useDispatch()
-    const post = useSelector((state)=>state.post)
-    const user = useSelector((state)=>state.userDetail.user)
+    var post = useSelector((state)=>state.post)
+    var user = useSelector((state)=>state.userDetail.user)
     // console.log(user)
     const workers = useSelector((state)=>state.workers)
     var arrayOfPosts = []
@@ -57,7 +57,7 @@ export default function ServicesDetail(){
 
 
         
-     },[])
+     },[dispatch, id, post.user])
 
     
 
@@ -108,7 +108,10 @@ export default function ServicesDetail(){
             </BuyContainer>
         </Parent>
         :
-        <h1>...cargando</h1>
+        <Parent>
+            <h1>...cargando</h1>
+
+        </Parent>
     }
         </>
     )
