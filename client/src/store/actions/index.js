@@ -88,6 +88,12 @@ export const getPosts = () => (dispatch) => {
     .then((res) => dispatch({ type: "GET_POSTS", payload: res.data }));
 };
 
+export const clearPostPrevius = () => {
+  return{
+    type: "CLEAR_POSTS"
+  }
+}
+
 export const getPostsByServiceId = (id) => (dispatch) => {
   axios
     .get(`https://wixer-server.herokuapp.com/posts/service/${id}`)

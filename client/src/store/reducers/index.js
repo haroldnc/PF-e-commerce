@@ -139,6 +139,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allPost:action.payload
             }
+        case "CLEAR_POSTS":
+            return{
+                ...state,
+                servicePosts:[]
+            }
 
         case "GET_WISHLIST":
             return{
