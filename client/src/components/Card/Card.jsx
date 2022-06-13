@@ -8,13 +8,19 @@ const Card = ({ title, img, description, price, service, id, userPost,userInfo, 
 
   const fullName = userPost.firstName + " " + userPost.lastName //el nombre del usuario que hizo el post
 
+  console.log(id)
   console.log(userPost)
 
   return (
     <Container>
-      <Link to={`/posts/detail/${id}`}>
-      <Image img={img} />
-      </Link>
+      { id?
+        <Link to={`/posts/detail/${id}`}>
+        <Image img={img} />
+        </Link>
+        :
+        <Image img={img} />
+
+      }
             <Profile>
               <ImgProfile src={userPost.image} />
               <NameProfile>{fullName}</NameProfile>
