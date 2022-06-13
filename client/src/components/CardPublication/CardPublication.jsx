@@ -53,7 +53,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
             img={card.img}
             price={card.price}
             service={card.service}
-            id={card.id}
+            id={card._id}
             description={card.description}
             rating={card.rating}
             userPost={card.user}

@@ -29,7 +29,7 @@ export default function ServicesDetail(){
     // console.log(user.username)
     // console.log(post.title)
         if(arrayOfPosts.length ){
-            userPost= arrayOfPosts.filter(p=>p.user===post.user)
+            userPost= arrayOfPosts.filter(p=>p.user.uid===post.user)
 
         }
     //    console.log(userPost)
