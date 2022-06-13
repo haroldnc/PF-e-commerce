@@ -124,15 +124,17 @@ const DataWorkers = Schema({
     ],
     dni: {
         type: String,
-        require: [true, 'DNI number is required'],
+        //require: [true, 'DNI number is required'],
+        default: "00000000"
     },
     phone: {
         type: String,
-        require: [true, 'Phone number is required'],
-        validate: {
+        //require: [true, 'Phone number is required'],
+        /*validate: {
             validator: (v) => /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/i.test(v),
             message: props => `Phone number is not valid`
-        }
+        },*/
+        default: "005491115144545"
     },
     web: {
         type: String,
@@ -140,11 +142,11 @@ const DataWorkers = Schema({
             validator: (v) => /^(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/i.test(v),
             message: props => `Web is not valid`
         },*/
-        default: ""
+        default: "http://www.miweb.com"
     },
     linkedin: {
         type: String,
-        default: ""
+        default: "http://www.linkedin.com/miusuario"
     },
     score: {
         type: Schema.Types.Double,
