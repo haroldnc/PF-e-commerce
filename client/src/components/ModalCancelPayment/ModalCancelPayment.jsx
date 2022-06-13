@@ -13,10 +13,15 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
 
     let LastTrans = "";
     if(Alltransaction){
-        LastTrans = Alltransaction.pop()
+        if(Alltransaction.length === 1){
+            LastTrans = Alltransaction
+        }else{
+            LastTrans = Alltransaction.pop()
+        }
     } 
+    console.log('trans', LastTrans)
 
-    console.log( 'transaction',LastTrans.sessionId)
+
 
     const cancelInmed = () =>{
         Swal.fire({
@@ -35,7 +40,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
                 'success'
               )
                 dispatch(cancelSubscription({
-                    sessionId: LastTrans.sessionId,
+                    sessionId: LastTrans[0].sessionId,
                     period_end: false
                 },profile))
                 toggleModalPaymentCancel()

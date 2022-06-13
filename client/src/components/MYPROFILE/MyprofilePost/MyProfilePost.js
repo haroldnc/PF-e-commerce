@@ -29,8 +29,33 @@ export const BtnPublic = styled.button `
 
 export const ContainerCards = styled.div `
     width: 100%;
-    display: flex;
+    display: grid;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
+`
+export const ContainerNopost = styled.div `
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align:center;
+    width:100%;
+    height:100%
+`
+
+export const Textone = styled.h1 `
+    color: rgba(0, 0, 0, 0.596);
+    text-align: center;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 15px;
+`
+
+export const TextTwo = styled.h3 `
+    color: rgba(0, 0, 0, 0.596);
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 30px;
+    margin-bottom:30px;
+    font-size: 20px;
 `
