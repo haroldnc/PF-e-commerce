@@ -6,11 +6,13 @@ const {upDatePost , deletePost} = require("../controllers/Publications/PostRoute
 const { getPostsByService } = require("../controllers/Publications/ByServiceID.controller");
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar.campos');
+const { getPostsByUser } = require("../controllers/Publications/ByUserID.controller");
 
 const router = Router()
 
 router.get("/", getAll);
-router.get("/:id", getId)
+router.get("/:id", getId);
+router.get("/user/:id", getPostsByUser);
 router.get("/service/:idService", getPostsByService);
 router.post("/",
 [
