@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Card = styled.div `
     width: 280px;
+    height: 250px;
     margin: 15px;
     margin-bottom: 30px;
     cursor: pointer;
@@ -9,7 +10,8 @@ export const Card = styled.div `
 
 export const Imagen = styled.img `
     width: 100%;
-    height: 50%;
+    height: 85%;
+    border-radius: 10px;
 
     &:hover{
         filter: brightness(110%); 

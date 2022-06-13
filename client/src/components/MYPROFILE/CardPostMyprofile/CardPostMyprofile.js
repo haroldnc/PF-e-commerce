@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   margin: 15px;
-  width: 15.5rem;
+  width: 14.5rem;
   border: 1px solid rgba(0, 0, 0, 0.089);
   border-radius: 5px;
   background-color: ${(props) => props.theme.colors.backgroundColorAlt};
@@ -25,6 +25,7 @@ export const Image = styled.div`
 export const Title = styled.h2`
   margin-left: 15px;
   margin-right: 15px;
+  margin-top: 15px;
   font-size: 18px;
 `
 
@@ -48,7 +49,7 @@ export const NameProfile = styled.h2`
 `;
 
 export const DescriptionContainer = styled.div`
-  min-height: 6rem;
+  min-height: 7rem;
 `
 
 export const Description = styled.h2`

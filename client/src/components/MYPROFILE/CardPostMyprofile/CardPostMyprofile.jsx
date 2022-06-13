@@ -1,5 +1,5 @@
 import React from "react";
-import { BotonPago, Container, Description, DivPay, DivRating, Image, PriceContainer, Rating, Staring, Pay, Title, Profile, ImgProfile, NameProfile, DescriptionContainer } from "./StyledCard";
+import { BotonPago, Container, Description, DivPay, DivRating, Image, PriceContainer, Rating, Staring, Pay, Title, Profile, ImgProfile, NameProfile, DescriptionContainer } from "./CardPostMyprofile";
 import { IconContext } from "react-icons";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -11,15 +11,14 @@ const CardPostMyprofile = ({ title, img, description, price, service, id, userIn
   return (
     <Container>
       <Image img={img} />
-            <Profile>
+            {/* <Profile>
               <ImgProfile src={profile_img} />
               <NameProfile>{fullName}</NameProfile>
-            </Profile>
+            </Profile> */}
       <Title>{title}</Title>
       <DescriptionContainer>
         <Description>{description}</Description>
       </DescriptionContainer>
-      
       <DivRating>
         <IconContext.Provider value={{ color: "rgb(202, 182, 0)" }}>
           <div>
@@ -31,7 +30,7 @@ const CardPostMyprofile = ({ title, img, description, price, service, id, userIn
         
       </DivRating>
       <DivPay>
-          {userInfo && userInfo.confirm_email === true ? (
+          {/* {userInfo && userInfo.confirm_email === true ? (
             <Link to={`/compra/${id}`}>
               <BotonPago>Contratar</BotonPago>
             </Link>
@@ -41,7 +40,7 @@ const CardPostMyprofile = ({ title, img, description, price, service, id, userIn
             >
               Contratar
             </BotonPago>
-          )}
+          )} */}
           <PriceContainer>
             <Staring>COMIENZA EN</Staring>
             <Pay>US${price}</Pay>

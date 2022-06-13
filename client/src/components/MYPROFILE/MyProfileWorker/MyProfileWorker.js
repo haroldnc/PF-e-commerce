@@ -384,3 +384,85 @@ export const TextPremium = styled.p `
     color: rgb(179, 156, 31);
 `
 
+export const Fileselect = styled.div `
+    position: relative;
+    display: inline-block;
+    margin-top: 10px;
+    width: 70px;  
+    height: 25px; 
+
+    &::before{
+        background-color: ${props => props.theme.colors.primary};
+        color: white;
+        font-family: 'roboto', sans-serif;
+        font-weight: 400;
+        font-size: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        content: 'Subir foto'; 
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        cursor: pointer;
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.575);
+    }
+
+    input[type="file"] {
+        opacity: 0;
+        width: 150px;
+        height: 32px;
+        display: inline-block;
+    }
+`
+
+export const BtnPerfil = styled.h1 `
+    color: ${props => props.theme.colors.primary};
+    border: 1px solid ${props => props.theme.colors.primary};
+    font-size:10px;
+    font-weight: 400;
+    font-family: 'roboto', sans-serif;
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-right: 15px;
+
+    &:hover{
+    color: white;
+    background-color: ${props => props.theme.colors.primary};
+
+    }
+
+`
+
+export const BtnPrefilCancel = styled.h1 `
+    color: red;
+    border: 1px solid red;
+    font-size:10px;
+    font-weight: 400;
+    font-family: 'roboto', sans-serif;
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover{
+    color: white;
+    background-color: red;
+
+    }
+
+`
+export const DivButtons = styled.div `
+    display:flex;
+    flex-direction:row;
+    margin-top:15px;
+    ${({showBtn}) => showBtn ? "none" : `visibility: hidden` }
+
+`
+
+

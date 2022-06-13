@@ -29,8 +29,7 @@ export const BtnPublic = styled.button `
 
 export const ContainerCards = styled.div `
     width: 100%;
-    display: flex;
+    display: grid;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
 `
