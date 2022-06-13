@@ -12,6 +12,12 @@ const MyProfilePost = ({id}) => {
     const allPost = useSelector(state => state.postsByUser)
 
     console.log('posts', allPost)
+    let posts = null
+    if(allPost){
+        if(allPost.length !== 0){
+            posts = allPost
+        }
+    }
 
 
     const handleClickPost = () =>{
@@ -29,7 +35,7 @@ const MyProfilePost = ({id}) => {
                 <BtnPublic onClick={handleClickPost}>Publicar servicio</BtnPublic>
             </NavPost>
             {
-                allPost ?
+                posts ?
                 <ContainerCards>
                 {
                    allPost.map( (p, index) => (
