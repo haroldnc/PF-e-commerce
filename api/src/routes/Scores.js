@@ -6,7 +6,7 @@ const { validarADMIN_ROLE } = require('../middlewares/validarAdminRole');
 const router = Router()
 
 router.get('/:publicationId', getScores)
-router.get('/:userId', getScoresWorker)
+router.get('/worker/:userId', getScoresWorker)
 router.get('/:publicationId/:userId', getScore)
 router.post('/',setScore)
 

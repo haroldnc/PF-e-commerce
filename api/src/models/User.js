@@ -1,4 +1,6 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model} = require('mongoose');
+var mongoose = require ("mongoose")
+require ("mongoose-double")(mongoose)
 
 const User = Schema({
     username: {
@@ -82,9 +84,8 @@ const User = Schema({
         type: Schema.Types.ObjectId,
         ref: 'User_roles'  
     },    
-    punctuation: {
-        type: Number,
-        default: 0
+    score: {
+        type: Schema.Types.Double  
     },
     // estado del usuario confirmacion de mail? Evaluar si queda o no.
     confirm_email: {

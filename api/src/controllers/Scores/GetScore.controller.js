@@ -1,6 +1,7 @@
 const Scoremodel = require ("../../models/Scores.js");
 const Publications = require("../../models/Publications.js");
 const User =require ("../../models/User.js");
+const DataWorkers = require("../../models/DataWorkers.js")
 
 
 const getScores = async (req, res) => {
@@ -79,23 +80,27 @@ const getScoresWorker = async (req, res) => {
     let limit = 5;
       
     try {
-        if (filterCriteria === 'all') {
-            scores = await Scoremodel.find({ publication: userId }).limit(limit);
-        }
-        if (filterCriteria === 'positive') {
-            scores = await Scoremodel.find({ publication: userId, score: { $gt: 2 }}).limit(limit);
-        }
-        if (filterCriteria === 'negative') {
-            scores = await Scoremodel.find({ publication: userId, score: { $lt: 3 } }).limit(limit);
-        }
-
-        let reScores = await Scoremodel.find({ publication: userId });
+            const trabajador = await DataWorkers.findById(userId)
+            console.log("log trabajador",trabajador);
+            let publicaciones = await Publications.find({user:trabajador.userId})
+            console.log("log publicaciones",publicaciones);
             
-        //calcular el promedio
-        const sum = reScores.reduce((partial_sum, r) => partial_sum + r.score, 0);
-        scoreAverage = (sum / reScores.length).toFixed(1);
+            for (let i = 0; i < publicaciones.length; i++) {
+                const e = await Scoremodel.find({ publication: publicaciones[i].id }).limit(limit);
 
-        return res.json({ scores, scoreAverage, totalScores: reScores.length });
+                scores.push(e)
+                
+            }
+            console.log("log scores",scores);
+            // let reScores = await Scoremodel.find({ publication: userId });
+            publicaciones = publicaciones.map(p => p.score)    
+            publicaciones = publicaciones.flat()
+
+            //calcular el promedio
+            const sum = publicaciones.reduce((partial_sum, r) => partial_sum + r, 0);
+            scoreAverage = (sum / publicaciones.length).toFixed(1);
+            console.log("log sum",sum);
+            return res.json({ scores, scoreAverage, totalScores: publicaciones.length });
 
     } catch (error) {
         console.log(error);
