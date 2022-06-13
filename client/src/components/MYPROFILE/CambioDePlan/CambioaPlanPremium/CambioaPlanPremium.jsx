@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import { ContainerCambio ,DivGob, Title, TextOne, TextTwo, Btn, BtnCancel, Parr  } from './CambioaPlanPemium'
 import { changeSubscription, GetTransactionById } from '../../../../store/actions/index'
 
-const CambioaPlanPremium = ({profile, isOpenChangeStandard, toggleIsOpenChangeStandard}) => {
+const CambioaPlanPremium = ({profile, isOpenChangePremium, toggleIsOpenChangePremium}) => {
 
     const dispatch = useDispatch()
     
@@ -24,7 +24,7 @@ const CambioaPlanPremium = ({profile, isOpenChangeStandard, toggleIsOpenChangeSt
     const handlechange = () => {
         
         Swal.fire({
-            title: 'Estas seguro?',
+            title: '¡Cambiate ahora!',
             text: "Tu plan se cambiará inmediatamente",
             icon: 'warning',
             showCancelButton: true,
@@ -35,14 +35,14 @@ const CambioaPlanPremium = ({profile, isOpenChangeStandard, toggleIsOpenChangeSt
             if (result.isConfirmed) {
               Swal.fire(
                 'Plan cambiado correctamente!',
-                'Tu plan cambiara a Standard inmediatamente',
+                'Tu plan cambiara a Premium inmediatamente',
                 'success'
               )
               dispatch(changeSubscription({
                 sessionId: LastTrans[0].sessionId,
                 priceId: "price_1L8o5dHq6KUjuv7Ihuith57b"
             }, profile))
-                toggleIsOpenChangeStandard()
+            toggleIsOpenChangePremium()
             window.location.href = window.location.href
             }
         })
@@ -53,13 +53,13 @@ const CambioaPlanPremium = ({profile, isOpenChangeStandard, toggleIsOpenChangeSt
     },[])
 
     return (
-        <ContainerCambio isOpenChangeStandard={isOpenChangeStandard}>
+        <ContainerCambio isOpenChangePremium={isOpenChangePremium}>
             <DivGob>
-                <Title>Actualmente cuentas con un plan Premium</Title>
-                <TextOne>¿Deseas cambiarte a un plan Standart?</TextOne>
-                <TextTwo>Recuerda que si tienes mas de 3 publicaciones las perderás</TextTwo>
-                <TextTwo>No harás parte de nuestros mejores talentos y podrás perder reconocimiento</TextTwo>
-                <Btn onClick={handlechange}>Cambiar Plan</Btn><BtnCancel onClick={toggleIsOpenChangeStandard}>Manter mi Plan</BtnCancel>
+                <Title>Actualmente cuentas con un plan Standard</Title>
+                <TextOne>¡Cambiate ahora al plan Premium!</TextOne>
+                <TextTwo>Podras publicar tus servicios sin limite</TextTwo>
+                <TextTwo>Aumentaran tus contrataciones, harás parte de nuestros mejores talentos</TextTwo>
+                <Btn onClick={handlechange}>Cambiar Plan</Btn><BtnCancel onClick={toggleIsOpenChangePremium}>Manter mi Plan</BtnCancel>
                 <Parr>En el siguiente ciclo se cobra la mensualidad más un prorrateo de los días restantes hasta antes del siguiente ciclo</Parr>
             </DivGob>
         </ContainerCambio>

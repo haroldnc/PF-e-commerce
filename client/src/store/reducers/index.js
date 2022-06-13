@@ -20,7 +20,8 @@ const initialState = {
     transactionById: [],
     queryPosts: [],
     posts: {},
-    postsByUser: []
+    postsByUser: [],
+    servicePosts:[]
 };
 //habia un objeto en initialstate
 

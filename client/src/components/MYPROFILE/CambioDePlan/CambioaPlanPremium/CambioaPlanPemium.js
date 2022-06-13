@@ -16,7 +16,7 @@ export const ContainerCambio = styled.div `
     transition: .3s ease;
 
 
-    ${({isOpenChangeStandard}) => isOpenChangeStandard ? "none" : `visibility: hidden`}
+    ${({isOpenChangePremium}) => isOpenChangePremium ? "none" : `visibility: hidden`}
 `
 
 export const DivGob = styled.div `

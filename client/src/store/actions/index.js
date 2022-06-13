@@ -216,7 +216,9 @@ export const cancelSubscription = (body,id) => async () => {
 }
 
 export const changeSubscription = (body,id) => async() => {
-  await axios.put(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body)
+  await axios.post(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body, {headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }})
 }
 
 export const getPostByUser = (id) => dispatch => {
