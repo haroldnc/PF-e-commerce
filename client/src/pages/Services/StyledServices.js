@@ -7,6 +7,7 @@ export const Page = styled.main `
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
 `
 export const Wrapper = styled.div`
     max-width: 1100px;

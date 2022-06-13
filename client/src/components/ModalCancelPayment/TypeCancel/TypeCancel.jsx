@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import { useDispatch,useSelector } from "react-redux";
+import Swal from 'sweetalert2'
 
 import { ContainerType, DivGlobal, Name, BtnCancel, BtnNoCancel } from './TypeCancel'
 
@@ -11,38 +12,80 @@ const TypeCancel = ({ isOpenType,toggleModalType, profile}) => {
 
     const Alltransaction = useSelector(state => state.transactionById)
 
-    const LastTrans = Alltransaction.pop()
+    let LastTrans = "";
+    if(Alltransaction){
+        LastTrans = Alltransaction.pop()
+    } 
     console.log('transactions', LastTrans.sessionId)
+    console.log('id', profile)
 
     const handleNocancel = () =>{
         toggleModalType()
     }
 
     const cancelInmed = () =>{
-        dispatch(cancelSubscription({
-            sessionId: "el ID de sesión",
-            period_end:false
+        Swal.fire({
+            title: 'Estas seguro?',
+            text: "Si cancelas tu membresia perderas tus clientes",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, cancelar!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Cancelada correctamente!',
+                'Tu plan será cancelado inmediatamente',
+                'success'
+              )
+              dispatch(cancelSubscription({
+                sessionId: LastTrans.sessionId,
+                period_end:false
+            
+            },profile))
+            toggleModalType()
+            }
+          })
         
-        }))
     }
     const cancelFinalCicle = () =>{
-        dispatch(cancelSubscription({
-
-        }))
+        Swal.fire({
+            title: 'Estas seguro?',
+            text: "Si cancelas tu membresia perderas tus clientes",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, cancelar!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Cancelada correctamente!',
+                'Estaras activo hasta el final del ciclo de cobro',
+                'success'
+              )
+              dispatch(cancelSubscription({
+                sessionId: LastTrans.sessionId,
+                period_end: true
+            },profile ))
+            toggleModalType()
+            }
+          })
     }
 
 
-    // useEffect(() => {
-    //     GetTransactionById(profile)
-    // },[])
+    useEffect(() => {
+        GetTransactionById(profile)
+    },[])
 
     return (
         <ContainerType isOpenType={isOpenType}>
             <DivGlobal>
                 <Name>¿Como deseas cancelar tu plan?</Name>
                 <div style={{display:"flex", flexDirection:"row", marginTop:"25px", justifyContent:"space-between"}}>
-                    <BtnCancel>Inmediatamente</BtnCancel>
-                    <BtnCancel>Final ciclo de facturación</BtnCancel>
+                    <BtnCancel onClick={cancelInmed}>Inmediatamente</BtnCancel>
+                    <BtnCancel onClick={cancelFinalCicle}>Final ciclo de facturación</BtnCancel>
                 </div>
 
                 <BtnNoCancel onClick={handleNocancel}>No cancelar</BtnNoCancel>

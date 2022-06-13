@@ -32,16 +32,24 @@ import { ContainerWorker,
          BtnAccept,
          BtnCancel,
          Cancelar,
-         Historial
+         Historial,
+         CambioPlan,
+         Premium,
+         TextPremium,
+         Fileselect,
+         BtnPerfil,
+         BtnPrefilCancel,
+         DivButtons
          } from './MyProfileWorker'
 
-import { PutInfoWorker, getWorkerDetail } from '../../../store/actions/index'
+import { PutInfoWorker, getWorkerDetail, PutInfoUser } from '../../../store/actions/index'
 import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
 import ProfileInactive from '../ProfileInactive/ProfileInactive.jsx'
+import MyProfilePost from '../MyprofilePost/MyProfilePost.jsx'
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
-import { MdOutlineEmail } from 'react-icons/md'
+import { MdOutlineEmail, MdStarPurple500 } from 'react-icons/md'
 import { GiSmartphone } from 'react-icons/gi'
 import { keyframes } from "styled-components";
 
@@ -50,8 +58,10 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
 
     const history = useHistory()
     const dispatch = useDispatch()
-    const [ image , setImage ] = useState("")
-    const [ panel , setPanel ] = useState("historial")
+    const [ image , setImage ] = useState(profile.user.image)
+    const [ showBtn , setShowBtn ] = useState(false)
+    const [ panel , setPanel ] = useState("post")
+    const [ loading, setLoading ] = useState(false)
     const [ Formularios, setFormularios ] = useState({
         title: false,
         aboutMe: false,
@@ -91,6 +101,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
     if(profile.dataWorker.subscribed){
         if(panel === "historial"){
             showPanel = <HistorialPayProfile id={profile.user.uid} toggleModalPaymentCancel={toggleModalPaymentCancel}/>
+        }else if(panel === "post"){
+            showPanel = <MyProfilePost id={profile.user.uid}/>
         }
     }else{
         showPanel = <ProfileInactive toggleModalPayment={toggleModalPayment}/>
@@ -100,10 +112,14 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         history.push(`/worker/${profile.dataWorker._id}`)
     }
 
+    console.log('perfiluser',profile )
     const RedirectLink = (url) => {
         window.open(url)
     }
 
+    const HistorialClick = () => {
+        setPanel("historial")
+    }
     const handleClickPayment = () => {
         toggleModalPayment()   
     }
@@ -124,46 +140,69 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         setChanges({...Changes,[key] : ""})
    }
 
-   const handlePutImage = (e, key) => {
-        e.preventDefault()
-        dispatch(PutInfoWorker({ [key] : Changes[key] } , profile._id ))
-        dispatch(getWorkerDetail(profile._id))
-        setInfoWorker({...infoWorker , [key] : Changes[key] })
-        setFormularios({ ...Formularios , [key] : !Formularios[key] })
-        setChanges({...Changes,[key] : ""})
-   }
+   
 
    const upLoadImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "PGimages");
-  
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dk69jry82/image/upload",
-      {
-        method: "POST",
-        body: data
-      }
-    );
-  
-    const file = await res.json();
-    setImage(file.secure_url);
-    // console.log(file.secure_url);
-    // setInput({
-    //   ...input,
-    //   img: file.secure_url
-    // })
-    // setLoading(false);
+        const files = e.target.files;
+        const data = new FormData();
+        data.append("file", files[0]);
+        data.append("upload_preset", "PGimages");
+        setLoading(true)
+        const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dk69jry82/image/upload",
+        {
+            method: "POST",
+            body: data
+        }
+        );
+        const file = await res.json();
+        setImage(file.secure_url);
+        setShowBtn(!showBtn)
+        setLoading(false);
   }
 
+  const handleChangeImage = () => {
+    dispatch(PutInfoUser({ image : image },profile.dataWorker.userId ))
+    setShowBtn(!showBtn)
+  }
+
+  const handleNoChange = () => {
+    setImage(profile.user.image)
+    setShowBtn(!showBtn)
+  }
+
+
+    let PremiumStar = null
+    if(profile.dataWorker.subscription_type === "62a642184cf2ae63ab17dffe" && profile.dataWorker.subscribed){
+        PremiumStar = 
+            <Premium>
+            <TextPremium>Premium</TextPremium>
+            <IconContext.Provider value={{size:"20px", color: "rgb(179, 156, 31)"}}>
+                    <div>
+                        <MdStarPurple500/>
+                    </div>
+                </IconContext.Provider>
+            </Premium>
+    }
 
     return(
         <ContainerWorker>
             <ContainerIzq>
-                <ImageContainer>
-                    <ImageProfile src={infoWorker.image} alt="img"/>
+            <ImageContainer>
+                    {PremiumStar}
+                    <ImageProfile src={loading ? "https://c.tenor.com/XK37GfbV0g8AAAAi/loading-cargando.gif" : image} alt="img"/>
                     <Username>{profile.user.username}</Username>
+                    <Fileselect>
+                        <input
+                            name="img"
+                            type="file"
+                            onChange={upLoadImage}
+                        />
+                    </Fileselect>
+                    <DivButtons showBtn={showBtn}>
+                        <BtnPerfil onClick={handleChangeImage}>Establecer como foto de perfil</BtnPerfil>
+                        <BtnPrefilCancel onClick={handleNoChange}>Cancelar</BtnPrefilCancel>
+                    </DivButtons>
                     <VistaPrevia onClick={handleClickVista}>Vista previa del perfil de Wixxer</VistaPrevia>
                     <Linea></Linea>
                     <DivName>
@@ -196,7 +235,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                                 <Div>
                                     <Subscribe>Activo</Subscribe>
                                 </Div>
-                                <Historial>Historial de pago</Historial>
+                                <CambioPlan>Cambiar de plan</CambioPlan>
+                                <Historial onClick={HistorialClick}>Historial de pago</Historial>
                             </div>
                                 :
                             <div style={{width: "100%"}}>

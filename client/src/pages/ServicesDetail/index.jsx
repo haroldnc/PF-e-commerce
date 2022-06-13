@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { Parent, DetailContainer, BuyContainer, ProfileImg, PostPicture, UserInfo, DescriptionContainer, ContactButton, HireButton, SubTitle, SubTitle2, ProfileLink } from "./styled_Services_Detail";
 import {Link, useParams} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers } from "../../store/actions";
+import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers, clearServiceDetail } from "../../store/actions";
 import PostDetailCard from "../../components/PostDetailCard";
 
 
@@ -14,8 +14,8 @@ export default function ServicesDetail(){
     const {id} = useParams()
     // console.log(id)
     const dispatch = useDispatch()
-    const post = useSelector((state)=>state.post)
-    const user = useSelector((state)=>state.userDetail.user)
+    var post = useSelector((state)=>state.post)
+    var user = useSelector((state)=>state.userDetail.user)
     // console.log(user)
     const workers = useSelector((state)=>state.workers)
     var arrayOfPosts = []
@@ -51,13 +51,22 @@ export default function ServicesDetail(){
         dispatch(getUserById(post.user))
         dispatch(getAllPosts())
         dispatch(getWorkers())
+
+     
+
+
+        // return ()=>{
+        //     dispatch(clearServiceDetail())
+        // }
         
        
         
 
 
         
-     })
+    },[dispatch, id, post.user])
+    
+    
 
     
 
@@ -108,7 +117,10 @@ export default function ServicesDetail(){
             </BuyContainer>
         </Parent>
         :
-        <h1>...cargando</h1>
+        <Parent>
+            <h1>...cargando</h1>
+
+        </Parent>
     }
         </>
     )
