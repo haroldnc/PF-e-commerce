@@ -4,20 +4,22 @@ import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs } from './styledComments';
+import { postComments } from "../../store/actions/index";
 
 const PostComments = () => {
     const dispatch = useDispatch();
     const history = useHistory();
-    //const userLogged = useSelector((state) => state.userSignIn);
-    //const userID = userLogged.userInfo.uid;
-    //const { publicationId } = useParams();
+    const userLogged = useSelector((state) => state.userSignIn);
+    const userID = userLogged.userInfo.uid;
+    const { publicationId } = useParams();
     // /comentar/:publicationId
+    // postComments
 
     const [rating, setRating] = useState(0);
 
     const [input, setInput] = useState({
-        //user: `${userID}`,
-        //publicationId: `${publicationId}`,
+        user: `${userID}`,
+        publicationId: `${publicationId}`,
         title: "",
         score: "",
         message: ""
@@ -60,8 +62,7 @@ const PostComments = () => {
 
         e.preventDefault();
         console.log(input)
-        //dispatch(postPublish(input));
-        /*
+        dispatch(postComments(input, publicationId));
         setInput({
             user: ``,
             publicationId: ``,
@@ -76,8 +77,7 @@ const PostComments = () => {
           title: 'Genial',
           text: 'Tu comentario se publico correctamente',
         })
-        history.push('/')
-        */
+       // history.push('/')
     };
 
     return (
