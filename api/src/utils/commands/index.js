@@ -157,3 +157,28 @@ module.exports.completeEmptyField = async (args, done) => {
       }
    }
 }
+
+module.exports.corregirPostsWorkers = async (args, done) => {
+   try {
+      const worker_role = await User_roles.findOne({ name: "worker" });
+      const workers = await DataWorkers.find();
+      const userWorkerIds = workers.map(e => e.userId);
+      const posts = await Publications.find().populate('user', 'user_role');
+      const posts_user = posts.filter(e => {
+         return !e.user || e.user.user_role.toString() !== worker_role._id.toString();
+      });
+      const n = posts_user.length;
+      const m = workers.length;
+      let k;
+
+      for (let i=0; i<n; i++){
+         k = Math.floor(Math.random() * m);
+
+         await Publications.findByIdAndUpdate(posts_user[i]._id, { user: userWorkerIds[k] });
+      }
+
+      done(`Se actualizaron ${posts_user.length} registros`);
+   } catch(error) {
+      done(error.message);
+   }
+}
