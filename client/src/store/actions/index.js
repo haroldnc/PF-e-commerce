@@ -117,7 +117,7 @@ export function getAllPosts() {
   return (dispatch) => {
     return axios
       .get(`https://wixer-server.herokuapp.com/posts`)
-      .then((res) => dispatch({ type: "GET_ALL_POSTS", payload: res.data }));
+      .then((res) => dispatch({ type: "GET_ALL_POSTS", payload: res.data.Publications }));
   };
 }
 
