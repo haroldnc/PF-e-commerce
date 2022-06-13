@@ -4,15 +4,15 @@ import { IconContext } from "react-icons";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-const Card = ({ title, img, description, price, service, id, userInfo, profile_img, firstName, lastName, rating }) => {
+const CardPostMyprofile = ({ title, img, description, price, service, id, userInfo, profile_img, firstName, lastName, rating }) => {
 
-  const fullName = userInfo.firstName + " " + userInfo.lastName
+  const fullName = firstName + " " + lastName
 
   return (
     <Container>
       <Image img={img} />
             <Profile>
-              <ImgProfile src={userInfo.image} />
+              <ImgProfile src={profile_img} />
               <NameProfile>{fullName}</NameProfile>
             </Profile>
       <Title>{title}</Title>
@@ -51,4 +51,4 @@ const Card = ({ title, img, description, price, service, id, userInfo, profile_i
   );
 };
 
-export default Card;
+export default CardPostMyprofile;

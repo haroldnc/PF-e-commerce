@@ -45,9 +45,9 @@ const HistorialPayProfile = ({id, toggleModalPaymentCancel}) => {
                <NavTitle>METODO DE PAGO</NavTitle>
             </NavRegistrados>
             {
-                transaction !== undefined ?
-                transaction.map( t => (
-                    <div key={t.payment_method._id}>
+                transaction  ?
+                transaction.map( (t, index) => (
+                    <div key={index}>
                         <CardHistorialPay
                             tarjeta={t.payment_method.network}
                             ultnum={t.payment_method.end_digits}
