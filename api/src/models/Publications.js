@@ -29,8 +29,7 @@ const Publications = Schema({
         type: String
     },
     score:{
-        type: Schema.Types.Double,
-        ref: "Scores",
+        type: [],
     },
     active: {
         type: Boolean,
