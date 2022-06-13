@@ -7,7 +7,7 @@ const DataWorkers = require("../../models/DataWorkers.js")
 const getScores = async (req, res) => {
     const { publicationId } = req.params;
     const { filterCriteria } = req.query;
-    console.log("log filterCriteria",filterCriteria);
+    //console.log("log filterCriteria",filterCriteria);
     let scoreAverage = 0;
     let scores = [];
     let limit = 5;
@@ -81,9 +81,9 @@ const getScoresWorker = async (req, res) => {
       
     try {
             const trabajador = await DataWorkers.findById(userId)
-            console.log("log trabajador",trabajador);
+            //console.log("log trabajador",trabajador);
             let publicaciones = await Publications.find({user:trabajador.userId})
-            console.log("log publicaciones",publicaciones);
+            //console.log("log publicaciones",publicaciones);
             
             for (let i = 0; i < publicaciones.length; i++) {
                 const e = await Scoremodel.find({ publication: publicaciones[i].id }).limit(limit);
@@ -91,7 +91,7 @@ const getScoresWorker = async (req, res) => {
                 scores.push(e)
                 
             }
-            console.log("log scores",scores);
+            //console.log("log scores",scores);
             // let reScores = await Scoremodel.find({ publication: userId });
             publicaciones = publicaciones.map(p => p.score)    
             publicaciones = publicaciones.flat()
@@ -99,7 +99,7 @@ const getScoresWorker = async (req, res) => {
             //calcular el promedio
             const sum = publicaciones.reduce((partial_sum, r) => partial_sum + r, 0);
             scoreAverage = (sum / publicaciones.length).toFixed(1);
-            console.log("log sum",sum);
+            //console.log("log sum",sum);
             return res.json({ scores, scoreAverage, totalScores: publicaciones.length });
 
     } catch (error) {

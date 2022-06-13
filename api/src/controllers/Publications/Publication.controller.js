@@ -4,7 +4,7 @@ const User= require('../../models/User.js')
 
 //buscador para buscar may o min
 function FindNeedle(haystack, needle) {
-    console.log("log haystack",haystack,needle);
+    //console.log("log haystack",haystack,needle);
     let indice=0, z='', j=0
     for(let i=0; i < haystack.length; i++){
         if((haystack[i] == needle[j])||(haystack[i].toLowerCase() == needle[j].toLowerCase())||(haystack[i].toLowerCase() == needle[j].toLowerCase())){
@@ -27,19 +27,19 @@ function FindNeedle(haystack, needle) {
         let TodasDB = []
         TodasDB = await Publications.find({ include: [Categories, User] })
             .populate('user', { firstName:1, lastName:1 });
-        console.log("await post",TodasDB);
-        console.log("await post",TodasDB.length);
+        //console.log("await post",TodasDB);
+        //console.log("await post",TodasDB.length);
         if(TodasDB.length > 0){
             if(title && title != '') {
                 //hacer consulta por coincidencia del title:
                 
                 TodasDB = TodasDB.filter(gDb =>{
-                    console.log("gDb",gDb);
+                    //console.log("gDb",gDb);
                     if(FindNeedle(gDb.title,title)>-1){
                         return gDb
                     }
                 })
-                    console.log("log de todas bb",TodasDB);
+                    //console.log("log de todas bb",TodasDB);
                 TodasDB= TodasDB.map(e =>{
                     let obj = {
                         "_id":e.id,
@@ -57,9 +57,9 @@ function FindNeedle(haystack, needle) {
             }
             else{
                 //consulta a todos los datos DB  
-                console.log("todas post",TodasDB);
+                //console.log("todas post",TodasDB);
                 TodasDB= TodasDB.map(e =>{
-                    console.log("todasdb post",TodasDB);
+                    //console.log("todasdb post",TodasDB);
                     let obj = {
                         "_id":e.id,
                         "title":e.title,

@@ -10,7 +10,7 @@ const getUserById = async (req, res) => {
     try {
         const user = await User.findById(id)
             .populate('user_role', 'name')
-        console.log(user)    
+        //console.log(user)    
         if(user.user_role.name === 'worker'){
             const dataWorker = await DataWorkers.findOne({'userId': id})
             res.json({
@@ -143,7 +143,7 @@ const createUser = async (req, res) => {
         }*/
         //como me viene el user_role? String o Id? ===> llega id
         const userRole = await User_roles.findOne({name: user_role});
-        console.log(userRole);
+        //console.log(userRole);
         
         const usuario = new User({
             username,

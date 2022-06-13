@@ -8,7 +8,7 @@ const Publications = require("../../models/Publications.js");
         try {
             const ScoreExists = await Scoremodel.find({ user, publication:publicationId});
             //Valido que se contrato el servicio por el autor de la puntuacion 
-            console.log("log ScoreExists",ScoreExists);
+            //console.log("log ScoreExists",ScoreExists);
             //Limitar el número de scores a 1
             if (ScoreExists.length > 0) {
                 const EScores = ScoreExists.map(Sc =>{
@@ -18,18 +18,18 @@ const Publications = require("../../models/Publications.js");
                         Sc.title = title
                     )
                 }) 
-                console.log("log EScores",EScores);
+                //console.log("log EScores",EScores);
                 await EScores.save();
                 return res.send(200);
             }
 
             const Scores = new Scoremodel({ user: user, publication: publicationId, title, message, score });
-            console.log("await Scores",Scores);
+            //console.log("await Scores",Scores);
             await Scores.save();
 
-            console.log("despues del awai");
+            //console.log("despues del awai");
             const publication = await Publications.findById(publicationId);
-            console.log("log publication",Scores.score);
+            //console.log("log publication",Scores.score);
             publication?.score.push(Scores.score);
             await publication?.save();
 

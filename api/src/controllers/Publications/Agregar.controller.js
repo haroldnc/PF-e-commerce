@@ -13,7 +13,7 @@ const addPublicate =  async (req, res) =>{
         score,
         img: img || 'https://s3.amazonaws.com/www-inside-design/uploads/2019/11/Designer-Confidential-1080x1080-Instagram-810x810.png'
     }
-    console.log(Publications)
+    //console.log(Publications)
     await Publications.create(Publicacion)
     res.sendStatus(201)
 }

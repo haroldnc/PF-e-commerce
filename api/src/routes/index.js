@@ -14,5 +14,6 @@ router.use('/Scores', require('./Scores'));
 router.use('/subscriptions', require('./subscriptions'));
 router.use('/transactions', require('./transactions'));
 router.use('/favorites', require('./favorites'));
+router.use('/hirings', require('./hiring'));
 
 module.exports = router;

@@ -18,7 +18,7 @@ const getAllWorkers = async (req, res, next) => {
     let {title} = req.query
     if(!title){
         try{
-            console.log(title)
+            //console.log(title)
             const allWorkers = await listAllWorkers()
             // console.log(allWorkers)
             res.send(allWorkers)
@@ -37,7 +37,7 @@ const getAllWorkers = async (req, res, next) => {
 
             //     return reg.test(e.userId.firstName) || reg.test(e.userId.lastName);
             // });
-            console.log(WorkersByUsername)
+            //console.log(WorkersByUsername)
 
             if(!WorkersByUsername.length) res.send({msg: "User not found"})
             else res.send(WorkersByUsername)
@@ -52,7 +52,7 @@ const getWorkerById = async (req, res, next) => {
     try{
         const worker = await  listAllWorkers()
         const unicWorker = worker.find(e => e.id === id)
-        console.log(unicWorker)
+        //console.log(unicWorker)
         // .find(e=> e.id === id)
         if(!unicWorker) res.status(404).send({msg:"not found"})
         else res.send(unicWorker)
