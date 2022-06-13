@@ -65,6 +65,7 @@ const Services = () => {
     numberPages.push(i + 1);
   }
 
+
   const pages = (page) => {
     console.log("ejecutado");
 
