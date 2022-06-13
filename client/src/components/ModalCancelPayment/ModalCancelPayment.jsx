@@ -19,7 +19,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
             LastTrans = Alltransaction.pop()
         }
     } 
-    console.log('profile', LastTrans)
+    console.log('trans', LastTrans)
 
 
 
@@ -40,7 +40,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
                 'success'
               )
                 dispatch(cancelSubscription({
-                    sessionId: LastTrans.sessionId,
+                    sessionId: LastTrans[0].sessionId,
                     period_end: false
                 },profile))
                 toggleModalPaymentCancel()
