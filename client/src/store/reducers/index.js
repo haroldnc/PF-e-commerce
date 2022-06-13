@@ -18,7 +18,8 @@ const initialState = {
     queryPosts: [],
     allTransactions: [],
     transactionById: [],
-    queryPosts: []
+    queryPosts: [],
+    posts: {}
 };
 //habia un objeto en initialstate
 
@@ -115,10 +116,6 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state
             }
-        case "POST_COMMENT":
-            return{
-                ...state
-            }
         case "GET_USER_BY_ID":
             return{
                 ...state,
@@ -166,16 +163,10 @@ const rootReducer = (state = initialState, action) => {
                 allTransactions: action.payload
             }
         case "GET_TRANSACTIONS_BYID":
-            console.log('payload',action.payload)
             return {
                 ...state,
                 transactionById: action.payload
             }
-
-
-        case  "PAYMENT":
-            console.log(action.payload)
-            window.location.href = action.payload.url
             
         default: return state;
     };

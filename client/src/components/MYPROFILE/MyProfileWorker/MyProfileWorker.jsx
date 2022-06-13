@@ -32,16 +32,20 @@ import { ContainerWorker,
          BtnAccept,
          BtnCancel,
          Cancelar,
-         Historial
+         Historial,
+         CambioPlan,
+         Premium,
+         TextPremium
          } from './MyProfileWorker'
 
 import { PutInfoWorker, getWorkerDetail } from '../../../store/actions/index'
 import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
 import ProfileInactive from '../ProfileInactive/ProfileInactive.jsx'
+import MyProfilePost from '../MyprofilePost/MyProfilePost.jsx'
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
-import { MdOutlineEmail } from 'react-icons/md'
+import { MdOutlineEmail, MdStarPurple500 } from 'react-icons/md'
 import { GiSmartphone } from 'react-icons/gi'
 import { keyframes } from "styled-components";
 
@@ -51,7 +55,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
     const history = useHistory()
     const dispatch = useDispatch()
     const [ image , setImage ] = useState("")
-    const [ panel , setPanel ] = useState("historial")
+    const [ panel , setPanel ] = useState("post")
     const [ Formularios, setFormularios ] = useState({
         title: false,
         aboutMe: false,
@@ -91,6 +95,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
     if(profile.dataWorker.subscribed){
         if(panel === "historial"){
             showPanel = <HistorialPayProfile id={profile.user.uid} toggleModalPaymentCancel={toggleModalPaymentCancel}/>
+        }else if(panel === "post"){
+            showPanel = <MyProfilePost id={profile.user.uid}/>
         }
     }else{
         showPanel = <ProfileInactive toggleModalPayment={toggleModalPayment}/>
@@ -104,6 +110,9 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         window.open(url)
     }
 
+    const HistorialClick = () => {
+        setPanel("historial")
+    }
     const handleClickPayment = () => {
         toggleModalPayment()   
     }
@@ -158,10 +167,24 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
   }
 
 
+    let PremiumStar = null
+    if(profile.dataWorker.subscription_type === "62a642184cf2ae63ab17dffe"){
+        PremiumStar = 
+            <Premium>
+            <TextPremium>Premium</TextPremium>
+            <IconContext.Provider value={{size:"20px", color: "rgb(179, 156, 31)"}}>
+                    <div>
+                        <MdStarPurple500/>
+                    </div>
+                </IconContext.Provider>
+            </Premium>
+    }
+
     return(
         <ContainerWorker>
             <ContainerIzq>
-                <ImageContainer>
+            <ImageContainer>
+                    {PremiumStar}
                     <ImageProfile src={infoWorker.image} alt="img"/>
                     <Username>{profile.user.username}</Username>
                     <VistaPrevia onClick={handleClickVista}>Vista previa del perfil de Wixxer</VistaPrevia>
@@ -196,7 +219,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                                 <Div>
                                     <Subscribe>Activo</Subscribe>
                                 </Div>
-                                <Historial>Historial de pago</Historial>
+                                <CambioPlan>Cambiar de plan</CambioPlan>
+                                <Historial onClick={HistorialClick}>Historial de pago</Historial>
                             </div>
                                 :
                             <div style={{width: "100%"}}>

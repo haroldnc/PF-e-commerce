@@ -11,7 +11,7 @@ import ModalPayment from '../../components/ModalPayment/ModalPayment.jsx'
 import { getUserById, getWorkerDetail } from '../../store/actions/index'
 import MyProfileUser from '../../components/MYPROFILE/MyProfileUser/MyProfileUser.jsx'
 import ModalCancelPayment from '../../components/ModalCancelPayment/ModalCancelPayment.jsx'
-import TypeCancel from '../../components/ModalCancelPayment/TypeCancel/TypeCancel.jsx'
+// import TypeCancel from '../../components/ModalCancelPayment/TypeCancel/TypeCancel.jsx'
 
 
 const Profile = () => {
@@ -20,7 +20,7 @@ const Profile = () => {
     const dispatch = useDispatch()
     const [ isOpenPayment, setIsOpenPayment ] = useState(false)
     const [ isOpenPaymentCancel, setIsOpenPaymentCancel] = useState(false)
-    const [ isOpenType , setIsOpenType ] = useState(false)
+    // const [ isOpenType , setIsOpenType ] = useState(false)
 
     const profile = useSelector(state => state.userDetail)
 
@@ -35,9 +35,9 @@ const Profile = () => {
      }
 
 
-    const toggleModalType = () => {
-        setIsOpenType(!isOpenType)
-    }
+    // const toggleModalType = () => {
+    //     setIsOpenType(!isOpenType)
+    // }
 
     const toggleModalPayment = () => {
         setIsOpenPayment(!isOpenPayment)
@@ -48,9 +48,8 @@ const Profile = () => {
     }
 
     useEffect(() => {
-        dispatch(getWorkerDetail(id))
         dispatch(getUserById(id))
-    }, [dispatch, id])
+    }, [])
 
     const profileHARD= {
         "ok": true,
@@ -136,13 +135,14 @@ const Profile = () => {
                 <ModalCancelPayment 
                     isOpenPaymentCancel={isOpenPaymentCancel}
                     toggleModalPaymentCancel={toggleModalPaymentCancel}
-                    toggleModalType={toggleModalType}
+                    profile={profile.user.uid}
+                    // toggleModalType={toggleModalType}
                 />
-                <TypeCancel 
+                {/* <TypeCancel 
                     isOpenType={isOpenType}
                     toggleModalType={toggleModalType}
                     profile={profile.user.uid}
-                />
+                /> */}
             </ContainerProfile> :
         <h2>Cargando...</h2>
         }

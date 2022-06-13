@@ -349,6 +349,19 @@ export const Historial = styled.p `
 
 
 `
+export const CambioPlan = styled.p`
+    margin-top: 15px;
+    text-align: right;
+    margin-right:40px;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color:rgba(0, 0, 0, 0.247);
+
+    &:hover{
+    color: rgba(0, 0, 0, 0.596);
+    }
+`
 export const Cancelar = styled.p `
     margin-top:  10px;
     text-align: right;
@@ -357,5 +370,17 @@ export const Cancelar = styled.p `
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
 
+`
+
+export const Premium = styled.div `
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 24%;
+    left: 24%;
+`
+
+export const TextPremium = styled.p `
+    color: rgb(179, 156, 31);
 `
 
