@@ -46,6 +46,7 @@ import { PutInfoWorker, getWorkerDetail, PutInfoUser } from '../../../store/acti
 import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
 import ProfileInactive from '../ProfileInactive/ProfileInactive.jsx'
 import MyProfilePost from '../MyprofilePost/MyProfilePost.jsx'
+import CambioaPlanStandard from '../CambioDePlan/CambioaPlanStandard/CambioaPlanStandard.jsx'
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
@@ -62,6 +63,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
     const [ showBtn , setShowBtn ] = useState(false)
     const [ panel , setPanel ] = useState("post")
     const [ loading, setLoading ] = useState(false)
+    const [ isOpenChangeStandard, setIsOpenChangeStandard ] = useState(false)
     const [ Formularios, setFormularios ] = useState({
         title: false,
         aboutMe: false,
@@ -97,6 +99,16 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         })
     }
 
+    const toggleIsOpenChangeStandard = () => {
+        setIsOpenChangeStandard(!isOpenChangeStandard)
+    }
+
+    const handleCambioPlan = () => {
+        if(profile.dataWorker.subscription_type === "62a2264367125dc0fdcfeab4"){
+            toggleIsOpenChangeStandard()
+        }
+    }
+
     let showPanel = null
     if(profile.dataWorker.subscribed){
         if(panel === "historial"){
@@ -112,7 +124,6 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         history.push(`/worker/${profile.dataWorker._id}`)
     }
 
-    console.log('perfiluser',profile )
     const RedirectLink = (url) => {
         window.open(url)
     }
@@ -171,9 +182,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
     setShowBtn(!showBtn)
   }
 
-
     let PremiumStar = null
-    if(profile.dataWorker.subscription_type === "62a642184cf2ae63ab17dffe" && profile.dataWorker.subscribed){
+    if(profile.dataWorker.subscription_type === "62a2264367125dc0fdcfeab4" && profile.dataWorker.subscribed){
         PremiumStar = 
             <Premium>
             <TextPremium>Premium</TextPremium>
@@ -235,7 +245,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                                 <Div>
                                     <Subscribe>Activo</Subscribe>
                                 </Div>
-                                <CambioPlan>Cambiar de plan</CambioPlan>
+                                <CambioPlan onClick={handleCambioPlan}>Cambiar de plan</CambioPlan>
                                 <Historial onClick={HistorialClick}>Historial de pago</Historial>
                             </div>
                                 :
@@ -466,6 +476,11 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                     {showPanel}
                 </InfoContainerDer>
             </ContainerDer>
+            <CambioaPlanStandard 
+            profile={profile.user.uid}
+            isOpenChangeStandard={isOpenChangeStandard} 
+            toggleIsOpenChangeStandard={toggleIsOpenChangeStandard}
+            />
         </ContainerWorker>
     )
 }
