@@ -19,7 +19,8 @@ const initialState = {
     allTransactions: [],
     transactionById: [],
     queryPosts: [],
-    posts: {}
+    posts: {},
+    postsByUser: []
 };
 //habia un objeto en initialstate
 
@@ -173,6 +174,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 transactionById: action.payload
+            }
+        case "GET_POST_BY_USER":
+            return {
+                ...state,
+                postsByUser: action.payload
             }
             
         default: return state;

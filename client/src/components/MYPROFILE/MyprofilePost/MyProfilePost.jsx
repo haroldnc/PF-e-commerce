@@ -1,27 +1,25 @@
 import React, { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getPosts } from '../../../store/actions/index'
-import { NavPost, BtnPublic, ContainerCards } from './MyProfilePost'
+import { getPostByUser } from '../../../store/actions/index'
+import { NavPost, BtnPublic, ContainerCards, TextTwo, Textone, ContainerNopost } from './MyProfilePost'
 import CardPostMyprofile from '../CardPostMyprofile/CardPostMyprofile.jsx'
 
 const MyProfilePost = ({id}) => {
 
     const history = useHistory()
     const dispatch = useDispatch()
-    const allPost = useSelector(state => state.posts)
-    console.log('posts' , allPost)
+    const allPost = useSelector(state => state.postsByUser)
 
-    const FilterPosts = allPost.length !== 0 ? allPost.Publications.filter(p => p.user.uid === id) : []
+    console.log('posts', allPost)
 
-    console.log('filtro', FilterPosts)
 
     const handleClickPost = () =>{
         history.push(`/publicar`)
     }
 
     useEffect(() => {
-        dispatch(getPosts())
+        dispatch(getPostByUser(id))
     },[])
 
     
@@ -31,10 +29,10 @@ const MyProfilePost = ({id}) => {
                 <BtnPublic onClick={handleClickPost}>Publicar servicio</BtnPublic>
             </NavPost>
             {
-                FilterPosts.length > 0 ?
+                allPost ?
                 <ContainerCards>
                 {
-                   FilterPosts.map( (p, index) => (
+                   allPost.map( (p, index) => (
                     <div key={index}>
                        <CardPostMyprofile
                         title={p.title}
@@ -46,10 +44,10 @@ const MyProfilePost = ({id}) => {
                    )) 
                 }
                 </ContainerCards> :
-                <ContainerCards>
-                <h1>Actualmente no tienes servicios activos</h1>
-                <h3>Ofrece tu primer servicio</h3>
-                </ContainerCards>
+                <ContainerNopost>
+                        <Textone>Actualmente no tienes servicios activos</Textone>
+                        <TextTwo>Ofrece tu primer servicio</TextTwo>
+                </ContainerNopost>
             }
            
         </div>

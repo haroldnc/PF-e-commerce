@@ -219,3 +219,7 @@ export const changeSubscription = (body,id) => async() => {
   await axios.put(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body)
 }
 
+export const getPostByUser = (id) => dispatch => {
+   axios.get(`https://wixer-server.herokuapp.com/posts/user/${id}`)
+  .then(res => dispatch({type: "GET_POST_BY_USER", payload: res.data}))
+}

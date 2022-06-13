@@ -42,7 +42,7 @@ import { ContainerWorker,
          DivButtons
          } from './MyProfileWorker'
 
-import { PutInfoWorker, getWorkerDetail } from '../../../store/actions/index'
+import { PutInfoWorker, getWorkerDetail, PutInfoUser } from '../../../store/actions/index'
 import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
 import ProfileInactive from '../ProfileInactive/ProfileInactive.jsx'
 import MyProfilePost from '../MyprofilePost/MyProfilePost.jsx'
@@ -154,19 +154,14 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
             body: data
         }
         );
-    
         const file = await res.json();
         setImage(file.secure_url);
         setShowBtn(!showBtn)
-        // setInput({
-        //   ...input,
-        //   img: file.secure_url
-        // })
         setLoading(false);
   }
 
   const handleChangeImage = () => {
-    // dispatch(PutInfoWorker({ [key] : Changes[key] } , profile.dataWorker._id ))
+    dispatch(PutInfoUser({ image : image }))
     setShowBtn(!showBtn)
   }
 
