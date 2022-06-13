@@ -17,7 +17,7 @@ export default function WorkerProfile (){
 
     function getUserPosts(wrkr, postArr){
         if(wrkr._id && postArr.length){
-            userPost = postArr.filter(p=>p.user===wrkr.userId.uid)
+            userPost = postArr.filter(p=>p.user.uid===wrkr.userId.uid)
             console.log(userPost)
             return userPost
         }
