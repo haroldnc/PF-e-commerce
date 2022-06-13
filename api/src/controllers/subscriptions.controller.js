@@ -51,7 +51,7 @@ const changeSubscriptionsStatus = async (req, res) => {
 
 	try{
 		if(!priceId) throw new Error('"priceId" nor found!');
-		if(!subscribed) throw new Error('"subscribed" status not found!');
+		if([undefined,null].includes(subscribed)) throw new Error('"subscribed" status not found!');
 
 		const subs = await Subscriptions.find({ priceId });
 
@@ -82,7 +82,8 @@ const cancelSubscription = async (req, res) => {
 		});
 
 		await DataWorkers.update({ userId: id }, {
-			subscribed: false
+			subscribed: false,
+			subscription_type: "62a6dd77e56b6f3e0ad916cd"
 		});
 
 		res.status(200).json({ msg: `The Subscription ${period_end?'will be cancelled at the end of the period':'was cancelled'}`})
