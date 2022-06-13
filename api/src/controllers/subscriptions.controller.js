@@ -53,7 +53,7 @@ const changeSubscriptionsStatus = async (req, res) => {
 		if(!priceId) throw new Error('"priceId" nor found!');
 		if([undefined,null].includes(subscribed)) throw new Error('"subscribed" status not found!');
 
-		const subs = await Subscriptions.find({ priceId });
+		const subs = await Subscriptions.findOne({ priceId });
 
 		await DataWorkers.update({ userId: id }, {
 			subscribed,
@@ -114,7 +114,7 @@ const changeSubscription = async (req, res) => {
 		  }]
 		});
 
-		const subs = await Subscriptions.find({ priceId });
+		const subs = await Subscriptions.findOne({ priceId });
 
 		await DataWorkers.update({ userId: id }, {
 			subscribed: true,
