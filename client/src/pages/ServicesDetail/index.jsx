@@ -100,7 +100,9 @@ export default function ServicesDetail(){
             <BuyContainer>
                 
                     <SubTitle>{`¿Te interesa trabajar con ${user.username}?`}</SubTitle>
+                    <Link to={`/comentarios/${id}`}>
                     <ContactButton>Hazle una pregunta</ContactButton><br />
+                    </Link>
                     <Link to={`/contratar/post/${id}`}>
                     <HireButton>{`Contratar a ${user.username}`}</HireButton>
                     </Link>
