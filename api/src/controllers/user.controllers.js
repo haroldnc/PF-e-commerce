@@ -13,6 +13,7 @@ const getUserById = async (req, res) => {
         //console.log(user)    
         if(user.user_role.name === 'worker'){
             const dataWorker = await DataWorkers.findOne({'userId': id})
+                .populate('subscription_type', 'name');
             res.json({
                 ok: true,
                 user,
