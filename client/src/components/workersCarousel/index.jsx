@@ -25,45 +25,37 @@ export default function WorkersCarousel({profiles}){
         infinite: true,
         arrows: true,
         speed: 500,
-        slidesToShow: 2,
+        slidesToShow: 3,
         slidesToScroll: 1,   
         nextArrow: <SlickArrowLeft />,
         prevArrow: <SlickArrowRight />
        }
 
     //    const workerProfiles = profiles.map(p=>p)
-    const availableProfiles = profiles.filter(person=> person.userId)
-    console.log(profiles)
-    console.log(availableProfiles)
+    const availableProfiles = profiles.filter(person=> person.subscription_type.name === "Premium")
+    console.log('caruserl',availableProfiles)
+    // console.log(availableProfiles)
 
 
     return(
-        <>
-        
-        {availableProfiles.length?
-
-            <WorkerDiv>
-            <TitleCarousel>Nuestros mejores talentos</TitleCarousel>
+        <WorkerDiv>
+        <TitleCarousel>Nuestros mejores talentos</TitleCarousel>
+        {availableProfiles.length? 
             <Slider {...settings}>
-                {
-                    availableProfiles.map(p=>
+                { availableProfiles.map((p,index)=>
                         <Card
-                        key={p._id}
-                        name ={`${p.userId.firstName} ${p.userId.lastName}`}
-                        image = {p.userId.image}
-                        title = {p.title}
-                        portfolioImage = {p.p_image}
-                        id = {p._id}           
+                            key={index}
+                            name ={`${p.userId.firstName} ${p.userId.lastName}`}
+                            image = {p.userId.image}
+                            title = {p.title}
+                            portfolioImage = {p.p_image}
+                            id = {p._id}  
                         />
-                        )
-                }
-
+                    )}
             </Slider>
+            :
+            <h1>...cargando</h1>} 
         </WorkerDiv>
-        :
-        <h1>...cargando</h1>
-                    } 
-        </>
 
     )
 }
