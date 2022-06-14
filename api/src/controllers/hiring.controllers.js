@@ -1,5 +1,8 @@
 const Hiring = require('../models/Hiring');
-
+const User = require('../models/User');
+const Publication = require('../models/Publications');
+const DataWorker = require('../models/DataWorkers');
+const nodemailer = require('nodemailer');
 
 const addHiring = async (req, res) => {
     const { idUser, idWorker, idPublication } = req.body;
@@ -10,7 +13,77 @@ const addHiring = async (req, res) => {
                 msg: 'Hiring added successfully',
                 hiring
             });
-        }
+
+        const user = await User.findById(idUser);
+        const worker = await User.findById(idWorker);
+        const dataWorker = await DataWorker.find({"userId": idWorker});
+        const publication = await Publication.findById(idPublication);
+
+        // enviar email de contacto al usuario con datos del worker
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'nachoburgos1995@gmail.com',
+                pass: 'mtlsdatewtbcwhbf'
+            }
+        });
+        const mailOptionsUser = {
+            from: "Wixxer <",
+            to: user.email,
+            subject: 'Hiring confirmation',
+            text: 'Hello ' + user.firstName + ' ' + user.lastName + '\n\n' +
+                'Thank you for using Wixxer to hire a job service according to your needs.\n\n' +
+                'Below we leave you the contact information of the contracted worker:\n\n' +
+                'Name:' + worker.firstname + ' ' + worker.lastname + '\n\n' +
+                'Email:' + worker.email + '\n\n' +
+                'Phone:' + dataWorker.phone + '\n\n' +
+                'Publication ID:' + publication.id + '\n\n' +
+                'Post Title:' + publication.title + '\n\n' +
+                'Description:' + publication.description + '\n\n' +
+                'Price:' + publication.price + '\n\n' +
+                'Thank you,\n' +
+                'Wixxer  Team'
+        };
+        transporter.sendMail(mailOptionsUser, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
+        // enviar email de contacto al worker con datos del user
+        const mailOptionsWorker = {
+            from: "Wixxer <",
+            to: worker.email,
+            subject: 'Hiring confirmation',
+            text: 'Hello ' + worker.firstName + ' ' + worker.lastName + '\n\n' +
+                'Thank you for using Wixxer to offer your professional services.\n\n' +
+                'Below we leave you the contact information of the worker to whom I contracted their services:\n\n' +
+                'Name:' + user.firstname + ' ' + user.lastname + '\n\n' +
+                'Email:' + user.email + '\n\n' +
+                'Publication ID:' + publication.id + '\n\n' +
+                'Post Title:' + publication.title + '\n\n' +
+                'Description:' + publication.description + '\n\n' +
+                'Price:' + publication.price + '\n\n' +
+                'Thank you,\n' +
+                'Wixxer  Team'
+        };
+        transporter.sendMail(mailOptionsWorker, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
+
+    return res.json({
+        ok: true,
+        msg: "User created",
+        usuario
+   });
+
+    }
     catch (error) {
         res.status(422).json({ 
             ok: false,
