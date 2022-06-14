@@ -49,7 +49,8 @@ function FindNeedle(haystack, needle) {
                         "user":e.user,
                         "service":e.service,
                         "score":e.score,
-                        "img":e.img
+                        "img":e.img,
+                        "active": e.active
                     }
                     return obj
 
@@ -68,7 +69,8 @@ function FindNeedle(haystack, needle) {
                         "user":e.user,
                         "service":e.service,
                         "score":e.score,
-                        "img":e.img
+                        "img":e.img,
+                        "active": e.active
                     }
                     return obj
                 })

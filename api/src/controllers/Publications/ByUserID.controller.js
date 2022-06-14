@@ -6,7 +6,8 @@ const getPostsByUser = async (req, res) => {
    try {
       const publicacions = await Publications.find({user: id})
          .populate('user', { _id:1, firstName:1, lastName:1, image:1 })
-         .populate('service', { _id:1, name:1 });
+         .populate('service', { _id:1, name:1 })
+         .populate('subscription_type', 'name');
 
       res.status(200).json(publicacions);
    } catch (error) {
