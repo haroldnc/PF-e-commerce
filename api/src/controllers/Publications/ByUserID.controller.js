@@ -15,8 +15,8 @@ const getPostsByUser = async (req, res) => {
       res.status(200).json({
          posts: [...publications],
          subscription_type: {
-            worker.subscription_type._id,
-            worker.subscription_type.name
+            id: worker.subscription_type._id,
+            name: worker.subscription_type.name
          }
       });
    } catch (error) {
