@@ -119,6 +119,10 @@ export function getUserById(id) {
   };
 }
 
+export const clearUserById = () => {
+  return {type :"CLEAR_USER_BY_ID"}
+}
+
 export function getAllPosts() {
   return (dispatch) => {
     return axios
@@ -225,6 +229,8 @@ export const getPostByUser = (id) => dispatch => {
    axios.get(`https://wixer-server.herokuapp.com/posts/user/${id}`)
   .then(res => dispatch({type: "GET_POST_BY_USER", payload: res.data}))
 }
+
+
 
 
 export const deletPost = (id) => async () => {

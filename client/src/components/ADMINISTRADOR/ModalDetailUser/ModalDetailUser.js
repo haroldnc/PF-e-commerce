@@ -15,8 +15,9 @@ export const ContainerModal = styled.div `
     align-items: center;
     transition: .3s ease;
 
-
     ${({isOpenDetailUser}) => isOpenDetailUser ? "none" : `visibility: hidden`}
+
+   
 `
 
 export const DivGlob = styled.div `

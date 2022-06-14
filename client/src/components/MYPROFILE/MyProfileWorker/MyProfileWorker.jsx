@@ -65,6 +65,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
     const history = useHistory()
     const dispatch = useDispatch()
     const allPost = useSelector(state => state.postsByUser)
+    console.log('allpost', allPost)
     const [ image , setImage ] = useState(profile.user.image)
     const [ showBtn , setShowBtn ] = useState(false)
     const [ panel , setPanel ] = useState("post")
@@ -130,7 +131,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         if(panel === "historial"){
             showPanel = <HistorialPayProfile id={profile.user.uid} toggleModalPaymentCancel={toggleModalPaymentCancel}/>
         }else if(panel === "post"){
-            showPanel = <MyProfilePost allPost={allPost} id={profile.user.uid}/>
+            showPanel = <MyProfilePost allPost={allPost ? allPost: null} id={profile.user.uid}/>
         }
     }else{
         showPanel = <ProfileInactive toggleModalPayment={toggleModalPayment}/>
@@ -371,7 +372,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                         {
                         infoWorker.languages.length === 0 ?<InfoProfile>Agrega tus idiomas ...</InfoProfile>: 
                             <DivResult>
-                                {profile.languages.map( (l, index )=> (
+                                {infoWorker.languages.map( (l, index )=> (
                                     <MapRow key={index}>
                                         <InfoProf>{l.idioma}</InfoProf>
                                         <Level>-   {l.level}</Level>

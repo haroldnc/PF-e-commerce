@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import { ContainerAdmin, Screen } from './Admin.js'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {Route} from "react-router-dom"
 import Home from "../Home/Home"
+import { getUserById,getPostByUser, clearUserById } from '../../store/actions/index'
 
 import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
 import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
@@ -20,25 +21,34 @@ import ModalDetailUser from '../../components/ADMINISTRADOR/ModalDetailUser/Moda
 
 const Admin = () => {
 
+    const UserDetail = useSelector(state => state.userDetail)
+    const PostById = useSelector(state => state.postsByUser)
+    const dispatch = useDispatch()
     let showLateral;
     let showScreen;
     const [ isOpenDetailUser, setIsOpenDetailUser ] = useState(false)
-    const [ idDetailUser, setIdDetailUser ] = useState(false)
     const [ render , setRender ] = useState("Dashboard") 
     const [ lateral , setLateral ] = useState({
         panel:"Menu",
         show: false
     })
 
+    
     const toggleModalDetailUser = (id) =>{
         setIsOpenDetailUser(!isOpenDetailUser)
-        setIdDetailUser(id)
+        if(id !== null){
+            dispatch(getUserById(id))
+            dispatch(getPostByUser(id))
+        }else{
+            dispatch(clearUserById())
+        }
     }
+
 
     const userSignIn = useSelector((state) => state.userSignIn);
     const { userInfo } = userSignIn;
 
-    console.log(DataAdmin)
+    // console.log(DataAdmin)
 
     // if(userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
     //     return(<p>good</p>)
@@ -81,9 +91,10 @@ const Admin = () => {
                 {showScreen}
             </Screen>
             <ModalDetailUser
-            isOpenDetailUser={isOpenDetailUser}
-            idDetailUser={idDetailUser}
-            toggleModalDetailUser={toggleModalDetailUser}
+                isOpenDetailUser={isOpenDetailUser}
+                toggleModalDetailUser={toggleModalDetailUser}
+                UserDetail={UserDetail}
+                PostById={PostById}
             />
         </ContainerAdmin>
     )

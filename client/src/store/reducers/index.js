@@ -134,6 +134,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 userDetail: action.payload
             }
+        case "CLEAR_USER_BY_ID":
+            return{
+                ...state,
+                userDetail: {}
+            }
         case "GET_POST_ID":
             return{
                 ...state,
