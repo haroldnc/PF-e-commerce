@@ -111,6 +111,7 @@ export const postPublish = (post) => async (dispatch) => {
 };
 
 export function getUserById(id) {
+  console.log(id)
   return (dispatch) => {
     return axios
       .get(`https://wixer-server.herokuapp.com/user/${id}`)

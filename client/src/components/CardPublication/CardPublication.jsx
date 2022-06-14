@@ -47,7 +47,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
       {pageslice &&
         pageslice.map((card) => (
           <CardP
-          key={card.id}
+          key={card._id}
             title={card.title}
             img={card.img}
             price={card.price}

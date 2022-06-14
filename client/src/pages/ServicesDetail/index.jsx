@@ -39,7 +39,7 @@ export default function ServicesDetail(){
     // const user = users.filter(u=>u.uid === post.user)
     // console.log(filteredWorker)
     //  console.log(filteredWorker[0]._id)
-    // console.log(post.user)
+    console.log(post.user)
 
    
 
@@ -48,7 +48,7 @@ export default function ServicesDetail(){
      useEffect(()=>{      
             
         dispatch(getPostById(id))
-        dispatch(getUserById(post.user))
+        if(post.user) dispatch(getUserById(post.user))
         dispatch(getAllPosts())
         dispatch(getWorkers())
 
@@ -106,7 +106,7 @@ export default function ServicesDetail(){
 
                     {userPost.length?
                     userPost.map(p=>(
-                        <PostDetailCard key={p.id} title={p.title} img={p.img} id={p.id} /> 
+                        <PostDetailCard key={p._id} title={p.title} img={p.img} id={p._id} /> 
                     ))
                     
                     :
