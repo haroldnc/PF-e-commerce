@@ -5,14 +5,14 @@ import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs, Errors } from './styledComments';
 import { postComments } from "../../store/actions/index";
+import { InputImage } from '../PublishForm/styledPublishForm';
 
 const PostComments = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const userLogged = useSelector((state) => state.userSignIn);
-    const userName = userLogged.userInfo.username;
+    const userID = userLogged.userInfo.uid;
     const [errors, setErrors] = useState({ name: "" });
-    console.log(errors)
     const { publicationId } = useParams();
     // /comentar/:publicationId
     // agarro el id de la publicacion por params asi que mandar el id de la publicacion al Link to=`/comentar/${"el id de la publicacion"}`
@@ -25,7 +25,7 @@ const PostComments = () => {
     const [rating, setRating] = useState(0);
 
     const [input, setInput] = useState({
-        user: `${userName}`,
+        user: `${userID}`,
         publicationId: `${publicationId}`,
         title: "",
         score: "",
@@ -51,12 +51,24 @@ const PostComments = () => {
           ...input,
           [e.target.name]: e.target.value
         });
-
+/*
         setErrors(validateForm({
-          ...input,
-          [e.target.name]: e.target.value,
-          score: 0
+            ...input,
+            [e.target.name]: e.target.value
         }));
+*/
+        if (!input.score) {
+            setErrors(validateForm({
+                ...input,
+                [e.target.name]: e.target.value,
+                score: 0
+            }));
+        } else {
+            setErrors(validateForm({
+                ...input,
+                score: input.score
+            }));
+        }
     };
 
     const handleSubmit = (e) => {
@@ -73,7 +85,7 @@ const PostComments = () => {
 
         e.preventDefault();
         console.log(input)
-        dispatch(postComments(input, publicationId));
+        dispatch(postComments(input));
         setInput({
             user: ``,
             publicationId: ``,

@@ -54,7 +54,7 @@ const Footer = () => {
 
             <AboutList>
                 <Li><a href="https://drive.google.com/file/d/1JIEUwBY85VKJSy4D0lAYeX6IJmDb6omO/view?usp=sharing" target="_blank" rel="noreferrer">Política de privacidad</a></Li>
-                <Link to="/comentar/62a62a965cc8058de9b4bc49">Comentar</Link>
+                <Link to="/comentar/62a6ad240ec0a7bc15354ae5">Comentar</Link>
             </AboutList>
           </div>
         </InfoFooter>
