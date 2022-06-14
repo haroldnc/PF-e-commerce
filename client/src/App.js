@@ -47,6 +47,7 @@ import PaymentSuccess from './pages/PaymenSuccess/PaymentSuccess.jsx'
 import Swal from "sweetalert2";
 import Favourites from "./pages/Favourites/Favourites";
 import PostComments from "./components/PostComments/PostComments";
+import HirePage from "./pages/HireConfirmation";
 
 
  // const stripePromise = loadStripe("pk_test_51L5zjMHq6KUjuv7IIFciLODh9WoDWs5rnmbUrfSZVOfMMWN67dB15Ricdwoi8UNFfuIHL6lgzSTocRXWlYa7aBSA00oP1VlFMI");
@@ -55,6 +56,7 @@ function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
 
   const { userInfo } = userSignIn;
+  console.log(userInfo)
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -131,6 +133,7 @@ function App() {
           <Route exact path="/paysuccess" component={PaymentSuccess} />
           <Route path="/favoritos/:id" component={Favourites} userInfo={userInfo} />
           <Route path="/comentar/:publicationId" component={PostComments}/>
+          <Route path="/contratar/post/:id" component={HirePage} />
         </Switch>
         <Footer />
         <ModalLogIn

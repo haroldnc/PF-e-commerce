@@ -101,7 +101,9 @@ export default function ServicesDetail(){
                 
                     <SubTitle>{`¿Te interesa trabajar con ${user.username}?`}</SubTitle>
                     <ContactButton>Hazle una pregunta</ContactButton><br />
+                    <Link to={`/contratar/post/${id}`}>
                     <HireButton>{`Contratar a ${user.username}`}</HireButton>
+                    </Link>
                     <SubTitle2>{`Otros anuncios de ${user.username} `}</SubTitle2>
 
                     {userPost.length?

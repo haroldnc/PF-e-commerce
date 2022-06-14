@@ -223,3 +223,8 @@ export const getPostByUser = (id) => dispatch => {
    axios.get(`https://wixer-server.herokuapp.com/posts/user/${id}`)
   .then(res => dispatch({type: "GET_POST_BY_USER", payload: res.data}))
 }
+
+
+export const hireButton = (body) => async () => {
+  await axios.post(`https://wixer-server.herokuapp.com/hirings`, body)
+}
