@@ -1,5 +1,8 @@
 import React, {useState} from "react";
 import { ContainerAdmin, Screen } from './Admin.js'
+import { useSelector } from "react-redux";
+import {Route} from "react-router-dom"
+import Home from "../Home/Home"
 
 import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
 import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
@@ -23,6 +26,16 @@ const Admin = () => {
         panel:"Menu",
         show: false
     })
+
+    const userSignIn = useSelector((state) => state.userSignIn);
+    const { userInfo } = userSignIn;
+
+    console.log(DataAdmin)
+
+    if(userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
+        return(<p>good</p>)
+    }
+  
 
 
     if(lateral.panel === "Menu" && lateral.show){

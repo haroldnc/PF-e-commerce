@@ -34,14 +34,13 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
   useEffect(() => {
     dispatch(getWishlist());
   }, [dispatch]);
-  
+  // console.log(userInfo)
 
   // const icon = isClicked ? <HeartFill /> : <HeartOutline />
 
   const handleIcon = (idUser, idPublication) => {
     dispatch(addToWishlist(idUser, idPublication));
   };
-  // console.log(pageslice)
 
   return (
     <>

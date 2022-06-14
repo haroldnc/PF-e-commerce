@@ -1,5 +1,5 @@
-import { GiConsoleController } from "react-icons/gi";
-import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
+// import { GiConsoleController } from "react-icons/gi";
+// import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
 
 const initialState = {
     allCategories: [],
