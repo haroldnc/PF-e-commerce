@@ -88,12 +88,6 @@ export const getPosts = () => (dispatch) => {
     .then((res) => dispatch({ type: "GET_POSTS", payload: res.data }));
 };
 
-export const clearPostPrevius = () => {
-  return{
-    type: "CLEAR_POSTS"
-  }
-}
-
 export const getPostsByServiceId = (id) => (dispatch) => {
   axios
     .get(`https://wixer-server.herokuapp.com/posts/service/${id}`)
@@ -205,9 +199,9 @@ export const PutInfoUser = (body,id) => async () => {
   await axios.put(`https://wixer-server.herokuapp.com/user/${id}`, body)
 }
 
-export const postComments = (comment, publicationId) => async (dispatch) => {
+export const postComments = (comment) => async (dispatch) => {
   axios
-    .post(`https://wixer-server.herokuapp.com/scores/${publicationId}`, comment)
+    .post(`https://wixer-server.herokuapp.com/:publicationId`, comment)
     .then((res) =>
       dispatch({ type: "POST_COMMENT", payload: res.payload })
     );
@@ -222,10 +216,15 @@ export const cancelSubscription = (body,id) => async () => {
 }
 
 export const changeSubscription = (body,id) => async() => {
-  await axios.put(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body)
+  await axios.post(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body, {headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }})
 }
 
 export const getPostByUser = (id) => dispatch => {
    axios.get(`https://wixer-server.herokuapp.com/posts/user/${id}`)
   .then(res => dispatch({type: "GET_POST_BY_USER", payload: res.data}))
 }
+
+
+

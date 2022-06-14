@@ -19,8 +19,6 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
             LastTrans = Alltransaction.pop()
         }
     } 
-    console.log('trans', LastTrans)
-
 
 
     const cancelInmed = () =>{
@@ -44,8 +42,8 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
                     period_end: false
                 },profile))
                 toggleModalPaymentCancel()
-            }
             window.location.href = window.location.href
+            }
         })
     }
 
