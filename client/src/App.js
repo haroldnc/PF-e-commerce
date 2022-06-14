@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 
 //PAyment Element
 
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-import ReactDOM from 'react-dom';
+// import {Elements} from '@stripe/react-stripe-js';
+// import {loadStripe} from '@stripe/stripe-js';
+// import ReactDOM from 'react-dom';
 
-//
+// //
 
-import CheckoutForm from "./components/CheckoutForm";
+// import CheckoutForm from "./components/CheckoutForm";
 
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "../src/styles/global";
@@ -128,7 +128,7 @@ function App() {
           <Route path="/confirm/:id" component={Confirm} />
           <Route path="/iniciar-sesion" component={LogInConfirm} />
           <Route path="/lista-favoritos" component={Wishlist} />
-          <Route exact path="/paysuccess" component={PaymentSuccess} />
+          {/* <Route exact path="/paysuccess" component={PaymentSuccess} /> */}
           <Route path="/favoritos/:id" component={Favourites} userInfo={userInfo} />
           <Route path="/comentar/:publicationId" component={PostComments}/>
         </Switch>
