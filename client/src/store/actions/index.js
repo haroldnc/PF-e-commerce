@@ -200,9 +200,9 @@ export const PutInfoUser = (body,id) => async () => {
   await axios.put(`https://wixer-server.herokuapp.com/user/${id}`, body)
 }
 
-export const postComments = (comment, id) => async (dispatch) => {
+export const postComments = (comment) => async (dispatch) => {
   axios
-    .post(`https://wixer-server.herokuapp.com/scores/${id}`, comment)
+    .post(`https://wixer-server.herokuapp.com/scores`, comment)
     .then((res) =>
       dispatch({ type: "POST_COMMENT", payload: res.payload })
     );

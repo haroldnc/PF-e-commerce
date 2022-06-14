@@ -16,25 +16,33 @@ import AdminWorkers from "../../components/ADMINISTRADOR/AdminWorkers/AdminWorke
 import Categorias from "../../components/ADMINISTRADOR/Categorias/Categorias.jsx";
 import DataAdmin from "../../components/ADMINISTRADOR/DataAdmin/DataAdmin.jsx";
 import AdminUser from "../../components/ADMINISTRADOR/AdminUser/AdminUser.jsx";
+import ModalDetailUser from '../../components/ADMINISTRADOR/ModalDetailUser/ModalDetailUser.jsx'
 
 const Admin = () => {
 
     let showLateral;
     let showScreen;
+    const [ isOpenDetailUser, setIsOpenDetailUser ] = useState(false)
+    const [ idDetailUser, setIdDetailUser ] = useState(false)
     const [ render , setRender ] = useState("Dashboard") 
     const [ lateral , setLateral ] = useState({
         panel:"Menu",
         show: false
     })
 
+    const toggleModalDetailUser = (id) =>{
+        setIsOpenDetailUser(!isOpenDetailUser)
+        setIdDetailUser(id)
+    }
+
     const userSignIn = useSelector((state) => state.userSignIn);
     const { userInfo } = userSignIn;
 
     console.log(DataAdmin)
 
-    if(userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
-        return(<p>good</p>)
-    }
+    // if(userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
+    //     return(<p>good</p>)
+    // }
   
 
 
@@ -51,7 +59,7 @@ const Admin = () => {
     if(render === "Dashboard"){
         showScreen = <Dasboard />
     }else if(render === "Registrados"){
-        showScreen = <AdminRegistrados/>
+        showScreen = <AdminRegistrados toggleModalDetailUser={toggleModalDetailUser}/>
     }else if(render === "Editar Categorías"){
         showScreen = <FormAdminCategory/>
     }else if(render === "Editar Servicios"){
@@ -72,6 +80,11 @@ const Admin = () => {
                 <NavAdmin render={render} />
                 {showScreen}
             </Screen>
+            <ModalDetailUser
+            isOpenDetailUser={isOpenDetailUser}
+            idDetailUser={idDetailUser}
+            toggleModalDetailUser={toggleModalDetailUser}
+            />
         </ContainerAdmin>
     )
 }
