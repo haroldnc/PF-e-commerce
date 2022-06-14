@@ -25,7 +25,7 @@ export const Image = styled.div`
 export const Title = styled.h2`
   margin-left: 15px;
   margin-right: 15px;
-  margin-top: 15px;
+  margin-top: 5px;
   font-size: 18px;
 `
 
@@ -109,17 +109,17 @@ export const PriceContainer = styled.div`
 `;
 
 export const BotonPago = styled.button`
-  min-width: 5rem;
+  min-width: 3rem;
   min-height: 2rem;
   margin-left: 10px;
   padding: 3px;
   border-radius: 5px;
   border: 1px solid red;
   background-color: transparent;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 400;
   color: red;
-  padding: 5px;
+  padding: 0px;
   cursor: pointer;
   font-family: "puppin", sans-serif;
   transition: 0.2s ease;
@@ -128,4 +128,55 @@ export const BotonPago = styled.button`
     background-color: red;
     color: white
   }
-`;
+`
+export const BotonActive = styled.button`
+  min-width: 3rem;
+  min-height: 2rem;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid rgb(94, 255, 0);
+  background-color: transparent;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgb(94, 255, 0);;
+  padding: 0px;
+  cursor: pointer;
+  font-family: "puppin", sans-serif;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: rgb(94, 255, 0);
+    color: white
+  }
+`
+
+export const BotonInactive = styled.button`
+  min-width: 3rem;
+  min-height: 2rem;
+  margin-left: 10px;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid rgba(129, 129, 129, 0.548);
+  background-color: transparent;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(129, 129, 129, 0.548);
+  padding: 0px;
+  cursor: pointer;
+  font-family: "puppin", sans-serif;
+  transition: 0.2s ease;
+
+  &:hover {
+    background-color: rgba(129, 129, 129, 0.548);
+    color: white
+  }
+`
+
+export const Services = styled.h2 `
+  color: rgba(0, 0, 0, 0.664);
+  font-family: "puppin", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 10px;
+`

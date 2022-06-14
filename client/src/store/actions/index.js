@@ -232,3 +232,8 @@ export const deletPost = (id) => async () => {
 } 
 
 
+export const editPosts = (body,id) => async () => {
+  await axios.put(`https://wixer-server.herokuapp.com/posts/${id}`, body)
+}
+
+

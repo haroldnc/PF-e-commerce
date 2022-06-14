@@ -1,16 +1,17 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getPostByUser, deletPost } from '../../../store/actions/index'
+import { getPostByUser, deletPost, editPosts } from '../../../store/actions/index'
 import { NavPost, BtnPublic, ContainerCards, TextTwo, Textone, ContainerNopost } from './MyProfilePost'
 import CardPostMyprofile from '../CardPostMyprofile/CardPostMyprofile.jsx'
 import Swal from 'sweetalert2'
 
-const MyProfilePost = ({id}) => {
+const MyProfilePost = ({id, allPost}) => {
 
     const history = useHistory()
     const dispatch = useDispatch()
-    const allPost = useSelector(state => state.postsByUser)
+    const [ PostAll , setPostAll ] = useState("")
+    const [ cambio , setCambio ] = useState( false )
 
     let posts = null
     if(allPost){
@@ -40,19 +41,21 @@ const MyProfilePost = ({id}) => {
                 'Ningun usuario podrá contratarte por esta publicación',
                 'success'
                 )
-            const response = dispatch(deletPost(id))
-            // window.location.href = window.location.href
-            console.log('eliminado', id )
+                const response = dispatch(deletPost(id))
+                if(cambio){
+                    setPostAll(PostAll.filter(e => e._id !== id))
+                }else{
+                    setPostAll(allPost.filter(e => e._id !== id))
+                    setCambio(true)
+                }
             }
         })
     }
 
-    useEffect(() => {
-        dispatch(getPostByUser(id))
-    },[])
+    const handleActivate = (body, id) => {
+        dispatch(editPosts(body,id))
+    }
 
-    
-    
     return (
         <div style={{width:"100%"}}>
             <NavPost>
@@ -62,6 +65,21 @@ const MyProfilePost = ({id}) => {
                 posts ?
                 <ContainerCards>
                 {
+                cambio ? PostAll.map( (p, index) => (
+                    <div key={index}>
+                       <CardPostMyprofile
+                        title={p.title}
+                        img={p.img}
+                        description={p.description}
+                        price={p.price}
+                        handleDelete={handleDelete}
+                        idPist={p._id}
+                        service={p.service.name}
+                        active={p.active}
+                        handleActivate={handleActivate}
+                       /> 
+                    </div>
+                   )) :
                    allPost.map( (p, index) => (
                     <div key={index}>
                        <CardPostMyprofile
@@ -71,9 +89,14 @@ const MyProfilePost = ({id}) => {
                         price={p.price}
                         handleDelete={handleDelete}
                         idPist={p._id}
+                        service={p.service.name}
+                        active={p.active}
+                        handleActivate={handleActivate}
+                        // rating={p.score}
                        /> 
                     </div>
                    )) 
+                   
                 }
                 </ContainerCards> :
                 <ContainerNopost>
