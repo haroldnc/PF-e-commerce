@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory , useParams } from "react-router-dom";
+import { Link, useHistory , useParams } from "react-router-dom";
 import {
   Container,
   HamburguerMenuIcon,
@@ -63,9 +63,10 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
         <div>
           {userInfo && userInfo.confirm_email === true  ? (
             <UserInfo>
+              {userInfo.user_role.name === "admin" && <Link to="/admin"><p>Administrar</p></Link>}
 
-              {userInfo.user_role.name && userInfo.user_role.name  === "user"  && (<UserRole>Usuario</UserRole>)}
-              {userInfo.user_role.name && userInfo.user_role.name  === "worker"  && (<UserRole>Worker</UserRole>)}
+              {/* {userInfo.user_role.name && userInfo.user_role.name  === "user"  && (<UserRole>Usuario</UserRole>)}
+              {userInfo.user_role.name && userInfo.user_role.name  === "worker"  && (<UserRole>Worker</UserRole>)} */}
               {userInfo.user_role === "628eefd607fe8bf42fb6a5f5" && <UserRole>Usuario</UserRole>}
               {userInfo.user_role === "628ef02007fe8bf42fb6a5f8" && <UserRole>Worker</UserRole>}
 
