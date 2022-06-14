@@ -20,7 +20,7 @@ const Home = ({ userInfo }) => {
   const profiles = useSelector((state) => state.workers);
   const dispatch = useDispatch();
 
-  console.log('errr',profiles)
+  // console.log('errr',profiles)
   useEffect(() => {
     dispatch(getWorkers());
     dispatch(getAllCategories());
