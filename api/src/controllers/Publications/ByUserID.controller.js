@@ -13,7 +13,7 @@ const getPostsByUser = async (req, res) => {
          .populate('service', { _id:1, name:1 });
 
       res.status(200).json({
-         posts: ...publications,
+         posts: [...publications],
          subscription_type: {
             worker.subscription_type._id,
             worker.subscription_type.name
