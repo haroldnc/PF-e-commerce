@@ -41,9 +41,12 @@ const addTransaction = async (req, res) => {
 
       const subscription = await stripe.subscriptions.retrieve(session.subscription);
       const payment = await stripe.paymentMethods.retrieve(subscription.default_payment_method);
+      const schedule = await stripe.subscriptionSchedules.create({
+         from_subscription: subscription.id
+      });
 
       await Transactions.create({
-         sessionId,
+         subSchedulesId: schedule.id,
          amount: session.amount_total/100,
          reason,
          date: new Date(subscription.current_period_start*1000),

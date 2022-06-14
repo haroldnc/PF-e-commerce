@@ -67,26 +67,20 @@ const changeSubscriptionsStatus = async (req, res) => {
 
 const cancelSubscription = async (req, res) => {
 	const { id } = req.params;
-	const {
-		sessionId,
-		period_end=true
-	} = req.body;
+	const { subSchedulesId } = req.body;
 
 	try{
-		if(!sessionId) throw new Error('"sessionId" not found!');
+		if(!subSchedulesId) throw new Error('"subSchedulesId" not found!');
 
-		const sub = await stripe.checkout.sessions.retrieve(sessionId);
-
-		await stripe.subscriptions.update(sub.subscription, {
-			cancel_at_period_end: period_end
-		});
+		await stripe.subscriptionSchedules.cancel(subSchedulesId);
+		const unsubscribed = await Subscriptions.findOne({ name: "Unsubscribed" });
 
 		await DataWorkers.update({ userId: id }, {
 			subscribed: false,
-			subscription_type: "62a6dd77e56b6f3e0ad916cd"
+			subscription_type: unsubscribed._id.toString()
 		});
 
-		res.status(200).json({ msg: `The Subscription ${period_end?'will be cancelled at the end of the period':'was cancelled'}`})
+		res.status(200).json({ msg: 'The Subscription was cancelled'})
 	} catch(error) {
 		res.status(422).json({ error: error.message });
 	}
@@ -95,33 +89,47 @@ const cancelSubscription = async (req, res) => {
 const changeSubscription = async (req, res) => {
 	const { id } = req.params;
 	const {
-		sessionId,
+		subSchedulesId,
 		priceId
 	} = req.body;
 
 	try{
-		if(!sessionId) throw new Error('"sessionId" not found!');
+		if(!subSchedulesId) throw new Error('"subSchedulesId" not found!');
 		if(!priceId) throw new Error('"priceId" nor found!');
 
-		const sub = await stripe.checkout.sessions.retrieve(sessionId);
-		const subscription = await stripe.subscriptions.retrieve(sub.subscription);
-		await stripe.subscriptions.update(sub.subscription, {
-		  cancel_at_period_end: false,
-		  proration_behavior: 'create_prorations',
-		  items: [{
-		    id: subscription.items.data[0].id,
-		    price: priceId,
-		  }]
+		const schedule = await stripe.subscriptionSchedules.retrieve(subSchedulesId);
+		const subscription = await stripe.subscriptions.retrieve(schedule.subscription);
+		await stripe.subscriptionSchedules.update(subSchedulesId, {
+			phases: [
+			   {
+			      items: [
+			      	{
+			      		price: subscription.items.data[0].price.id
+			      	}
+					],
+			      start_date: subscription.current_period_start,
+			      end_date: 'now'
+			   },
+			   {
+			      items: [
+			      	{
+			      		price: priceId
+			      	}
+			      ],
+			      start_date: 'now',
+			      end_date: subscription.current_period_end
+			   }
+			]
 		});
 
 		const subs = await Subscriptions.findOne({ priceId });
 
 		await DataWorkers.update({ userId: id }, {
 			subscribed: true,
-			subscription_type: subs?._id
+			subscription_type: subs._id
 		});
 
-		res.status(200).json({ msg: `The Subscription ${period_end?'will be cancelled at the end of the period':'was cancelled'}`})
+		res.status(200).json({ msg: 'The Subscription updated successfully'})
 	} catch(error) {
 		res.status(422).json({ error: error.message });
 	}
