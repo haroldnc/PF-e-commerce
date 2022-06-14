@@ -131,7 +131,7 @@ const Profile = () => {
             <h1>si quieres ver tu perfil primero debes inciar sesion</h1>
         </Validate>)
     }
-    if(userInfo.uid !== id){
+    if(userInfo.uid !== id && userInfo.user_role.name !== "worker"){
         return(
             <Validate>
                 <h1>buen intento!</h1>
