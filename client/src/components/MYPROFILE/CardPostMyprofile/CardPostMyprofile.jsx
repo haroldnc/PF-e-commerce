@@ -4,9 +4,8 @@ import { IconContext } from "react-icons";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
 
-const CardPostMyprofile = ({ title, img, description, price, service, id, userInfo, profile_img, firstName, lastName, rating }) => {
+const CardPostMyprofile = ({ title, img, description, price,idPist, rating, handleDelete }) => {
 
-  const fullName = firstName + " " + lastName
 
   return (
     <Container>
@@ -30,9 +29,10 @@ const CardPostMyprofile = ({ title, img, description, price, service, id, userIn
         
       </DivRating>
       <DivPay>
+      <BotonPago onClick={() => handleDelete(idPist)}>Eliminar</BotonPago>
+
           {/* {userInfo && userInfo.confirm_email === true ? (
             <Link to={`/compra/${id}`}>
-              <BotonPago>Contratar</BotonPago>
             </Link>
           ) : (
             <BotonPago

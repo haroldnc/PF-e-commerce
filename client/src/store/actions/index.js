@@ -216,9 +216,8 @@ export const cancelSubscription = (body,id) => async () => {
 }
 
 export const changeSubscription = (body,id) => async() => {
-  await axios.post(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body, {headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }})
+  // await axios.post(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body, )
+  await axios({ method: 'put', url:`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, data: body})
 }
 
 export const getPostByUser = (id) => dispatch => {
@@ -226,5 +225,10 @@ export const getPostByUser = (id) => dispatch => {
   .then(res => dispatch({type: "GET_POST_BY_USER", payload: res.data}))
 }
 
+
+export const deletPost = (id) => async () => {
+  const response = await axios.delete(`https://wixer-server.herokuapp.com/posts/${id}`)
+  return response
+} 
 
 
