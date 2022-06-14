@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 
 import MyProfileWorker from '../../components/MYPROFILE/MyProfileWorker/MyProfileWorker.jsx'
 
-import { ContainerProfile } from './Profile'
+import { ContainerProfile,Validate } from './Profile'
 import ModalPayment from '../../components/ModalPayment/ModalPayment.jsx'
 import { getUserById, getWorkerDetail } from '../../store/actions/index'
 import MyProfileUser from '../../components/MYPROFILE/MyProfileUser/MyProfileUser.jsx'
@@ -24,7 +24,7 @@ const Profile = () => {
 
     const profile = useSelector(state => state.userDetail)
 
-    
+    console.log(id)
 
 
     let query = window.location.search.substring(1);
@@ -120,6 +120,26 @@ const Profile = () => {
             TypeProfile = <MyProfileUser profile={profile} toggleModalPayment={toggleModalPayment} />
         }
     }
+
+    //ACA ESTOY VALIDANDO LA RUTA DE PERFILES PARA EVITAR HACKEO HACIA ALGUN USUARIO
+    const userSignIn = useSelector((state) => state.userSignIn);
+    const { userInfo } = userSignIn;
+
+
+    if(!userInfo){
+        return(<Validate>
+            <h1>si quieres ver tu perfil primero debes inciar sesion</h1>
+        </Validate>)
+    }
+    if(userInfo.uid !== id && userInfo.user_role.name !== "worker"){
+        return(
+            <Validate>
+                <h1>buen intento!</h1>
+                <h2>no puedes acceder al perfil de otros usuarios</h2>
+            </Validate>
+        )
+    }
+    ///////////////////////////////////////////////------------------------------------
     
     return (
         <>
