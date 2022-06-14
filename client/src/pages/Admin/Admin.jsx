@@ -54,9 +54,9 @@ const Admin = () => {
     console.log(DataAdmin)
     console.log(userInfo)
 
-    // if(userInfo.user_role.name !== "admin"){
-    //     return(<p>good</p>)
-    // }
+    if(userInfo.user_role.name !== "admin"){
+        return(<p>good</p>)
+    }
   
 
 
