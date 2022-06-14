@@ -3,22 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
-import { Form, Comment, CommentBody, Inputs } from './styledComments';
+import { Form, Comment, CommentBody, Inputs, Errors } from './styledComments';
 import { postComments } from "../../store/actions/index";
 
 const PostComments = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const userLogged = useSelector((state) => state.userSignIn);
-    const userID = userLogged.userInfo.uid;
+    const userName = userLogged.userInfo.username;
+    const [errors, setErrors] = useState({ name: "" });
+    console.log(errors)
     const { publicationId } = useParams();
     // /comentar/:publicationId
-    // postComments
+    // agarro el id de la publicacion por params asi que mandar el id de la publicacion al Link to=`/comentar/${"el id de la publicacion"}`
+    // solo seria implementar eso para que el usuario pueda comentar esa publicacion y como van a armar una seccion en donde estara 
+    // mas o menos lo que el usuario "compro" entonces decidi hacerlo asi. Para que cuando hagan el .map() puedan pasar el id de la publicacion
+    // al boton donde te reenviara a la pagina de comentar con el id de la publicacion en donde se hara el comentario.
+
+    // PD: puse una ruta de prueba en el footer, en la parte de Acerca de, eliminenlo.
 
     const [rating, setRating] = useState(0);
 
     const [input, setInput] = useState({
-        user: `${userID}`,
+        user: `${userName}`,
         publicationId: `${publicationId}`,
         title: "",
         score: "",
@@ -32,6 +39,11 @@ const PostComments = () => {
             ...input,
             score: rate * 0.05
         });
+
+        setErrors(validateForm({
+            ...input,
+            score: rate * 0.05
+        }));
     }
 
     const handleInputChange = (e) => {
@@ -40,12 +52,11 @@ const PostComments = () => {
           [e.target.name]: e.target.value
         });
 
-        /*
         setErrors(validateForm({
           ...input,
-          [e.target.name]: e.target.value
+          [e.target.name]: e.target.value,
+          score: 0
         }));
-        */
     };
 
     const handleSubmit = (e) => {
@@ -77,7 +88,7 @@ const PostComments = () => {
           title: 'Genial',
           text: 'Tu comentario se publico correctamente',
         })
-       // history.push('/')
+       // history.push('/') <-- poner la ruta anterior 
     };
 
     return (
@@ -89,10 +100,13 @@ const PostComments = () => {
 
                 <CommentBody>
                     <Rating onClick={handleRating} ratingValue={rating} className="stars" fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}/>
+                    {errors.score && <Errors>{errors.score}</Errors>}
                     <Inputs>
                         <input type="text" name='title' placeholder="Titulo" value={input.title} onChange={handleInputChange}></input>
+                        {errors.title && <Errors>{errors.title}</Errors>}
                         <br></br>
                         <textarea name="message" placeholder="Escribe tu comentario" value={input.message} onChange={handleInputChange}></textarea>
+                        {errors.message && <Errors>{errors.message}</Errors>}
                         <br></br>
                         <button>Publicar comentario</button>   
                     </Inputs>   
@@ -101,5 +115,23 @@ const PostComments = () => {
         </Comment>
     );
 };
+
+export function validateForm(input) {
+    let errors = {};
+  
+    if (!input.title) {
+      errors.title = "El titulo es requerido";
+    };
+  
+    if (!input.message) {
+      errors.message = "El comentario es requerido";
+    };
+  
+    if (input.score === 0) {
+      errors.score = "La puntuacion es requerido";
+    };
+  
+    return errors;
+  };
 
 export default PostComments;
