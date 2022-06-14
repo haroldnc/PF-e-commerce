@@ -9,7 +9,7 @@ const PublishService = () => {
   const { userInfo } = userSignIn;
 
 
-  if(userInfo.user_role !== "628ef02007fe8bf42fb6a5f8"){
+  if(!userInfo || userInfo.user_role.name !== "worker" ){
       return(
         <ValidateRoute>
           <h2>lo siento, no puedes crear publicaciones!</h2>
