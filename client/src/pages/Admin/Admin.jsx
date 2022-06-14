@@ -3,7 +3,7 @@ import { ContainerAdmin, Screen } from './Admin.js'
 import { useSelector, useDispatch } from "react-redux";
 import {Route} from "react-router-dom"
 import Home from "../Home/Home"
-import { getUserById,getPostByUser, clearUserById } from '../../store/actions/index'
+import { getUserById,getPostByUser, clearUserById, getHiringsByUser } from '../../store/actions/index'
 
 import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
 import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
@@ -23,6 +23,7 @@ const Admin = () => {
 
     const UserDetail = useSelector(state => state.userDetail)
     const PostById = useSelector(state => state.postsByUser)
+    const HiringByUser = useSelector(state => state.hiringsByUser)
     const dispatch = useDispatch()
     let showLateral;
     let showScreen;
@@ -39,6 +40,7 @@ const Admin = () => {
         if(id !== null){
             dispatch(getUserById(id))
             dispatch(getPostByUser(id))
+            dispatch(getHiringsByUser(id))
         }else{
             dispatch(clearUserById())
         }
@@ -97,6 +99,7 @@ const Admin = () => {
                 toggleModalDetailUser={toggleModalDetailUser}
                 UserDetail={UserDetail}
                 PostById={PostById}
+                HiringByUser={HiringByUser}
             />
         </ContainerAdmin>
     )

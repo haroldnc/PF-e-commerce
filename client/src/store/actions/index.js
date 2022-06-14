@@ -250,3 +250,12 @@ export const editPosts = (body,id) => async () => {
 }
 
 
+export const getHiringsByUser = (id) => dispatch => {
+  axios.get(`https://wixer-server.herokuapp.com/hirings/user/${id}`)
+  .then( res => dispatch({type: "GET_HIRINGS_BY_USER", payload: res.data}))
+}
+
+export const DeleteUser = (id) => async() => {
+  await  axios.delete(`https://wixer-server.herokuapp.com/user/${id}`)
+}
+
