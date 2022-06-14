@@ -48,12 +48,9 @@ const Admin = () => {
     const userSignIn = useSelector((state) => state.userSignIn);
     const { userInfo } = userSignIn;
 
-<<<<<<< HEAD
     // console.log(DataAdmin)
-=======
     console.log(DataAdmin)
     console.log(userInfo)
->>>>>>> 38b00dce42e88c83a7c890e52ef1ffb26125f6d1
 
     if(userInfo.user_role.name !== "admin"){
         return(<p>good</p>)
