@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import DetailUser from '../DetailUser/DetailUser.jsx'
 import DetailWorker  from '../DetailWorker/DetailWorker.jsx'
 
-import { ContainerModal, DivGlob } from './ModalDetailUser'
+import { ContainerModal, DivGlob, BtnAtras } from './ModalDetailUser'
 
-const ModalDetailUser = ({isOpenDetailUser, toggleModalDetailUser, UserDetail, PostById}) => {
+const ModalDetailUser = ({isOpenDetailUser, toggleModalDetailUser, UserDetail, PostById, HiringByUser}) => {
 
 
     // console.log('userdetail',UserDetail)
@@ -15,7 +15,7 @@ const ModalDetailUser = ({isOpenDetailUser, toggleModalDetailUser, UserDetail, P
         if(UserDetail.user.user_role.name === "user"){
             showUser = <DetailUser UserDetail={UserDetail}/>
         }else{
-            showUser = <DetailWorker  UserDetail={UserDetail} PostById={PostById}/>
+            showUser = <DetailWorker  UserDetail={UserDetail} PostById={PostById} HiringByUser={HiringByUser}/>
         }
     }
 
@@ -26,7 +26,7 @@ const ModalDetailUser = ({isOpenDetailUser, toggleModalDetailUser, UserDetail, P
         <ContainerModal isOpenDetailUser={isOpenDetailUser}>
             <DivGlob>
                     {showUser}
-                <button onClick={() => toggleModalDetailUser(null) }>Cerrar</button>
+                <BtnAtras onClick={() => toggleModalDetailUser(null) }>Cerrar</BtnAtras>
             </DivGlob>
         </ContainerModal>
     )

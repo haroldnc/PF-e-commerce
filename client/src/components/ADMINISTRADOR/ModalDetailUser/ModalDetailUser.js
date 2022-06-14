@@ -27,3 +27,18 @@ export const DivGlob = styled.div `
     border-radius: 25px;
     padding: 25px;
 `
+
+export const BtnAtras = styled.button `
+    color: ${props => props.theme.colors.primary};
+    font-size: 13px;
+    background-color: transparent;
+    cursor:pointer;
+    font-family: 'Poppins', sans-serif;
+    width: 20%;
+    margin-left:40%;
+    margin-top: -5px;
+
+    &:hover{
+        color: ${props => props.theme.colors.secondary};
+    }
+`
