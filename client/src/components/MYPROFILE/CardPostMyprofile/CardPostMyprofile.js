@@ -114,16 +114,18 @@ export const BotonPago = styled.button`
   margin-left: 10px;
   padding: 3px;
   border-radius: 5px;
-  background-color: ${(props) => props.theme.colors.primary};
+  border: 1px solid red;
+  background-color: transparent;
   font-size: 13px;
   font-weight: 400;
-  color: white;
+  color: red;
   padding: 5px;
   cursor: pointer;
   font-family: "puppin", sans-serif;
   transition: 0.2s ease;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.secondary};
+    background-color: red;
+    color: white
   }
 `;
