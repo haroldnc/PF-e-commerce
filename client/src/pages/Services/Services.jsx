@@ -7,7 +7,7 @@ import {
   getPosts,
   getPostsByServiceId,
   getServiceById,
-  // clearPostPrevius
+  clearPostPrevius
 } from "../../store/actions/index";
 import { useParams } from "react-router-dom";
 
@@ -43,7 +43,7 @@ const Services = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // dispatch(clearPostPrevius())
+    dispatch(clearPostPrevius())
     dispatch(getServiceById(id));
     dispatch(getPostsByServiceId(id));
   }, [dispatch, id]);
