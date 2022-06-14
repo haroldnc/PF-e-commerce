@@ -125,6 +125,10 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state
             }
+        case "POST_COMMENT":
+            return{
+                ...state
+            }
         case "GET_USER_BY_ID":
             return{
                 ...state,
