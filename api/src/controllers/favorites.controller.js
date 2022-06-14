@@ -4,7 +4,7 @@ const addFavorite = async (req, res) => {
     const { idUser, idPublication } = req.body;
     try {
         // validar si existe una publicacion con ese id
-        const publication = await Favorites.findById(idPublication);
+        const publication = await Favorites.find({idPublication});
         if (!publication) {
             const favorite = await Favorites.create({ idUser, idPublication });
             res.status(200).json({ 
@@ -46,7 +46,8 @@ const getAllFavorites = async (req, res) => {
 const getFavoritesByUser = async (req, res) => {
     const { idUser } = req.params
     try {
-        const favorites = await Favorites.find({ idUser });
+        const favorites = await Favorites.find({ idUser })
+            .populate('idPublication', {title: 1, description: 1, price: 1, img: 1, score: 1, user: 1})
         res.status(200).json({ 
             ok: true,
             favorites
