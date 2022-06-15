@@ -33,7 +33,7 @@ export default function WorkersCarousel({profiles}){
 
     //    const workerProfiles = profiles.map(p=>p)
     const availableProfiles = profiles.filter(person=> person.subscription_type.name === "Premium")
-    console.log('caruserl',availableProfiles)
+    // console.log('caruserl',availableProfiles)
     // console.log(availableProfiles)
 
 
