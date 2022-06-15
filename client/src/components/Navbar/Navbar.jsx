@@ -67,8 +67,8 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
 
               {userInfo.user_role.name && userInfo.user_role.name  === "user"  && (<UserRole>Usuario</UserRole>)}
               {userInfo.user_role.name && userInfo.user_role.name  === "worker"  && (<UserRole>Worker</UserRole>)}
-              {/* {userInfo.user_role === "628eefd607fe8bf42fb6a5f5" && <UserRole>Usuario</UserRole>}
-              {userInfo.user_role === "628ef02007fe8bf42fb6a5f8" && <UserRole>Worker</UserRole>} */}
+              {userInfo.user_role === "628eefd607fe8bf42fb6a5f5" && <UserRole>Usuario</UserRole>}
+              {userInfo.user_role === "628ef02007fe8bf42fb6a5f8" && <UserRole>Worker</UserRole>}
 
               <Profile onClick={handleToggle}  img={userInfo.image}>
               </Profile>
@@ -80,20 +80,10 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
               {/* <Profile onClick={handleToggle}  img={userInfo.image}/>  */}
 
               
-<<<<<<< HEAD
-              {userInfo.user_role.name && userInfo.user_role.name === "worker" && <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
-              {userInfo.user_role.name && userInfo.user_role.name  === "user" && <ProfileBoxUser isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
-             {userInfo.user_role === "628eefd607fe8bf42fb6a5f5" && <ProfileBoxUser isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
+              {userInfo.user_role.name && userInfo.user_role.name === "worker" && <ProfileBoxWorker isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
+              {userInfo.user_role.name && userInfo.user_role.name  === "user" && <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
+             {userInfo.user_role === "628eefd607fe8bf42fb6a5f5" && <ProfileBoxWorker isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
               {userInfo.user_role === "628ef02007fe8bf42fb6a5f8" && <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
-=======
-              {
-                userInfo.user_role.name && userInfo.user_role.name === "user" ?
-                <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
-                :
-                <ProfileBoxWorker isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
-              }
-              
->>>>>>> 838c228121a898e3de3e10211b678edf6fa0b935
             </UserInfo>
 
           ) : (

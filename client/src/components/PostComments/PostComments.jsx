@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs, Errors } from './styledComments';
-import { postComments } from "../../store/actions/index";
+import { postComments, getHiringsUser, getHiringsByUser } from "../../store/actions/index";
 import { InputImage } from '../PublishForm/styledPublishForm';
 
 const PostComments = () => {
@@ -23,7 +23,9 @@ const PostComments = () => {
     // PD: puse una ruta de prueba en el footer, en la parte de Acerca de, eliminenlo.
 
     const [rating, setRating] = useState(0);
-
+    
+    console.log("usuario",userLogged);
+    
     const [input, setInput] = useState({
         user: `${userID}`,
         publicationId: `${publicationId}`,
@@ -31,10 +33,15 @@ const PostComments = () => {
         score: "",
         message: ""
     });
+    
+    useEffect( () => {
+        dispatch( getHiringsByUser( userID ))
+      },[ dispatch ])
 
     const handleRating = (rate) => {
         setRating(rate);
 
+        console.log("Soy rate",rate);
         setInput({
             ...input,
             score: rate * 0.05

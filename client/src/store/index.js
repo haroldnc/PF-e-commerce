@@ -26,7 +26,10 @@ const initialState = {
   allPost: [],
   wishlist: [],
 
-  queryPosts: [],
+  userWishlist: [],
+  queryPosts:[],
+  hiringsByUser: [],
+  userHirings:[]
 };
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

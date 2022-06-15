@@ -8,13 +8,15 @@ export const Container = styled.section`
     align-items: center;
 `
 export const Wrapper = styled.div`
-    width: 100%;
+    max-width: 1100px;
+    min-width: 1100px;
+
     justify-content: space-between;
     display: flex;
 
     @media (max-width: 768px){
         flex-flow: column;
-        min-width: 100%;
+    min-width: 90%;
     }
 `
 
@@ -53,7 +55,7 @@ export const Right = styled.div`
 `
 
 export const Image = styled.div`
-    background-image: url('https://assets.soyhenry.com/henry-landing/assets/microlandings/SoftwareIntro.jpg');
+    background-image: url(${(props => props.img)});
     background-position: absolute;
     background-repeat: no-repeat;
     background-size: cover;
