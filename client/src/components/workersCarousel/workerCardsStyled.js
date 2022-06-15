@@ -2,16 +2,17 @@ import styled from "styled-components";
 
 export const ImgArrow = styled.img`
   padding: 10px;
-`;
+  width: 50px;
+`
 
 export const WorkerDiv = styled.div`
   padding-bottom: 50px;
   margin-top: 50px;
-`;
+`
 
 export const TitleCarousel = styled.h2`
   margin-bottom: 30px;
-`;
+`
 
 export const Container = styled.div`
   width: 322px;

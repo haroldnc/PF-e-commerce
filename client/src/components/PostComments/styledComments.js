@@ -90,3 +90,8 @@ export const Inputs = styled.div`
         transition: 0.5s;
     }
 `
+
+export const Errors = styled.p`
+  color: red;
+  margin-top: 1rem;
+`;

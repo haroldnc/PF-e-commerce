@@ -1,5 +1,5 @@
-import { GiConsoleController } from "react-icons/gi";
-import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
+// import { GiConsoleController } from "react-icons/gi";
+// import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
 
 const initialState = {
     allCategories: [],
@@ -20,7 +20,9 @@ const initialState = {
     transactionById: [],
     queryPosts: [],
     posts: {},
-    postsByUser: []
+    postsByUser: [],
+    servicePosts:[],
+    hiringsByUser: []
 };
 //habia un objeto en initialstate
 
@@ -124,10 +126,19 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state
             }
+        case "POST_COMMENT":
+            return{
+                ...state
+            }
         case "GET_USER_BY_ID":
             return{
                 ...state,
                 userDetail: action.payload
+            }
+        case "CLEAR_USER_BY_ID":
+            return{
+                ...state,
+                userDetail: {}
             }
         case "GET_POST_ID":
             return{
@@ -138,6 +149,11 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 allPost:action.payload
+            }
+        case "CLEAR_POSTS":
+            return{
+                ...state,
+                servicePosts:[]
             }
 
         case "GET_WISHLIST":
@@ -179,6 +195,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postsByUser: action.payload
+            }
+        case "GET_HIRINGS_BY_USER":
+            return {
+                ...state,
+                hiringsByUser: action.payload
             }
             
         default: return state;

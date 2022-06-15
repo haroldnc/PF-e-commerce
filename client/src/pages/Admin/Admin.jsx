@@ -1,5 +1,9 @@
 import React, {useState} from "react";
 import { ContainerAdmin, Screen } from './Admin.js'
+import { useSelector, useDispatch } from "react-redux";
+import {Route} from "react-router-dom"
+import Home from "../Home/Home"
+import { getUserById,getPostByUser, clearUserById, getHiringsByUser } from '../../store/actions/index'
 
 import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
 import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
@@ -13,16 +17,47 @@ import AdminWorkers from "../../components/ADMINISTRADOR/AdminWorkers/AdminWorke
 import Categorias from "../../components/ADMINISTRADOR/Categorias/Categorias.jsx";
 import DataAdmin from "../../components/ADMINISTRADOR/DataAdmin/DataAdmin.jsx";
 import AdminUser from "../../components/ADMINISTRADOR/AdminUser/AdminUser.jsx";
+import ModalDetailUser from '../../components/ADMINISTRADOR/ModalDetailUser/ModalDetailUser.jsx'
 
 const Admin = () => {
 
+    const UserDetail = useSelector(state => state.userDetail)
+    const PostById = useSelector(state => state.postsByUser)
+    const HiringByUser = useSelector(state => state.hiringsByUser)
+    const dispatch = useDispatch()
     let showLateral;
     let showScreen;
+    const [ isOpenDetailUser, setIsOpenDetailUser ] = useState(false)
     const [ render , setRender ] = useState("Dashboard") 
     const [ lateral , setLateral ] = useState({
         panel:"Menu",
         show: false
     })
+
+    
+    const toggleModalDetailUser = (id) =>{
+        setIsOpenDetailUser(!isOpenDetailUser)
+        if(id !== null){
+            dispatch(getUserById(id))
+            dispatch(getPostByUser(id))
+            dispatch(getHiringsByUser(id))
+        }else{
+            dispatch(clearUserById())
+        }
+    }
+
+
+    const userSignIn = useSelector((state) => state.userSignIn);
+    const { userInfo } = userSignIn;
+
+    // console.log(DataAdmin)
+    console.log(DataAdmin)
+    console.log(userInfo)
+
+    if(userInfo.user_role.name !== "admin"){
+        return(<p>good</p>)
+    }
+  
 
 
     if(lateral.panel === "Menu" && lateral.show){
@@ -38,7 +73,7 @@ const Admin = () => {
     if(render === "Dashboard"){
         showScreen = <Dasboard />
     }else if(render === "Registrados"){
-        showScreen = <AdminRegistrados/>
+        showScreen = <AdminRegistrados toggleModalDetailUser={toggleModalDetailUser}/>
     }else if(render === "Editar Categorías"){
         showScreen = <FormAdminCategory/>
     }else if(render === "Editar Servicios"){
@@ -59,6 +94,13 @@ const Admin = () => {
                 <NavAdmin render={render} />
                 {showScreen}
             </Screen>
+            <ModalDetailUser
+                isOpenDetailUser={isOpenDetailUser}
+                toggleModalDetailUser={toggleModalDetailUser}
+                UserDetail={UserDetail}
+                PostById={PostById}
+                HiringByUser={HiringByUser}
+            />
         </ContainerAdmin>
     )
 }
