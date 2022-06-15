@@ -78,9 +78,7 @@ const addHiring = async (req, res) => {
         });
 
     return res.json({
-        ok: true,
-        msg: "User created",
-        usuario
+        ok: true
    });
 
     }
