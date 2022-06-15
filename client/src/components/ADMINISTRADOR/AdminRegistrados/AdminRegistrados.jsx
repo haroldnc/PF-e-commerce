@@ -6,7 +6,7 @@ import CardAdminR from '../CardAdminR/CardAdminR.jsx'
 
 import { ContainerREgistrados, NavRegistrados, User, Role, Corr, Tel } from './AdminRegistrados'
 
-const AdminRegistrados = () => {
+const AdminRegistrados = ({toggleModalDetailUser}) => {
 
     const dispatch = useDispatch() 
 
@@ -28,11 +28,13 @@ const AdminRegistrados = () => {
             {
                 allUsers.users && allUsers.users.map( u => (
                     <CardAdminR
+                        id={u.uid}
                         image={u.image}
                         username = {u.username}
                         telefono={u.phone}
                         email={u.email}
                         role={u.user_role.name}
+                        toggleModalDetailUser={toggleModalDetailUser}
                     />
 
                 ))

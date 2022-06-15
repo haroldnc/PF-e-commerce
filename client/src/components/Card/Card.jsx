@@ -8,8 +8,6 @@ const Card = ({ title, img, description, price, service, id, userPost,userInfo, 
 
   const fullName = userPost.firstName + " " + userPost.lastName //el nombre del usuario que hizo el post
 
-  console.log(id)
-  console.log(userPost)
 
   return (
     <Container>

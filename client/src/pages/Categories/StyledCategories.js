@@ -42,7 +42,7 @@ export const ContainerFilter = styled.div `
     margin-top: 55px;
     margin-left:50px;
     border-radius: 25px;
-    border: solid 1px grey;
+  
 `
 
 export const Div = styled.div `

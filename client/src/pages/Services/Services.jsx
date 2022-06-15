@@ -7,6 +7,7 @@ import {
   getPosts,
   getPostsByServiceId,
   getServiceById,
+  clearPostPrevius
 } from "../../store/actions/index";
 import { useParams } from "react-router-dom";
 
@@ -42,6 +43,7 @@ const Services = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    dispatch(clearPostPrevius())
     dispatch(getServiceById(id));
     dispatch(getPostsByServiceId(id));
   }, [dispatch, id]);
@@ -64,6 +66,7 @@ const Services = () => {
   for (let i = 0; i < Math.ceil(servicePosts.length / 15); i++) {
     numberPages.push(i + 1);
   }
+
 
   const pages = (page) => {
     console.log("ejecutado");

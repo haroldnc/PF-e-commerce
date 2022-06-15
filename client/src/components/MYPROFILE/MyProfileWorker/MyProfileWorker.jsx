@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { ContainerWorker,
@@ -39,29 +39,39 @@ import { ContainerWorker,
          Fileselect,
          BtnPerfil,
          BtnPrefilCancel,
-         DivButtons
+         DivButtons,
+         PostsC
          } from './MyProfileWorker'
 
-import { PutInfoWorker, getWorkerDetail, PutInfoUser } from '../../../store/actions/index'
+import { PutInfoWorker, getWorkerDetail, PutInfoUser, getPostByUser } from '../../../store/actions/index'
 import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
 import ProfileInactive from '../ProfileInactive/ProfileInactive.jsx'
 import MyProfilePost from '../MyprofilePost/MyProfilePost.jsx'
+import CambioaPlanStandard from '../CambioDePlan/CambioaPlanStandard/CambioaPlanStandard.jsx'
+import CambioaPlanPremium from '../CambioDePlan/CambioaPlanPremium/CambioaPlanPremium.jsx'
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
-import { MdOutlineEmail, MdStarPurple500 } from 'react-icons/md'
+import { MdOutlineEmail, MdStarPurple500, MdPostAdd } from 'react-icons/md'
 import { GiSmartphone } from 'react-icons/gi'
 import { keyframes } from "styled-components";
 
 
 const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}) => {
 
+    useEffect(() => {
+        dispatch(getPostByUser(profile.user.uid))
+    },[])
     const history = useHistory()
     const dispatch = useDispatch()
+    const allPost = useSelector(state => state.postsByUser)
+    console.log('allpost', allPost)
     const [ image , setImage ] = useState(profile.user.image)
     const [ showBtn , setShowBtn ] = useState(false)
     const [ panel , setPanel ] = useState("post")
     const [ loading, setLoading ] = useState(false)
+    const [ isOpenChangeStandard, setIsOpenChangeStandard ] = useState(false)
+    const [ isOpenChangePremium, setIsOpenChangePremium ] = useState(false)
     const [ Formularios, setFormularios ] = useState({
         title: false,
         aboutMe: false,
@@ -70,7 +80,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         certificacion: false,
         experiencia: false,
         linkedin: false,
-        web: false
+        web: false,
+        phone: false
     })
     const [ Changes , setChanges ] = useState({
         title: "",
@@ -79,7 +90,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         skills: "",
         linkedin: "",
         web: "",
-        image:""
+        image:"",
+        phone:""
     })
     const [ infoWorker , setInfoWorker ] = useState({
         title: profile.dataWorker.title,
@@ -88,7 +100,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         skills: profile.dataWorker.skills,
         linkedin: profile.dataWorker.linkedin,
         web: profile.dataWorker.web,
-        image: profile.user.image
+        image: profile.user.image,
+        phone: profile.dataWorker.phone
     })
     const toggleForms = (dato) => {
         setFormularios({
@@ -97,12 +110,28 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         })
     }
 
+    const toggleIsOpenChangeStandard = () => {
+        setIsOpenChangeStandard(!isOpenChangeStandard)
+    }
+
+    const toggleIsOpenChangePremium = () => {
+        setIsOpenChangePremium(!isOpenChangePremium)
+    }
+
+    const handleCambioPlan = () => {
+        if(profile.dataWorker.subscription_type.name === "Premium"){
+            toggleIsOpenChangeStandard()
+        }else{
+            toggleIsOpenChangePremium()
+        }
+    }
+
     let showPanel = null
     if(profile.dataWorker.subscribed){
         if(panel === "historial"){
             showPanel = <HistorialPayProfile id={profile.user.uid} toggleModalPaymentCancel={toggleModalPaymentCancel}/>
         }else if(panel === "post"){
-            showPanel = <MyProfilePost id={profile.user.uid}/>
+            showPanel = <MyProfilePost allPost={allPost ? allPost: null} id={profile.user.uid}/>
         }
     }else{
         showPanel = <ProfileInactive toggleModalPayment={toggleModalPayment}/>
@@ -112,13 +141,12 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
         history.push(`/worker/${profile.dataWorker._id}`)
     }
 
-    console.log('perfiluser',profile )
     const RedirectLink = (url) => {
         window.open(url)
     }
 
-    const HistorialClick = () => {
-        setPanel("historial")
+    const panelClick = (panel) => {
+        setPanel(panel)
     }
     const handleClickPayment = () => {
         toggleModalPayment()   
@@ -171,9 +199,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
     setShowBtn(!showBtn)
   }
 
-
     let PremiumStar = null
-    if(profile.dataWorker.subscription_type === "62a642184cf2ae63ab17dffe" && profile.dataWorker.subscribed){
+    if(profile.dataWorker.subscription_type.name === "Premium" && profile.dataWorker.subscribed){
         PremiumStar = 
             <Premium>
             <TextPremium>Premium</TextPremium>
@@ -227,16 +254,53 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                                 <GiSmartphone/>
                             </div>
                         </IconContext.Provider>
-                        <EmailPhone>{profile.dataWorker.phone}</EmailPhone>
+                        <EmailPhone onClick={() => toggleForms("phone")}>{infoWorker.phone}</EmailPhone>
                     </DivOther>
+                    {
+                        Formularios.phone ?
+                            <FormsDiv>
+                                <form>
+                                    <input 
+                                        placeholder="Agrega un numero de telefono..."
+                                        value={Changes.phone}
+                                        name="phone"
+                                        onChange={(e) => handleChange(e)}
+                                    />
+                                    <div style={{display: "flex" , justifyContent:"center"}}>
+                                        <BtnCancel onClick={() => toggleForms("phone")}>Cancelar</BtnCancel>
+                                        <BtnAccept onClick={(e) => hamdlePut(e,"phone")}>Actualizar</BtnAccept>
+                                    </div>
+                                </form>
+                            </FormsDiv>
+                        : null
+                    }
+                    <DivOther>
+                         <IconContext.Provider value={{size:"20px", color: "rgba(0, 0, 0, 0.596)"}}>
+                            <div>
+                                <MdPostAdd/>
+                            </div>
+                            </IconContext.Provider>
+                        <EmailPhone onClick={() => panelClick("post")}>Publicaciones</EmailPhone>
+
+                    </DivOther>
+                    <DivOther>
+                        <div style={{display:"flex", flexDirection:"column", marginLeft:"35px"}}>
+                            <PostsC>Totales:   {allPost ? allPost.length : null}</PostsC>
+                            <PostsC>Activas:   {allPost ? allPost.filter(p => p.active === true).length : null}</PostsC>
+                        </div>
+                    </DivOther>
+
+
+
+
                         {
                             profile.dataWorker.subscribed ? 
                             <div style={{width: "100%"}}>
                                 <Div>
                                     <Subscribe>Activo</Subscribe>
                                 </Div>
-                                <CambioPlan>Cambiar de plan</CambioPlan>
-                                <Historial onClick={HistorialClick}>Historial de pago</Historial>
+                                <CambioPlan onClick={handleCambioPlan}>Cambiar de plan</CambioPlan>
+                                <Historial onClick={() => panelClick("historial")}>Historial de pago</Historial>
                             </div>
                                 :
                             <div style={{width: "100%"}}>
@@ -308,7 +372,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                         {
                         infoWorker.languages.length === 0 ?<InfoProfile>Agrega tus idiomas ...</InfoProfile>: 
                             <DivResult>
-                                {profile.languages.map( (l, index )=> (
+                                {infoWorker.languages.map( (l, index )=> (
                                     <MapRow key={index}>
                                         <InfoProf>{l.idioma}</InfoProf>
                                         <Level>-   {l.level}</Level>
@@ -466,6 +530,16 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                     {showPanel}
                 </InfoContainerDer>
             </ContainerDer>
+            <CambioaPlanStandard 
+            profile={profile.user.uid}
+            isOpenChangeStandard={isOpenChangeStandard} 
+            toggleIsOpenChangeStandard={toggleIsOpenChangeStandard}
+            />
+            < CambioaPlanPremium 
+            profile={profile.user.uid}
+            isOpenChangePremium={isOpenChangePremium}
+            toggleIsOpenChangePremium={toggleIsOpenChangePremium}
+            />
         </ContainerWorker>
     )
 }

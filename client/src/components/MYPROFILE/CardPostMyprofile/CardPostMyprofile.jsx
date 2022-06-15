@@ -1,12 +1,91 @@
-import React from "react";
-import { BotonPago, Container, Description, DivPay, DivRating, Image, PriceContainer, Rating, Staring, Pay, Title, Profile, ImgProfile, NameProfile, DescriptionContainer } from "./CardPostMyprofile";
+import React, {useState} from "react";
+import { BotonPago,
+        Container, 
+        Description, 
+        DivPay, 
+        DivRating, 
+        Image, 
+        PriceContainer, 
+        Rating, 
+        Staring, 
+        Pay, 
+        Title,
+        Services, 
+        BotonActive,  
+        Profile, 
+        ImgProfile, 
+        NameProfile, 
+        DescriptionContainer ,
+        BotonInactive
+      } from "./CardPostMyprofile";
 import { IconContext } from "react-icons";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2'
 
-const CardPostMyprofile = ({ title, img, description, price, service, id, userInfo, profile_img, firstName, lastName, rating }) => {
+const CardPostMyprofile = ({ title, img, description, price,idPist, rating, handleDelete, service, active, handleActivate }) => {
 
-  const fullName = firstName + " " + lastName
+  const [ activate, setActivate ] = useState(active)
+
+//   const ArrayAvg = (myArray) => {
+//     let i = 0, summ = 0, ArrayLen = myArray.length;
+//     while (i < ArrayLen) {
+//         summ = summ + myArray[i++];
+// }
+//     return summ / ArrayLen;
+// }
+// console.log(rating)
+// var promScore = ArrayAvg(rating);
+
+const handleChange = () => {
+    if(activate){
+      Swal.fire({
+        title: 'Estas seguro?',
+        text: "Tu publicación se desactivará",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Desactivar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Publicación desactivada correctamente!',
+            'Tu publicación no será visible',
+            'success'
+          )
+          handleActivate({
+            active: false
+          } ,idPist)
+          setActivate(false)
+        }
+    })
+    }else{
+      Swal.fire({
+        title: 'Estas seguro?',
+        text: "Tu publicación se activará",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Activar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Publicación activada correctamente!',
+            'Tu publicación ahora será visible',
+            'success'
+          )
+          handleActivate({
+            active: true
+          } ,idPist)
+          setActivate(true)
+        }
+    })
+    
+
+    }
+}
 
   return (
     <Container>
@@ -15,6 +94,7 @@ const CardPostMyprofile = ({ title, img, description, price, service, id, userIn
               <ImgProfile src={profile_img} />
               <NameProfile>{fullName}</NameProfile>
             </Profile> */}
+      <Services>{service}</Services>
       <Title>{title}</Title>
       <DescriptionContainer>
         <Description>{description}</Description>
@@ -30,22 +110,16 @@ const CardPostMyprofile = ({ title, img, description, price, service, id, userIn
         
       </DivRating>
       <DivPay>
-          {/* {userInfo && userInfo.confirm_email === true ? (
-            <Link to={`/compra/${id}`}>
-              <BotonPago>Contratar</BotonPago>
-            </Link>
-          ) : (
-            <BotonPago
-              onClick={() => alert("Debes registrarte o iniciar secion")}
-            >
-              Contratar
-            </BotonPago>
-          )} */}
-          <PriceContainer>
-            <Staring>COMIENZA EN</Staring>
-            <Pay>US${price}</Pay>
-          </PriceContainer>
-        </DivPay>
+        <BotonPago onClick={() => handleDelete(idPist)}>Eliminar</BotonPago>
+            { activate ?
+              <BotonActive onClick={handleChange}>Activa</BotonActive>
+              : <BotonInactive onClick={handleChange}>Inactiva</BotonInactive>
+            }
+        <PriceContainer>
+          <Staring>COMIENZA EN</Staring>
+          <Pay>US${price}</Pay>
+        </PriceContainer>
+      </DivPay>
     </Container>
   );
 };

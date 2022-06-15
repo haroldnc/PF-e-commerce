@@ -26,7 +26,7 @@ export default function ServicesDetail(){
     var arrayOfPosts = []
     arrayOfPosts = useSelector((state)=>state.allPost)
     var userPost = []
-    const hiringsByUser = useSelector((state)=>state.hiringsByUser)
+    const hiringsByUser = useSelector((state)=>state.userHirings)
     // var author
     // console.log(user)
     // console.log(post)
@@ -45,7 +45,7 @@ export default function ServicesDetail(){
     // const user = users.filter(u=>u.uid === post.user)
     // console.log(filteredWorker)
     //  console.log(filteredWorker[0]._id)
-    // console.log(post.user)
+    console.log(post.user)
 
    
     const filteredHirings = hiringsByUser.filter(h=>h.idPublication === id)
@@ -58,7 +58,7 @@ export default function ServicesDetail(){
      useEffect(()=>{      
             
         dispatch(getPostById(id))
-        dispatch(getUserById(post.user))
+        if(post.user) dispatch(getUserById(post.user))
         dispatch(getAllPosts())
         dispatch(getWorkers())
         if(userInfo){

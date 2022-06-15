@@ -118,6 +118,7 @@ export const EmailPhone = styled.h1 `
     text-align: left;
     font-family: 'Poppins', sans-serif;
     margin-left: 15px;
+    cursor: pointer;
 `
 
 export const DivName = styled.div `
@@ -348,6 +349,14 @@ export const Historial = styled.p `
     }
 
 
+`
+
+export const PostsC = styled.p `
+    margin-top: 5px;
+    text-align: right;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    color:rgba(0, 0, 0, 0.247);
 `
 export const CambioPlan = styled.p`
     margin-top: 15px;
