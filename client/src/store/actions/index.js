@@ -255,6 +255,11 @@ export const getHiringsByUser = (id) => dispatch => {
   .then( res => dispatch({type: "GET_HIRINGS_BY_USER", payload: res.data}))
 }
 
+export const getHiringsByWorker = (id) => dispatch => {
+  axios.get(`https://wixer-server.herokuapp.com/hirings/worker/${id}`)
+  .then( res => dispatch({type: "GET_HIRINGS_BY_WORKER", payload: res.data}))
+}
+
 export const DeleteUser = (id) => async() => {
   await  axios.delete(`https://wixer-server.herokuapp.com/user/${id}`)
 }
