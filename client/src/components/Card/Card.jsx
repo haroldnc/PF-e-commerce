@@ -1,52 +1,69 @@
-import React from "react";
-import { BotonPago, Container, Description, DivPay, DivRating, Image, PriceContainer, Rating, Staring, Pay, Title, Profile, ImgProfile, NameProfile, DescriptionContainer } from "./StyledCard";
+import React, {useState} from "react";
+import {
+  BotonPago,
+  Container,
+  Description,
+  DivPay,
+  DivRating,
+  Image,
+  PriceContainer,
+  Rating,
+  Staring,
+  Pay,
+  Title,
+  Profile,
+  ImgProfile,
+  NameProfile,
+  DescriptionContainer,
+  HeartContainer,
+  HeartFill,
+  HeartOutline,
+} from "./StyledCard";
 import { IconContext } from "react-icons";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToWishlist, addToWishlist2, removeFromWishlist } from "../../store/actions";
 
-const Card = ({ title, img, description, price, service, id, userInfo, profile_img, firstName, lastName, rating }) => {
+const Card = ({
+  title,
+  img,
+  description,
+  price,
+  service,
+  userId,
+  userInfo,
+  profile_img,
+  firstName,
+  lastName,
+  rating,
+  id,
+  post,
+}) => {
+  const fullName = firstName + " " + lastName;
+  const dispatch = useDispatch();
+  const [fav, setFav] = useState(true)
+  
+  const [isClicked, setIsClicked] = useState(true);
 
-  const fullName = firstName + " " + lastName
+  // const handleIcon = (idUser, idPublication) => {
+  //   // dispatch(addToWishlist(idUser, idPublication));
+  //   dispatch(addToWishlist2(idUser, idPublication));
+  //   setFav(!fav)
+  // };
+  const handleIcon = (e) => {
+    // dispatch(addToWishlist(idUser, idPublication));
+    setFav(!fav)
+  };
 
+  const removeFavorite = (idPublication) => {
+    dispatch(removeFromWishlist(idPublication))
+  }
+  
+  // <HeartOutline onClick={() => handleIcon(userId, id)}/>
   return (
     <Container>
-      <Image img={img} />
-            <Profile>
-              <ImgProfile src={profile_img} />
-              <NameProfile>{fullName}</NameProfile>
-            </Profile>
-      <Title>{title}</Title>
-      <DescriptionContainer>
-        <Description>{description}</Description>
-      </DescriptionContainer>
       
-      <DivRating>
-        <IconContext.Provider value={{ color: "rgb(202, 182, 0)" }}>
-          <div>
-            <IoIosStar />
-          </div>
-        </IconContext.Provider>
-
-        <Rating>{rating}</Rating>
-        
-      </DivRating>
-      <DivPay>
-          {userInfo && userInfo.confirm_email === true ? (
-            <Link to={`/compra/${id}`}>
-              <BotonPago>Contratar</BotonPago>
-            </Link>
-          ) : (
-            <BotonPago
-              onClick={() => alert("Debes registrarte o iniciar secion")}
-            >
-              Contratar
-            </BotonPago>
-          )}
-          <PriceContainer>
-            <Staring>COMIENZA EN</Staring>
-            <Pay>US${price}</Pay>
-          </PriceContainer>
-        </DivPay>
     </Container>
   );
 };

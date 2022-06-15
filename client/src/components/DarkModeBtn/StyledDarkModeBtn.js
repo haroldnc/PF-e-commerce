@@ -3,10 +3,10 @@ import { FaMoon, FaSun } from "react-icons/fa";
 
 export const Container = styled.div`
   position: fixed;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 2rem;
   bottom: 1.5rem;
-  right: 1.5rem;
+  left: 1.5rem;
   cursor: pointer;
   border-radius: 9999px;
   background-color: ${(props) => props.theme.colors.backgroundColorAlt};

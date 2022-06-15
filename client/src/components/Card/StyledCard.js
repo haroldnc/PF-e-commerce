@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 export const Container = styled.div`
   margin: 15px;
@@ -125,4 +126,35 @@ export const BotonPago = styled.button`
   &:hover {
     background-color: ${(props) => props.theme.colors.secondary};
   }
+`;
+
+export const HeartContainer = styled.div`
+  position: absolute;
+  width: 1.7rem;
+  height: 1.7rem;
+  z-index: 10;
+  top: 0px;
+  right: 5px;
+  background-color: ${(props) => props.theme.colors.backgroundColorAlt};
+  backdrop-filter: blur(5px);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: ${(props) => props.theme.boxShadow};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const HeartOutline = styled(AiOutlineHeart)`
+  color: ${(props) => props.theme.colors.font};
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
+`;
+
+export const HeartFill = styled(AiFillHeart)`
+  color: red;
+  font-size: 1.5rem;
+  font-weight: 900;
+  cursor: pointer;
 `;

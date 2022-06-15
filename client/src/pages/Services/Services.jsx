@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Grid, Page, NameServ, Wrapper } from "./StyledServices";
+import {Page ,Grid, NameServ, Wrapper, Container } from "./StyledServices";
 import Paginate from "../../components/Paginate/Paginate";
 import CardPublication from "../../components/CardPublication/CardPublication";
 import {
@@ -78,6 +78,8 @@ const Services = () => {
     }
     setCurrentPage(page);
   };
+
+  console.log("hcsa",pageslice)
 
   if (service) {
     return (

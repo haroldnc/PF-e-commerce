@@ -128,7 +128,7 @@ function App() {
           <Route path="/iniciar-sesion" component={LogInConfirm} />
           <Route path="/lista-favoritos" component={Wishlist} />
           <Route exact path="/paysuccess" component={PaymentSuccess} />
-          <Route path="/favoritos/:id" component={Favourites} userInfo={userInfo} />
+          <Route path="/favoritos/:id" component={Favourites}/>
         </Switch>
         <Footer />
         <ModalLogIn

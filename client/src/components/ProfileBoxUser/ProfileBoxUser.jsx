@@ -11,11 +11,15 @@ const ProfileBoxUser = ({isOpen,toggleModalSignOut, handleToggle, userInfo}) => 
   const handleClick = () => {
     history.push(`/profile/${userInfo.uid}`)
   }
+  const handleGoFavs = () => {
+    history.push(`/favoritos/${userInfo.uid}`);
+  }
   
   return (
     <Container isOpen={isOpen}>
       <ul onClick={handleToggle}>
         <li onClick={() => handleClick()}>Perfil</li>
+        <li onClick={() => handleGoFavs()}>Favoritos</li>
         <li onClick={toggleModalSignOut} >Cerrar sesión</li>
       </ul>
     </Container>

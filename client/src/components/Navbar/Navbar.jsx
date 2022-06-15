@@ -79,14 +79,12 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
               {/* <Profile onClick={handleToggle}  img={userInfo.image}/>  */}
 
               
-              {
-                userInfo.user_role.name && userInfo.user_role.name === "worker" ?
-                <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
-                :
-                <ProfileBoxUser isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>
-              }
-              
+              {userInfo.user_role.name && userInfo.user_role.name === "worker" && <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
+              {userInfo.user_role.name && userInfo.user_role.name  === "user" && <ProfileBoxUser isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
+             {userInfo.user_role === "628eefd607fe8bf42fb6a5f5" && <ProfileBoxUser isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
+              {userInfo.user_role === "628ef02007fe8bf42fb6a5f8" && <ProfileBox isOpen={isOpen} toggleModalSignOut={toggleModalSignOut} handleToggle={handleToggle} userInfo={userInfo}/>}
             </UserInfo>
+
           ) : (
             <LinksContainer>
               <li>

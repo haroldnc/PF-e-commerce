@@ -1,6 +1,7 @@
 import axios from "axios";
 import { GiAxeInLog } from "react-icons/gi";
 
+
 export const getAllCategories = () => (dispatch) => {
   axios
     .get("https://wixer-server.herokuapp.com/categories")
@@ -135,8 +136,11 @@ export const getConfirmUser = (id) => (dispatch) => {
 
 export const addToWishlist = (idUser, idPublication) => async (dispatch) => {
   axios
-    .post(`http://wixer-server.herokuapp.com/favorites`, {idUser, idPublication})
-    .then((res) => dispatch({ type: "ADD_TO_WISHLIST", payload: res.data }));
+    .post(`http://wixer-server.herokuapp.com/favorites`, {
+      idUser,
+      idPublication,
+    })
+    .then((res) => dispatch({ type: "ADD_TO_WISHLIST", payload: res.data }))
 };
 
 export const getWishlist = () => (dispatch) => {
@@ -146,17 +150,20 @@ export const getWishlist = () => (dispatch) => {
 };
 
 export const getWishlistById = (id) => (dispatch) => {
-  axios
-    .get(`http://wixer-server.herokuapp.com/favorites/${id}`)
-    .then((res) => dispatch({ type: "GET_WISHLIST_BY_ID", payload: res.data }));
+  axios.get(`http://wixer-server.herokuapp.com/favorites/${id}`).then((res) => dispatch({ type: "GET_WISHLIST_BY_ID", payload: res.data }));
 };
 
-export const removeWishlist = (payload) => {
-  return {
-    type: "REMOVE_WISHLIST",
-    payload,
-  };
+export const removeFromWishlist = (_id) => (dispatch) => {
+  axios.delete(`http://wixer-server.herokuapp.com/favorites/${_id}`).then((res) => dispatch({ type: "REMOVE_WISHLIST", payload: res.data.favorite._id }));
+
+
 };
+
+// export const removeFromWishlist = (_id) => (dispatch) => {
+//   axios.delete(`http://wixer-server.herokuapp.com/favorites/${_id}`).then((res) => dispatch({ type: "REMOVE_WISHLIST", payload: res.data }));
+// };
+
+
 
 export const getPostByQuery = (query) => (dispatch) => {
   axios
@@ -169,29 +176,32 @@ export const PostPayment = (body) => (dispatch) => {
     .then((res) => dispatch({ type: "PAYMENT", payload: res.data }));
 };
 
-
 export const PostTransaction = (body) => async () => {
-  await axios.post(`http://wixer-server.herokuapp.com/transactions`, body)
-}
+  await axios.post(`http://wixer-server.herokuapp.com/transactions`, body);
+};
 
-export const GetAllTransaction = () => dispatch => {
-  axios.get(`http://wixer-server.herokuapp.com/transactions`)
-  .then(res => dispatch({type: "GET_ALL_TRANSACTIONS", payload: res.data}))
-}
+export const GetAllTransaction = () => (dispatch) => {
+  axios
+    .get(`http://wixer-server.herokuapp.com/transactions`)
+    .then((res) =>
+      dispatch({ type: "GET_ALL_TRANSACTIONS", payload: res.data })
+    );
+};
 
-export const GetTransactionById = (id) => dispatch => {
-  console.log('Funciono transacit')
-  axios.get(`http://wixer-server.herokuapp.com/transactions/${id}`)
-  .then(res => dispatch({type: "GET_TRANSACTIONS_BYID", payload: res.data}))
-}
-
+export const GetTransactionById = (id) => (dispatch) => {
+  console.log("Funciono transacit");
+  axios
+    .get(`http://wixer-server.herokuapp.com/transactions/${id}`)
+    .then((res) =>
+      dispatch({ type: "GET_TRANSACTIONS_BYID", payload: res.data })
+    );
+};
 
 export const PutInfoWorker = (body, id) => async () => {
   await axios.put(`http://wixer-server.herokuapp.com/workers/${id}`, body);
 };
 
-export const PutInfoUser = (body,id) => async () => {  
-  await axios.put(`http://wixer-server.herokuapp.com/user/${id}`, body)
-}
-
+export const PutInfoUser = (body, id) => async () => {
+  await axios.put(`http://wixer-server.herokuapp.com/user/${id}`, body);
+};
 
