@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {Page ,Grid, NameServ, Wrapper, Container } from "./StyledServices";
+import { Grid, Page, NameServ, Wrapper } from "./StyledServices";
 import Paginate from "../../components/Paginate/Paginate";
 import CardPublication from "../../components/CardPublication/CardPublication";
 import {
   getPosts,
   getPostsByServiceId,
   getServiceById,
+  clearPostPrevius
 } from "../../store/actions/index";
 import { useParams } from "react-router-dom";
 
@@ -42,6 +43,7 @@ const Services = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    dispatch(clearPostPrevius())
     dispatch(getServiceById(id));
     dispatch(getPostsByServiceId(id));
   }, [dispatch, id]);
@@ -65,6 +67,7 @@ const Services = () => {
     numberPages.push(i + 1);
   }
 
+
   const pages = (page) => {
     console.log("ejecutado");
 
@@ -78,8 +81,6 @@ const Services = () => {
     }
     setCurrentPage(page);
   };
-
-  console.log("hcsa",pageslice)
 
   if (service) {
     return (

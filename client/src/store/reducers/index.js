@@ -2,26 +2,6 @@
 // import { InputsDivs } from "../../components/PublishForm/styledPublishForm";
 
 const initialState = {
-  allCategories: [],
-  allUsers: [],
-  allUsersPaginate: {},
-  filteredUsers: [],
-  services: [],
-  service: {},
-  category: [],
-  workers: [],
-  workerDetail: {},
-  users: [],
-  userDetail: {},
-  post: {},
-  allPost: [],
-  queryPosts: [],
-  allTransactions: [],
-  transactionById: [],
-  queryPosts: [],
-  addWishlist: [],
-  userWishlist: [],
-  removeWishlist: [],
     allCategories: [],
     allUsers: [],
     allservices: [],
@@ -183,28 +163,23 @@ const rootReducer = (state = initialState, action) => {
                 servicePosts:[]
             }
 
-            case "REMOVE_WISHLIST":
-              const filter213 = state.removeWishlist?.favorites?.filter(
-                (r) => r._id !== action.payload
-              );
-              console.log("payload", filter213);
-              return {
+        case "GET_WISHLIST":
+            return{
                 ...state,
-                removeWishlist: filter213,
-              };
-        
+                wishlist: action.payload
+            }
+
             case "GET_WISHLIST_BY_ID":
-              return {
+                return{
+                    ...state,
+                    userWishlist: action.payload
+                }   
+
+        case "ADD_TO_WISHLIST":
+
+            return{
                 ...state,
-                userWishlist: action.payload,
-              };
-        
-            case "ADD_TO_WISHLIST":
-              console.log("asd", action.payload);
-              return {
-                ...state,
-                userWishlist: action.payload,
-              };
+            }
 
         case "GET_POST_BY_QUERY":
             return{

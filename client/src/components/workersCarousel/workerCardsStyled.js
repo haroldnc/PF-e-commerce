@@ -8,11 +8,6 @@ export const ImgArrow = styled.img`
 export const WorkerDiv = styled.div`
   padding-bottom: 50px;
   margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  height: 100vh;
 `
 
 export const TitleCarousel = styled.h2`
@@ -20,7 +15,7 @@ export const TitleCarousel = styled.h2`
 `
 
 export const Container = styled.div`
-  width: 320px;
+  width: 322px;
   display: flex;
   flex-direction: column;
   padding: 0px 9px 8px;

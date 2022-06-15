@@ -40,7 +40,7 @@ const LogosHome = ({ allCategories }) => {
   };
 
   return (
-    <Container>
+    <>
       <Name>Explora el mercado</Name>
         <div>
             
@@ -54,7 +54,7 @@ const LogosHome = ({ allCategories }) => {
             </LogoCard>
           ))}
       </LogosGlobal>
-    </Container>
+    </>
   );
 };
 

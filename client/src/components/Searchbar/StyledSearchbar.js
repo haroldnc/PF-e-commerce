@@ -20,13 +20,13 @@ export const Input = styled.input`
   background-color: transparent;
   margin-left: 1rem;
   caret-color: ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.font};
+  color: ${props => props.theme.colors.font}
 `;
 export const Button = styled.button`
   color: white;
   background-color: ${(props) => props.theme.colors.primary};
-  width: 5rem;
   height: 100%;
+  width: 5rem;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   cursor: pointer;

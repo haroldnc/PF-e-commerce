@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 export const Container = styled.div`
-    min-width: 19rem;
+    min-width: 20rem;
     min-height:19rem;
     border-radius: 5px;
     display: flex;
@@ -10,7 +10,7 @@ export const Container = styled.div`
     flex-wrap: wrap;
     align-content: space-around;
     align-items: flex-start;
-    margin: 10px 10px;
+    margin: 15px 50px;
     box-shadow: ${props => props.theme.boxShadow};
     cursor:pointer;
     background: ${props => props.theme.colors.backgroundColorAlt};

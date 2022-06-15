@@ -21,15 +21,15 @@ const initialState = {
   posts: [],
   servicePosts: [],
   postDetail: [],
-  userDetail: {},
+  userDetail:{},
   post: {},
-  allPost: [],
+  allPost:[],
   wishlist: [],
-
   userWishlist: [],
   queryPosts:[],
   hiringsByUser: [],
   userHirings:[]
+
 };
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
