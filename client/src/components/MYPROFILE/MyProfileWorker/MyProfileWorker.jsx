@@ -65,7 +65,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
     const history = useHistory()
     const dispatch = useDispatch()
     const allPost = useSelector(state => state.postsByUser)
-    console.log('allpost', allPost)
+    // console.log('allpost', allPost)
     const [ image , setImage ] = useState(profile.user.image)
     const [ showBtn , setShowBtn ] = useState(false)
     const [ panel , setPanel ] = useState("post")

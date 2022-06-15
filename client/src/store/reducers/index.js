@@ -62,7 +62,7 @@ const rootReducer = (state = initialState, action) => {
 
         case "GET_SERVICES":
             const users = state.allUsers;
-            console.log(users)
+            // console.log(users)
             const services = state.allCategories.map((s) => s.services);
 
             return {
