@@ -24,7 +24,7 @@ const Admin = () => {
     const UserDetail = useSelector(state => state.userDetail)
     const PostById = useSelector(state => state.postsByUser)
     const HiringByWorker = useSelector(state => state.hiringsByWorker)
-    console.log('priHiring',HiringByUser)
+    // console.log('priHiring',HiringByUser)
     const HiringByUser = useSelector(state => state.userHirings)
     const dispatch = useDispatch()
     let showLateral;
