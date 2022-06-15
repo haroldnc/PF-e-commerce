@@ -11,7 +11,7 @@ export default function WorkerProfile (){
     const dispatch = useDispatch()
     const worker = useSelector((state)=>state.workerDetail)
     const arrayOfPost = useSelector((state)=>state.allPost)
-    console.log(arrayOfPost)
+    // console.log(arrayOfPost)
     var userPost = []
 
 

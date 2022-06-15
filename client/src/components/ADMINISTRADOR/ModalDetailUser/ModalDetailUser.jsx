@@ -4,7 +4,7 @@ import DetailWorker  from '../DetailWorker/DetailWorker.jsx'
 
 import { ContainerModal, DivGlob, BtnAtras } from './ModalDetailUser'
 
-const ModalDetailUser = ({isOpenDetailUser, toggleModalDetailUser, UserDetail, PostById, HiringByUser}) => {
+const ModalDetailUser = ({isOpenDetailUser, toggleModalDetailUser, UserDetail, PostById, HiringByUser, HiringByWorker}) => {
 
 
     // console.log('userdetail',UserDetail)
@@ -13,9 +13,9 @@ const ModalDetailUser = ({isOpenDetailUser, toggleModalDetailUser, UserDetail, P
         showUser = null
     }else{
         if(UserDetail.user.user_role.name === "user"){
-            showUser = <DetailUser UserDetail={UserDetail}/>
+            showUser = <DetailUser UserDetail={UserDetail} HiringByUser={HiringByUser}/>
         }else{
-            showUser = <DetailWorker  UserDetail={UserDetail} PostById={PostById} HiringByUser={HiringByUser}/>
+            showUser = <DetailWorker  UserDetail={UserDetail} PostById={PostById} HiringByWorker={HiringByWorker}/>
         }
     }
 

@@ -22,6 +22,7 @@ const initialState = {
     posts: {},
     postsByUser: [],
     servicePosts:[],
+    hiringsByWorker: [],
     userHirings:[]
 };
 //habia un objeto en initialstate
@@ -62,7 +63,7 @@ const rootReducer = (state = initialState, action) => {
 
         case "GET_SERVICES":
             const users = state.allUsers;
-            console.log(users)
+            // console.log(users)
             const services = state.allCategories.map((s) => s.services);
 
             return {
@@ -200,6 +201,12 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 userHirings:action.payload
+            }
+
+        case "GET_HIRINGS_BY_WORKER":
+            return{
+                ...state,
+                hiringsByWorker: action.payload
             }
             
         default: return state;

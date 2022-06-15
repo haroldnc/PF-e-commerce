@@ -259,6 +259,15 @@ export const editPosts = (body,id) => async () => {
   await axios.put(`https://wixer-server.herokuapp.com/posts/${id}`, body)
 }
 
+export const changeStatusPosts = (body,id) => async () =>{
+  await axios.put(`https://wixer-server.herokuapp.com/posts/status/${id}`, body)
+}
+
+export const getHiringsByWorker = (id) => dispatch => {
+  axios.get(`https://wixer-server.herokuapp.com/hirings/worker/${id}`)
+  .then( res => dispatch({type: "GET_HIRINGS_BY_WORKER", payload: res.data}))
+}
+
 export const DeleteUser = (id) => async() => {
   await  axios.delete(`https://wixer-server.herokuapp.com/user/${id}`)
 }
