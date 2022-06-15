@@ -4,6 +4,7 @@ import { getAllCategories, postCategories,putCategories, deleteCategories } from
 
 import Swal from 'sweetalert2'
 import { ContainerFormCategory, NameC, FormCategory, DivInput, Btn, LabelC, InputC, SelectC, SpanC } from './FormAdminCategory'
+import { GiCannonShot } from "react-icons/gi";
 
 const FormAdminCategory = () => {
 
@@ -54,8 +55,10 @@ const FormAdminCategory = () => {
 
     const submitCrear = (e) => {
         e.preventDefault()
-        if(estado.name && estado.img && estado.phrase && selectModificar){
-            // dispatch(postCategories(estado))
+        console.log(estado)
+        console.log(selectModificar)
+        if(estado.name && estado.img && estado.phrase && estado.phrase){
+            dispatch(postCategories(estado))
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -79,8 +82,8 @@ const FormAdminCategory = () => {
 
     const submitModificar = (e) => {
         e.preventDefault()
-        if(modificar.name && modificar.img && modificar.phrase){
-            // dispatch(putCategories(modificar,selectModificar))
+        if(modificar.name && modificar.img && modificar.phrase && selectModificar){
+            dispatch(putCategories(modificar,selectModificar))
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -121,7 +124,8 @@ const FormAdminCategory = () => {
                     'Los servicios asociados se eliminaron',
                     'success'
                   )
-            // dispatch(deleteCategories(selectEliminar))
+            dispatch(deleteCategories(selectEliminar))
+            console.log('funca eliminad',selectEliminar)
                 }
             })
         }else{Swal.fire({

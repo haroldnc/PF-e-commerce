@@ -63,8 +63,8 @@ const FormAdminServices = () => {
     const submitCrear = (e) => {
         e.preventDefault()
         if(estado.name && estado.img && estado.category){
-            // dispatch(postService(estado))
-            console.log(estado)
+            dispatch(postService(estado))
+            console.log('funcaservice',estado)
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -89,8 +89,8 @@ const FormAdminServices = () => {
     const submitModificar = (e) => {
         e.preventDefault()
         if(modificar.name && modificar.img && selectModificar){
-            // dispatch(putServices(modificar,selectModificar))
-            console.log(selectModificar)
+            dispatch(putServices(modificar,selectModificar))
+            console.log('funca modificar',selectModificar)
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -130,8 +130,8 @@ const FormAdminServices = () => {
                     'Se ha eliminado el servicio',
                     'success'
                   )
-            // dispatch(deleteService(selectEliminar))
-            console.log('funca')
+            dispatch(deleteService(selectEliminar))
+            console.log('funca delete', selectEliminar)
                 }
             })
         }else{Swal.fire({

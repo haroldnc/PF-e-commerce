@@ -21,7 +21,7 @@ export const putServices = (body, id) => async() => {
 }
 
 export const deleteService = (id) => async() => {
-  await axios.put(`https://wixer-server.herokuapp.com/services/${id}`)
+  await axios.delete(`https://wixer-server.herokuapp.com/services/${id}`)
 }
 
 export const getCategorybyId = (id) => (dispatch) => {
@@ -59,7 +59,7 @@ export const putCategories = (body, id) => async () => {
 }
 
 export const deleteCategories = (id) => async () => {
-  await axios.put( `https://wixer-server.herokuapp.com/categories/${id}`)
+  await axios.delete( `https://wixer-server.herokuapp.com/categories/${id}`)
 }
 
 export const postUser = (payload) => async () => {

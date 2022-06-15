@@ -17,6 +17,8 @@ import { Container,
     PostsC
 } from './DetailUser'
 
+import { DeleteUser } from '../../../store/actions/index'
+
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
 import { MdOutlineEmail, MdPostAdd } from 'react-icons/md'
@@ -24,7 +26,7 @@ import { GiSmartphone, GiShakingHands } from 'react-icons/gi'
 import { AiFillLinkedin } from 'react-icons/ai'
 import { SiWebauthn } from 'react-icons/si'
 
-const DetailUser = ({ UserDetail, HiringByUser, }) => {
+const DetailUser = ({ UserDetail, HiringByUser,toggleModalDetailUser }) => {
 
 
     const  dispatch = useDispatch()
@@ -50,7 +52,8 @@ const DetailUser = ({ UserDetail, HiringByUser, }) => {
                 'success'
               )
                 console.log('funca', id)
-             // dispatch(DeleteUser(id))
+             dispatch(DeleteUser(id))
+             toggleModalDetailUser(null)
             // window.location.href = window.location.href
             }
         })
@@ -97,7 +100,7 @@ const DetailUser = ({ UserDetail, HiringByUser, }) => {
                 </IconContext.Provider>
                 <EmailPhone>Contrataciones </EmailPhone>
             </DivOther>
-            <PostsC>Totales: {HiringByUser.hirings.length}</PostsC>
+            <PostsC>Totales: {HiringByUser.length}</PostsC>
             </div>
         </div>
         <BtnBaja onClick={() => handleDeleteUser(UserDetail.user.uid)}>Dar baja a Worker</BtnBaja>
