@@ -4,6 +4,7 @@
 const initialState = {
     allCategories: [],
     allUsers: [],
+    allservices: [],
     allUsersPaginate: {},
     filteredUsers: [],
     services: [],
@@ -35,6 +36,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 allCategories: action.payload,
             };
+        case "GET_ALL_SERVICES":
+            return{
+                ...state,
+                allservices: action.payload
+            }
         case "GET_ALL_USERS":
             return {
                 ...state,

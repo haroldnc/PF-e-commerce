@@ -25,6 +25,7 @@ const Admin = () => {
     const PostById = useSelector(state => state.postsByUser)
     const HiringByWorker = useSelector(state => state.hiringsByWorker)
     const HiringByUser = useSelector(state => state.hiringsByUser)
+    console.log('priHiring',HiringByUser)
     const dispatch = useDispatch()
     let showLateral;
     let showScreen;
@@ -56,12 +57,12 @@ const Admin = () => {
     console.log(DataAdmin)
     console.log(userInfo)
 
-    if(userInfo.user_role.name && userInfo.user_role.name !== "admin"){
-        return(<p>good</p>)
-    }
-    if(userInfo.user_role && userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
-        return(<p>good</p>)
-    }
+    // if(userInfo.user_role.name && userInfo.user_role.name !== "admin"){
+    //     return(<p>good</p>)
+    // }
+    // if(userInfo.user_role && userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
+    //     return(<p>good</p>)
+    // }
   
 
 
@@ -84,7 +85,7 @@ const Admin = () => {
     }else if(render === "Editar Servicios"){
         showScreen = <FormAdminServices />
     }else if( render === "Workers"){
-        showScreen = <AdminWorkers/>
+        showScreen = <AdminWorkers toggleModalDetailUser={toggleModalDetailUser}/>
     }else if(render === "Categorías"){
         showScreen = <Categorias/>
     }else if(render === "Servicios"){

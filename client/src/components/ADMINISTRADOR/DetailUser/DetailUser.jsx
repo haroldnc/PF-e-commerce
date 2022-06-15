@@ -31,7 +31,7 @@ const DetailUser = ({ UserDetail, HiringByUser, }) => {
 
     console.log('Worer',UserDetail)
     // console.log('posts', PostById)
-    // console.log('hirings',HiringByWorker )
+    console.log('hirings',HiringByUser )
 
     const handleDeleteUser = (id)=> {
         Swal.fire({

@@ -6,12 +6,12 @@ import CardAdminR from '../CardAdminR/CardAdminR.jsx'
 
 import { ContainerREgistrados, NavRegistrados, User, Role, Corr, Tel } from './AdminWorkers'
 
-const AdminWorkers = () => {
+const AdminWorkers = ({toggleModalDetailUser}) => {
 
     const dispatch = useDispatch() 
 
     const allWorkers = useSelector( state => state.workers)
-    console.log(allWorkers)
+    console.log('allwork',allWorkers)
 
     useEffect( () => {
         dispatch(getWorkers())
@@ -22,17 +22,19 @@ const AdminWorkers = () => {
             <NavRegistrados>
                 <User>NOMBRE COMPLETO</User>
                 <Corr>TITULO</Corr>
-                <Tel>PUNTUACIÓN</Tel>
-                <Role>COSTO POR HORA</Role>
+                <Tel>ACTIVO</Tel>
+                <Role>TIPO DE PLAN</Role>
             </NavRegistrados>
             {
                 allWorkers && allWorkers.map( u => (
                     <CardAdminR
+                        id={u.userId.uid}
                         image={u.userId.image}
                         username = {`${u.userId.firstName} ${u.userId.lastName}`}
-                        telefono={u.userId.punctuation}
+                        telefono={u.subscribed ? "Activo": "Inactivo"}
                         email={u.title}
-                        role={`${u.pricePerHour} $`}
+                        role={u.subscription_type.name}
+                        toggleModalDetailUser={toggleModalDetailUser}
                     />
 
                 ))

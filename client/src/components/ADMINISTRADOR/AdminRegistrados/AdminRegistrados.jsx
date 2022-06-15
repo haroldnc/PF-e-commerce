@@ -11,7 +11,6 @@ const AdminRegistrados = ({toggleModalDetailUser}) => {
     const dispatch = useDispatch() 
 
     const allUsers = useSelector( state => state.allUsersPaginate)
-    console.log('selector',allUsers.users )
 
     useEffect( () => {
         dispatch(getAllUsersAllPAginate())
