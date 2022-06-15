@@ -22,7 +22,7 @@ const initialState = {
     posts: {},
     postsByUser: [],
     servicePosts:[],
-    hiringsByUser: [],
+    hiringsByUser: {},
     hiringsByWorker: [],
     userHirings:[]
 };
