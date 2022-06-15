@@ -23,7 +23,6 @@ const initialState = {
     posts: {},
     postsByUser: [],
     servicePosts:[],
-    hiringsByUser: {},
     hiringsByWorker: [],
     userHirings:[]
 };
@@ -210,16 +209,11 @@ const rootReducer = (state = initialState, action) => {
                 userHirings:action.payload
             }
 
-        case "GET_HIRINGS_BY_USER":
-            return {
+        case "GET_HIRINGS_BY_WORKER":
+            return{
                 ...state,
-                hiringsByUser: action.payload
+                hiringsByWorker: action.payload
             }
-            case "GET_HIRINGS_BY_WORKER":
-                return{
-                    ...state,
-                    hiringsByWorker: action.payload
-                }
             
         default: return state;
     };

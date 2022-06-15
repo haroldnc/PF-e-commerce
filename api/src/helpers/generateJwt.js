@@ -5,7 +5,7 @@ const generateJwt = (id) => {
         id
     };
     return new Promise((resolve, reject) => {
-        console.log(payload, 'entro a generar jwt');
+        //console.log(payload, 'entro a generar jwt');
         jwt.sign(
             payload, 
             process.env.ACCESS_TOKEN_SECRET, 
@@ -20,6 +20,6 @@ const generateJwt = (id) => {
             }
         );
     });
-;}
+};
 
 module.exports = { generateJwt };

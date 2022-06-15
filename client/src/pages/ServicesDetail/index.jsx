@@ -49,6 +49,8 @@ export default function ServicesDetail(){
 
    
     const filteredHirings = hiringsByUser.filter(h=>h.idPublication._id === id)
+    let comentario = filteredHirings.map(h=>h.idPublication._id===post._id ? true :false)
+    comentario = comentario.includes(true)
 
     const HandleClick = ()=>{
         alert("Ya has contratado este servicio con anterioridad intenta con otra publicación o probablemente aun no has iniciado sesión.")
@@ -82,8 +84,12 @@ export default function ServicesDetail(){
         
     },[dispatch, id, post.user])
     
-    
-
+    console.log("post",post)
+const comentar = (
+    <Link to={`/comentar/${post._id}`}>
+        <HireButton>Comentar</HireButton>
+    </Link>
+)
     
 
 
@@ -127,6 +133,13 @@ export default function ServicesDetail(){
                         <HireButton onClick={HandleClick}>{`Contratar a ${user.username}`}</HireButton>
 
                     }
+                    <br />
+                    {
+                        comentario
+                        ? comentar
+                        :<></>
+                    }
+
                     <SubTitle2>{`Otros anuncios de ${user.username} `}</SubTitle2>
 
                     {userPost.length?

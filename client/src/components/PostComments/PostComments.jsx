@@ -4,27 +4,18 @@ import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs, Errors } from './styledComments';
-import { postComments, getHiringsUser, getHiringsByUser } from "../../store/actions/index";
+import { postComments, getHiringsByUserId } from "../../store/actions/index";
 import { InputImage } from '../PublishForm/styledPublishForm';
 
 const PostComments = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const userLogged = useSelector((state) => state.userSignIn);
+    const {userHirings} = useSelector((state) => state);
     const userID = userLogged.userInfo.uid;
     const [errors, setErrors] = useState({ name: "" });
     const { publicationId } = useParams();
-    // /comentar/:publicationId
-    // agarro el id de la publicacion por params asi que mandar el id de la publicacion al Link to=`/comentar/${"el id de la publicacion"}`
-    // solo seria implementar eso para que el usuario pueda comentar esa publicacion y como van a armar una seccion en donde estara 
-    // mas o menos lo que el usuario "compro" entonces decidi hacerlo asi. Para que cuando hagan el .map() puedan pasar el id de la publicacion
-    // al boton donde te reenviara a la pagina de comentar con el id de la publicacion en donde se hara el comentario.
-
-    // PD: puse una ruta de prueba en el footer, en la parte de Acerca de, eliminenlo.
-
     const [rating, setRating] = useState(0);
-    
-    console.log("usuario",userLogged);
     
     const [input, setInput] = useState({
         user: `${userID}`,
@@ -35,7 +26,7 @@ const PostComments = () => {
     });
     
     useEffect( () => {
-        dispatch( getHiringsByUser( userID ))
+        dispatch( getHiringsByUserId( userID ))
       },[ dispatch ])
 
     const handleRating = (rate) => {
@@ -109,28 +100,37 @@ const PostComments = () => {
         })
        // history.push('/') <-- poner la ruta anterior 
     };
-
+    
+    let comentar = userHirings.map(h=>h.idPublication._id===publicationId ? true :false)
+    comentar = comentar.includes(true)
     return (
         <Comment>
-            <Form onSubmit={handleSubmit}>
-                <div>
+            <>
+            {
+                comentar ?
+                <Form onSubmit={handleSubmit}>
+                    <div>
 
-                </div>
+                    </div>
 
-                <CommentBody>
-                    <Rating onClick={handleRating} ratingValue={rating} className="stars" fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}/>
-                    {errors.score && <Errors>{errors.score}</Errors>}
-                    <Inputs>
-                        <input type="text" name='title' placeholder="Titulo" value={input.title} onChange={handleInputChange}></input>
-                        {errors.title && <Errors>{errors.title}</Errors>}
-                        <br></br>
-                        <textarea name="message" placeholder="Escribe tu comentario" value={input.message} onChange={handleInputChange}></textarea>
-                        {errors.message && <Errors>{errors.message}</Errors>}
-                        <br></br>
-                        <button>Publicar comentario</button>   
-                    </Inputs>   
-                </CommentBody>
-            </Form>
+                    <CommentBody>
+                        <Rating onClick={handleRating} ratingValue={rating} className="stars" fillColorArray={['#f17a45', '#f19745', '#f1a545', '#f1b345', '#f1d045']}/>
+                        {errors.score && <Errors>{errors.score}</Errors>}
+                        <Inputs>
+                            <input type="text" name='title' placeholder="Titulo" value={input.title} onChange={handleInputChange}></input>
+                            {errors.title && <Errors>{errors.title}</Errors>}
+                            <br></br>
+                            <textarea name="message" placeholder="Escribe tu comentario" value={input.message} onChange={handleInputChange}></textarea>
+                            {errors.message && <Errors>{errors.message}</Errors>}
+                            <br></br>
+                            <button>Publicar comentario</button>   
+                        </Inputs>   
+                    </CommentBody>
+                </Form>
+                :
+                <h1>Error</h1>
+            }
+            </>
         </Comment>
     );
 };

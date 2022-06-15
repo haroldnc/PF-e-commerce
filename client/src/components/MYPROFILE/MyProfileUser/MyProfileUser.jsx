@@ -1,6 +1,6 @@
 import React,{ useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { PutInfoUser, getHiringsByUser } from '../../../store/actions/index'
+import { PutInfoUser, getHiringsByUserId } from '../../../store/actions/index'
 import CardHiringWorker from '../CardHiringWorker/CardHiringWorker.jsx'
 
 import { Container,
@@ -40,11 +40,11 @@ const MyProfileUser = ({profile}) => {
     const [ loading, setLoading ] = useState(false)
 
     const [panelHiring, setPanelHiring ] = useState("activas")
-    const AllHiring = useSelector(state => state.hiringsByUser)
+    const AllHiring = useSelector(state => state.userHirings)
     console.log('hirings',AllHiring )
 
     useEffect(() => {
-        dispatch(getHiringsByUser(profile.user.uid))
+        dispatch(getHiringsByUserId(profile.user.uid))
     },[])
 
     const upLoadImage = async (e) => {
@@ -76,9 +76,9 @@ const MyProfileUser = ({profile}) => {
     setShowBtn(!showBtn)
   }
 
-    let Abiertas = Object.entries(AllHiring).length !== 0 ? AllHiring.hirings.filter( h => h.status === false) : []
+    let Abiertas = Object.entries(AllHiring).length !== 0 ? AllHiring.filter( h => h.status === false) : []
     console.log('abiertas',Abiertas)
-    let Cerradas = Object.entries(AllHiring).length !== 0 ? AllHiring.hirings.filter( h => h.status === true) : []
+    let Cerradas = Object.entries(AllHiring).length !== 0 ? AllHiring.filter( h => h.status === true) : []
 
     return (
         <Container>
