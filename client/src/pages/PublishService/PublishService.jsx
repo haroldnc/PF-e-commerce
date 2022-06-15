@@ -1,27 +1,60 @@
 import React from 'react';
 import PublishForm from '../../components/PublishForm/PublishForm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {ValidateRoute} from "./Validateroute"
+import { useEffect } from 'react';
+import {getPostByUser,getWorkers} from "../../store/actions/index"
+
+
+const Validation = (workers,allPost,userInfo) => {
+
+  if(!userInfo) return false;
+  if(userInfo.user_role && userInfo.user_role === "628eefd607fe8bf42fb6a5f5") return false;
+  if(userInfo.user_role.name && userInfo.user_role.name === "user") return false;
+  let worker =  workers.find(e => e.userId.uid === userInfo.uid)
+  console.log(worker)
+  if(worker.subscribed === false) return false;
+  if(worker.subscription_type.name === "Premium" && allPost.length < 5) return true;
+  if(worker.subscription_type.name === "Standard" && allPost.length < 3) return true;
+  return false
+
+}
 
 const PublishService = () => {
 
+  const dispatch = useDispatch()
+
+
   const userSignIn = useSelector((state) => state.userSignIn);
+  const {workers} = useSelector((state) => state)
+  const allPost = useSelector(state => state.postsByUser)
+
   const { userInfo } = userSignIn;
 
+  useEffect(() => {
+    if(userInfo && !allPost) dispatch(getPostByUser(userInfo.uid))
+    if(workers.length === 0)dispatch(getWorkers());
+  },[])
 
-  if(!userInfo || userInfo.user_role.name === "user" ){
-      return(
-        <ValidateRoute>
-          <h2>lo siento, no puedes crear publicaciones!</h2>
-          <p>Solo puedes publicar si eres un worker suscrito a nuestra version premium</p>
-        </ValidateRoute>
-      )
+  const validate = allPost && workers.length >0 && Validation(workers,allPost,userInfo)
+  
+  if(validate){
+    return (
+      <div>
+        <PublishForm/>
+      </div>
+    );
+  }else{
+    return(
+      <ValidateRoute>
+        <h1>Lo siento!</h1>
+        <h4>Para poder hacer una publicacion debes cumplir con lo siguiente:</h4>
+        <p>- Debes estar registrado com worker y debes iniciar sesion</p>
+        <p>- Debes tener un a suscripcion ya sea standar o premium</p>
+        <p>- Si es standar no puedes hacer mas de 3 publiciones, y si eres premium no puedes hacer mas de 5</p>
+      </ValidateRoute>
+    )
   }
-  return (
-    <div>
-      <PublishForm/>
-    </div>
-  );
 };
 
 export default PublishService;
