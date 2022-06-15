@@ -20,7 +20,7 @@ const addHiring = async (req, res) => {
         const publication = await Publication.findById(idPublication);
 
         // enviar email de contacto al usuario con datos del worker
-        const transporter = nodemailer.createTransport({
+        /*const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: 'nachoburgos1995@gmail.com',
@@ -75,7 +75,7 @@ const addHiring = async (req, res) => {
             } else {
                 console.log('Email sent: ' + info.response);
             }
-        });
+        });*/
 
     return res.json({
         ok: true
