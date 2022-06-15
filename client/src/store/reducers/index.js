@@ -20,7 +20,8 @@ const initialState = {
     transactionById: [],
     queryPosts: [],
     posts: {},
-    postsByUser: []
+    postsByUser: [],
+    hiringsByUser: []
 };
 //habia un objeto en initialstate
 
@@ -179,6 +180,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 postsByUser: action.payload
+            }
+        case "GET_HIRINGS_BY_USER_ID":
+            return{
+                ...state,
+                hiringsByUser: action.payload
             }
             
         default: return state;
