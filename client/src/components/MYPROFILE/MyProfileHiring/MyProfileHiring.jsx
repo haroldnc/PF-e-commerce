@@ -19,6 +19,7 @@ const MyProfileHiring = ({allHirings}) => {
 
     
     let Abiertas = allHirings.hirings.filter( h => h.status === false)
+    console.log('abiertas',Abiertas)
     let Cerradas = allHirings.hirings.filter( h => h.status === true)
 
 
@@ -45,6 +46,7 @@ const MyProfileHiring = ({allHirings}) => {
                             post={h.idPublication}
                             open="Abierta"
                             key={h._id}
+                            id={h.idPublication._id}
                             />
                         )):
                         <div style={{width:"100%"}}>
@@ -62,6 +64,7 @@ const MyProfileHiring = ({allHirings}) => {
                             post={h.idPublication}
                             open= "Cerrada"
                             key={h._id}
+                            id={h.idPublication._id}
                             />
                         )):
                         <div style={{width:"100%"}}>

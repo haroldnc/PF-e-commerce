@@ -30,7 +30,7 @@ export const BtnPublic = styled.button `
 export const ContainerCards = styled.div `
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 `
 
 export const NavHiring = styled.div `

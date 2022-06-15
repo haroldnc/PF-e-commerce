@@ -37,6 +37,11 @@ export const Correo = styled.h1 `
     width: 220px;
     margin-left: 20px;
     text-align: center;
+    cursor: pointer;
+
+    &:hover{
+        color: ${props => props.theme.colors.primary}
+    }
 
 
 `
