@@ -48,7 +48,7 @@ export default function ServicesDetail(){
     console.log(post.user)
 
    
-    const filteredHirings = hiringsByUser.filter(h=>h.idPublication === id)
+    const filteredHirings = hiringsByUser.filter(h=>h.idPublication._id === id)
 
     const HandleClick = ()=>{
         alert("Ya has contratado este servicio con anterioridad intenta con otra publicación o probablemente aun no has iniciado sesión.")

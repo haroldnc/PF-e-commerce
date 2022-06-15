@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs, Errors } from './styledComments';
-import { postComments, getHiringsUser } from "../../store/actions/index";
+import { postComments, getHiringsUser, getHiringsByUser } from "../../store/actions/index";
 import { InputImage } from '../PublishForm/styledPublishForm';
 
 const PostComments = () => {
@@ -35,7 +35,7 @@ const PostComments = () => {
     });
     
     useEffect( () => {
-        dispatch( getHiringsUser( userID ))
+        dispatch( getHiringsByUser( userID ))
       },[ dispatch ])
 
     const handleRating = (rate) => {
