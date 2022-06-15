@@ -8,7 +8,7 @@ const Hiring = Schema({
     },
     idWorker:{
         type: Schema.Types.ObjectId,
-        ref: "DataWorkers" 
+        ref: "User" 
     },
     idPublication:{
         type: Schema.Types.ObjectId,

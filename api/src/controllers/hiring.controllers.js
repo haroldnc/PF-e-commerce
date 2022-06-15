@@ -112,6 +112,8 @@ const getHiringsByUser = async (req, res) => {
     const { idUser } = req.params;
     try {
         const hirings = await Hiring.find({ idUser })
+            .populate('idUser', {firstName: 1, lastName: 1, image: 1})
+            .populate('idWorker', {firstName: 1, lastName: 1, image: 1})
         res.status(200).json({ 
             ok: true,
             hirings
@@ -145,6 +147,8 @@ const getHiringsByWorker = async (req, res) => {
     const { idWorker } = req.params;
     try {
         const hirings = await Hiring.find({ idWorker })
+            .populate('idUser', {firstName: 1, lastName: 1, image: 1})
+            .populate('idWorker', {firstName: 1, lastName: 1, image: 1})
         res.status(200).json({
             ok: true,
             hirings
