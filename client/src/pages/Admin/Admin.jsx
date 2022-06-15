@@ -24,6 +24,7 @@ const Admin = () => {
     const UserDetail = useSelector(state => state.userDetail)
     const PostById = useSelector(state => state.postsByUser)
     const HiringByWorker = useSelector(state => state.hiringsByWorker)
+    const HiringByUser = useSelector(state => state.hiringsByUser)
     const dispatch = useDispatch()
     let showLateral;
     let showScreen;
@@ -41,6 +42,7 @@ const Admin = () => {
             dispatch(getUserById(id))
             dispatch(getPostByUser(id))
             dispatch(getHiringsByWorker(id))
+            dispatch(getHiringsByUser(id))
         }else{
             dispatch(clearUserById())
         }
@@ -99,7 +101,8 @@ const Admin = () => {
                 toggleModalDetailUser={toggleModalDetailUser}
                 UserDetail={UserDetail}
                 PostById={PostById}
-                HiringByUser={HiringByWorker}
+                HiringByWorker={HiringByWorker}
+                HiringByUser={HiringByUser}
             />
         </ContainerAdmin>
     )

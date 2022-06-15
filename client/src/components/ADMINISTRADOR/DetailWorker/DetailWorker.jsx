@@ -18,19 +18,20 @@ import { Container,
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
-import { MdOutlineEmail, MdStarPurple500, MdPostAdd } from 'react-icons/md'
-import { GiSmartphone } from 'react-icons/gi'
+import { MdOutlineEmail, MdPostAdd } from 'react-icons/md'
+import { GiSmartphone, GiShakingHands } from 'react-icons/gi'
 import { AiFillLinkedin } from 'react-icons/ai'
 import { SiWebauthn } from 'react-icons/si'
 
 
-const DetailWorker = ({UserDetail, PostById, HiringByUser}) => {
+
+const DetailWorker = ({UserDetail, PostById, HiringByWorker}) => {
 
     const  dispatch = useDispatch()
 
     console.log('Worer',UserDetail)
     console.log('posts', PostById)
-    console.log('hirings',HiringByUser )
+    console.log('hirings',HiringByWorker )
 
     const handleDeleteUser = (id)=> {
         Swal.fire({
@@ -122,19 +123,19 @@ const DetailWorker = ({UserDetail, PostById, HiringByUser}) => {
                     </IconContext.Provider>
                     <EmailPhone>Publicaciones:</EmailPhone>
                 </DivOther>
-                    <PostsC>Totales: {PostById.length}</PostsC>
-                    <PostsC>Activas: {PostById.filter(p => p.active === true).length}</PostsC>
+                    <PostsC>Totales: {PostById ? PostById.length : null}</PostsC>
+                    <PostsC>Activas: {PostById ? PostById.filter(p => p.active === true).length : null}</PostsC>
                 </div>
                 <div style={{display:"flex", flexDirection:"column", marginLeft:"50px"}}>
                 <DivOther>
                     <IconContext.Provider value={{size:"20px", color: "rgba(0, 0, 0, 0.596)"}}>
                         <div>
-                            <MdPostAdd/>
+                            <GiShakingHands/>
                         </div>
                     </IconContext.Provider>
                     <EmailPhone>Contrataciones </EmailPhone>
                 </DivOther>
-                <PostsC>Totales: {HiringByUser.hirings.length}</PostsC>
+                <PostsC>Totales: {HiringByWorker.hirings.length}</PostsC>
                 </div>
             </div>
             <BtnBaja onClick={() => handleDeleteUser(UserDetail.user.uid)}>Dar baja a Worker</BtnBaja>
