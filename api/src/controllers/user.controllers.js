@@ -1,5 +1,6 @@
 const User = require("../models/User.js");
 const User_roles = require('../models/User_roles');
+const DataWorkers = require('../models/DataWorkers');
 const Publications = require('../models/Publications');
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt');
@@ -7,8 +8,23 @@ const bcrypt = require('bcrypt');
 const getUserById = async (req, res) => {
     const { id } = req.params;
     try {
-        const user = await User.findById(id);
-        res.json(user)
+        const user = await User.findById(id)
+            .populate('user_role', 'name')
+        //console.log(user)    
+        if(user.user_role.name === 'worker'){
+            const dataWorker = await DataWorkers.findOne({'userId': id})
+                .populate('subscription_type', 'name');
+            res.json({
+                ok: true,
+                user,
+                dataWorker
+            });
+        }else{
+            res.json({
+                ok: true,
+                user,
+            });
+        };
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -70,26 +86,35 @@ const upDateUser =  (req, res) => {
 
 const deleteUser = async (req, res) => {
     const { id } = req.params
-    // borrar publicaciones del usuario
-    await User.findByIdAndDelete(id);
-    return new Promise((resolve, reject) => {
-        Publications.deleteMany({ 'idUser': id }, (err, result) => {
-            if (err) reject(err);
-            resolve(result);
+    try {
+        const user = await User.findById(id).populate('user_role','name'); // borra el usuario
+
+        if(user.user_role.name === 'worker'){
+            await Publications.deleteMany({ user: id }); // borra las publicaciones del usuario
+            await DataWorkers.deleteOne({ userId: id }); // borra los datos del trabajador
+        };
+
+        await User.findByIdAndDelete(id);
+        res.status(200).json({
+            ok: true,
+            msg: 'User deleted'
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
         });
-    })
-    .then(result => {
-        res.json(result);
-    })
-    .catch(e => console.log(e));
+    };
 };
 
 const createUser = async (req, res) => {
     // agregar usuario  
     const { username, firstName, lastName, email, password, image, user_role, dni, phone, web} = req.body;
     try {
-        // validar si nickname, email, telefono y dni ya existen.
+        // validar si nickname y email ya existen.
         const existUserName = await User.findOne({ username });
+   
         if (existUserName) { 
             return res.status(400).json({
                 ok: false,
@@ -97,40 +122,49 @@ const createUser = async (req, res) => {
             });
         };
         const existEmail = await User.findOne({ email });
-        if (existEmail) { 
+         if (existEmail) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This email is already registered'
             });
         };
-        const existPhone = await User.findOne({ phone });
-        if (existPhone) { 
+        /*const existPhone = await DataWorkers.findOne({ phone });
+         if (existPhone) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This phone is already registered'
             });
         };
-        const existDni = await User.findOne({ dni });
+        const existDni = await DataWorkers.findOne({ dni });
         if (existDni) { 
             return res.status(400).json({
                 ok: false,
                 msg: 'This DNI is already registered'
             });
-        };
+        }*/
         //como me viene el user_role? String o Id? ===> llega id
-        // const userRole = await User_roles.findOne({user_role});
+        const userRole = await User_roles.findOne({name: user_role});
+        //console.log(userRole);
+        
         const usuario = new User({
             username,
             firstName,
             lastName,
             email,
             password,
-            user_role,
-            image,
-            dni,
-            phone,
-            web
+            user_role: userRole._id,
+            image
         });
+
+        if (user_role === 'worker'){
+            await DataWorkers.create({
+                dni,
+                phone,
+                subscribed: false,
+                subscription_type: "62a6dd77e56b6f3e0ad916cd",
+                userId: usuario._id
+            })
+        }
 
         // encriptar password y guardar usuario
         const salt = await bcrypt.genSalt(10);
@@ -153,7 +187,7 @@ const createUser = async (req, res) => {
             text: 'Hello ' + usuario.firstName + ' ' + usuario.lastName + '\n\n' +
                 'Thank you for registering on Wixxer.\n' +
                 'To confirm your registration, please click on the following link:\n\n' +
-                'http://localhost:3000/confirmar/' + usuario._id + '\n\n' +
+                `${process.env.DOMAIN}/confirm/` + usuario._id + '\n\n' +
                 "If it doesn't work, copy and paste the link into your browser.\n\n" +
                 'Thank you,\n' +
                 'Wixxer  Team'
@@ -168,7 +202,9 @@ const createUser = async (req, res) => {
         return res.json({
             ok: true,
             msg: "User created",
-        })
+            usuario
+        });
+    
     }
     catch (error) {
         console.log(error);
@@ -179,6 +215,31 @@ const createUser = async (req, res) => {
     };
 };
 
+const confirmRegister = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'User not found'
+            }); // si no existe el usuario
+        };
+        const userConfirmed = await User.findByIdAndUpdate(id, { confirm_email: true }, { new: true });
+        return res.json({
+            ok: true,
+            msg: 'User confirmed',
+            userConfirmed
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Unexpected error'
+        });
+    };
+};
 
 
-module.exports = {getUserById, getAllUsers, upDateUser, deleteUser, createUser};
+
+module.exports = {getUserById, getAllUsers, upDateUser, deleteUser, createUser, confirmRegister};

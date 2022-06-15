@@ -4,13 +4,14 @@ import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs, Errors } from './styledComments';
-import { postComments, getHiringsUser } from "../../store/actions/index";
+import { postComments, getHiringsByUser } from "../../store/actions/index";
 import { InputImage } from '../PublishForm/styledPublishForm';
 
 const PostComments = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const userLogged = useSelector((state) => state.userSignIn);
+    const {hiringsByUser} = useSelector((state) => state);
     const userID = userLogged.userInfo.uid;
     const [errors, setErrors] = useState({ name: "" });
     const { publicationId } = useParams();
@@ -26,6 +27,8 @@ const PostComments = () => {
     
     console.log("usuario",userLogged);
     
+    console.log("hiringsByUser",hiringsByUser);
+    
     const [input, setInput] = useState({
         user: `${userID}`,
         publicationId: `${publicationId}`,
@@ -35,7 +38,7 @@ const PostComments = () => {
     });
     
     useEffect( () => {
-        dispatch( getHiringsUser( userID ))
+        dispatch( getHiringsByUser( userID ))
       },[ dispatch ])
 
     const handleRating = (rate) => {
