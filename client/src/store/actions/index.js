@@ -325,3 +325,9 @@ export const removeFromWishlist = (_id) => (dispatch) => {
       dispatch({ type: "REMOVE_WISHLIST", payload: res.data.favorite._id })
     );
 };
+export const clearProfile = () => {
+  return{
+    type: "CLEAR_PROFILE"
+  }
+}
+

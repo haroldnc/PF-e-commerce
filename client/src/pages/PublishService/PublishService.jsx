@@ -11,10 +11,13 @@ const Validation = (workers,allPost,userInfo) => {
   if(!userInfo) return false;
   if(userInfo.user_role && userInfo.user_role === "628eefd607fe8bf42fb6a5f5") return false;
   if(userInfo.user_role.name && userInfo.user_role.name === "user") return false;
+  if(userInfo.user_role && userInfo.user_role === "628ef02d07fe8bf42fb6a5fa") return true;
+  if(userInfo.user_role.name && userInfo.user_role.name === "admin") return true;
+
   let worker =  workers.find(e => e.userId.uid === userInfo.uid)
   console.log(worker)
   if(worker.subscribed === false) return false;
-  if(worker.subscription_type.name === "Premium" && allPost.length < 5) return true;
+  if(worker.subscription_type.name === "Premium") return true;
   if(worker.subscription_type.name === "Standard" && allPost.length < 3) return true;
   return false
 
@@ -49,9 +52,9 @@ const PublishService = () => {
       <ValidateRoute>
         <h1>Lo siento!</h1>
         <h4>Para poder hacer una publicacion debes cumplir con lo siguiente:</h4>
-        <p>- Debes estar registrado com worker y debes iniciar sesion</p>
+        <p>- Debes estar registrado como worker y debes iniciar sesion</p>
         <p>- Debes tener un a suscripcion ya sea standar o premium</p>
-        <p>- Si es standar no puedes hacer mas de 3 publiciones, y si eres premium no puedes hacer mas de 5</p>
+        <p>- Si es standar no puedes hacer mas de 3 publiciones, y si eres premium puedes publicar ilimitadamente</p>
       </ValidateRoute>
     )
   }

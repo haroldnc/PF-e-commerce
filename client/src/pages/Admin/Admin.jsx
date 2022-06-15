@@ -17,15 +17,22 @@ import AdminWorkers from "../../components/ADMINISTRADOR/AdminWorkers/AdminWorke
 import Categorias from "../../components/ADMINISTRADOR/Categorias/Categorias.jsx";
 import DataAdmin from "../../components/ADMINISTRADOR/DataAdmin/DataAdmin.jsx";
 import AdminUser from "../../components/ADMINISTRADOR/AdminUser/AdminUser.jsx";
-import ModalDetailUser from '../../components/ADMINISTRADOR/ModalDetailUser/ModalDetailUser.jsx'
+import ModalDetailUser from '../../components/ADMINISTRADOR/ModalDetailUser/ModalDetailUser.jsx';
+
+const validation = (userInfo) =>{
+    if(!userInfo) return false;
+    if(userInfo.user_role.name && userInfo.user_role.name === "admin") return true;
+    if(userInfo.user_role === "628ef02d07fe8bf42fb6a5fa") return true;
+    return false
+}
 
 const Admin = () => {
 
     const UserDetail = useSelector(state => state.userDetail)
     const PostById = useSelector(state => state.postsByUser)
     const HiringByWorker = useSelector(state => state.hiringsByWorker)
-    // console.log('priHiring',HiringByUser)
     const HiringByUser = useSelector(state => state.userHirings)
+    // console.log('priHiring',HiringByUser)
     const dispatch = useDispatch()
     let showLateral;
     let showScreen;
@@ -53,17 +60,10 @@ const Admin = () => {
     const userSignIn = useSelector((state) => state.userSignIn);
     const { userInfo } = userSignIn;
 
-    // console.log(DataAdmin)
-    console.log(DataAdmin)
-    console.log(userInfo)
 
-    // if(userInfo.user_role.name && userInfo.user_role.name !== "admin"){
-    //     return(<p>good</p>)
-    // }
-    // if(userInfo.user_role && userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
-    //     return(<p>good</p>)
-    // }
-  
+    const validate = validation(userInfo) 
+    if(!validate)  return(<p>good</p>)
+   
 
 
     if(lateral.panel === "Menu" && lateral.show){

@@ -222,6 +222,11 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 hiringsByWorker: action.payload
             }
+        case "CLEAR_PROFILE":
+            return{
+                ...state,
+                userDetail:{}
+            }
             
         default: return state;
     };
