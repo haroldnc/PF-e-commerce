@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory,withRouter } from 'react-router-dom'
 import { getCategorybyId } from '../../store/actions/index'
@@ -13,6 +13,7 @@ const Categories = withRouter(({ location }) => {
 const history = useHistory()
  const dispatch = useDispatch()
  const category = useSelector(state => state.category)
+ const allCategories = useSelector(state => state.allCategories)
  const {id} = useParams()
  const [ localId , setLocalId ] = useState([])
 console.log(localId)

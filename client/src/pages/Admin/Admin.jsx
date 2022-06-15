@@ -3,7 +3,7 @@ import { ContainerAdmin, Screen } from './Admin.js'
 import { useSelector, useDispatch } from "react-redux";
 import {Route} from "react-router-dom"
 import Home from "../Home/Home"
-import { getUserById,getPostByUser, clearUserById, getHiringsByUser } from '../../store/actions/index'
+import { getUserById,getPostByUser, clearUserById, getHiringsByUserId } from '../../store/actions/index'
 
 import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
 import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
@@ -40,7 +40,7 @@ const Admin = () => {
         if(id !== null){
             dispatch(getUserById(id))
             dispatch(getPostByUser(id))
-            dispatch(getHiringsByUser(id))
+            dispatch(getHiringsByUserId(id))
         }else{
             dispatch(clearUserById())
         }
