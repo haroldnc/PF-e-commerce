@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { getPostByUser, deletPost, editPosts } from '../../../store/actions/index'
+import { getPostByUser, deletPost, changeStatusPosts } from '../../../store/actions/index'
 import { NavPost, BtnPublic, ContainerCards, TextTwo, Textone, ContainerNopost } from './MyProfilePost'
 import CardPostMyprofile from '../CardPostMyprofile/CardPostMyprofile.jsx'
 import Swal from 'sweetalert2'
@@ -53,7 +53,7 @@ const MyProfilePost = ({id, allPost}) => {
     }
 
     const handleActivate = (body, id) => {
-        dispatch(editPosts(body,id))
+        dispatch(changeStatusPosts(body,id))
     }
 
     return (

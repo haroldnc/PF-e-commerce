@@ -231,7 +231,17 @@ export const getPostByUser = (id) => dispatch => {
 }
 
 
+export const hireButton = (body) => async () => {
+  await axios.post(`https://wixer-server.herokuapp.com/hirings`, body)
+}
 
+export function getHiringsByUserId(arg) {
+  return (dispatch) => {
+    return axios
+      .get(`https://wixer-server.herokuapp.com/hirings/user/${arg}`)
+      .then((res) => dispatch({ type: "GET_HIRINGS_BY_USER_ID", payload: res.data.hirings }));
+  };  
+}
 
 export const deletPost = (id) => async () => {
   const response = await axios.delete(`https://wixer-server.herokuapp.com/posts/${id}`)
@@ -249,10 +259,19 @@ export const editPosts = (body,id) => async () => {
   await axios.put(`https://wixer-server.herokuapp.com/posts/${id}`, body)
 }
 
+export const changeStatusPosts = (body,id) => async () =>{
+  await axios.put(`https://wixer-server.herokuapp.com/posts/status/${id}`, body)
+}
+
 
 export const getHiringsByUser = (id) => dispatch => {
   axios.get(`https://wixer-server.herokuapp.com/hirings/user/${id}`)
   .then( res => dispatch({type: "GET_HIRINGS_BY_USER", payload: res.data}))
+}
+
+export const getHiringsByWorker = (id) => dispatch => {
+  axios.get(`https://wixer-server.herokuapp.com/hirings/worker/${id}`)
+  .then( res => dispatch({type: "GET_HIRINGS_BY_WORKER", payload: res.data}))
 }
 
 export const DeleteUser = (id) => async() => {
