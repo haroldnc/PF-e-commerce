@@ -1,5 +1,5 @@
 import React from "react";
-import { BotonPago, Container, Description, DivPay, DivRating, Image, PriceContainer, Rating, Staring, Pay, Title, Profile, ImgProfile, NameProfile, DescriptionContainer } from "./StyledCard";
+import { BotonPago, Container, Description, DivPay, DivRating, Image, PriceContainer, Rating, Staring, Pay, Title, Profile, ImgProfile, NameProfile, DescriptionContainer, HeartContainer, HeartFill } from "./StyledCard";
 import { IconContext } from "react-icons";
 import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
@@ -8,16 +8,22 @@ const Card = ({ title, img, description, price, service, id, userPost,userInfo, 
 
   const fullName = userPost.firstName + " " + userPost.lastName //el nombre del usuario que hizo el post
 
+  
+
 
   return (
     <Container>
+      <HeartContainer >
+            <HeartFill />
+            {/* {fav ?  <HeartFill /> : <HeartOutline />} */}
+            
+          </HeartContainer>
       { id?
         <Link to={`/posts/detail/${id}`}>
         <Image img={img} />
         </Link>
         :
         <Image img={img} />
-
       }
             <Profile>
               <ImgProfile src={userPost.image} />

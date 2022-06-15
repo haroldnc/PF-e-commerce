@@ -303,7 +303,7 @@ export const addToWishlist = (idUser, idPublication) => async (dispatch) => {
       idUser,
       idPublication,
     })
-    .then((res) => dispatch({ type: "ADD_TO_WISHLIST", payload: res.data }).catch({type: "ERROR", payload: res.data}));
+    .then((res) => dispatch({ type: "ADD_TO_WISHLIST", payload: res.data }));
 };
 
 export const getWishlist = () => (dispatch) => {

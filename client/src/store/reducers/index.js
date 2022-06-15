@@ -24,7 +24,9 @@ const initialState = {
     postsByUser: [],
     servicePosts:[],
     hiringsByWorker: [],
-    userHirings:[]
+    userHirings:[],
+    userWishlist: [],
+    removeWishlist: [],
 };
 //habia un objeto en initialstate
 
@@ -163,23 +165,29 @@ const rootReducer = (state = initialState, action) => {
                 servicePosts:[]
             }
 
-        case "GET_WISHLIST":
-            return{
-                ...state,
-                wishlist: action.payload
-            }
-
-            case "GET_WISHLIST_BY_ID":
-                return{
-                    ...state,
-                    userWishlist: action.payload
-                }   
-
-        case "ADD_TO_WISHLIST":
-
-            return{
-                ...state,
-            }
+            case "REMOVE_WISHLIST":
+                const filter213 = state.removeWishlist?.favorites?.filter(
+                  (r) => r._id !== action.payload
+                );
+                console.log("payload", filter213);
+                return {
+                  ...state,
+                  removeWishlist: filter213,
+                };
+          
+              case "GET_WISHLIST_BY_ID":
+                return {
+                  ...state,
+                  userWishlist: action.payload,
+                };
+          
+              case "ADD_TO_WISHLIST":
+                console.log("asd", action.payload);
+                return {
+                  ...state,
+                  userWishlist: action.payload,
+                };
+  
 
         case "GET_POST_BY_QUERY":
             return{
