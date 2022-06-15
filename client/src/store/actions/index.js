@@ -297,3 +297,9 @@ export const DeleteUser = (id) => async() => {
   await  axios.delete(`https://wixer-server.herokuapp.com/user/${id}`)
 }
 
+export const clearProfile = () => {
+  return{
+    type: "CLEAR_PROFILE"
+  }
+}
+
