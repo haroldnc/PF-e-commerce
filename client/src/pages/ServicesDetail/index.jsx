@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { Parent, DetailContainer, BuyContainer, ProfileImg, PostPicture, UserInfo, DescriptionContainer, ContactButton, HireButton, SubTitle, SubTitle2, ProfileLink } from "./styled_Services_Detail";
 import {Link, useParams} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers, clearServiceDetail } from "../../store/actions";
+import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers, clearServiceDetail, getHiringsByUserId } from "../../store/actions";
 import PostDetailCard from "../../components/PostDetailCard";
 
 
@@ -10,7 +10,12 @@ import PostDetailCard from "../../components/PostDetailCard";
 
 export default function ServicesDetail(){
     
+    const userLog = useSelector((state) => state.userSignIn);
 
+
+    // console.log(postId)
+
+    const {userInfo} = userLog
     const {id} = useParams()
     // console.log(id)
     const dispatch = useDispatch()
@@ -21,6 +26,7 @@ export default function ServicesDetail(){
     var arrayOfPosts = []
     arrayOfPosts = useSelector((state)=>state.allPost)
     var userPost = []
+    const hiringsByUser = useSelector((state)=>state.userHirings)
     // var author
     // console.log(user)
     // console.log(post)
@@ -42,7 +48,11 @@ export default function ServicesDetail(){
     console.log(post.user)
 
    
+    const filteredHirings = hiringsByUser.filter(h=>h.idPublication._id === id)
 
+    const HandleClick = ()=>{
+        alert("Ya has contratado este servicio con anterioridad intenta con otra publicación o probablemente aun no has iniciado sesión.")
+    }
     
     
      useEffect(()=>{      
@@ -51,6 +61,12 @@ export default function ServicesDetail(){
         if(post.user) dispatch(getUserById(post.user))
         dispatch(getAllPosts())
         dispatch(getWorkers())
+        if(userInfo){
+            dispatch(getHiringsByUserId(userInfo.uid))
+
+        }else{
+            return
+        }
 
      
 
@@ -103,9 +119,14 @@ export default function ServicesDetail(){
                     <Link to={`/comentarios/${id}`}>
                     <ContactButton>Hazle una pregunta</ContactButton><br />
                     </Link>
-                    <Link to={`/contratar/post/${id}`}>
-                    <HireButton>{`Contratar a ${user.username}`}</HireButton>
-                    </Link>
+                    { filteredHirings.length < 1 && userLog && userInfo?
+                        <Link to={`/contratar/post/${id}`}>
+                            <HireButton>{`Contratar a ${user.username}`}</HireButton>
+                         </Link>
+                        :
+                        <HireButton onClick={HandleClick}>{`Contratar a ${user.username}`}</HireButton>
+
+                    }
                     <SubTitle2>{`Otros anuncios de ${user.username} `}</SubTitle2>
 
                     {userPost.length?
