@@ -9,7 +9,11 @@ export const Page = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     flex-direction: column
+=======
+    margin-top: 2rem;
+>>>>>>> 838c228121a898e3de3e10211b678edf6fa0b935
 `
 export const Wrapper = styled.div`
     max-width: 1100px;

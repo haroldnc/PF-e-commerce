@@ -30,7 +30,7 @@ export const InfoFooter = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  min-width: 1100px;
+  min-width: 100%;
   border-top: 1px solid ${props => props.theme.colors.borderColor}; 
 `;
 
@@ -40,12 +40,16 @@ export const LastInfoFooter = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  padding-left: 3rem;
+  padding-right: 3rem;
   color: ${(props) => props.theme.colors.font};
 
-  @media screen and (max-width: 660px) {
+  @media screen and (max-width: 768px) {
     display: block;
     justify-content: center;
     text-align: center;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   ${(props) =>

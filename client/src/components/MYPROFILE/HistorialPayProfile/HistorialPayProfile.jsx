@@ -4,7 +4,7 @@ import { GetTransactionById } from '../../../store/actions/index'
 import { NavRegistrados, NavTitle, CancelDiv, CancelBtn, Text } from './HistorialPayProfile'
 import CardHistorialPay from '../CardHistorialPay/CardHistorialPay.jsx'
 
-const HistorialPayProfile = ({id}) => {
+const HistorialPayProfile = ({id, toggleModalPaymentCancel}) => {
 
     const dispatch = useDispatch()
     const transaction = useSelector(state => state.transactionById)
@@ -27,13 +27,16 @@ const HistorialPayProfile = ({id}) => {
         "expiration": "1970-01-20T03:41:26.782Z",
         "user": "62926fb4a8415ffb1bf2a4bc"
         }
-    console.log('tansaction', transaction )
+
+    const handleClickCancel = () => {
+        toggleModalPaymentCancel()
+    }
 
     return (
         <div style={{width:"100%"}}>
             <CancelDiv>
                 <Text>Podrás cancelar tu membresia en cualquier momento: </Text>
-                <CancelBtn>Cancelar membresia</CancelBtn>
+                <CancelBtn onClick={handleClickCancel}>Cancelar membresia</CancelBtn>
             </CancelDiv>
             <NavRegistrados>
                <NavTitle>FECHA</NavTitle>
@@ -42,9 +45,9 @@ const HistorialPayProfile = ({id}) => {
                <NavTitle>METODO DE PAGO</NavTitle>
             </NavRegistrados>
             {
-                transaction !== undefined ?
-                transaction.map( t => (
-                    <div key={t.payment_method._id}>
+                transaction  ?
+                transaction.map( (t, index) => (
+                    <div key={index}>
                         <CardHistorialPay
                             tarjeta={t.payment_method.network}
                             ultnum={t.payment_method.end_digits}

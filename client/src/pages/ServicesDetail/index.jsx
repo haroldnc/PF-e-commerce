@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import { Parent, DetailContainer, BuyContainer, ProfileImg, PostPicture, UserInfo, DescriptionContainer, ContactButton, HireButton, SubTitle, SubTitle2, ProfileLink } from "./styled_Services_Detail";
 import {Link, useParams} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { getPostById, getUserById, getAllPosts, getWorkers } from "../../store/actions";
+import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers, clearServiceDetail } from "../../store/actions";
 import PostDetailCard from "../../components/PostDetailCard";
 
 
@@ -14,8 +14,9 @@ export default function ServicesDetail(){
     const {id} = useParams()
     // console.log(id)
     const dispatch = useDispatch()
-    const post = useSelector((state)=>state.post)
-    const user = useSelector((state)=>state.userDetail)
+    var post = useSelector((state)=>state.post)
+    var user = useSelector((state)=>state.userDetail.user)
+    // console.log(user)
     const workers = useSelector((state)=>state.workers)
     var arrayOfPosts = []
     arrayOfPosts = useSelector((state)=>state.allPost)
@@ -28,38 +29,51 @@ export default function ServicesDetail(){
     // console.log(user.username)
     // console.log(post.title)
         if(arrayOfPosts.length ){
-            userPost= arrayOfPosts.filter(p=>p.user===post.user)
+            userPost= arrayOfPosts.filter(p=>p.user.uid===post.user)
 
         }
     //    console.log(userPost)
 
     const filteredWorker = workers.filter(w=>w.userId.uid === post.user)
+
+    // const user = users.filter(u=>u.uid === post.user)
     // console.log(filteredWorker)
     //  console.log(filteredWorker[0]._id)
-    // console.log(post.user)
+    console.log(post.user)
+
+   
 
     
-
     
-
-    
-    useEffect(()=>{
+     useEffect(()=>{      
+            
         dispatch(getPostById(id))
-    
-        dispatch(getUserById(post.user))
+        if(post.user) dispatch(getUserById(post.user))
+        dispatch(getAllPosts())
+        dispatch(getWorkers())
+
+     
+
+
+        // return ()=>{
+        //     dispatch(clearServiceDetail())
+        // }
+        
+       
+        
 
 
         
-        dispatch(getAllPosts())
-        dispatch(getWorkers())
-    }, [dispatch, id, post.user])
+    },[dispatch, id, post.user])
+    
+    
 
     
 
 
     return(
         <>
-        { post.title && post.user && user.username?
+        { post.title && post.user && user?
 
             <Parent>
             <DetailContainer>
@@ -92,7 +106,7 @@ export default function ServicesDetail(){
 
                     {userPost.length?
                     userPost.map(p=>(
-                        <PostDetailCard key={p.id} title={p.title} img={p.img} id={p.id} /> 
+                        <PostDetailCard key={p._id} title={p.title} img={p.img} id={p._id} /> 
                     ))
                     
                     :
@@ -103,7 +117,10 @@ export default function ServicesDetail(){
             </BuyContainer>
         </Parent>
         :
-        <h1>...cargando</h1>
+        <Parent>
+            <h1>...cargando</h1>
+
+        </Parent>
     }
         </>
     )

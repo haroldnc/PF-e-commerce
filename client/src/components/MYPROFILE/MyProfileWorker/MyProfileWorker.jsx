@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { ContainerWorker,
          ContainerIzq, 
          ContainerDer,
@@ -31,24 +32,46 @@ import { ContainerWorker,
          BtnAccept,
          BtnCancel,
          Cancelar,
-         Historial
+         Historial,
+         CambioPlan,
+         Premium,
+         TextPremium,
+         Fileselect,
+         BtnPerfil,
+         BtnPrefilCancel,
+         DivButtons,
+         PostsC
          } from './MyProfileWorker'
 
-import { PutInfoWorker, getWorkerDetail } from '../../../store/actions/index'
+import { PutInfoWorker, getWorkerDetail, PutInfoUser, getPostByUser } from '../../../store/actions/index'
 import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
+import ProfileInactive from '../ProfileInactive/ProfileInactive.jsx'
+import MyProfilePost from '../MyprofilePost/MyProfilePost.jsx'
+import CambioaPlanStandard from '../CambioDePlan/CambioaPlanStandard/CambioaPlanStandard.jsx'
+import CambioaPlanPremium from '../CambioDePlan/CambioaPlanPremium/CambioaPlanPremium.jsx'
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
-import { MdOutlineEmail } from 'react-icons/md'
+import { MdOutlineEmail, MdStarPurple500, MdPostAdd } from 'react-icons/md'
 import { GiSmartphone } from 'react-icons/gi'
 import { keyframes } from "styled-components";
 
 
-const MyProfileWorker = ({profile, toggleModalPayment}) => {
+const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}) => {
 
+    useEffect(() => {
+        dispatch(getPostByUser(profile.user.uid))
+    },[])
+    const history = useHistory()
     const dispatch = useDispatch()
-    const [ image , setImage ] = useState("")
-    const [ panel , setPanel ] = useState("historial")
+    const allPost = useSelector(state => state.postsByUser)
+    console.log('allpost', allPost)
+    const [ image , setImage ] = useState(profile.user.image)
+    const [ showBtn , setShowBtn ] = useState(false)
+    const [ panel , setPanel ] = useState("post")
+    const [ loading, setLoading ] = useState(false)
+    const [ isOpenChangeStandard, setIsOpenChangeStandard ] = useState(false)
+    const [ isOpenChangePremium, setIsOpenChangePremium ] = useState(false)
     const [ Formularios, setFormularios ] = useState({
         title: false,
         aboutMe: false,
@@ -57,7 +80,8 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
         certificacion: false,
         experiencia: false,
         linkedin: false,
-        web: false
+        web: false,
+        phone: false
     })
     const [ Changes , setChanges ] = useState({
         title: "",
@@ -66,7 +90,8 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
         skills: "",
         linkedin: "",
         web: "",
-        image:""
+        image:"",
+        phone:""
     })
     const [ infoWorker , setInfoWorker ] = useState({
         title: profile.dataWorker.title,
@@ -75,7 +100,8 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
         skills: profile.dataWorker.skills,
         linkedin: profile.dataWorker.linkedin,
         web: profile.dataWorker.web,
-        image: profile.user.image
+        image: profile.user.image,
+        phone: profile.dataWorker.phone
     })
     const toggleForms = (dato) => {
         setFormularios({
@@ -84,20 +110,44 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
         })
     }
 
+    const toggleIsOpenChangeStandard = () => {
+        setIsOpenChangeStandard(!isOpenChangeStandard)
+    }
+
+    const toggleIsOpenChangePremium = () => {
+        setIsOpenChangePremium(!isOpenChangePremium)
+    }
+
+    const handleCambioPlan = () => {
+        if(profile.dataWorker.subscription_type.name === "Premium"){
+            toggleIsOpenChangeStandard()
+        }else{
+            toggleIsOpenChangePremium()
+        }
+    }
+
     let showPanel = null
     if(profile.dataWorker.subscribed){
         if(panel === "historial"){
-            showPanel = <HistorialPayProfile id={profile.user.uid}/>
+            showPanel = <HistorialPayProfile id={profile.user.uid} toggleModalPaymentCancel={toggleModalPaymentCancel}/>
+        }else if(panel === "post"){
+            showPanel = <MyProfilePost allPost={allPost ? allPost: null} id={profile.user.uid}/>
         }
     }else{
-        showPanel = "No hay nada"
+        showPanel = <ProfileInactive toggleModalPayment={toggleModalPayment}/>
     }
     
+    const handleClickVista = () => {
+        history.push(`/worker/${profile.dataWorker._id}`)
+    }
 
     const RedirectLink = (url) => {
         window.open(url)
     }
 
+    const panelClick = (panel) => {
+        setPanel(panel)
+    }
     const handleClickPayment = () => {
         toggleModalPayment()   
     }
@@ -118,47 +168,69 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
         setChanges({...Changes,[key] : ""})
    }
 
-   const handlePutImage = (e, key) => {
-        e.preventDefault()
-        dispatch(PutInfoWorker({ [key] : Changes[key] } , profile._id ))
-        dispatch(getWorkerDetail(profile._id))
-        setInfoWorker({...infoWorker , [key] : Changes[key] })
-        setFormularios({ ...Formularios , [key] : !Formularios[key] })
-        setChanges({...Changes,[key] : ""})
-   }
+   
 
    const upLoadImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "PGimages");
-  
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dk69jry82/image/upload",
-      {
-        method: "POST",
-        body: data
-      }
-    );
-  
-    const file = await res.json();
-    setImage(file.secure_url);
-    // console.log(file.secure_url);
-    // setInput({
-    //   ...input,
-    //   img: file.secure_url
-    // })
-    // setLoading(false);
+        const files = e.target.files;
+        const data = new FormData();
+        data.append("file", files[0]);
+        data.append("upload_preset", "PGimages");
+        setLoading(true)
+        const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dk69jry82/image/upload",
+        {
+            method: "POST",
+            body: data
+        }
+        );
+        const file = await res.json();
+        setImage(file.secure_url);
+        setShowBtn(!showBtn)
+        setLoading(false);
   }
 
+  const handleChangeImage = () => {
+    dispatch(PutInfoUser({ image : image },profile.dataWorker.userId ))
+    setShowBtn(!showBtn)
+  }
+
+  const handleNoChange = () => {
+    setImage(profile.user.image)
+    setShowBtn(!showBtn)
+  }
+
+    let PremiumStar = null
+    if(profile.dataWorker.subscription_type.name === "Premium" && profile.dataWorker.subscribed){
+        PremiumStar = 
+            <Premium>
+            <TextPremium>Premium</TextPremium>
+            <IconContext.Provider value={{size:"20px", color: "rgb(179, 156, 31)"}}>
+                    <div>
+                        <MdStarPurple500/>
+                    </div>
+                </IconContext.Provider>
+            </Premium>
+    }
 
     return(
         <ContainerWorker>
             <ContainerIzq>
-                <ImageContainer>
-                    <ImageProfile src={infoWorker.image} alt="img"/>
+            <ImageContainer>
+                    {PremiumStar}
+                    <ImageProfile src={loading ? "https://c.tenor.com/XK37GfbV0g8AAAAi/loading-cargando.gif" : image} alt="img"/>
                     <Username>{profile.user.username}</Username>
-                    <VistaPrevia>Vista previa del perfil de Wixxer</VistaPrevia>
+                    <Fileselect>
+                        <input
+                            name="img"
+                            type="file"
+                            onChange={upLoadImage}
+                        />
+                    </Fileselect>
+                    <DivButtons showBtn={showBtn}>
+                        <BtnPerfil onClick={handleChangeImage}>Establecer como foto de perfil</BtnPerfil>
+                        <BtnPrefilCancel onClick={handleNoChange}>Cancelar</BtnPrefilCancel>
+                    </DivButtons>
+                    <VistaPrevia onClick={handleClickVista}>Vista previa del perfil de Wixxer</VistaPrevia>
                     <Linea></Linea>
                     <DivName>
                         <IconContext.Provider value={{size:"20px", color: "rgba(0, 0, 0, 0.596)"}}>
@@ -182,15 +254,53 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
                                 <GiSmartphone/>
                             </div>
                         </IconContext.Provider>
-                        <EmailPhone>{profile.dataWorker.phone}</EmailPhone>
+                        <EmailPhone onClick={() => toggleForms("phone")}>{infoWorker.phone}</EmailPhone>
                     </DivOther>
+                    {
+                        Formularios.phone ?
+                            <FormsDiv>
+                                <form>
+                                    <input 
+                                        placeholder="Agrega un numero de telefono..."
+                                        value={Changes.phone}
+                                        name="phone"
+                                        onChange={(e) => handleChange(e)}
+                                    />
+                                    <div style={{display: "flex" , justifyContent:"center"}}>
+                                        <BtnCancel onClick={() => toggleForms("phone")}>Cancelar</BtnCancel>
+                                        <BtnAccept onClick={(e) => hamdlePut(e,"phone")}>Actualizar</BtnAccept>
+                                    </div>
+                                </form>
+                            </FormsDiv>
+                        : null
+                    }
+                    <DivOther>
+                         <IconContext.Provider value={{size:"20px", color: "rgba(0, 0, 0, 0.596)"}}>
+                            <div>
+                                <MdPostAdd/>
+                            </div>
+                            </IconContext.Provider>
+                        <EmailPhone onClick={() => panelClick("post")}>Publicaciones</EmailPhone>
+
+                    </DivOther>
+                    <DivOther>
+                        <div style={{display:"flex", flexDirection:"column", marginLeft:"35px"}}>
+                            <PostsC>Totales:   {allPost ? allPost.length : null}</PostsC>
+                            <PostsC>Activas:   {allPost ? allPost.filter(p => p.active === true).length : null}</PostsC>
+                        </div>
+                    </DivOther>
+
+
+
+
                         {
                             profile.dataWorker.subscribed ? 
                             <div style={{width: "100%"}}>
                                 <Div>
                                     <Subscribe>Activo</Subscribe>
                                 </Div>
-                                <Historial>Historial de pago</Historial>
+                                <CambioPlan onClick={handleCambioPlan}>Cambiar de plan</CambioPlan>
+                                <Historial onClick={() => panelClick("historial")}>Historial de pago</Historial>
                             </div>
                                 :
                             <div style={{width: "100%"}}>
@@ -262,7 +372,7 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
                         {
                         infoWorker.languages.length === 0 ?<InfoProfile>Agrega tus idiomas ...</InfoProfile>: 
                             <DivResult>
-                                {profile.languages.map( (l, index )=> (
+                                {infoWorker.languages.map( (l, index )=> (
                                     <MapRow key={index}>
                                         <InfoProf>{l.idioma}</InfoProf>
                                         <Level>-   {l.level}</Level>
@@ -420,6 +530,16 @@ const MyProfileWorker = ({profile, toggleModalPayment}) => {
                     {showPanel}
                 </InfoContainerDer>
             </ContainerDer>
+            <CambioaPlanStandard 
+            profile={profile.user.uid}
+            isOpenChangeStandard={isOpenChangeStandard} 
+            toggleIsOpenChangeStandard={toggleIsOpenChangeStandard}
+            />
+            < CambioaPlanPremium 
+            profile={profile.user.uid}
+            isOpenChangePremium={isOpenChangePremium}
+            toggleIsOpenChangePremium={toggleIsOpenChangePremium}
+            />
         </ContainerWorker>
     )
 }

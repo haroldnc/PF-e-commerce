@@ -11,12 +11,13 @@ export default function WorkerProfile (){
     const dispatch = useDispatch()
     const worker = useSelector((state)=>state.workerDetail)
     const arrayOfPost = useSelector((state)=>state.allPost)
+    console.log(arrayOfPost)
     var userPost = []
 
 
     function getUserPosts(wrkr, postArr){
-        if(wrkr.aboutMe !== undefined && postArr.length){
-            userPost = postArr.filter(p=>p.user===wrkr.userId.uid)
+        if(wrkr._id && postArr.length){
+            userPost = postArr.filter(p=>p.user.uid===wrkr.userId.uid)
             console.log(userPost)
             return userPost
         }
@@ -31,6 +32,7 @@ export default function WorkerProfile (){
     }, [dispatch, id])
     
     getUserPosts(worker, arrayOfPost)
+    // console.log(getUserPosts(worker, arrayOfPost))
     // console.log(worker)
     // console.log(arrayOfPost)
     // const userPost= arrayOfPost.filter(p=>p.user===worker.userId.uid)
@@ -96,7 +98,7 @@ export default function WorkerProfile (){
             {
                 userPost.length?
                 userPost.map(p=>(
-                    <ProfilePostDetailCard key={p.id} title={p.title} img={p.img} id={p.id} />
+                    <ProfilePostDetailCard key={p._id} title={p.title} img={p.img} id={p._id} />
                 ))
                 :
                 <h4>...cargando datos</h4>

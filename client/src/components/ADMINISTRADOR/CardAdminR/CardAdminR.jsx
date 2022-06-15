@@ -5,7 +5,7 @@ import { ContainerCardAdminR, ProfilePicture, DivProfile, Worker, UserName, Corr
 import { AiOutlineEye } from 'react-icons/ai'
 import { IconContext } from "react-icons";
 
-const CardAdminR = ({ image, username, telefono, email, role}) => {
+const CardAdminR = ({ image, username, telefono, email, role, toggleModalDetailUser, id}) => {
     return (
         <ContainerCardAdminR>
             <DivProfile>
@@ -15,7 +15,7 @@ const CardAdminR = ({ image, username, telefono, email, role}) => {
             <Correo>{email}</Correo>
             <Phone>{telefono}</Phone>
             <Worker role={role}>{role}</Worker>
-            <Icon>
+            <Icon onClick={() => toggleModalDetailUser(id)}>
                 <IconContext.Provider value={{size:"20px", color: "#05668d"}}>
                     <div>
                         <AiOutlineEye/>

@@ -37,7 +37,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
   const [isFaved, setIsFaved] = useState(false);
   const userWishlist = useSelector(state => state.userWishlist?.favorites);
 
-  console.log("poronga", pageslice);
+  console.log("poronga", );
 
   useEffect(() => {
     dispatch(getWishlistById(userInfo.uid));
@@ -59,7 +59,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
       {pageslice &&
         pageslice.map((card, index) => (
           <Card key={index}> 
-          <HeartContainer>
+          <HeartContainer onClick={() => fav()}>
             <HeartFill onClick={() => handleAddFavorite(userInfo.uid, card._id)} />
             {/* {fav ?  <HeartFill /> : <HeartOutline />} */}
             

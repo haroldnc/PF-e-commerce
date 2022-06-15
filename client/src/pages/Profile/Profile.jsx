@@ -6,18 +6,25 @@ import { useParams } from 'react-router-dom'
 
 import MyProfileWorker from '../../components/MYPROFILE/MyProfileWorker/MyProfileWorker.jsx'
 
-import { ContainerProfile } from './Profile'
+import { ContainerProfile,Validate } from './Profile'
 import ModalPayment from '../../components/ModalPayment/ModalPayment.jsx'
 import { getUserById, getWorkerDetail } from '../../store/actions/index'
 import MyProfileUser from '../../components/MYPROFILE/MyProfileUser/MyProfileUser.jsx'
+import ModalCancelPayment from '../../components/ModalCancelPayment/ModalCancelPayment.jsx'
+// import TypeCancel from '../../components/ModalCancelPayment/TypeCancel/TypeCancel.jsx'
+
 
 const Profile = () => {
 
     const { id } = useParams()
     const dispatch = useDispatch()
     const [ isOpenPayment, setIsOpenPayment ] = useState(false)
+    const [ isOpenPaymentCancel, setIsOpenPaymentCancel] = useState(false)
+    // const [ isOpenType , setIsOpenType ] = useState(false)
+
     const profile = useSelector(state => state.userDetail)
 
+    console.log(id)
 
 
     let query = window.location.search.substring(1);
@@ -28,14 +35,21 @@ const Profile = () => {
      }
 
 
+    // const toggleModalType = () => {
+    //     setIsOpenType(!isOpenType)
+    // }
+
     const toggleModalPayment = () => {
         setIsOpenPayment(!isOpenPayment)
     }
 
+    const toggleModalPaymentCancel = () => {
+        setIsOpenPaymentCancel(!isOpenPaymentCancel)
+    }
+
     useEffect(() => {
-        dispatch(getWorkerDetail(id))
         dispatch(getUserById(id))
-    }, [dispatch, id])
+    }, [])
 
     const profileHARD= {
         "ok": true,
@@ -75,16 +89,57 @@ const Profile = () => {
         }
     }
 
+    const profileUserHARD = {
+        "ok": true,
+        "user": {
+        "username": "elfran",
+        "firstName": "elfran",
+        "lastName": "elfran",
+        "email": "elfran@gmail.com",
+        "image": "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+        "user_role": {
+        "_id": "628eefd607fe8bf42fb6a5f5",
+        "name": "user"
+        },
+        "punctuation": 0,
+        "confirm_email": false,
+        "uid": "629f8b395fd85e3406d03058"
+        }
+        }
+
 
     let TypeProfile = null
-    console.log('user',profile)
     if( Object.entries(profile).length !== 0 ){
         if(profile.user.user_role.name === "worker"){
-            TypeProfile = <MyProfileWorker profile={profile} toggleModalPayment={toggleModalPayment}/>
+            TypeProfile = <MyProfileWorker 
+                                profile={profile} 
+                                toggleModalPayment={toggleModalPayment}
+                                toggleModalPaymentCancel={toggleModalPaymentCancel}
+                            />
         }else{
             TypeProfile = <MyProfileUser profile={profile} toggleModalPayment={toggleModalPayment} />
         }
     }
+
+    //ACA ESTOY VALIDANDO LA RUTA DE PERFILES PARA EVITAR HACKEO HACIA ALGUN USUARIO
+    const userSignIn = useSelector((state) => state.userSignIn);
+    const { userInfo } = userSignIn;
+
+
+    if(!userInfo){
+        return(<Validate>
+            <h1>si quieres ver tu perfil primero debes inciar sesion</h1>
+        </Validate>)
+    }
+    if(userInfo.uid !== id && userInfo.user_role.name !== "worker"){
+        return(
+            <Validate>
+                <h1>buen intento!</h1>
+                <h2>no puedes acceder al perfil de otros usuarios</h2>
+            </Validate>
+        )
+    }
+    ///////////////////////////////////////////////------------------------------------
     
     return (
         <>
@@ -97,6 +152,17 @@ const Profile = () => {
                     toggleModalPayment={toggleModalPayment}
                     profile={profile.user.uid}
                 />
+                <ModalCancelPayment 
+                    isOpenPaymentCancel={isOpenPaymentCancel}
+                    toggleModalPaymentCancel={toggleModalPaymentCancel}
+                    profile={profile.user.uid}
+                    // toggleModalType={toggleModalType}
+                />
+                {/* <TypeCancel 
+                    isOpenType={isOpenType}
+                    toggleModalType={toggleModalType}
+                    profile={profile.user.uid}
+                /> */}
             </ContainerProfile> :
         <h2>Cargando...</h2>
         }
