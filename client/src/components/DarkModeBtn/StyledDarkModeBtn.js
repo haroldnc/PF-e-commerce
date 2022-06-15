@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: 2.5rem;
   height: 2.5rem;
   bottom: 1.5rem;
-  right: 1.5rem;
+  left: 1.5rem;
   cursor: pointer;
   border-radius: 9999px;
   background-color: ${(props) => props.theme.colors.backgroundColorAlt};

@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs } from './styledComments';
-import { postComments } from "../../store/actions/index";
+import { postComments, getHiringsUser } from "../../store/actions/index";
 
 const PostComments = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,9 @@ const PostComments = () => {
     // postComments
 
     const [rating, setRating] = useState(0);
-
+    
+    console.log("usuario",userLogged);
+    
     const [input, setInput] = useState({
         user: `${userID}`,
         publicationId: `${publicationId}`,
@@ -24,10 +26,15 @@ const PostComments = () => {
         score: "",
         message: ""
     });
+    
+    useEffect( () => {
+        dispatch( getHiringsUser( userID ))
+      },[ dispatch ])
 
     const handleRating = (rate) => {
         setRating(rate);
 
+        console.log("Soy rate",rate);
         setInput({
             ...input,
             score: rate * 0.05
@@ -61,7 +68,7 @@ const PostComments = () => {
         }
 
         e.preventDefault();
-        console.log(input)
+        console.log("Input",input)
         dispatch(postComments(input, publicationId));
         setInput({
             user: ``,
