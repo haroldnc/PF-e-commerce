@@ -18,6 +18,7 @@ const addHiring = async (req, res) => {
         const worker = await User.findById(idWorker);
         const dataWorker = await DataWorker.find({"userId": idWorker});
         const publication = await Publication.findById(idPublication);
+        if (!dataWorker.phone) dataWorker.phone = 'No phone';
 
         // enviar email de contacto al usuario con datos del worker
         const transporter = nodemailer.createTransport({
@@ -34,13 +35,13 @@ const addHiring = async (req, res) => {
             text: 'Hello ' + user.firstName + ' ' + user.lastName + '\n\n' +
                 'Thank you for using Wixxer to hire a job service according to your needs.\n\n' +
                 'Below we leave you the contact information of the contracted worker:\n\n' +
-                'Name:' + worker.firstname + ' ' + worker.lastname + '\n\n' +
-                'Email:' + worker.email + '\n\n' +
-                'Phone:' + dataWorker.phone + '\n\n' +
-                'Publication ID:' + publication.id + '\n\n' +
-                'Post Title:' + publication.title + '\n\n' +
-                'Description:' + publication.description + '\n\n' +
-                'Price:' + publication.price + '\n\n' +
+                'Name:' + ' ' + worker.firstName + ' ' + worker.lastName + '\n\n' +
+                'Email:' + ' ' +  worker.email + '\n\n' +
+                'Phone:' + ' ' +  dataWorker.phone + '\n\n' +
+                'Publication ID:' + ' ' +  publication.id + '\n\n' +
+                'Post Title:' + ' ' +  publication.title + '\n\n' +
+                'Description:' + ' ' +  publication.description + '\n\n' +
+                'Price:' + ' U$S ' +  publication.price + '\n\n' +
                 'Thank you,\n' +
                 'Wixxer  Team'
         };
@@ -59,13 +60,13 @@ const addHiring = async (req, res) => {
             subject: 'Hiring confirmation',
             text: 'Hello ' + worker.firstName + ' ' + worker.lastName + '\n\n' +
                 'Thank you for using Wixxer to offer your professional services.\n\n' +
-                'Below we leave you the contact information of the worker to whom I contracted their services:\n\n' +
-                'Name:' + user.firstname + ' ' + user.lastname + '\n\n' +
-                'Email:' + user.email + '\n\n' +
-                'Publication ID:' + publication.id + '\n\n' +
-                'Post Title:' + publication.title + '\n\n' +
-                'Description:' + publication.description + '\n\n' +
-                'Price:' + publication.price + '\n\n' +
+                'Below we leave the contact information of the user who contracted their services:\n\n' +
+                'Name:' + ' ' +  user.firstName + ' ' + user.lastName + '\n\n' +
+                'Email:' + ' ' +  user.email + '\n\n' +
+                'Publication ID:' + ' ' +  publication.id + '\n\n' +
+                'Post Title:' + ' ' +  publication.title + '\n\n' +
+                'Description:' + ' ' +  publication.description + '\n\n' +
+                'Price:' + ' ' +  publication.price + '\n\n' +
                 'Thank you,\n' +
                 'Wixxer  Team'
         };
