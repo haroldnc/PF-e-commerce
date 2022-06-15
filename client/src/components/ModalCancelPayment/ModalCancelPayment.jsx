@@ -54,7 +54,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
     // }
 
     useEffect(() => {
-        GetTransactionById(profile)
+        dispatch(GetTransactionById(profile))
     },[])
 
     return (

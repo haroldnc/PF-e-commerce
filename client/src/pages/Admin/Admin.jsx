@@ -3,7 +3,7 @@ import { ContainerAdmin, Screen } from './Admin.js'
 import { useSelector, useDispatch } from "react-redux";
 import {Route} from "react-router-dom"
 import Home from "../Home/Home"
-import { getUserById,getPostByUser, clearUserById, getHiringsByUser } from '../../store/actions/index'
+import { getUserById,getPostByUser, clearUserById, getHiringsByUserId, getHiringsByWorker } from '../../store/actions/index'
 
 import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
 import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
@@ -23,7 +23,9 @@ const Admin = () => {
 
     const UserDetail = useSelector(state => state.userDetail)
     const PostById = useSelector(state => state.postsByUser)
-    const HiringByUser = useSelector(state => state.hiringsByUser)
+    const HiringByWorker = useSelector(state => state.hiringsByWorker)
+    console.log('priHiring',HiringByUser)
+    const HiringByUser = useSelector(state => state.userHirings)
     const dispatch = useDispatch()
     let showLateral;
     let showScreen;
@@ -40,7 +42,8 @@ const Admin = () => {
         if(id !== null){
             dispatch(getUserById(id))
             dispatch(getPostByUser(id))
-            dispatch(getHiringsByUser(id))
+            dispatch(getHiringsByWorker(id))
+            dispatch(getHiringsByUserId(id))
         }else{
             dispatch(clearUserById())
         }
@@ -54,9 +57,12 @@ const Admin = () => {
     console.log(DataAdmin)
     console.log(userInfo)
 
-    if(userInfo.user_role.name !== "admin"){
-        return(<p>good</p>)
-    }
+    // if(userInfo.user_role.name && userInfo.user_role.name !== "admin"){
+    //     return(<p>good</p>)
+    // }
+    // if(userInfo.user_role && userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
+    //     return(<p>good</p>)
+    // }
   
 
 
@@ -79,7 +85,7 @@ const Admin = () => {
     }else if(render === "Editar Servicios"){
         showScreen = <FormAdminServices />
     }else if( render === "Workers"){
-        showScreen = <AdminWorkers/>
+        showScreen = <AdminWorkers toggleModalDetailUser={toggleModalDetailUser}/>
     }else if(render === "Categorías"){
         showScreen = <Categorias/>
     }else if(render === "Servicios"){
@@ -99,6 +105,7 @@ const Admin = () => {
                 toggleModalDetailUser={toggleModalDetailUser}
                 UserDetail={UserDetail}
                 PostById={PostById}
+                HiringByWorker={HiringByWorker}
                 HiringByUser={HiringByUser}
             />
         </ContainerAdmin>

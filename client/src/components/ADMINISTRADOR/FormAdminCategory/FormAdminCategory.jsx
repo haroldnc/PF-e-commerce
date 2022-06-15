@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { getAllCategories, postCategories } from "../../../store/actions";
+import { getAllCategories, postCategories,putCategories, deleteCategories } from "../../../store/actions";
 
 import Swal from 'sweetalert2'
 import { ContainerFormCategory, NameC, FormCategory, DivInput, Btn, LabelC, InputC, SelectC, SpanC } from './FormAdminCategory'
@@ -50,13 +50,12 @@ const FormAdminCategory = () => {
 
     const handleEliminar = (e) => {
         setSetEliminar(e.target.value)
-        console.log(selectEliminar)
     }
 
     const submitCrear = (e) => {
         e.preventDefault()
-        if(estado.name && estado.img && estado.phrase){
-            // postCategories(estado)
+        if(estado.name && estado.img && estado.phrase && selectModificar){
+            // dispatch(postCategories(estado))
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -80,10 +79,58 @@ const FormAdminCategory = () => {
 
     const submitModificar = (e) => {
         e.preventDefault()
+        if(modificar.name && modificar.img && modificar.phrase){
+            // dispatch(putCategories(modificar,selectModificar))
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'La categoría ha sido Modificada correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              setModificar({
+                name:"",
+                img:"",
+                phrase:""
+            })
+            setSetModificar("")
+        }else{Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tienes algun dato erróneo!',
+            footer: ''
+          })
+        }
     }
 
     const submitEliminar = (e) =>{
         e.preventDefault()
+        if(selectEliminar){
+            Swal.fire({
+                title: 'Estas seguro?',
+                text: "Tu Categoria se eliminará inmediatamente",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  Swal.fire(
+                    'Eliminada correctamente!',
+                    'Los servicios asociados se eliminaron',
+                    'success'
+                  )
+            // dispatch(deleteCategories(selectEliminar))
+                }
+            })
+        }else{Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Tienes algun dato erróneo!',
+            footer: ''
+          })
+        }
     }
 
 

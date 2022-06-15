@@ -17,6 +17,7 @@ server.set('port', process.env.PORT || 4000);
 //middlewares
 server.use(morgan('dev'));
 server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
 server.use(cookieParser());
 server.use(cors()) // cors para que se pueda hacer peticiones desde otro dominio 

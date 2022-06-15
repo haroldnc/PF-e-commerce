@@ -64,6 +64,7 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
           {userInfo && userInfo.confirm_email === true  ? (
             <UserInfo>
               {userInfo.user_role.name === "admin" && <Link to="/admin"><p>Administrar</p></Link>}
+              {userInfo.user_role === "628ef02d07fe8bf42fb6a5fa" && <Link to="/admin"><p>Administrar</p></Link>}
 
               {userInfo.user_role.name && userInfo.user_role.name  === "user"  && (<UserRole>Usuario</UserRole>)}
               {userInfo.user_role.name && userInfo.user_role.name  === "worker"  && (<UserRole>Worker</UserRole>)}

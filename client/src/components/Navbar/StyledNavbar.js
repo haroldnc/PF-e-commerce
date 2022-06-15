@@ -60,12 +60,12 @@ export const SignIn = styled.button`
   align-items: center;
   justify-content: center;
   height: 2rem;
-  width: 6rem;
+  width: 4rem;
   border-radius: 5px;
   background-color: transparent;
   border: 2px solid ${(props) => props.theme.colors.primary};
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 600;
   transition: .3s ease;
   color: ${props => props.theme.colors.font};
 
@@ -79,14 +79,13 @@ export const LogIn = styled.button`
   align-items: center;
   justify-content: center;
   height: 2rem;
-  width: 5rem;
+  width: 4rem;
   border-radius: 5px;
   background-color: ${(props) => props.theme.colors.primary};
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 600;
   color: white;
   transition: .3s ease;
-  font-size: 12px;
 
   :hover{
       background-color: ${(props) => props.theme.colors.secondary};

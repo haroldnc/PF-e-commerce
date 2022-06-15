@@ -1,6 +1,7 @@
 const { Router } = require('express');
-const { login, googleSignIn } = require('../controllers/authentication.controller');
+const { login, googleSignIn, renewToken } = require('../controllers/authentication.controller');
 const { validarCampos } = require('../middlewares/validar.campos.js');
+const { validarJWT } = require('../middlewares/validar.jwt.js');
 const { check } = require('express-validator');
 
 const router = Router();
@@ -12,5 +13,7 @@ router.post('/',
     validarCampos
 ], login);
 router.post('/google', googleSignIn);
+//router.get('/renew', validarJWT, renewToken);// validarJwt es un middleware, agregar. renewToken genera nuevo token.
+router.get('/renew', renewToken);
 
 module.exports = router;

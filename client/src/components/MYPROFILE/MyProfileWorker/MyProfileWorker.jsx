@@ -43,17 +43,18 @@ import { ContainerWorker,
          PostsC
          } from './MyProfileWorker'
 
-import { PutInfoWorker, getWorkerDetail, PutInfoUser, getPostByUser } from '../../../store/actions/index'
+import { PutInfoWorker, getWorkerDetail, PutInfoUser, getPostByUser, getHiringsByWorker } from '../../../store/actions/index'
 import HistorialPayProfile from "../HistorialPayProfile/HistorialPayProfile.jsx";
 import ProfileInactive from '../ProfileInactive/ProfileInactive.jsx'
 import MyProfilePost from '../MyprofilePost/MyProfilePost.jsx'
 import CambioaPlanStandard from '../CambioDePlan/CambioaPlanStandard/CambioaPlanStandard.jsx'
 import CambioaPlanPremium from '../CambioDePlan/CambioaPlanPremium/CambioaPlanPremium.jsx'
+import MyProfileHiring from '../MyProfileHiring/MyProfileHiring.jsx'
 
 import { IconContext } from 'react-icons'
 import { CgProfile } from 'react-icons/cg'
 import { MdOutlineEmail, MdStarPurple500, MdPostAdd } from 'react-icons/md'
-import { GiSmartphone } from 'react-icons/gi'
+import { GiSmartphone, GiShakingHands } from 'react-icons/gi'
 import { keyframes } from "styled-components";
 
 
@@ -61,11 +62,12 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
 
     useEffect(() => {
         dispatch(getPostByUser(profile.user.uid))
+        dispatch(getHiringsByWorker(profile.user.uid))
     },[])
     const history = useHistory()
     const dispatch = useDispatch()
     const allPost = useSelector(state => state.postsByUser)
-    console.log('allpost', allPost)
+    const allHirings = useSelector(state => state.hiringsByWorker)
     const [ image , setImage ] = useState(profile.user.image)
     const [ showBtn , setShowBtn ] = useState(false)
     const [ panel , setPanel ] = useState("post")
@@ -132,6 +134,8 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
             showPanel = <HistorialPayProfile id={profile.user.uid} toggleModalPaymentCancel={toggleModalPaymentCancel}/>
         }else if(panel === "post"){
             showPanel = <MyProfilePost allPost={allPost ? allPost: null} id={profile.user.uid}/>
+        }else if(panel === "hiring"){
+            showPanel = <MyProfileHiring id={profile.user.uid} allHirings={allHirings}/>
         }
     }else{
         showPanel = <ProfileInactive toggleModalPayment={toggleModalPayment}/>
@@ -200,6 +204,7 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
   }
 
     let PremiumStar = null
+    
     if(profile.dataWorker.subscription_type.name === "Premium" && profile.dataWorker.subscribed){
         PremiumStar = 
             <Premium>
@@ -289,10 +294,20 @@ const MyProfileWorker = ({profile, toggleModalPayment, toggleModalPaymentCancel}
                             <PostsC>Activas:   {allPost ? allPost.filter(p => p.active === true).length : null}</PostsC>
                         </div>
                     </DivOther>
-
-
-
-
+                    <DivOther>
+                         <IconContext.Provider value={{size:"20px", color: "rgba(0, 0, 0, 0.596)"}}>
+                            <div>
+                                <GiShakingHands/>
+                            </div>
+                            </IconContext.Provider>
+                        <EmailPhone onClick={() => panelClick("hiring")}>Contrataciones</EmailPhone>
+                    </DivOther>
+                    <DivOther>
+                        <div style={{display:"flex", flexDirection:"column", marginLeft:"35px"}}>
+                            <PostsC>Totales:   {allHirings ? allHirings.hirings.length : null}</PostsC>
+                            {/* <PostsC>Activas:   {allPost ? allPost.filter(p => p.active === true).length : null}</PostsC> */}
+                        </div>
+                    </DivOther>
                         {
                             profile.dataWorker.subscribed ? 
                             <div style={{width: "100%"}}>

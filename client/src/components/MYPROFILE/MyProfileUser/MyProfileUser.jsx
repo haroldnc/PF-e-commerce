@@ -1,6 +1,7 @@
-import React,{ useState } from "react";
-import { useDispatch } from "react-redux";
-import { PutInfoUser } from '../../../store/actions/index'
+import React,{ useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { PutInfoUser, getHiringsByUserId } from '../../../store/actions/index'
+import CardHiringWorker from '../CardHiringWorker/CardHiringWorker.jsx'
 
 import { Container,
         ContainerUser,
@@ -15,7 +16,15 @@ import { Container,
         ContainerContratos,
         Title,
         Txtone,
-        TxtWixx
+        TxtWixx,
+        NavBar,
+        BtnPublic,
+        NavHiring,
+        NavUsuario,
+        NavPublicacion,
+        NavMonto,
+        NavTitle,
+        ContainerCards
     } from './MyProfileUser'
 import { AiOutlineMail } from 'react-icons/ai'
 import { IconContext } from "react-icons/lib"
@@ -30,7 +39,13 @@ const MyProfileUser = ({profile}) => {
     const [ showBtn , setShowBtn ] = useState(false)
     const [ loading, setLoading ] = useState(false)
 
+    const [panelHiring, setPanelHiring ] = useState("activas")
+    const AllHiring = useSelector(state => state.userHirings)
+    console.log('hirings',AllHiring )
 
+    useEffect(() => {
+        dispatch(getHiringsByUserId(profile.user.uid))
+    },[])
 
     const upLoadImage = async (e) => {
         const files = e.target.files;
@@ -60,6 +75,10 @@ const MyProfileUser = ({profile}) => {
     setImage(profile.user.image)
     setShowBtn(!showBtn)
   }
+
+    let Abiertas = Object.entries(AllHiring).length !== 0 ? AllHiring.filter( h => h.status === false) : []
+    console.log('abiertas',Abiertas)
+    let Cerradas = Object.entries(AllHiring).length !== 0 ? AllHiring.filter( h => h.status === true) : []
 
     return (
         <Container>
@@ -101,11 +120,55 @@ const MyProfileUser = ({profile}) => {
             </ContainerUser>
 
             <ContainerContratos>
-                <Title>Actualmente no tienes servicios contratados</Title>
-                <div style={{display:"flex", flexDirection:"row"}}>
-                <Txtone>Encuentra lo que necesitas en </Txtone>
-                <TxtWixx> Wixxer</TxtWixx>
-                </div>
+            <NavBar>
+                <BtnPublic onClick={() => setPanelHiring("activas")}>Activas</BtnPublic>
+                <BtnPublic onClick={() => setPanelHiring("historial")}>Historial </BtnPublic>
+            </NavBar>
+            <NavHiring>
+               <NavUsuario>WORKER</NavUsuario>
+               <NavPublicacion>PUBLICACIÓN</NavPublicacion>
+               <NavMonto>MONTO</NavMonto>
+               <NavTitle>ESTADO</NavTitle>
+            </NavHiring>
+
+        {
+                panelHiring === "activas" ?
+                <ContainerCards>
+                    {
+                        Abiertas.length > 0 ? Abiertas.map( h => (
+                            <CardHiringWorker
+                            user={h.idWorker}
+                            post={h.idPublication}
+                            open="Abierta"
+                            key={h._id}
+                            id={h.idPublication._id}
+                            />
+                        )):
+                        <div style={{width:"100%"}}>
+                            <Title>Actualmente no tienes servicios Activos</Title>
+                        </div>
+                    }
+                    
+                </ContainerCards>
+             : 
+                <ContainerCards>
+                    {
+                        Cerradas.length > 0 ? Cerradas.map( h => (
+                            <CardHiringWorker
+                            user={h.idUser}
+                            post={h.idPublication}
+                            open= "Cerrada"
+                            key={h._id}
+                            id={h.idPublication._id}
+                            />
+                        )):
+                        <div style={{width:"100%", marginBottom:"25px"}}>
+                            <Title>Actualmente no tienes servicios en tu historial</Title>
+                        </div>
+
+                    }
+                </ContainerCards>
+            }
             </ContainerContratos>
         </Container>
     )

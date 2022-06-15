@@ -29,9 +29,12 @@ const Publications = Schema({
         type: String
     },
     score:{
-        type: Schema.Types.Double
+        type: [],
     },
-
+    active: {
+        type: Boolean,
+        default: true
+    }
 })
 
 Publications.method('toJSON', function () {
