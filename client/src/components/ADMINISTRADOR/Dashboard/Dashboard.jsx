@@ -1,30 +1,49 @@
-import React,{ useEffect} from 'react'
+import React,{ useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { getAllUsersAllPAginate, getWorkers, getPosts } from '../../../store/actions/index.js'
+import { getAllUsersAllPAginate, getWorkers, getPosts, getAllHirings } from '../../../store/actions/index.js'
 import { Doughnut } from 'react-chartjs-2'
+import ChartDB from '../ChartDB/ChartDB.jsx'
 
-import { ContainerDashboard, Number, Name, Usuarios, CardsDatos, Tabla, Datos, ImgProv } from './Dashboard.js'
+import { ContainerDashboard, Number, Name, Usuarios, CardsDatos, Tabla, Datos, ImgProv, CardsDatosColor } from './Dashboard.js'
 
 import { CgProfile } from 'react-icons/cg'
 import { GrUserWorker } from 'react-icons/gr'
-import { GiTakeMyMoney } from 'react-icons/gi'
+import { GiTakeMyMoney,GiShakingHands } from 'react-icons/gi'
 import { BsFillFilePostFill } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
+import { FaFileSignature } from 'react-icons/fa'
 
 
 const Dasboard = () => {
 
     const dispatch = useDispatch()
+    
 
     const Registrados = useSelector(state => state.allUsersPaginate)
     const Workers = useSelector(state => state.workers)
     const Posts = useSelector(state => state.posts)
+    const allHirings = useSelector(state => state.allHirings)
+    console.log('result',Registrados)
+    // const [ userData , serUserData ] = useState({
+    //     labels: [1,2,3,4,5,6],
+    //     datasets: [{
+    //         label: "Datos",
+    //         data: [Registrados !== undefined ? Registrados.users.length : 1,
+    //                 Workers ?  Workers.length : 2,
+    //                 Workers ? Workers.filter( w => w.subscribed === true).length : 3,
+    //                 Posts ? Posts.Publications.length : 4,
+    //                 allHirings ?   allHirings.length : 5,
+    //                 allHirings ? allHirings.filter( w => w.status === true).length : 6
+    //             ]
+    //     },]
+    // })
     console.log('registrado',Registrados)
 
     useEffect(() => {
         dispatch(getAllUsersAllPAginate())
         dispatch(getWorkers())
         dispatch(getPosts())
+        dispatch(getAllHirings())
     },[])
 
 
@@ -65,6 +84,15 @@ const Dasboard = () => {
                     <Name>Registrados</Name>
                 </CardsDatos>
                 <CardsDatos>
+                <IconContext.Provider value={{size:"20px"}}>
+                        <div>
+                            <BsFillFilePostFill/>
+                        </div>
+                    </IconContext.Provider>
+                    <Number>{ Posts.length === 0 ? "Cargando..." : Posts.Publications.length}</Number>
+                    <Name>Publicaciones</Name>
+                </CardsDatos>
+                <CardsDatos>
                     <IconContext.Provider value={{size:"20px"}}>
                         <div>
                             <GrUserWorker/>
@@ -73,45 +101,62 @@ const Dasboard = () => {
                     <Number>{Workers.length === 0 ? "Cargando..." : Workers.length}</Number>
                     <Name>Workers</Name>
                 </CardsDatos>
-                <CardsDatos>
-                <IconContext.Provider value={{size:"20px"}}>
-                        <div>
-                            <BsFillFilePostFill/>
-                        </div>
-                    </IconContext.Provider>
-                    <Number>{ Posts.length === 0 ? "Cargando..." : Posts.length}</Number>
-                    <Name>Publicaciones</Name>
-                </CardsDatos>
-                <CardsDatos>
+                <CardsDatosColor>
                 <IconContext.Provider value={{size:"20px"}}>
                         <div>
                             <GiTakeMyMoney/>
                         </div>
                     </IconContext.Provider>
-                    <Number>0</Number>
+                    <Number>{Workers.length === 0 ? "Cargando..." : Workers.filter( w => w.subscribed === true).length}</Number>
                     <Name>Activos</Name>
+                </CardsDatosColor>
+                <CardsDatos>
+                <IconContext.Provider value={{size:"20px"}}>
+                        <div>
+                            <GiShakingHands/>
+                        </div>
+                    </IconContext.Provider>
+                    <Number>{allHirings === undefined ? "Cargando..." : allHirings.length}</Number>
+                    <Name>Contratos Totales</Name>
+                </CardsDatos>
+                <CardsDatos>
+                <IconContext.Provider value={{size:"20px"}}>
+                        <div>
+                            <FaFileSignature/>
+                        </div>
+                    </IconContext.Provider>
+                    <Number>{allHirings === undefined? "Cargando..." : allHirings.filter( w => w.status === true).length}</Number>
+                    <Name>Contratos cerrados</Name>
                 </CardsDatos>
             </Datos>
-            <Tabla>
-                {/* <div>
-                <Doughnut
-                    data={state}
-                    options={{
-                        title:{
-                        display:true,
-                        text:'Average Rainfall per month',
-                        fontSize:20
-                        },
-                        legend:{
-                        display:true,
-                        position:'right'
-                        }
-                    }}
-                />
-                </div> */}
-            <ImgProv src="https://static.anychart.com/images/gallery/v8/pie-and-donut-charts-donut-chart.png" alt="" />
-            </Tabla>
+                <Tabla>
+                    <ChartDB 
+                        // chartData={userData}
+                        Registrados={Registrados}
+                        Workers={Workers}
+                        Posts={Posts}
+                        allHirings={allHirings}
+                    />
+                    {/* <div>
+                    <Doughnut
+                        data={state}
+                        options={{
+                            title:{
+                            display:true,
+                            text:'Average Rainfall per month',
+                            fontSize:20
+                            },
+                            legend:{
+                            display:true,
+                            position:'right'
+                            }
+                        }}
+                    />
+                    </div> */}
+                {/* <ImgProv src="https://static.anychart.com/images/gallery/v8/pie-and-donut-charts-donut-chart.png" alt="" /> */}
+                </Tabla>
 
+            
         </ContainerDashboard>
     )
 }

@@ -60,6 +60,10 @@ const Admin = () => {
         panel:"Menu",
         show: false
     })
+    useEffect(() => {
+        dispatch(getAllPosts())
+        dispatch(getAllHirings())
+    },[])
 
     const toggleModalHistorial = (id) => {
         setIsOpenHistory(!isOpenHistory)
@@ -83,8 +87,8 @@ const Admin = () => {
     const { userInfo } = userSignIn;
 
 
-    // const validate = validation(userInfo) 
-    // if(!validate)  return(<p>good</p>)
+    const validate = validation(userInfo) 
+    if(!validate)  return(<p>good</p>)
    
 
     // if(userInfo.user_role.name && userInfo.user_role.name !== "admin"){
@@ -95,10 +99,7 @@ const Admin = () => {
     // }
   
 
-    useEffect(() => {
-        dispatch(getAllPosts())
-        dispatch(getAllHirings())
-    },[])
+   
 
 
     if(lateral.panel === "Menu" && lateral.show){
