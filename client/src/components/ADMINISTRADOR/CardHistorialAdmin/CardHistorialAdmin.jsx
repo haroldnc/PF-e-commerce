@@ -1,25 +1,18 @@
-import React from 'react'
-import { ContainerHistorial } from './CardHistorialPay'
-import { Fecha, Membresia, Monto, Metodo } from './CardHistorialPay'
+import React from "react";
+import { Container, Fecha, Monto, Metodo, NavTitle, NavRegistrados } from './CardHistorialAdmin'
 
-import { SiVisa } from 'react-icons/si'
 import { IconContext } from 'react-icons'
 import { BsFillCreditCard2BackFill} from 'react-icons/bs'
 
-const CardHistorialPay = ({ tarjeta, ultnum, amount, plan, fecha}) => {
+const CardHistorialAdmin = ({fecha,ultnum, amount, tarjeta}) => {
 
     const Date = fecha.replace('T', ' ')
 
-   let result =  Date.substring(0,19)
+    let result =  Date.substring(0,19)
 
-//    let Tarjetas = null
-//    if(tarjeta[0] === "v"){
-//        Tarjetas = <BsFillCreditCard2BackFill/>
-//    }
     return(
-        <ContainerHistorial>
+        <Container>
             <Fecha>{result}</Fecha>
-            <Membresia>{plan}</Membresia>
             <Monto>{`USD ${amount}`}</Monto>
             <div style={{display:"flex", flexDirection:"row",justifyContent:"center", alignItems:"center",width:"200px"}}>
                 <Metodo>{tarjeta}</Metodo>
@@ -30,8 +23,8 @@ const CardHistorialPay = ({ tarjeta, ultnum, amount, plan, fecha}) => {
                 </IconContext.Provider>
                 <Metodo>{`***${ultnum}`}</Metodo>
             </div>
-        </ContainerHistorial>
+        </Container>
     )
 }
 
-export default CardHistorialPay
+export default CardHistorialAdmin

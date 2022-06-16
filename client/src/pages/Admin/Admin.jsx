@@ -3,7 +3,7 @@ import { ContainerAdmin, Screen } from './Admin.js'
 import { useSelector, useDispatch } from "react-redux";
 import {Route} from "react-router-dom"
 import Home from "../Home/Home"
-import { getUserById,getPostByUser, clearUserById, getHiringsByUserId, getHiringsByWorker } from '../../store/actions/index'
+import { getUserById,getPostByUser, clearUserById, getHiringsByUserId, getHiringsByWorker, GetTransactionById } from '../../store/actions/index'
 
 import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
 import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
@@ -18,6 +18,8 @@ import Categorias from "../../components/ADMINISTRADOR/Categorias/Categorias.jsx
 import DataAdmin from "../../components/ADMINISTRADOR/DataAdmin/DataAdmin.jsx";
 import AdminUser from "../../components/ADMINISTRADOR/AdminUser/AdminUser.jsx";
 import ModalDetailUser from '../../components/ADMINISTRADOR/ModalDetailUser/ModalDetailUser.jsx';
+import AdminSuscriptores from '../../components/ADMINISTRADOR/AdminSuscriptores/AdminSuscriptores.jsx'
+import ModalHistorialPay from '../../components/ADMINISTRADOR/ModalHistorialPay/ModalHistorialPay.jsx'
 
 const validation = (userInfo) =>{
     if(!userInfo) return false;
@@ -26,16 +28,20 @@ const validation = (userInfo) =>{
     return false
 }
 
+
 const Admin = () => {
 
     const UserDetail = useSelector(state => state.userDetail)
     const PostById = useSelector(state => state.postsByUser)
     const HiringByWorker = useSelector(state => state.hiringsByWorker)
+    const transaction = useSelector(state => state.transactionById)
+    // console.log('priHiring',HiringByUser)
     const HiringByUser = useSelector(state => state.userHirings)
     // console.log('priHiring',HiringByUser)
     const dispatch = useDispatch()
     let showLateral;
     let showScreen;
+    const[ isOpenHistory, setIsOpenHistory ]= useState(false)
     const [ isOpenDetailUser, setIsOpenDetailUser ] = useState(false)
     const [ render , setRender ] = useState("Dashboard") 
     const [ lateral , setLateral ] = useState({
@@ -43,7 +49,11 @@ const Admin = () => {
         show: false
     })
 
-    
+    const toggleModalHistorial = (id) => {
+        setIsOpenHistory(!isOpenHistory)
+        dispatch(GetTransactionById(id))
+    }
+
     const toggleModalDetailUser = (id) =>{
         setIsOpenDetailUser(!isOpenDetailUser)
         if(id !== null){
@@ -64,6 +74,14 @@ const Admin = () => {
     const validate = validation(userInfo) 
     if(!validate)  return(<p>good</p>)
    
+
+    // if(userInfo.user_role.name && userInfo.user_role.name !== "admin"){
+    //     return(<p>good</p>)
+    // }
+    // if(userInfo.user_role && userInfo.user_role !== "628ef02d07fe8bf42fb6a5fa"){
+    //     return(<p>good</p>)
+    // }
+  
 
 
     if(lateral.panel === "Menu" && lateral.show){
@@ -86,11 +104,15 @@ const Admin = () => {
         showScreen = <FormAdminServices />
     }else if( render === "Workers"){
         showScreen = <AdminWorkers toggleModalDetailUser={toggleModalDetailUser}/>
+    }else if(render === "Suscriptores"){
+        showScreen = <AdminSuscriptores toggleModalHistorial={toggleModalHistorial}/>
     }else if(render === "Categorías"){
         showScreen = <Categorias/>
     }else if(render === "Servicios"){
         
     }
+
+
 
     return (
         <ContainerAdmin>
@@ -108,6 +130,12 @@ const Admin = () => {
                 HiringByWorker={HiringByWorker}
                 HiringByUser={HiringByUser}
             />
+            <ModalHistorialPay
+                isOpenHistory={isOpenHistory}
+                toggleModalHistorial={toggleModalHistorial}
+                transaction={transaction}
+            />
+
         </ContainerAdmin>
     )
 }
