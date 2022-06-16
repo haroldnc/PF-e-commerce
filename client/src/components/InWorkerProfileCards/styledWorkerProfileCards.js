@@ -4,12 +4,17 @@ import { Link } from "react-router-dom";
 export const CardParent = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     width: 25%;
-    margin: 5px 0 20px;
+    margin: 10px;
+    // margin: 5px 0 20px;
     align-items: flex-end;
-    border: 2px black solid;
+    // border: 2px black solid;
+    border-radius: 5px;
     text-align: center;
-    padding: 25px;
+    padding: 15px;
+    background: url("https://m.media-amazon.com/images/I/61+EgLc0XNL._AC_SY450_.jpg")
     
 `
 

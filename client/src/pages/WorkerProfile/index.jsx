@@ -33,7 +33,7 @@ export default function WorkerProfile (){
     
     getUserPosts(worker, arrayOfPost)
     // console.log(getUserPosts(worker, arrayOfPost))
-    // console.log(worker)
+    console.log(worker)
     // console.log(arrayOfPost)
     // const userPost= arrayOfPost.filter(p=>p.user===worker.userId.uid)
 
@@ -77,7 +77,7 @@ export default function WorkerProfile (){
 
                 }
             </Div2>
-            <Div3>
+            {/* <Div3>
                 {worker.userId?
                     <HireButton>{`Contacta a ${worker.userId.firstName}`}</HireButton>
                 :
@@ -90,7 +90,7 @@ export default function WorkerProfile (){
                 :
                 <DescriptionArea>Hazle algunas preguntas a este profesional antes de llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de este usuario.</DescriptionArea>
                 }
-            </Div3>
+            </Div3> */}
         </Container>
             <PostsTitle>Publicaciones que ha hecho este usuario:</PostsTitle>
         <ProfileCardsContainer>

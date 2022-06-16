@@ -8,9 +8,11 @@ export const Container = styled.div`
     grid-row-gap: 0px;
     margin: 100px 100px 25px ;
     width: 80%;
-    border: solid 1px black;
+    // border: solid 1px black;
     text-align: center;
-    /* background-color: ${(props) => props.theme.colors.primary}; */
+    background-color: rgb(224,224,224); 
+    // background: url("https://m.media-amazon.com/images/I/61+EgLc0XNL._AC_SY450_.jpg")
+    // background: url("https://fondosmil.com/fondo/9846.jpg")
     border-radius: 15px;
     padding: 25px;
 `
@@ -73,18 +75,19 @@ export const SubTitle = styled.h3`
 `
 
 export const ProfileCardsContainer = styled.div`
-    width: 80%;
+    width: 100%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    border: solid 1px black;
+    // border: solid 1px black;
     border-radius: 15px;
-    margin: 25px 100px 50px ;
+    // margin: 25px 100px 50px ;
+    // margin: 20px 20px;
     padding: 10px;
 `
 
 export const PostsTitle = styled.h4`
     width: 40%;
-    margin: auto;
+    margin: 0rem 9rem;
 `
