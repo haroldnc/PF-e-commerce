@@ -49,8 +49,8 @@ export const BtnLogout = styled.button `
     font-size: 16px;
     padding:5px;
     border-radius: 10px;
-    margin-left: 70px;
-    margin-top: 400px;
+    margin-left: 50px;
+    margin-top: 20px;
     cursor:pointer;
 
     :hover{

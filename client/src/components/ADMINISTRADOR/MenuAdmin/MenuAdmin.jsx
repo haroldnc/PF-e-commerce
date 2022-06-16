@@ -49,14 +49,14 @@ const MenuAdmin = ({lateral, setLateral, setRender}) => {
                     </IconContext.Provider>
                 <Namediv>Workers</Namediv>
             </Menudiv>
-            <Menudiv onClick={() => handleClick("Usuarios")}>
+            {/* <Menudiv onClick={() => handleClick("Usuarios")}>
             <IconContext.Provider value={{size:"20px"}}>
                         <div>
                             <FiUsers/>
                         </div>
                     </IconContext.Provider>
                 <Namediv>Usuarios</Namediv>
-            </Menudiv>
+            </Menudiv> */}
             <Menudiv onClick={() => handleClick("Suscriptores")}>
             <IconContext.Provider value={{size:"20px"}}>
                         <div>
