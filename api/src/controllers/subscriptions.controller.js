@@ -1,5 +1,6 @@
 const Subscriptions = require('../models/Subscriptions');
 const DataWorkers = require("../models/DataWorkers");
+const Publications = require("../models/Publications");
 const stripe = require('stripe')(process.env.API_KEY_STRIPE);
 
 const getSubscriptions = async (req, res) => {
@@ -80,6 +81,10 @@ const cancelSubscription = async (req, res) => {
 			subscription_type: unsubscribed._id.toString()
 		});
 
+		await Publications.update({ user: id}, {
+			active: false
+		});
+
 		res.status(200).json({ msg: 'The Subscription was cancelled'})
 	} catch(error) {
 		res.status(422).json({ error: error.message });
@@ -128,6 +133,20 @@ const changeSubscription = async (req, res) => {
 			subscribed: true,
 			subscription_type: subs._id
 		});
+
+		if(subs.name === 'Standard'){
+			let posts_active = await Publications.find({user: id, active:true});
+			
+			if (posts_active.length > 3){
+				posts_active = posts_active.slice(3);
+			}
+
+			for (let i=0; i<posts_active.length; i++){
+				await Publications.findByIdAndUpdate(posts_active._id, {
+					active: false
+				});
+			}
+		}
 
 		res.status(200).json({ msg: 'The Subscription updated successfully'})
 	} catch(error) {

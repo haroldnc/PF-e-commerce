@@ -23,6 +23,20 @@ const getTransactionsByUser = async (req, res) => {
    }
 }
 
+const getLastTransactionByUser = async (req, res) => {
+   const { id } = req.params;
+
+   try{
+      const transactions = await Transactions.find({ user: id });
+
+      if (!transactions.length) throw new Error('Transaction not found');
+      
+      res.status(200).json(transactions[transactions.length-1]);
+   } catch(error) {
+      res.status(404).json({ error: error.message });
+   }
+}
+
 const addTransaction = async (req, res) => {
    const {
       sessionId,
