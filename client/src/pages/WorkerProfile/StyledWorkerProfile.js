@@ -125,10 +125,19 @@ export const Grid = styled.div`
 
 
 export const CommentContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 40%;
+    /* display: flex;
+    flex-direction: column; */
+    border-radius: 5px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    width: 60%;
     align-items: center;
-    border: 1px solid black;
+    flex-wrap: wrap;
+    /* border: 1px solid black; */
     margin: 30px auto;
+    box-shadow: 0 10px 20px 0 rgb(0 0 0 / 7%);
 `

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux"
 import { getUserById } from "../../store/actions";
+import { ParentComment, TextP, UserSpan } from "./cardComments";
 
 export default function CardComments({id, title, message, user}){
     
@@ -17,16 +18,16 @@ export default function CardComments({id, title, message, user}){
 
     return(
         <>
-        <div key={id}>
-            <h3>{title}</h3>
+        <ParentComment key={id}>
+            <h5>{title}</h5>
             {userDetail && userDetail.user && userDetail.user.username?
-                        <span>{userDetail.user.username}</span>
+                        <UserSpan>{`Comentario de:  ${userDetail.user.username}`}</UserSpan>
                 :
-                <span>Sin Nombre</span>
+                <UserSpan>Sin Nombre</UserSpan>
             }
-            <p>{message}</p>
+            <TextP>{message}</TextP>
 
-        </div>
+        </ParentComment>
         </>
     )
 }
