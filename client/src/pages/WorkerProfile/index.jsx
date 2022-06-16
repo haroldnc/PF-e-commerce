@@ -18,7 +18,12 @@ import {
   Wrapper,
   Grid,
 } from "./StyledWorkerProfile";
+import {useSelector, useDispatch} from "react-redux"
+import {useParams} from "react-router-dom"
+import {getAllPosts, getCommentsByWorkerId, getWorkerDetail} from "../../store/actions"
+import { CommentContainer, Container, DescriptionArea, Div1, Div2, Div3, HireButton, PostsTitle, Price, ProfileCardsContainer, ProfilePic, SubTitle } from "./StyledWorkerProfile";
 import ProfilePostDetailCard from "../../components/InWorkerProfileCards";
+import CardComments from "../../components/CardComments";
 
 export default function WorkerProfile() {
   const { id } = useParams();
@@ -28,19 +33,24 @@ export default function WorkerProfile() {
   // console.log(arrayOfPost)
   var userPost = [];
 
-  function getUserPosts(wrkr, postArr) {
-    if (wrkr._id && postArr.length) {
-      userPost = postArr.filter((p) => p.user.uid === wrkr.userId.uid);
-      console.log(userPost);
-      return userPost;
-    } else {
-      return userPost;
+
+
+    function getUserPosts(wrkr, postArr){
+        if(wrkr._id && postArr.length){
+            userPost = postArr.filter(p=>p.user.uid===wrkr.userId.uid)
+            console.log(userPost)
+            return userPost
+        }
+        else{
+            return userPost
+        }
     }
   }
     
     useEffect(()=>{
         dispatch(getWorkerDetail(id))
         dispatch(getAllPosts())
+        dispatch(getCommentsByWorkerId(id))
     }, [dispatch, id])
     
     getUserPosts(worker, arrayOfPost)
@@ -48,6 +58,8 @@ export default function WorkerProfile() {
     console.log(worker)
     // console.log(arrayOfPost)
     // const userPost= arrayOfPost.filter(p=>p.user===worker.userId.uid)
+   const filteredComments =  comments.filter(c=>c.some(Object))
+   const objectsFromComments = filteredComments.map(o=>o[0])
 
   return (
     <Containerr>
@@ -130,4 +142,3 @@ export default function WorkerProfile() {
       
     </Containerr>
   );
-}

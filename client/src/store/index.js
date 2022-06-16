@@ -27,7 +27,8 @@ const initialState = {
   wishlist: [],
   queryPosts:[],
   hiringsByUser: [],
-  userHirings:[]
+  userHirings:[],
+  comments: []
 
 };
 

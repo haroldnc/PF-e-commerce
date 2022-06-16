@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 export default function ServicesDetail(){
     
     const userLog = useSelector((state) => state.userSignIn);
+    
 
 
     // console.log(postId)
@@ -38,7 +39,7 @@ export default function ServicesDetail(){
         if(arrayOfPosts.length ){
             userPost= arrayOfPosts.filter(p=>p.user.uid===post.user && p._id !== id)
            // userPost = userPost.filter
-
+            userPost = userPost.slice(0,3)
         }
     //    console.log(userPost)
 
@@ -47,12 +48,12 @@ export default function ServicesDetail(){
     // const user = users.filter(u=>u.uid === post.user)
     // console.log(filteredWorker)
     //  console.log(filteredWorker[0]._id)
-    console.log(post.user)
+    //console.log(post.user)
 
    
     const filteredHirings = hiringsByUser.filter(h=>h.idPublication._id === id)
     let comentario = filteredHirings.filter(h=>h.idPublication._id===post._id)
-    console.log("log COM",comentario);
+   // console.log("log COM",comentario);
     let finalizado = comentario
     comentario = comentario[0]
    
@@ -67,7 +68,8 @@ export default function ServicesDetail(){
         })
     }
     
-    
+
+
      useEffect(()=>{      
             
         dispatch(getPostById(id))
@@ -95,7 +97,7 @@ export default function ServicesDetail(){
         
     },[dispatch, id, post.user])
     
-    console.log("post",post)
+   // console.log("post",post)
 const comentar = (
     <Link to={`/comentar/${post._id}`}>
         <HireButton>Comentar</HireButton>
@@ -156,6 +158,7 @@ const comentar = (
                     {userPost.length?
                     userPost.map(p=>(
                         <PostDetailCard key={p._id} title={p.title} img={p.img} id={p._id} /> 
+
                     ))
                     
                     :

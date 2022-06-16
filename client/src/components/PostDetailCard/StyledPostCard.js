@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export const CardParent = styled.div`
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 70%;
     margin: 5px 0 20px;
     align-items: flex-end;
     border: 2px black solid;
@@ -14,7 +14,13 @@ export const CardParent = styled.div`
 
 export const CardImg = styled.img`
     width: 100%;
-    height: 45%;
+    height: 100%;
+    /* height: 45%; */
+`
+
+export const ImageContainer = styled.img`
+     width: 100%;
+    height: 50%;
 `
 
 export const CardTitle = styled.h4`

@@ -345,3 +345,9 @@ export const getAllHirings = () => dispatch =>  {
   axios.get(`https://wixxer.up.railway.app/hirings`)
   .then( res => dispatch({ type: "GET_ALL_HIRINGS", payload: res.data.hirings}))
 }
+
+
+export const getCommentsByWorkerId = (id)=> dispatch=> {
+  axios.get(`https://wixer-server.herokuapp.com/scores/worker/${id}`)
+  .then( res => dispatch({type: "GET_COMMENT_BY_WORKER_ID", payload: res.data.scores }))
+}
