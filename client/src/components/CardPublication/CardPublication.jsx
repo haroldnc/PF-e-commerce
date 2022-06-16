@@ -66,6 +66,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
                 {/* {fav ?  <HeartFill /> : <HeartOutline />} */}
               </HeartContainer>
             )}
+
             {/* <HeartContainer onClick={() => handleIcon(userInfo.uid, card._id)}> */}
             {/* <HeartFill  /> */}
 
