@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs, Errors } from './styledComments';
-import { postComments, getHiringsByUserId } from "../../store/actions/index";
+import { postComments, getHiringsByUserId, putHiring } from "../../store/actions/index";
 import { InputImage } from '../PublishForm/styledPublishForm';
 
 const PostComments = () => {
@@ -83,6 +83,7 @@ const PostComments = () => {
 
         e.preventDefault();
         console.log(input)
+        dispatch(putHiring({idUser:userID, idPublication:publicationId}))
         dispatch(postComments(input));
         setInput({
             user: ``,
@@ -101,13 +102,21 @@ const PostComments = () => {
        // history.push('/') <-- poner la ruta anterior 
     };
     
-    let comentar = userHirings.map(h=>h.idPublication._id===publicationId ? true :false)
-    comentar = comentar.includes(true)
+    // let comentar = userHirings.map(h=>h.idPublication._id===publicationId ? true :false)
+    // comentar = comentar.includes(true)
+    // let finalizado = userHirings.map(h=>h.status===true ? true :false)
+    // finalizado = finalizado.includes(true)
+
+    let comentario = userHirings.filter(h=>h.idPublication._id===publicationId)
+    console.log("log COM",comentario);
+    let finalizado = comentario
+    comentario = comentario[0]
+    
     return (
         <Comment>
             <>
             {
-                comentar ?
+                !comentario?.status && finalizado?.length > 0?
                 <Form onSubmit={handleSubmit}>
                     <div>
 
@@ -128,7 +137,7 @@ const PostComments = () => {
                     </CommentBody>
                 </Form>
                 :
-                <h1>Error</h1>
+                <h1>Esta publicacion ya fue Calificada</h1>
             }
             </>
         </Comment>

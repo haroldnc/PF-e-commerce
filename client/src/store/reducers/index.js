@@ -27,6 +27,7 @@ const initialState = {
     userHirings:[],
     userWishlist: [],
     removeWishlist: [],
+    lastTransactionById: {}
 };
 //habia un objeto en initialstate
 
@@ -222,6 +223,16 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 hiringsByWorker: action.payload
             }
+        case "CLEAR_PROFILE":
+            return{
+                ...state,
+                userDetail:{}
+            }
+        case "GET_LAST_TRANSACT_BY_ID": 
+        return {
+            ...state,
+            lastTransactionById : action.payload
+        }
             
         default: return state;
     };

@@ -4,6 +4,7 @@ import {Link, useParams} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers, clearServiceDetail, getHiringsByUserId } from "../../store/actions";
 import PostDetailCard from "../../components/PostDetailCard";
+import Swal from "sweetalert2";
 
 
 
@@ -35,7 +36,8 @@ export default function ServicesDetail(){
     // console.log(user.username)
     // console.log(post.title)
         if(arrayOfPosts.length ){
-            userPost= arrayOfPosts.filter(p=>p.user.uid===post.user)
+            userPost= arrayOfPosts.filter(p=>p.user.uid===post.user && p._id !== id)
+           // userPost = userPost.filter
 
         }
     //    console.log(userPost)
@@ -49,11 +51,20 @@ export default function ServicesDetail(){
 
    
     const filteredHirings = hiringsByUser.filter(h=>h.idPublication._id === id)
-    let comentario = filteredHirings.map(h=>h.idPublication._id===post._id ? true :false)
-    comentario = comentario.includes(true)
-
+    let comentario = filteredHirings.filter(h=>h.idPublication._id===post._id)
+    console.log("log COM",comentario);
+    let finalizado = comentario
+    comentario = comentario[0]
+   
+    
     const HandleClick = ()=>{
-        alert("Ya has contratado este servicio con anterioridad intenta con otra publicación o probablemente aun no has iniciado sesión.")
+        // 
+        return Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Error',
+            text: 'Al parecer ya hiciste esta contratación. Si no lo has hecho recuerda loggearte',
+        })
     }
     
     
@@ -135,7 +146,7 @@ const comentar = (
                     }
                     <br />
                     {
-                        comentario
+                        !comentario?.status && finalizado?.length > 0
                         ? comentar
                         :<></>
                     }

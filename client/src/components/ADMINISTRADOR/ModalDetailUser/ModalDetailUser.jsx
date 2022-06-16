@@ -13,15 +13,22 @@ const ModalDetailUser = ({isOpenDetailUser, toggleModalDetailUser, UserDetail, P
         showUser = null
     }else{
         if(UserDetail.user.user_role.name === "user"){
-            showUser = <DetailUser UserDetail={UserDetail} HiringByUser={HiringByUser}/>
+            showUser = <DetailUser 
+                            UserDetail={UserDetail} 
+                            HiringByUser={HiringByUser} 
+                            toggleModalDetailUser={toggleModalDetailUser}
+                        />
         }else{
-            showUser = <DetailWorker  UserDetail={UserDetail} PostById={PostById} HiringByWorker={HiringByWorker}/>
+            showUser = <DetailWorker  
+                            UserDetail={UserDetail} 
+                            PostById={PostById} 
+                            HiringByWorker={HiringByWorker}
+                            toggleModalDetailUser={toggleModalDetailUser}
+                        />
         }
     }
 
-    
 
-   
     return(
         <ContainerModal isOpenDetailUser={isOpenDetailUser}>
             <DivGlob>

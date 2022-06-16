@@ -21,7 +21,7 @@ export const putServices = (body, id) => async() => {
 }
 
 export const deleteService = (id) => async() => {
-  await axios.put(`https://wixer-server.herokuapp.com/services/${id}`)
+  await axios.delete(`https://wixer-server.herokuapp.com/services/${id}`)
 }
 
 export const getCategorybyId = (id) => (dispatch) => {
@@ -59,7 +59,7 @@ export const putCategories = (body, id) => async () => {
 }
 
 export const deleteCategories = (id) => async () => {
-  await axios.put( `https://wixer-server.herokuapp.com/categories/${id}`)
+  await axios.delete( `https://wixer-server.herokuapp.com/categories/${id}`)
 }
 
 export const postUser = (payload) => async () => {
@@ -215,9 +215,9 @@ export const GetAllTransaction = () => dispatch => {
 }
 
 export const GetTransactionById = (id) => dispatch => {
-  console.log('Funciono transacit')
   axios.get(`https://wixer-server.herokuapp.com/transactions/${id}`)
   .then(res => dispatch({type: "GET_TRANSACTIONS_BYID", payload: res.data}))
+
 }
 
 
@@ -247,7 +247,7 @@ export const cancelSubscription = (body,id) => async () => {
 
 export const changeSubscription = (body,id) => async() => {
   // await axios.post(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body, )
-  await axios({ method: 'put', url:`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, data: body})
+  await axios(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body)
 }
 
 export const getPostByUser = (id) => dispatch => {
@@ -325,3 +325,18 @@ export const removeFromWishlist = (_id) => (dispatch) => {
       dispatch({ type: "REMOVE_WISHLIST", payload: res.data.favorite._id })
     );
 };
+export const clearProfile = () => {
+  return{
+    type: "CLEAR_PROFILE"
+  }
+}
+
+
+export const getLastTransactionById = (id)=> dispatch=> {
+  axios.get(`http://wixer-server.herokuapp.com/transactions/last/${id}`)
+  .then( res => dispatch({type: "GET_LAST_TRANSACT_BY_ID", payload: res.data }))
+}
+
+export const putHiring = (body) => async() => {
+  await axios.put(`http://wixer-server.herokuapp.com/hirings/`, body)
+}
