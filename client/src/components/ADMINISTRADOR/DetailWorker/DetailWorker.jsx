@@ -86,7 +86,7 @@ const DetailWorker = ({UserDetail, PostById, HiringByWorker, toggleModalDetailUs
                                 <GiSmartphone/>
                             </div>
                         </IconContext.Provider>
-                        <EmailPhone>{UserDetail.dataWorker.phone}</EmailPhone>
+                        <EmailPhone>{UserDetail.dataWorker.phone && UserDetail.dataWorker.phone}</EmailPhone>
                     </DivOther>
                 </div>
             </div>

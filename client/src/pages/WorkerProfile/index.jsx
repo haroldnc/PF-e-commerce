@@ -37,6 +37,17 @@ export default function WorkerProfile() {
       return userPost;
     }
   }
+    
+    useEffect(()=>{
+        dispatch(getWorkerDetail(id))
+        dispatch(getAllPosts())
+    }, [dispatch, id])
+    
+    getUserPosts(worker, arrayOfPost)
+    // console.log(getUserPosts(worker, arrayOfPost))
+    console.log(worker)
+    // console.log(arrayOfPost)
+    // const userPost= arrayOfPost.filter(p=>p.user===worker.userId.uid)
 
   useEffect(() => {
     dispatch(getWorkerDetail(id));
@@ -86,44 +97,23 @@ export default function WorkerProfile() {
                 </DescriptionArea>
               )}
             </Div2>
-            <Div3>
-              {worker.userId ? (
-                <HireButton>{`Contacta a ${worker.userId.firstName}`}</HireButton>
-              ) : (
-                <HireButton>Contacta a este profesional</HireButton>
-              )}
+            {/* <Div3>
+                {worker.userId?
+                    <HireButton>{`Contacta a ${worker.userId.firstName}`}</HireButton>
+                :
+                    <HireButton>Contacta a este profesional</HireButton>
 
-              {worker.userId ? (
-                <DescriptionArea>
-                  {`Hazle algunas preguntas a ${worker.userId.firstName} ${worker.userId.lastName} para llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de ${worker.userId.firstName}`}
-                  .
-                </DescriptionArea>
-              ) : (
-                <DescriptionArea>
-                  Hazle algunas preguntas a este profesional antes de llevar a
-                  cabo tu proyecto. No te olvides de mirar lo que otros clientes
-                  dicen acerca de este usuario.
-                </DescriptionArea>
-              )}
-            </Div3>
-          </Container>
-          <PostsTitle>Publicaciones que ha hecho este usuario:</PostsTitle>
-          <ProfileCardsContainer>
-            <Grid>
-                {userPost.length ? (
-              userPost.map((p) => (
-                    <ProfilePostDetailCard
-                  key={p._id}
-                  title={p.title}
-                  img={p.img}
-                  id={p._id}
-                />
-                
-              ))
-            ) : (
-              <h4>...cargando datos</h4>
-            )}
-            </Grid>
+                }
+
+                {worker.userId?
+                <DescriptionArea>{`Hazle algunas preguntas a ${worker.userId.firstName} ${worker.userId.lastName} para llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de ${worker.userId.firstName}`}.</DescriptionArea>
+                :
+                <DescriptionArea>Hazle algunas preguntas a este profesional antes de llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de este usuario.</DescriptionArea>
+                }
+            </Div3> */}
+        </Container>
+            <PostsTitle>Publicaciones que ha hecho este usuario:</PostsTitle>
+        <ProfileCardsContainer>
             
           </ProfileCardsContainer>
         </div>
