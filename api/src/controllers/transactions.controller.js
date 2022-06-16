@@ -81,5 +81,6 @@ const addTransaction = async (req, res) => {
 module.exports = {
    getTransactions,
    getTransactionsByUser,
+   getLastTransactionByUser,
    addTransaction
 }
