@@ -4,6 +4,7 @@ const DataWorkers = require('../models/DataWorkers');
 const Publications = require('../models/Publications');
 const nodemailer = require('nodemailer')
 const bcrypt = require('bcrypt');
+const Hiring = require('../models/Hiring');
 
 const getUserById = async (req, res) => {
     const { id } = req.params;
@@ -92,6 +93,9 @@ const deleteUser = async (req, res) => {
         if(user.user_role.name === 'worker'){
             await Publications.deleteMany({ user: id }); // borra las publicaciones del usuario
             await DataWorkers.deleteOne({ userId: id }); // borra los datos del trabajador
+            await Hiring.update({ idWorker: id }, { status: false });
+        } else {
+            await Hiring.update({ idUser: id }, { status: false });
         };
 
         await User.findByIdAndDelete(id);
