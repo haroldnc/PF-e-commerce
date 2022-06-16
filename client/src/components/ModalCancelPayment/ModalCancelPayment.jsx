@@ -21,7 +21,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
     // } 
 
     //console.log('transacts', Alltransaction)
-
+    console.log(LastTrans)
     const cancelInmed = () =>{
         //console.log('alltrans',Alltransaction.subSchedulesId)
         Swal.fire({
