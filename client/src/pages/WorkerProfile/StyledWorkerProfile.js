@@ -122,3 +122,13 @@ export const Grid = styled.div`
         grid-template-columns: repeat(1, 1fr);
     }
 `
+
+
+export const CommentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    align-items: center;
+    border: 1px solid black;
+    margin: 30px auto;
+`

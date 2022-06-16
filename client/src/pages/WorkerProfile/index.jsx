@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getAllPosts, getWorkerDetail } from "../../store/actions";
+import { getAllPosts, getWorkerDetail, getCommentsByWorkerId } from "../../store/actions";
 import {
   Container,
   DescriptionArea,
@@ -17,11 +17,8 @@ import {
   Containerr,
   Wrapper,
   Grid,
+  CommentContainer,
 } from "./StyledWorkerProfile";
-import {useSelector, useDispatch} from "react-redux"
-import {useParams} from "react-router-dom"
-import {getAllPosts, getCommentsByWorkerId, getWorkerDetail} from "../../store/actions"
-import { CommentContainer, Container, DescriptionArea, Div1, Div2, Div3, HireButton, PostsTitle, Price, ProfileCardsContainer, ProfilePic, SubTitle } from "./StyledWorkerProfile";
 import ProfilePostDetailCard from "../../components/InWorkerProfileCards";
 import CardComments from "../../components/CardComments";
 
@@ -30,20 +27,17 @@ export default function WorkerProfile() {
   const dispatch = useDispatch();
   const worker = useSelector((state) => state.workerDetail);
   const arrayOfPost = useSelector((state) => state.allPost);
+  const comments = useSelector((state)=>state.comments);
   // console.log(arrayOfPost)
   var userPost = [];
 
-
-
-    function getUserPosts(wrkr, postArr){
-        if(wrkr._id && postArr.length){
-            userPost = postArr.filter(p=>p.user.uid===wrkr.userId.uid)
-            console.log(userPost)
-            return userPost
-        }
-        else{
-            return userPost
-        }
+  function getUserPosts(wrkr, postArr) {
+    if (wrkr._id && postArr.length) {
+      userPost = postArr.filter((p) => p.user.uid === wrkr.userId.uid);
+      console.log(userPost);
+      return userPost;
+    } else {
+      return userPost;
     }
   }
     
@@ -55,11 +49,11 @@ export default function WorkerProfile() {
     
     getUserPosts(worker, arrayOfPost)
     // console.log(getUserPosts(worker, arrayOfPost))
-    console.log(worker)
+    //console.log(worker)
     // console.log(arrayOfPost)
     // const userPost= arrayOfPost.filter(p=>p.user===worker.userId.uid)
-   const filteredComments =  comments.filter(c=>c.some(Object))
-   const objectsFromComments = filteredComments.map(o=>o[0])
+    const filteredComments =  comments.filter(c=>c.some(Object))
+    const objectsFromComments = filteredComments.map(o=>o[0])
 
   return (
     <Containerr>
@@ -103,9 +97,7 @@ export default function WorkerProfile() {
                     <HireButton>{`Contacta a ${worker.userId.firstName}`}</HireButton>
                 :
                     <HireButton>Contacta a este profesional</HireButton>
-
                 }
-
                 {worker.userId?
                 <DescriptionArea>{`Hazle algunas preguntas a ${worker.userId.firstName} ${worker.userId.lastName} para llevar a cabo tu proyecto. No te olvides de mirar lo que otros clientes dicen acerca de ${worker.userId.firstName}`}.</DescriptionArea>
                 :
@@ -131,6 +123,21 @@ export default function WorkerProfile() {
             )}
             </Grid>
           </ProfileCardsContainer>
+          <CommentContainer>
+            <h3>Comentarios</h3>
+          {objectsFromComments.length && objectsFromComments.map(c=>(
+                    <CardComments 
+                    id = {c._id}
+                    title={c.title}
+                    message={c.message}
+                    user={c.user}
+                    />
+                ))
+
+
+                }
+          </CommentContainer>
+          
         </div>
       ) : (
         <h1>
@@ -142,3 +149,4 @@ export default function WorkerProfile() {
       
     </Containerr>
   );
+} 
