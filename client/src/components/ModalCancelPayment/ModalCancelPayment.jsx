@@ -9,7 +9,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
 
     const dispatch = useDispatch()
 
-    const Alltransaction = useSelector(state => state.lastTransactionById)
+    const LastTrans = useSelector(state => state.lastTransactionById)
 
     // let LastTrans = "";
     // if(Alltransaction){
@@ -20,10 +20,10 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
     //     }
     // } 
 
-    console.log('transacts', Alltransaction)
+    //console.log('transacts', Alltransaction)
 
     const cancelInmed = () =>{
-        console.log('alltrans',Alltransaction.subSchedulesId)
+        //console.log('alltrans',Alltransaction.subSchedulesId)
         Swal.fire({
             title: 'Estas seguro?',
             text: "Tu plan se cancelará inmediatamente",
@@ -40,7 +40,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
                 'success'
               )
                 dispatch(cancelSubscription({
-                    subSchedulesId: Alltransaction.subSchedulesId,
+                    subSchedulesId: LastTrans.subSchedulesId,
                 },profile))
                 toggleModalPaymentCancel()
             window.location.href = window.location.href

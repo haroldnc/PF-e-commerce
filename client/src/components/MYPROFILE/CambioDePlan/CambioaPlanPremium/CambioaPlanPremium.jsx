@@ -8,7 +8,7 @@ const CambioaPlanPremium = ({profile, isOpenChangePremium, toggleIsOpenChangePre
 
     const dispatch = useDispatch()
     
-    const Alltransaction = useSelector(state => state.lastTransactionById)
+    const LastTrans = useSelector(state => state.lastTransactionById)
 
     // let LastTrans = "";
     // if(Alltransaction){
@@ -18,12 +18,12 @@ const CambioaPlanPremium = ({profile, isOpenChangePremium, toggleIsOpenChangePre
     //         LastTrans = Alltransaction.pop()
     //     }
     // } 
-    console.log('session', Alltransaction)
+    //console.log('session', Alltransaction)
 
 
     const handlechange = () => {
-        console.log('id',profile)
-        console.log('transaction',Alltransaction.subSchedulesId)
+        //console.log('id',profile)
+        //console.log('transaction',Alltransaction.subSchedulesId)
         Swal.fire({
             title: '¡Cambiate ahora!',
             text: "Tu plan se cambiará inmediatamente",
@@ -32,19 +32,19 @@ const CambioaPlanPremium = ({profile, isOpenChangePremium, toggleIsOpenChangePre
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, Cambiar!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Plan cambiado correctamente!',
-                'Tu plan cambiara a Premium inmediatamente',
-                'success'
-              )
-            dispatch(changeSubscription({
-                subSchedulesId: Alltransaction.subSchedulesId,
-                priceId: "price_1L8o5dHq6KUjuv7Ihuith57b"
-            }, profile))
-            toggleIsOpenChangePremium()
-            window.location.href = window.location.href
+                Swal.fire(
+                    'Plan cambiado correctamente!',
+                    'Tu plan cambiara a Premium inmediatamente',
+                    'success'
+                )
+                dispatch(changeSubscription({
+                    subSchedulesId: LastTrans.subSchedulesId,
+                    priceId: "price_1L8o5dHq6KUjuv7Ihuith57b"
+                }, profile))
+                toggleIsOpenChangePremium()
+                window.location.href = window.location.href
             }
         })
     }
