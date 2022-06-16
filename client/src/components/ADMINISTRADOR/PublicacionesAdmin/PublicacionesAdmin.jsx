@@ -52,7 +52,7 @@ const PublicacionesAdmin = ({Allpublic}) => {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Activar!'
+                confirmButtonText: 'Si, Desactivar!'
               }).then((result) => {
                 if (result.isConfirmed){
                   Swal.fire(

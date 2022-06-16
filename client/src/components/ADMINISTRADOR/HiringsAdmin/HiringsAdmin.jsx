@@ -57,7 +57,7 @@ const HiringsAdmin = ({allHirings}) => {
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, Activar!'
+                    confirmButtonText: 'Si, Cerrar!'
                   }).then((result) => {
                     if (result.isConfirmed){
                       Swal.fire(
@@ -67,11 +67,13 @@ const HiringsAdmin = ({allHirings}) => {
                       )
                       let post = Activa.filter( a => a.idUser._id === iduser)
                       setInactiva([post[0],...Inactiva])
-                      setActiva(Activa.filter( a => a.idUser._id === iduser))
-                    //   dispatch(putHiring({
-                    //       idPublication: idPubl,
-                    //       idUser: iduser
-                    //     }))
+                      setActiva(Activa.filter( a => a.idUser._id !== iduser))
+                      console.log('id user', iduser)
+                      console.log('id post', idPubl)
+                      dispatch(putHiring({
+                            idUser: iduser,
+                            idPublication: idPubl
+                        }))
                     }
                 })
             }else{
