@@ -12,7 +12,7 @@ export default function CardComments({id, title, message, user}){
         dispatch(getUserById(user))
         
 
-    })
+    },[dispatch, user])
 
 
     return(
