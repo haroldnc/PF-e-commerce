@@ -8,9 +8,9 @@ const CambioaPlanStandard = ({profile, isOpenChangeStandard, toggleIsOpenChangeS
 
     const dispatch = useDispatch()
     
-    const Alltransaction = useSelector(state => state.lastTransactionById)
+    const LastTrans = useSelector(state => state.lastTransactionById)
 
-    let LastTrans = "";
+    //let LastTrans = "";
     // if(Alltransaction){
     //     if(Alltransaction.length === 1){
     //         LastTrans = Alltransaction
@@ -18,12 +18,12 @@ const CambioaPlanStandard = ({profile, isOpenChangeStandard, toggleIsOpenChangeS
     //         LastTrans = Alltransaction.pop()
     //     }
     // } 
-    console.log('session', Alltransaction)
+    //console.log('session', Alltransaction)
 
 
     const handlechange = () => {
-        console.log('id',profile)
-        console.log('transaction',Alltransaction.subSchedulesId)
+        //console.log('id',profile)
+        //console.log('transaction',Alltransaction.subSchedulesId)
         Swal.fire({
             title: 'Estas seguro?',
             text: "Tu plan se cambiará inmediatamente",
@@ -32,16 +32,16 @@ const CambioaPlanStandard = ({profile, isOpenChangeStandard, toggleIsOpenChangeS
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, Cambiar!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Plan cambiado correctamente!',
-                'Tu plan cambiara a Standard inmediatamente',
-                'success'
-              )
-              dispatch(changeSubscription({
-                subSchedulesId: Alltransaction.subSchedulesId,
-                priceId: "price_1L8UkLHq6KUjuv7IZqgYJUFE"
+                Swal.fire(
+                    'Plan cambiado correctamente!',
+                    'Tu plan cambiara a Standard inmediatamente',
+                    'success'
+                )
+                dispatch(changeSubscription({
+                    subSchedulesId: LastTrans.subSchedulesId,
+                    priceId: "price_1L8UkLHq6KUjuv7IZqgYJUFE"
             }, profile))
                 toggleIsOpenChangeStandard()
             window.location.href = window.location.href

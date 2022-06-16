@@ -40,7 +40,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
                 'success'
               )
                 dispatch(cancelSubscription({
-                    subSchedulesId: Alltransaction.subSchedulesId,
+                    subSchedulesId: LastTrans.subSchedulesId,
                 },profile))
                 toggleModalPaymentCancel()
             window.location.href = window.location.href

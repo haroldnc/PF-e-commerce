@@ -10,14 +10,7 @@ const TypeCancel = ({ isOpenType,toggleModalType, profile}) => {
 
     const dispatch = useDispatch()
 
-    const Alltransaction = useSelector(state => state.transactionById)
-
-    let LastTrans = "";
-    if(Alltransaction){
-        LastTrans = Alltransaction.pop()
-    } 
-    console.log('transactions', LastTrans.sessionId)
-    console.log('id', profile)
+    const LastTrans = useSelector(state => state.transactionById);
 
     const handleNocancel = () =>{
         toggleModalType()
@@ -32,21 +25,19 @@ const TypeCancel = ({ isOpenType,toggleModalType, profile}) => {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, cancelar!'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire(
-                'Cancelada correctamente!',
-                'Tu plan será cancelado inmediatamente',
-                'success'
-              )
-              dispatch(cancelSubscription({
-                sessionId: LastTrans.sessionId,
-                period_end:false
-            
-            },profile))
-            toggleModalType()
+                Swal.fire(
+                    'Cancelada correctamente!',
+                    'Tu plan será cancelado inmediatamente',
+                    'success'
+                )
+                dispatch(cancelSubscription({
+                    subSchedulesId: LastTrans.subSchedulesId
+                }, profile))
+                toggleModalType()
             }
-          })
+        })
         
     }
     const cancelFinalCicle = () =>{
