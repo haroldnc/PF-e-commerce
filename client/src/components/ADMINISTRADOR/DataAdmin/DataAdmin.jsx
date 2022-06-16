@@ -24,7 +24,7 @@ const DataAdmin = ({lateral, setLateral, setRender}) => {
             <DivName>
                 <NameMenu>Data</NameMenu>
             </DivName>
-            <Menudiv onClick={() => handleClick("Categorías")}>
+            {/* <Menudiv onClick={() => handleClick("Categorías")}>
             <IconContext.Provider value={{size:"20px"}}>
                         <div>
                             <BsFileEarmarkPostFill/>
@@ -39,7 +39,7 @@ const DataAdmin = ({lateral, setLateral, setRender}) => {
                         </div>
                     </IconContext.Provider>
                 <Namediv>Servicios</Namediv>
-            </Menudiv>
+            </Menudiv> */}
             <Menudiv onClick={() => handleClick("Publicaciones")}>
             <IconContext.Provider value={{size:"20px"}}>
                         <div>

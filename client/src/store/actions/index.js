@@ -247,7 +247,7 @@ export const cancelSubscription = (body,id) => async () => {
 
 export const changeSubscription = (body,id) => async() => {
   // await axios.post(`https://wixxer.up.railway.app/subscriptions/change/${id}`, body, )
-  await axios(`https://wixxer.up.railway.app/subscriptions/change/${id}`, body)
+  await axios.put(`https://wixxer.up.railway.app/subscriptions/change/${id}`, body)
 }
 
 export const getPostByUser = (id) => dispatch => {

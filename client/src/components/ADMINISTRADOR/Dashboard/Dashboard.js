@@ -36,9 +36,20 @@ export const CardsDatos = styled.div `
 
 `
 
+export const CardsDatosColor = styled.div `
+    background-color: ${props => props.theme.colors.secondaryLighter};
+    width: 95%;
+    margin: 15px;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.425);
+
+`
+
 export const Tabla = styled.div `
     background-color: ${props => props.theme.colors.backgroundColorAlt};
     width: 50%;
+    height: 85%;
     margin: 15px;
     border-radius: 15px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.425);
