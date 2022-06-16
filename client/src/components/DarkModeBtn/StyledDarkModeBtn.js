@@ -3,8 +3,8 @@ import { FaMoon, FaSun } from "react-icons/fa";
 
 export const Container = styled.div`
   position: fixed;
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   bottom: 1.5rem;
   left: 1.5rem;
   cursor: pointer;

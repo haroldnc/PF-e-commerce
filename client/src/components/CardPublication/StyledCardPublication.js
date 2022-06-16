@@ -28,9 +28,9 @@ export const Profile = styled.div`
 `;
 
 export const ImgProfile = styled.img`
-  width: 10%;
-  height: 10%;
-  border-radius: 20px;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 99999px;
 `;
 
 export const NameProfile = styled.p`

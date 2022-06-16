@@ -6,11 +6,6 @@ export const Card = styled.div `
     margin: 15px;
     margin-bottom: 30px;
     cursor: pointer;
-
-    @media(max-width: 680px){
-        width: 235px;
-        height: 240px;
-    }
 `
 
 export const Imagen = styled.img `

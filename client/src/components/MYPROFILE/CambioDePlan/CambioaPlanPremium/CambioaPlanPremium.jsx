@@ -2,27 +2,28 @@ import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from 'sweetalert2'
 import { ContainerCambio ,DivGob, Title, TextOne, TextTwo, Btn, BtnCancel, Parr  } from './CambioaPlanPemium'
-import { changeSubscription, GetTransactionById } from '../../../../store/actions/index'
+import { changeSubscription, getLastTransactionById } from '../../../../store/actions/index'
 
 const CambioaPlanPremium = ({profile, isOpenChangePremium, toggleIsOpenChangePremium}) => {
 
     const dispatch = useDispatch()
     
-    const Alltransaction = useSelector(state => state.transactionById)
+    const Alltransaction = useSelector(state => state.lastTransactionById)
 
-    let LastTrans = "";
-    if(Alltransaction){
-        if(Alltransaction.length === 1){
-            LastTrans = Alltransaction
-        }else{
-            LastTrans = Alltransaction.pop()
-        }
-    } 
-    // console.log('session', LastTrans[0].sessionId)
+    // let LastTrans = "";
+    // if(Alltransaction){
+    //     if(Alltransaction.length === 1){
+    //         LastTrans = Alltransaction
+    //     }else{
+    //         LastTrans = Alltransaction.pop()
+    //     }
+    // } 
+    console.log('session', Alltransaction)
 
 
     const handlechange = () => {
-        
+        console.log('id',profile)
+        console.log('transaction',Alltransaction.subSchedulesId)
         Swal.fire({
             title: '¡Cambiate ahora!',
             text: "Tu plan se cambiará inmediatamente",
@@ -38,8 +39,8 @@ const CambioaPlanPremium = ({profile, isOpenChangePremium, toggleIsOpenChangePre
                 'Tu plan cambiara a Premium inmediatamente',
                 'success'
               )
-              dispatch(changeSubscription({
-                sessionId: LastTrans[0].sessionId,
+            dispatch(changeSubscription({
+                subSchedulesId: Alltransaction.subSchedulesId,
                 priceId: "price_1L8o5dHq6KUjuv7Ihuith57b"
             }, profile))
             toggleIsOpenChangePremium()
@@ -49,7 +50,7 @@ const CambioaPlanPremium = ({profile, isOpenChangePremium, toggleIsOpenChangePre
     }
 
     useEffect(() => {
-        dispatch(GetTransactionById(profile))
+        dispatch(getLastTransactionById(profile))
     },[])
 
     return (

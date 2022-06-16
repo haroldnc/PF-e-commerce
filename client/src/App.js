@@ -132,18 +132,12 @@ function App() {
           <Route path="/confirm/:id" component={Confirm} />
           <Route path="/iniciar-sesion" component={LogInConfirm} />
           <Route path="/lista-favoritos" component={Wishlist} />
-
-          <Route exact path="/paysuccess" component={PaymentSuccess} />
-          <Route path="/favoritos/:id" component={Favourites}/>
-
           {/* <Route exact path="/paysuccess" component={PaymentSuccess} /> */}
           <Route path="/favoritos/:id" component={Favourites} userInfo={userInfo} />
           <Route path="/comentar/:publicationId" component={PostComments}/>
-
           <Route exact path="/contratar/post/:id" component={HirePage} />
           <Route path="/contratar/succes" component={SuccesOrFail}/>
           <Route path="/comentarios/:id" component={CommentPage}/>
-
         </Switch>
         <Footer />
         <ModalLogIn

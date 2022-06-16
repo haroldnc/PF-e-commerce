@@ -8,10 +8,5 @@ export const Container = styled.main`
 `
 export const Wrapper = styled.div`
     max-width: 1100px;
-    min-width: 1100px;
-
-    @media (max-width:680px){
-        max-width: 90%;
-    min-width: 90%;
-    }
+    min-width: 1100px
 `

@@ -25,13 +25,13 @@ import { SiWebauthn } from 'react-icons/si'
 
 
 
-const DetailWorker = ({UserDetail, PostById, HiringByWorker}) => {
+const DetailWorker = ({UserDetail, PostById, HiringByWorker, toggleModalDetailUser}) => {
 
     const  dispatch = useDispatch()
 
-    console.log('Worer',UserDetail)
-    console.log('posts', PostById)
-    console.log('hirings',HiringByWorker )
+    // console.log('Worer',UserDetail)
+    // console.log('posts', PostById)
+    // console.log('hirings',HiringByWorker )
 
     const handleDeleteUser = (id)=> {
         Swal.fire({
@@ -50,7 +50,8 @@ const DetailWorker = ({UserDetail, PostById, HiringByWorker}) => {
                 'success'
               )
                 console.log('funca', id)
-             // dispatch(DeleteUser(id))
+             dispatch(DeleteUser(id))
+             toggleModalDetailUser(null)
             // window.location.href = window.location.href
             }
         })

@@ -40,8 +40,8 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
   console.log("poronga", );
 
   useEffect(() => {
-    dispatch(getWishlistById(userInfo.uid));
-  }, [dispatch, userInfo.uid]);
+    dispatch(getWishlistById(userInfo?.uid));
+  }, [dispatch, userInfo?.uid]);
 
   // const icon = isClicked ? <HeartFill /> : <HeartOutline />
 
@@ -60,7 +60,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
         pageslice.map((card, index) => (
           <Card key={index}> 
           <HeartContainer onClick={() => fav()}>
-            <HeartFill onClick={() => handleAddFavorite(userInfo.uid, card._id)} />
+            <HeartFill onClick={() => handleAddFavorite(userInfo?.uid, card._id)} />
             {/* {fav ?  <HeartFill /> : <HeartOutline />} */}
             
           </HeartContainer>
@@ -69,8 +69,8 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
 
             <Image src={card.img} />
             <Profile>
-              <ImgProfile src={card.imgProfile} />
-              <NameProfile>Michael</NameProfile>
+              <ImgProfile src={card.user.image} />
+              <NameProfile>{card.user.firstName}</NameProfile>
             </Profile>
             <Description>{card.description || title}</Description>
             <DivRating>
@@ -80,7 +80,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
                 </div>
               </IconContext.Provider>
 
-              <Rating>{card.score}</Rating>
+              <Rating>{card.score[0]}</Rating>
             </DivRating>
             <DivPay>
               {userInfo && userInfo.confirm_email === true ? (
