@@ -71,7 +71,6 @@ const handleChange = () => {
         }
     })
     }else{
-      if(suscribe === "Standard" && posts.filter( p => p.active === true).length < 3){
         console.log('los post',posts.filter( p => p.active === true).length)
         console.log('plan',suscribe)
         Swal.fire({
@@ -95,17 +94,6 @@ const handleChange = () => {
             setActivate(true)
           }
       })
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'No puedes activar',
-          text: 'Tienes 3 publicaciones activas, cambiate a Premium y no tendras problemas!',
-          footer: '<a href="">Why do I have this issue?</a>'
-        })
-      }
-
-
-    
 
     }
 }
