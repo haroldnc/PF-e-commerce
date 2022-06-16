@@ -93,9 +93,9 @@ const deleteUser = async (req, res) => {
         if(user.user_role.name === 'worker'){
             await Publications.deleteMany({ user: id }); // borra las publicaciones del usuario
             await DataWorkers.deleteOne({ userId: id }); // borra los datos del trabajador
-            await.Hiring.update({ idWorker: id }, { status: false });
+            await Hiring.update({ idWorker: id }, { status: false });
         } else {
-            await.Hiring.update({ idUser: id }, { status: false });
+            await Hiring.update({ idUser: id }, { status: false });
         };
 
         await User.findByIdAndDelete(id);
