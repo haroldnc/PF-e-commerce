@@ -83,6 +83,7 @@ const MyProfileWorker = ({
   const [loading, setLoading] = useState(false);
   const [isOpenChangeStandard, setIsOpenChangeStandard] = useState(false);
   const [isOpenChangePremium, setIsOpenChangePremium] = useState(false);
+  const [ levelLanguahe, setLevelLenguaje ] = useState("")
   const [Formularios, setFormularios] = useState({
     title: false,
     aboutMe: false,
@@ -183,7 +184,15 @@ const MyProfileWorker = ({
       ...Changes,
       [e.target.name]: e.target.value,
     });
+    console.log('change',Changes )
   };
+
+  
+
+  const handleSelectLenguaje = (e) => {
+    setLevelLenguaje(e.target.value)
+    console.log('selectLemguaje', levelLanguahe)
+  }
 
   const hamdlePut = (e, key) => {
     e.preventDefault();
@@ -193,6 +202,14 @@ const MyProfileWorker = ({
     setFormularios({ ...Formularios, [key]: !Formularios[key] });
     setChanges({ ...Changes, [key]: "" });
   };
+
+  const submitChangeLanguaje = (e) =>{
+    e.preventDefault()
+    setInfoWorker({
+      ...infoWorker,
+      languages: [... infoWorker.languages, {idioma:Changes.languages , level: levelLanguahe}]
+    })
+  }
 
   const upLoadImage = async (e) => {
     const files = e.target.files;
@@ -473,10 +490,10 @@ const MyProfileWorker = ({
             </FormsDiv>
           ) : null}
           <Linea></Linea>
-          <br />
+          {/* <br />
           <Row>
             <Titulos>Idiomas</Titulos>
-            <BtnForms onClick={() => toggleForms("idiomas")}>
+            <BtnForms onClick={() => toggleForms("languages")}>
               Agregar nuevo
             </BtnForms>
           </Row>
@@ -497,11 +514,11 @@ const MyProfileWorker = ({
               <form>
                 <input
                   placeholder="Agrega un idioma..."
-                  // value={estado.description}
-                  // name="description"
-                  // onChange={(e) => handleChange(e)}
+                  value={Changes.languages}
+                  name="languages"
+                  onChange={(e) => handleChange(e)}
                 />
-                <select>
+                <select onClick={(e) => handleSelectLenguaje(e)}>
                   <option value="">Nivel de idioma</option>
                   <option value="Basico">Basico</option>
                   <option value="Conversacional">Conversacional</option>
@@ -512,7 +529,7 @@ const MyProfileWorker = ({
                   <BtnCancel onClick={() => toggleForms("idiomas")}>
                     Cancelar
                   </BtnCancel>
-                  <BtnAccept>Actualizar</BtnAccept>
+                  <BtnAccept onClick={(e) => submitChangeLanguaje(e)}>Actualizar</BtnAccept>
                 </div>
               </form>
             </FormsDiv>
@@ -561,7 +578,7 @@ const MyProfileWorker = ({
               </form>
             </FormsDiv>
           ) : null}
-          <Linea></Linea>
+          <Linea></Linea> */}
           {/* <br/>
                     <Row>
                         <Titulos>Certificacón</Titulos>
