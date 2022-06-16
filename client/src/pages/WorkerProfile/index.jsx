@@ -125,8 +125,9 @@ export default function WorkerProfile() {
           </ProfileCardsContainer>
           <CommentContainer>
             <h3>Comentarios</h3>
-          {objectsFromComments.length && objectsFromComments.map(c=>(
+          {objectsFromComments.length && objectsFromComments.map((c,index)=>(
                     <CardComments 
+                    key={index}
                     id = {c._id}
                     title={c.title}
                     message={c.message}

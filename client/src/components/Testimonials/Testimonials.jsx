@@ -113,9 +113,9 @@ const Testimonials = () => {
         }}
       >
         {testimonials &&
-          testimonials.map((card) => (
-            <SplideSlide>
-              <div key={card.name}>
+          testimonials.map((card, index) => (
+            <SplideSlide key={index}>
+              <div>
                 <TestimonialCard>
                   <TestimonialImage src={card.image} alt={card.name} />
                   <TestimonialText>

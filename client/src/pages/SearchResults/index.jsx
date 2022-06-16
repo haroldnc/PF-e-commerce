@@ -8,7 +8,10 @@ import { SearchFail } from "./styledSeachResults";
 export default function SearchResults(){
     
     const queryResults = useSelector((state)=>state.queryPosts)
-    console.log(queryResults)
+    const userSignIn = useSelector((state) => state.userSignIn);
+    const { userInfo } = userSignIn;
+
+    // console.log(queryResults)
     
     return(
         <> {queryResults.length ?
@@ -16,7 +19,7 @@ export default function SearchResults(){
             <Wrapper>
             <NameServ>Resultados de tu búsqueda</NameServ>    
             <Grid>
-            <CardPublication pageslice={queryResults}/>
+            <CardPublication pageslice={queryResults}  userInfo={userInfo}/>
             </Grid>    
             </Wrapper>
         </Page>
