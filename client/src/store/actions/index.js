@@ -342,6 +342,6 @@ export const putHiring = (body) => async() => {
 }
 
 export const getAllHirings = () => dispatch =>  {
-  axios.get(`http://wixer-server.herokuapp.com/hirings`)
+  axios.get(`https://wixxer.up.railway.app/hirings`)
   .then( res => dispatch({ type: "GET_ALL_HIRINGS", payload: res.data.hirings}))
 }
