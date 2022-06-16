@@ -1,18 +1,40 @@
 import styled from "styled-components";
 
+export const Containerr = styled.main`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 2rem;
+`
+
+export const Wrapper = styled.div`
+    min-width: 1100px;
+    max-width: 1100px;
+
+    @media(max-width: 780px) {
+
+    min-width: 100%;
+    max-width: 100%;
+    }
+`
+
 export const Container = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    margin: 100px 100px 25px ;
-    width: 80%;
-    border: solid 1px black;
+    display: flex;
+    gap: 2rem;
+    margin: 100px 0 0 0;
+    width: 100%;
     text-align: center;
-    /* background-color: ${(props) => props.theme.colors.primary}; */
-    border-radius: 15px;
-    padding: 25px;
+    background-color: ${(props) => props.theme.colors.backgroundColorAlt};
+    border-radius: 5px;
+    box-shadow: ${props => props.theme.boxShadow};
+
+    @media(max-width: 680px) {
+        flex-direction: column;
+        gap: 0;
+    }
 `
 
 export const Div1 = styled.div`
@@ -25,16 +47,22 @@ export const Div2 = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
+    padding: 10px;
 
 `
 export const Div3 = styled.div`
     grid-area: 1 / 3 / 2 / 4;
     margin: 50px;
+    background-color: ${props => props.theme.colors.borderColor};
+    height: 12.5rem;
+    padding: 10px;
+    border-radius: 5px;
 `
 
 export const ProfilePic = styled.img`
     border-radius: 50%;
-    width: 70%;
+    width: 15rem;
+    height: 15rem;
 
 `
 
@@ -49,23 +77,25 @@ export const DescriptionArea = styled.article`
 `
 
 export const HireButton = styled.button`
-    border: 2px solid black;
     border-radius: 5px;
     color: white;
-    letter-spacing: 2px;
     padding: 5px;
+    height: 2.5rem;
     cursor: pointer;
     width: 100%;
     margin: 0 0 15px;
     background-color:${(props) => props.theme.colors.primary};
+    transition: .3s ease;
+
+    &:hover{
+        background-color: ${(props) => props.theme.colors.secondary};
+    }
 `
 
 export const profesionalInfo = styled.div`
     display: flex;
     flex-direction: column;
     text-align: left;
-
-
 `
 
 export const SubTitle = styled.h3`
@@ -73,18 +103,22 @@ export const SubTitle = styled.h3`
 `
 
 export const ProfileCardsContainer = styled.div`
-    width: 80%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    border: solid 1px black;
+    width: 100%;
     border-radius: 15px;
-    margin: 25px 100px 50px ;
-    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 export const PostsTitle = styled.h4`
-    width: 40%;
-    margin: auto;
+    margin: 30px 0 0 0;
+`
+
+export const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    @media(max-width: 680px){
+        grid-template-columns: repeat(1, 1fr);
+    }
 `

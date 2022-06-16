@@ -12,6 +12,10 @@ export const Card = styled.div`
   justify-content: space-between;
   flex-direction: column;
   position: relative;
+
+  @media(max-width: 768px) {
+    width: 92%;
+  }
 `;
 
 export const Image = styled.img`

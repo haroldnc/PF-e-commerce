@@ -5,7 +5,8 @@ export const PresentationSection = styled.div `
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 100px
+    margin-bottom: 100px;
+    height: calc(100vh - 4rem);
 `
 
 export const PresentationParagraphTittle = styled.div `

@@ -4,7 +4,12 @@ export const ContainerWorker = styled.div `
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: flex-start;
+
+    @media (max-width: 768px){
+        flex-direction: column-reverse;
+    }
 
 `
 
@@ -15,6 +20,10 @@ export const ContainerIzq = styled.div `
     flex-direction: column;
     align-items: center;
 
+    @media (max-width: 768px) {
+        width: 98%;
+    }
+
 `   
 
 export const ContainerDer = styled.div `
@@ -22,40 +31,56 @@ export const ContainerDer = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 768px) {
+        width: 98%;
+        margin-bottom: 1rem;
+    }
 `
 
 export const ImageContainer = styled.div `
     width: 80%;
-    border: solid 2px #f1f1f1f1;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: ${props => props.theme.colors.backgroundColorAlt};
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.225);
+    box-shadow: ${props => props.theme.boxShadow};
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const InfoContainer = styled.div `
     width: 80%;
-    border: solid 2px #f1f1f1f1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: ${props => props.theme.colors.backgroundColorAlt};
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.225);
+    box-shadow: ${props => props.theme.boxShadow};
     margin-top: 25px;
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const InfoContainerDer = styled.div `
     width: 90%;
-    border: solid 2px #f1f1f1f1;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: ${props => props.theme.colors.backgroundColorAlt};
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.225);
+    box-shadow: ${props => props.theme.boxShadow};
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const ImageProfile = styled.img `
@@ -70,6 +95,7 @@ export const Username = styled.h1 `
     margin-top: 10px;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
+    color: ${props => props.theme.colors.font};
 
 `
 
@@ -86,6 +112,7 @@ export const VistaPrevia = styled.button `
     color:rgba(0, 0, 0, 0.247);
     font-family: 'Poppins', sans-serif;
     transition: .3s ease;
+
 
 
     :hover{
@@ -108,7 +135,7 @@ export const Name = styled.h1 `
     margin-left: 15px;
     text-align: left;
     font-family: 'Poppins', sans-serif;
-
+    color: ${props=> props.theme.colors.font};
 `
 
 export const EmailPhone = styled.h1 `
@@ -119,6 +146,7 @@ export const EmailPhone = styled.h1 `
     font-family: 'Poppins', sans-serif;
     margin-left: 15px;
     cursor: pointer;
+    color: ${props=> props.theme.colors.font};
 `
 
 export const DivName = styled.div `
@@ -239,13 +267,13 @@ export const Unsuscribe = styled.h2 `
 export const BtnPay = styled.button `
     background-color: ${props => props.theme.colors.primary}; 
     width: 90%;
-    margin-left:15px;
+    margin-left: 15px;
     font-size: 18px;
     padding: 10px;
-    margin-top: 15px;
     border-radius: 15px;
     color: white;
     cursor: pointer;
+    height: 3rem;
   transition: .3s ease;
 
 
@@ -257,7 +285,7 @@ export const BtnPay = styled.button `
 export const FormsDiv = styled.div `
     margin-top: 15px;
     width: 85%;
-    background-color: ${props => props.theme.colors.borderColor}; 
+    background-color: ${props => props.theme.colors.backgroundColorAlt}; 
     border: 1px solid rgba(0, 0, 0, 0.247);
     border-radius: 10px;
     

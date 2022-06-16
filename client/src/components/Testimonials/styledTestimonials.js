@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const TestimonialSection = styled.div `
-    padding: 3.4rem;
+export const TestimonialSection = styled.main `
+height: calc(100vh - 4rem);
 
     .tittleTestimonial {
         margin-bottom: 1rem;
@@ -11,6 +11,7 @@ export const TestimonialSection = styled.div `
 export const TestimonialCard = styled.div `
     display: flex;
     padding: 1rem;
+    margin: 0 auto;
 
     @media screen and (max-width: 820px) {
         display: block;
@@ -18,7 +19,7 @@ export const TestimonialCard = styled.div `
 `
 
 export const TestimonialImage = styled.img `
-    max-width: 20rem;
+    max-width: 30rem;
 
     @media screen and (max-width: 820px) {
         max-width: 100%;

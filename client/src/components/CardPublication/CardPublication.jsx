@@ -37,7 +37,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
   const [isFaved, setIsFaved] = useState(false);
   const userWishlist = useSelector(state => state.userWishlist?.favorites);
 
-  console.log("poronga", );
+  console.log("poronga", pageslice);
 
   useEffect(() => {
     dispatch(getWishlistById(userInfo?.uid));

@@ -15,6 +15,10 @@ export const Container = styled.main`
 export const Grid = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+
+    @media(max-width: 768px){
+      grid-template-columns: repeat(2, 1fr);
+    }
 `
 
 
@@ -30,6 +34,7 @@ export const Card = styled.div`
   justify-content: space-between;
   flex-direction: column;
   position: relative;
+
 `;
 
 export const Image = styled.div`

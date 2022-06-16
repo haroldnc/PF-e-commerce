@@ -1,18 +1,31 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    height: calc(100vh -4rem);
+  max-width: 1100px;
+    min-width: 1100px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+
+    @media (max-width: 768px){
+        max-width: 90%;
+      min-width: 90%;
+    }
 `
  
 export const LogosGlobal = styled.div `
     display: grid;
     flex-direction: row;
     grid-template-columns: repeat(5, 1fr);
+    column-gap: 4rem;
     margin-top: 25px;
     margin: 0 auto;
+
+    @media (max-width: 680px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 `
 export const LogoCard = styled.div `
     display: flex;
@@ -59,6 +72,6 @@ export const Name = styled.h1 `
 font-size: 25px;
 font-family: 'Poppins', sans-serif;
 font-weight: 700;
-margin: 40px 0 20px 0;
+margin: 40px 0 60px 0;
 
 `

@@ -3,10 +3,17 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     width: 80%;
-    margin-left:10%;
+    margin: 0 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 768px) {
+        width: 95%;
+        margin:0 5px;
+    }
+
+    
 `
 
 export const ImageProfile = styled.img `
@@ -18,27 +25,35 @@ export const ImageProfile = styled.img `
 `
 
 export const ContainerUser = styled.div `
-    margin-top: 20px;
     width: 90%;
-    border: solid 2px #f1f1f1f1;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    border-radius: 15px;
     background-color: ${props => props.theme.colors.backgroundColorAlt};
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.225);
+    box-shadow: ${props => props.theme.boxShadow};
+    color: ${props => props.theme.colors.font};
+
+    @media(max-width: 768px){
+        width: 100%;
+    }
 `
 
 export const ContainerContratos = styled.div `
     margin-top: 50px;
     width: 90%;
-    border: solid 2px #f1f1f1f1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    border-radius: 15px;
+    color: red;
     background-color: ${props => props.theme.colors.backgroundColorAlt};
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.225);
+    box-shadow: ${props => props.theme.boxShadow};
+
+    @media (max-width: 768px){
+        width: 100%;
+    }
 `
 
 export const Name = styled.h1 `
@@ -47,6 +62,7 @@ export const Name = styled.h1 `
     font-family: 'Poppins', sans-serif; 
     font-size: 35px;
     font-weight: 500;   
+    color: ${props => props.theme.colors.font};
 `
 
 export const Correo = styled.h3 `
@@ -54,10 +70,16 @@ export const Correo = styled.h3 `
     color: rgba(0, 0, 0, 0.596);
     margin-bottom: 10px;
     margin-left: 15px;
+    color: ${props => props.theme.colors.font};
+
+    
+    @media  (min-width: 768px) {
+        font-size: 6px;
+    }
 
 `
 
-export const ProfilInfo = styled. div `
+export const ProfilInfo = styled.div `
     display:flex;
     flex-direction:column;
     justify-content:space-between;
@@ -65,7 +87,7 @@ export const ProfilInfo = styled. div `
     margin-top:35px;
     padding-left:35px;
     padding-bottom:35px;
-
+    
 `
 
 export const Fileselect = styled.div `
@@ -73,15 +95,17 @@ export const Fileselect = styled.div `
     display: inline-block;
     margin-top: 10px;
     margin-left:90px;
-    width: 70px;  
+    width: 80px;  
     height: 25px; 
+    cursor: pointer;
 
     &::before{
+        
         background-color: ${props => props.theme.colors.primary};
         color: white;
         font-family: 'roboto', sans-serif;
         font-weight: 400;
-        font-size: 10px;
+        font-size: 13px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -93,7 +117,6 @@ export const Fileselect = styled.div `
         top: 0;
         bottom: 0;
         cursor: pointer;
-        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.575);
     }
 
     input[type="file"] {
@@ -157,7 +180,7 @@ export const DivImage = styled.div `
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    padding: 15px,
+    padding: 15px;
 `
 
 export const Title = styled.h1 `
@@ -176,6 +199,7 @@ export const Txtone = styled.h2 `
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 20px;
+
 `
 
 export const TxtWixx = styled.h2 `
@@ -199,14 +223,14 @@ export const NavBar = styled.div `
     justify-content: right;
 `
 export const BtnPublic = styled.button `
-    margin-right: 25px;
+    margin-right: 10px;
     font-size:16px;
-    padding:5px;
+    padding:8px;
     color: white;
     background-color: ${props => props.theme.colors.primary};
     border-radius: 5px;
-    border: 1px solid ${props => props.theme.colors.primary};
     cursor: pointer;
+    transition: .3s ease;
 
     &:hover{
     background-color: ${props => props.theme.colors.secondary};
@@ -221,7 +245,12 @@ export const NavHiring = styled.div `
     display:flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 5rem;
+
+    @media (max-width: 768px){
+        width: 90%;
+    }
 `
 
 export const NavUsuario = styled.h3 `
@@ -230,6 +259,10 @@ export const NavUsuario = styled.h3 `
     color: rgba(0, 0, 0, 0.356);
     margin-left: 80px;
     width:270px;
+    @media(max-width: 768px){
+        width: 0;
+        margin-left: 0;
+    }
 `
 
 export const NavPublicacion = styled.h3 `
@@ -238,6 +271,10 @@ export const NavPublicacion = styled.h3 `
     color: rgba(0, 0, 0, 0.356);
     margin-left: 100px;
     width:270px;
+    @media(max-width: 768px){
+        width: 0;
+        margin-left: 0;
+    }
 `
 
 export const NavMonto = styled.h3 `
@@ -246,6 +283,10 @@ export const NavMonto = styled.h3 `
     color: rgba(0, 0, 0, 0.356);
     margin-left: 100px;
     width:270px;
+    @media(max-width: 768px){
+        width: 0;
+        margin-left: 0;
+    }
 `
 
 export const NavTitle = styled.h3 `
@@ -254,6 +295,11 @@ export const NavTitle = styled.h3 `
     color: rgba(0, 0, 0, 0.356);
     margin-left: 20px;
     width:270px;
+
+    @media(max-width: 768px){
+        width: 0;
+        margin-left: 0;
+    }
 `
 
 export const ContainerCards = styled.div `

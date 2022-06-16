@@ -8,13 +8,15 @@ export const Container = styled.section`
     align-items: center;
 `
 export const Wrapper = styled.div`
-    width: 100%;
+    max-width: 1100px;
+    min-width: 1100px;
+
     justify-content: space-between;
     display: flex;
 
     @media (max-width: 768px){
         flex-flow: column;
-        min-width: 100%;
+    min-width: 90%;
     }
 `
 
@@ -66,3 +68,4 @@ export const Image = styled.div`
         margin: 0 auto;
     }
 `
+

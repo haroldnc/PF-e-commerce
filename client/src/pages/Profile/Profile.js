@@ -7,4 +7,5 @@ margin-top: 8rem
 `
 
 export const Validate = styled.div`
-margin:20%`
+margin:20%;
+`

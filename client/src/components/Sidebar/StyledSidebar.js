@@ -12,7 +12,7 @@ export const Container = styled.aside`
   align-items: center;
   flex-flow: column;
   box-shadow: ${(props) => props.theme.boxShadow};
-  background-color: white;
+  background-color: ${props => props.theme.colors.backgroundColorAlt};
   transition: 0.3s ease-in-out;
   opacity: ${({ isOpen }) => (isOpen ? "100%" : "0")};
   right: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
@@ -62,3 +62,38 @@ export const LogIn = styled.button`
   color: white;
   transition: 0.3s ease;
 `;
+
+export const InfoUser = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 5rem;
+`
+export const Profile = styled.div`
+  width: 8rem;
+  height: 8rem;
+  border-radius: 99999px;
+  background: url(${props => props.img});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+`
+export const UserRole = styled.span`
+  color: #13e300;
+  font-size: 25px;
+  margin-top: 1rem;
+`
+export const InfoUserLinks = styled.div`
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 1rem;
+
+  ul{
+    font-size: 25px;
+  }
+`
