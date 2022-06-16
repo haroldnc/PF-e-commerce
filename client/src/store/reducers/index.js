@@ -125,7 +125,7 @@ const rootReducer = (state = initialState, action) => {
         case "GET_POST_SERVICE_BY_ID":
             return{
                 ...state,
-                servicePosts: action.payload
+                servicePosts: action.payload.filter(p => p.active === true)
             }
         case "POST_ID":
             return{
@@ -193,7 +193,7 @@ const rootReducer = (state = initialState, action) => {
         case "GET_POST_BY_QUERY":
             return{
                 ...state,
-                queryPosts: action.payload.Publications
+                queryPosts: action.payload.Publications.filter(e => e.active === true)
             }
         case  "PAYMENT":
             window.location.href = action.payload.url
