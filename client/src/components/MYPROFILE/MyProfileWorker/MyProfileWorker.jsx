@@ -151,6 +151,7 @@ const MyProfileWorker = ({
         <MyProfilePost
           allPost={allPost ? allPost : null}
           id={profile.user.uid}
+          profile={profile}
         />
       );
     } else if (panel === "hiring") {
@@ -241,6 +242,8 @@ const MyProfileWorker = ({
       </Premium>
     );
   }
+
+  console.log('prueba perfil', profile)
 
   return (
     <ContainerWorker>
