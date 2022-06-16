@@ -1,5 +1,6 @@
 const DataWorkers = require('../models/DataWorkers');
 const Publications = require('../models/Publications');
+const User = require('../models/User');
 
 const validarSubscriptionForCreatePost = async (req, res, next) => {
     const { user } = req.body;
@@ -48,9 +49,17 @@ const validarSubscriptionForChangeStatus = async (req, res, next) => {
         const worker = await DataWorkers.findOne({ userId: post.user})
             .populate('subscription_type', 'name');
 
-        if(!worker) throw new Error('The User no is Worker');
-        if(!worker.subscription_type.name) throw new Error('No valid subscription');
-        if(!worker.subscribed) throw new Error('Worker no subscribed');
+        if(!worker){
+            const cur_user = await User.findById(post.user)
+                .populate('user_role', 'name');
+
+            if (!cur_user) throw new Error('The User no exist');
+            if (cur_user.user_role.name !== 'admin') throw new Error('The user not is Worker or Admin');
+        } else {
+            throw new Error('The User no is Worker');
+            if(!worker.subscription_type.name) throw new Error('No valid subscription');
+            if(!worker.subscribed) throw new Error('Worker no subscribed');
+        }
         const posts = await Publications.count({ user: post.user, active: true });
 
         if (req.body.active){

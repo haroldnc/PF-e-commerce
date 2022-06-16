@@ -90,6 +90,9 @@ const addHiring = async (req, res) => {
 const getAllHirings = async (req, res) => {
     try {
         const hirings = await Hiring.find()
+            .populate('idUser', {firstName: 1, lastName: 1, image: 1})
+            .populate('idWorker', {firstName: 1, lastName: 1, image: 1})
+            .populate('idPublication', {title: 1, price: 1})
         res.status(200).json({ 
             ok: true,
             hirings
