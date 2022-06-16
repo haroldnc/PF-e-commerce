@@ -50,7 +50,7 @@ export default function HirePage(){
 
     },[dispatch, id])
     
-    console.log(data)
+    // console.log(data)
     return(
 
         <>

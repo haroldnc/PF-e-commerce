@@ -31,7 +31,7 @@ const Favourites = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [userFav, setUserFavs] = useState([]);
-  console.log("jasd", userFav);
+  // console.log("jasd", userFav);
 
   useEffect(() => {
 

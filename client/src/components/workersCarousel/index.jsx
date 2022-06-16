@@ -56,7 +56,7 @@ export default function WorkersCarousel({ profiles }) {
       >
         {availableProfiles.length ? (
           availableProfiles.map((p, index) => (
-            <SplideSlide>
+            <SplideSlide key={index}>
               <Card
                 key={index}
                 name={`${p.userId.firstName} ${p.userId.lastName}`}

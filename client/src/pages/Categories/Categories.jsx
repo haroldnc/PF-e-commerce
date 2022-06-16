@@ -16,7 +16,7 @@ const history = useHistory()
  const allCategories = useSelector(state => state.allCategories)
  const {id} = useParams()
  const [ localId , setLocalId ] = useState([])
-console.log(localId)
+// console.log(localId)
   useEffect(() => {
     dispatch(getCategorybyId(id));
   }, [dispatch, location.pathname, id]);
@@ -30,7 +30,7 @@ console.log(localId)
       setLocalId(localId.filter( f => f !== e.target.value)) :
       setLocalId([...localId, e.target.value])
   }
-  console.log('categories', allCategories)
+  // console.log('categories', allCategories)
   return (
     <Container>
       <ContainerBanner>

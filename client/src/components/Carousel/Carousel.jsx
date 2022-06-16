@@ -63,7 +63,7 @@ const Carousel = ({allCategories}) => {
         }}
       >
           {allCategories?.map((card, index) => (
-            <SplideSlide>
+            <SplideSlide key={index}>
               <Card>
                 <Link
                   style={{ textDecoration: "none" }}
