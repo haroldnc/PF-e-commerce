@@ -26,7 +26,7 @@ function FindNeedle(haystack, needle) {
         const {title} = req.query;
         let TodasDB = []
         TodasDB = await Publications.find({ include: [Categories, User] })
-            .populate('user', { firstName:1, lastName:1 });
+            .populate('user', { firstName:1, lastName:1, image:1 });
         //console.log("await post",TodasDB);
         //console.log("await post",TodasDB.length);
         if(TodasDB.length > 0){
