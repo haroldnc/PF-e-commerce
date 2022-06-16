@@ -35,7 +35,7 @@ const Favourites = () => {
 
   useEffect(() => {
 
-    axios.get(`http://wixer-server.herokuapp.com/favorites/${id}`).then((res) => {setUserFavs(res.data.favorites)});
+    axios.get(`https://wixxer.up.railway.app/favorites/${id}`).then((res) => {setUserFavs(res.data.favorites)});
 
 
   }, [id]);
