@@ -6,12 +6,13 @@ import { NavPost, BtnPublic, ContainerCards, TextTwo, Textone, ContainerNopost }
 import CardPostMyprofile from '../CardPostMyprofile/CardPostMyprofile.jsx'
 import Swal from 'sweetalert2'
 
-const MyProfilePost = ({id, allPost}) => {
+const MyProfilePost = ({id, allPost, profile}) => {
 
     const history = useHistory()
     const dispatch = useDispatch()
     const [ PostAll , setPostAll ] = useState("")
     const [ cambio , setCambio ] = useState( false )
+    // const [ PostActivos , setPostActivos ] = useState(allPost && allPost.filter( p => p.active === true).length)
 
     let posts = null
     if(allPost){
@@ -52,6 +53,9 @@ const MyProfilePost = ({id, allPost}) => {
         })
     }
 
+    // console.log('plan', profile.dataWorker.subscription_type.name)
+    // console.log('post',PostActivos)
+
     const handleActivate = (body, id) => {
         dispatch(changeStatusPosts(body,id))
     }
@@ -77,6 +81,8 @@ const MyProfilePost = ({id, allPost}) => {
                         service={p.service.name}
                         active={p.active}
                         handleActivate={handleActivate}
+                        suscribe={profile.dataWorker.subscription_type.name}
+                        posts={allPost}
                        /> 
                     </div>
                    )) :
@@ -92,6 +98,8 @@ const MyProfilePost = ({id, allPost}) => {
                         service={p.service.name}
                         active={p.active}
                         handleActivate={handleActivate}
+                        suscribe={profile.dataWorker.subscription_type.name}
+                        posts={allPost}
                         // rating={p.score}
                        /> 
                     </div>
