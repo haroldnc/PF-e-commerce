@@ -88,3 +88,13 @@ export const PostsTitle = styled.h4`
     width: 40%;
     margin: auto;
 `
+
+
+export const CommentContainer = styled.div`
+
+    width: 40%;
+    margin: auto;
+    border: solid 2px black;
+
+
+`

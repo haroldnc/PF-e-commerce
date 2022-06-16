@@ -340,3 +340,9 @@ export const getLastTransactionById = (id)=> dispatch=> {
 export const putHiring = (body) => async() => {
   await axios.put(`http://wixer-server.herokuapp.com/hirings/`, body)
 }
+
+
+export const getCommentsByWorkerId = (id)=> dispatch=> {
+  axios.get(`https://wixer-server.herokuapp.com/scores/worker/${id}`)
+  .then( res => dispatch({type: "GET_COMMENT_BY_WORKER_ID", payload: res.data.scores }))
+}

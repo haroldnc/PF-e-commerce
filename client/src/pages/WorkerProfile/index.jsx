@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import {useSelector, useDispatch} from "react-redux"
 import {useParams} from "react-router-dom"
-import {getAllPosts, getWorkerDetail} from "../../store/actions"
-import { Container, DescriptionArea, Div1, Div2, Div3, HireButton, PostsTitle, Price, ProfileCardsContainer, ProfilePic, SubTitle } from "./StyledWorkerProfile";
+import {getAllPosts, getCommentsByWorkerId, getWorkerDetail} from "../../store/actions"
+import { CommentContainer, Container, DescriptionArea, Div1, Div2, Div3, HireButton, PostsTitle, Price, ProfileCardsContainer, ProfilePic, SubTitle } from "./StyledWorkerProfile";
 import ProfilePostDetailCard from "../../components/InWorkerProfileCards";
+import CardComments from "../../components/CardComments";
 
 export default function WorkerProfile (){
 
@@ -11,6 +12,7 @@ export default function WorkerProfile (){
     const dispatch = useDispatch()
     const worker = useSelector((state)=>state.workerDetail)
     const arrayOfPost = useSelector((state)=>state.allPost)
+    const comments = useSelector((state)=>state.comments)
     // console.log(arrayOfPost)
     var userPost = []
 
@@ -29,6 +31,7 @@ export default function WorkerProfile (){
     useEffect(()=>{
         dispatch(getWorkerDetail(id))
         dispatch(getAllPosts())
+        dispatch(getCommentsByWorkerId(id))
     }, [dispatch, id])
     
     getUserPosts(worker, arrayOfPost)
@@ -36,6 +39,8 @@ export default function WorkerProfile (){
     // console.log(worker)
     // console.log(arrayOfPost)
     // const userPost= arrayOfPost.filter(p=>p.user===worker.userId.uid)
+   const filteredComments =  comments.filter(c=>c.some(Object))
+   const objectsFromComments = filteredComments.map(o=>o[0])
 
 
     return(
@@ -104,6 +109,19 @@ export default function WorkerProfile (){
                 <h4>...cargando datos</h4>
             }
         </ProfileCardsContainer>
+            <CommentContainer>
+                {objectsFromComments.length && objectsFromComments.map(c=>(
+                    <CardComments 
+                    id = {c._id}
+                    title={c.title}
+                    message={c.message}
+                    user={c.user}
+                    />
+                ))
+
+
+                }
+            </CommentContainer>
             </div>
         :
         <h1>Los datos se están cargando o este usuario no tiene datos válidos, espere.</h1>

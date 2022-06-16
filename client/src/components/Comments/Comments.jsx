@@ -15,11 +15,11 @@ const Comments = () => {
         "commentsFiltered" para usarlo aqui y que en el detalle del worker aparesca sus respectivos comentarios.
     */
     
-    /*
-    useEffect(() => {
-        dispatch(getComments());
-    }, [dispatch]);
-    */
+    
+    // useEffect(() => {
+    //     dispatch(getComments());
+    // }, [dispatch]);
+    
 
     return (
         <div>

@@ -27,7 +27,8 @@ const initialState = {
     userHirings:[],
     userWishlist: [],
     removeWishlist: [],
-    lastTransactionById: {}
+    lastTransactionById: {},
+    comments:[]
 };
 //habia un objeto en initialstate
 
@@ -233,6 +234,11 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             lastTransactionById : action.payload
         }
+        case "GET_COMMENT_BY_WORKER_ID":
+            return{
+                ...state,
+                comments: action.payload
+            }
             
         default: return state;
     };
