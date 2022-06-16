@@ -180,8 +180,8 @@ const createUser = async (req, res) => {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'nachoburgos1995@gmail.com',
-                pass: 'mtlsdatewtbcwhbf'
+                user: 'harold.mth95@gmail.com',
+                pass: 'ramitbsyvctshlun'
             }
         });
         const mailOptions = {
