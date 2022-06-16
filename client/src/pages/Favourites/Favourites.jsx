@@ -16,7 +16,7 @@ import {
   Staring,
   Title,
 } from "./StyledFavourites";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelec } from "react-redux";
 import {
   removeFromWishlist,
 } from "../../store/actions";
@@ -32,6 +32,7 @@ const Favourites = () => {
   const dispatch = useDispatch();
   const [userFav, setUserFavs] = useState([]);
   // console.log("jasd", userFav);
+
 
   useEffect(() => {
 
@@ -49,6 +50,7 @@ const Favourites = () => {
       <Grid>
         {userFav?.map((u, index) => (
           <Card key={index}>
+            
             <HeartContainer>
               <HeartFill onClick={(e) => handleDelete(u._id)} />
             </HeartContainer>

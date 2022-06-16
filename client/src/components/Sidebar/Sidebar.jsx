@@ -43,7 +43,7 @@ const Sidebar = ({ isOpen, toggle, userInfo, isOpenModalSignOut, toggleModalSign
           )}
           {userInfo.user_role.name === "user" && (
             <InfoUserLinks>
-              <ul>
+              <ul onClick={toggle}>
                 <li onClick={() => handleClick()}>Perfil</li>
                 <li onClick={() => handleGoFavs()}>Favoritos</li>
                 <li onClick={toggleModalSignOut}>Cerrar sesión</li>
@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen, toggle, userInfo, isOpenModalSignOut, toggleModalSign
           )}
           {userInfo.user_role === "628eefd607fe8bf42fb6a5f5" && (
             <InfoUserLinks>
-              <ul>
+              <ul onClick={toggle}>
                 <li onClick={() => handleClick()}>Perfil</li>
                 <li onClick={() => handleGoFavs()}>Favoritos</li>
                 <li onClick={toggleModalSignOut}>Cerrar sesión</li>
@@ -61,7 +61,7 @@ const Sidebar = ({ isOpen, toggle, userInfo, isOpenModalSignOut, toggleModalSign
           )}
           {userInfo.user_role.name === "worker" && (
             <InfoUserLinks>
-              <ul>
+              <ul onClick={toggle}>
                 <li onClick={() => handleClick()}>Perfil</li>
                 <li onClick={() => handleGoFavs()}>Favoritos</li>
                 <Link to="/publicar">
@@ -73,7 +73,7 @@ const Sidebar = ({ isOpen, toggle, userInfo, isOpenModalSignOut, toggleModalSign
           )}
           {userInfo.user_role === "628ef02007fe8bf42fb6a5f8" && (
             <InfoUserLinks>
-              <ul>
+              <ul onClick={toggle}>
                 <li onClick={() => handleClick()}>Perfil</li>
                 <li onClick={() => handleGoFavs()}>Favoritos</li>
                 <Link to="/publicar">

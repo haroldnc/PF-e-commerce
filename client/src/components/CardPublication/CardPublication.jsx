@@ -35,7 +35,7 @@ import CardP from "../Card/Card";
 const CardPublication = ({ pageslice, userInfo, title, img }) => {
   const dispatch = useDispatch();
   const [isFaved, setIsFaved] = useState(false);
-  const userWishlist = useSelector(state => state.userWishlist?.favorites);
+  const userWishlist = useSelector((state) => state.userWishlist?.favorites);
 
   // console.log("poronga", userInfo);
 
@@ -46,24 +46,26 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
   // const icon = isClicked ? <HeartFill /> : <HeartOutline />
 
   const handleAddFavorite = (idUser, idPublication) => {
-       dispatch(addToWishlist(idUser, idPublication));
+    dispatch(addToWishlist(idUser, idPublication));
   };
 
   const fav = () => {
     setIsFaved(!isFaved);
-  }
-
+  };
 
   return (
     <>
       {pageslice &&
         pageslice.map((card, index) => (
-          <Card key={index}> 
-          <HeartContainer onClick={() => fav()}>
-            <HeartFill onClick={() => handleAddFavorite(userInfo?.uid, card._id)} />
-            {/* {fav ?  <HeartFill /> : <HeartOutline />} */}
-            
-          </HeartContainer>
+          <Card key={index}>
+            {userInfo && (
+              <HeartContainer onClick={() => fav()}>
+                <HeartFill
+                  onClick={() => handleAddFavorite(userInfo?.uid, card._id)}
+                />
+                {/* {fav ?  <HeartFill /> : <HeartOutline />} */}
+              </HeartContainer>
+            )}
             {/* <HeartContainer onClick={() => handleIcon(userInfo.uid, card._id)}> */}
             {/* <HeartFill  /> */}
 
@@ -83,9 +85,9 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
               <Rating>{card.score[0]}</Rating>
             </DivRating>
             <DivPay>
-                <Link to={`/posts/detail/${card._id}`}>
-                  <BotonPago>Ver detalle</BotonPago>
-                </Link>            
+              <Link to={`/posts/detail/${card._id}`}>
+                <BotonPago>Ver detalle</BotonPago>
+              </Link>
               <PriceContainer>
                 <Staring>COMIENZA EN</Staring>
                 <Pay>US${card.price}</Pay>
