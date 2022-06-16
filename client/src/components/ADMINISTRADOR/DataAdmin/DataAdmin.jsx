@@ -5,6 +5,7 @@ import { ContainerMenu, NameMenu, DivName, Menudiv, Namediv } from './DataAdmin'
 import { BsFileEarmarkPostFill, BsFileEarmarkPost } from 'react-icons/bs'
 import { MdPostAdd } from 'react-icons/md'
 import { IconContext } from 'react-icons'
+import { GiShakingHands } from 'react-icons/gi'
 
 const DataAdmin = ({lateral, setLateral, setRender}) => {
 
@@ -46,6 +47,14 @@ const DataAdmin = ({lateral, setLateral, setRender}) => {
                         </div>
                     </IconContext.Provider>
                 <Namediv>Publicaciones</Namediv>
+            </Menudiv>
+            <Menudiv onClick={() => handleClick("Contrataciones")}>
+            <IconContext.Provider value={{size:"20px"}}>
+                        <div>
+                            <GiShakingHands/>
+                        </div>
+                    </IconContext.Provider>
+                <Namediv>Contrataciones</Namediv>
             </Menudiv>
         </ContainerMenu>
     )

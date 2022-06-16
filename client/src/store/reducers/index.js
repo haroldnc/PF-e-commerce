@@ -25,6 +25,7 @@ const initialState = {
     servicePosts:[],
     hiringsByWorker: [],
     userHirings:[],
+    allHirings: [],
     userWishlist: [],
     removeWishlist: [],
     lastTransactionById: {}
@@ -233,6 +234,11 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             lastTransactionById : action.payload
         }
+        case "GET_ALL_HIRINGS" :
+            return {
+                ...state,
+                allHirings: action.payload
+            }
             
         default: return state;
     };

@@ -1,9 +1,17 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { ContainerAdmin, Screen } from './Admin.js'
 import { useSelector, useDispatch } from "react-redux";
 import {Route} from "react-router-dom"
 import Home from "../Home/Home"
-import { getUserById,getPostByUser, clearUserById, getHiringsByUserId, getHiringsByWorker, GetTransactionById } from '../../store/actions/index'
+import { getUserById,
+        getPostByUser, 
+        clearUserById, 
+        getHiringsByUserId, 
+        getHiringsByWorker, 
+        GetTransactionById,
+        getAllPosts,
+        getAllHirings
+    } from '../../store/actions/index'
 
 import NavAdmin from '../../components/ADMINISTRADOR/NavAdmin/NavAdmin.jsx'
 import LateralNavAdmin from '../../components/ADMINISTRADOR/LateralNavAdmin/LateralNavAdmin.jsx'
@@ -20,6 +28,8 @@ import AdminUser from "../../components/ADMINISTRADOR/AdminUser/AdminUser.jsx";
 import ModalDetailUser from '../../components/ADMINISTRADOR/ModalDetailUser/ModalDetailUser.jsx';
 import AdminSuscriptores from '../../components/ADMINISTRADOR/AdminSuscriptores/AdminSuscriptores.jsx'
 import ModalHistorialPay from '../../components/ADMINISTRADOR/ModalHistorialPay/ModalHistorialPay.jsx'
+import PublicacionesAdmin from '../../components/ADMINISTRADOR/PublicacionesAdmin/PublicacionesAdmin.jsx'
+import HiringsAdmin from '../../components/ADMINISTRADOR/HiringsAdmin/HiringsAdmin.jsx'
 
 const validation = (userInfo) =>{
     if(!userInfo) return false;
@@ -31,10 +41,12 @@ const validation = (userInfo) =>{
 
 const Admin = () => {
 
+    const Allpublic = useSelector(state => state.allPost)
     const UserDetail = useSelector(state => state.userDetail)
     const PostById = useSelector(state => state.postsByUser)
     const HiringByWorker = useSelector(state => state.hiringsByWorker)
     const transaction = useSelector(state => state.transactionById)
+    const allHirings = useSelector(state => state.allHirings)
     // console.log('priHiring',HiringByUser)
     const HiringByUser = useSelector(state => state.userHirings)
     // console.log('priHiring',HiringByUser)
@@ -71,8 +83,8 @@ const Admin = () => {
     const { userInfo } = userSignIn;
 
 
-    const validate = validation(userInfo) 
-    if(!validate)  return(<p>good</p>)
+    // const validate = validation(userInfo) 
+    // if(!validate)  return(<p>good</p>)
    
 
     // if(userInfo.user_role.name && userInfo.user_role.name !== "admin"){
@@ -82,6 +94,11 @@ const Admin = () => {
     //     return(<p>good</p>)
     // }
   
+
+    useEffect(() => {
+        dispatch(getAllPosts())
+        dispatch(getAllHirings())
+    },[])
 
 
     if(lateral.panel === "Menu" && lateral.show){
@@ -110,6 +127,10 @@ const Admin = () => {
         showScreen = <Categorias/>
     }else if(render === "Servicios"){
         
+    }else if(render === "Publicaciones"){
+        showScreen = <PublicacionesAdmin  Allpublic={Allpublic}/>
+    }else if(render === "Contrataciones"){
+        showScreen = <HiringsAdmin allHirings={allHirings}/>
     }
 
 
