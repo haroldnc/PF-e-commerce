@@ -49,9 +49,12 @@ export default function ServicesDetail(){
 
    
     const filteredHirings = hiringsByUser.filter(h=>h.idPublication._id === id)
-    let comentario = filteredHirings.map(h=>h.idPublication._id===post._id ? true :false)
-    comentario = comentario.includes(true)
-
+    let comentario = filteredHirings.filter(h=>h.idPublication._id===post._id)
+    console.log("log COM",comentario);
+    let finalizado = comentario
+    comentario = comentario[0]
+   
+    
     const HandleClick = ()=>{
         alert("Ya has contratado este servicio con anterioridad intenta con otra publicación o probablemente aun no has iniciado sesión.")
     }
@@ -135,7 +138,7 @@ const comentar = (
                     }
                     <br />
                     {
-                        comentario
+                        !comentario?.status && finalizado?.length > 0
                         ? comentar
                         :<></>
                     }

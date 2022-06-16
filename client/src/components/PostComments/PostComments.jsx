@@ -102,13 +102,21 @@ const PostComments = () => {
        // history.push('/') <-- poner la ruta anterior 
     };
     
-    let comentar = userHirings.map(h=>h.idPublication._id===publicationId ? true :false)
-    comentar = comentar.includes(true)
+    // let comentar = userHirings.map(h=>h.idPublication._id===publicationId ? true :false)
+    // comentar = comentar.includes(true)
+    // let finalizado = userHirings.map(h=>h.status===true ? true :false)
+    // finalizado = finalizado.includes(true)
+
+    let comentario = userHirings.filter(h=>h.idPublication._id===publicationId)
+    console.log("log COM",comentario);
+    let finalizado = comentario
+    comentario = comentario[0]
+    
     return (
         <Comment>
             <>
             {
-                comentar ?
+                !comentario?.status && finalizado?.length > 0?
                 <Form onSubmit={handleSubmit}>
                     <div>
 
@@ -129,7 +137,7 @@ const PostComments = () => {
                     </CommentBody>
                 </Form>
                 :
-                <h1>Error</h1>
+                <h1>Esta publicacion ya fue Calificada</h1>
             }
             </>
         </Comment>
