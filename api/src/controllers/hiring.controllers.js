@@ -176,11 +176,31 @@ const deleteHiring = async (req, res) => {
     };
 };
 
+const putHiring = async (req, res) =>{
+    const {idPublication, idUser} = req.body
+    try{
+        const hiring = await Hiring.updateOne({idUser, idPublication},{status:true});
+        console.log("log hiring",hiring);
+        res.status(200).json({
+            ok: true,
+            msg: 'Hiring finish successfully',
+            hiring
+        });
+    }catch (error) {
+        res.status(422).json({
+            ok: false,
+            msg: 'Error finish hiring',
+            error: error.message
+        });
+    };
+}
+
 module.exports = { 
     addHiring, 
     getAllHirings, 
     getHiringsByUser, 
     getHiringsByPublication, 
     getHiringsByWorker,
-    deleteHiring
+    deleteHiring,
+    putHiring
 };
