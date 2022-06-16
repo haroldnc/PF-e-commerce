@@ -22,13 +22,14 @@ export const BuyContainer = styled.div`
 `
 
 export const ProfileImg = styled.img`
-    border-radius: 50%;
-    width: 70px;
+    border-radius: 99999px;
+    width: 3rem;
+    height: 3rem;
 `
 
 export const PostPicture = styled.img`
     width: 100%;
-    height: 50%;
+    height: 26%;
 `
 
 export const UserInfo = styled.div`

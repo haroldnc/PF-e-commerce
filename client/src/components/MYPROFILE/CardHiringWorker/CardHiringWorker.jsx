@@ -10,7 +10,7 @@ import { ContainerHiring,
         Monto
      } from './CardHiringWorker'
 
-const CardHiringWorker = ({user, post, open, id}) => {
+const CardHiringWorker = ({user, post, open, id, status}) => {
 
     const history = useHistory()
 

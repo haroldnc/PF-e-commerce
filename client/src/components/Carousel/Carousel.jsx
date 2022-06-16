@@ -6,7 +6,10 @@ import LeftArrow from '../assets/images/arrowL.png'
 import RightArrow from '../assets/images/arrowR.png'
 import { Link } from 'react-router-dom'
 
-import {CarouselDiv, TitleCarousel, CardCarousel, Image, NameCard, ArrowImage, Linked} from './StyledCarousel'
+import {CarouselDiv, TitleCarousel, CardCarousel, Image, NameCard, ArrowImage, Linked, Card} from './StyledCarousel'
+
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 
 
@@ -46,19 +49,34 @@ const Carousel = ({allCategories}) => {
 
     return(
         <CarouselDiv>
-            <TitleCarousel>Servicios populares</TitleCarousel>
-            <Slider {...settings}>
-            { allCategories && allCategories.map((card,index) => (
-                
-                    <CardCarousel key={index}>
-                        <Link style={{textDecoration: "none"}} to={`/servicios/${card.services[0]._id}`}>
-                            <Image src={imgservicios[index]} alt="img"/>
-                            <NameCard>{card.services[0].name}</NameCard>
-                        </Link>
-                    </CardCarousel>
-                
-            ))}
-            </Slider>
+        <TitleCarousel>Servicios populares</TitleCarousel>
+         <Splide
+        options={{
+            arrows: false,
+            pagination: false,
+          perPage: 5,
+          gap: "1rem",
+          breakpoints: {
+            1200: { perPage: 2, gap: "50px" },
+            640: { perPage: 2, gap: "3rem" },
+          },
+        }}
+      >
+          {allCategories?.map((card, index) => (
+            <SplideSlide>
+              <Card>
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`/servicios/${card.services[0]._id}`}
+                >
+                  <Image src={imgservicios[index]} alt="img" />
+                  <NameCard>{card.services[0].name}</NameCard>
+                </Link>
+              </Card>
+            </SplideSlide>
+          ))}
+      </Splide>
+      
         </CarouselDiv>  
     )
 }

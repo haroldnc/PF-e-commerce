@@ -1,17 +1,28 @@
 import styled from 'styled-components'
 
 
-export const Page = styled.main `
+export const Page = styled.main`
+    height: calc(100% - 5rem);
     width: 100%;
-    height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 2rem;
+    flex-direction: column;
+    margin-top: 6rem;
 `
 export const Wrapper = styled.div`
     max-width: 1100px;
     min-width: 1100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    @media (max-width: 680px){
+        max-width: 100%;
+        min-width: 100%;
+    }
 `
 
 export const NameServ = styled.h2 `
@@ -19,8 +30,11 @@ export const NameServ = styled.h2 `
     color: 01103;
 `
 
-export const Grid = styled.div `
+export const Grid = styled.div`
     display: grid;
-    flex-direction: row;
     grid-template-columns: repeat(4, 1fr);
-`
+
+    @media (max-width:680px){
+        grid-template-columns: repeat(1, 1fr);
+    }
+` 

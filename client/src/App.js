@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-
-
 //PAyment Element
 
 // import {Elements} from '@stripe/react-stripe-js';
@@ -33,7 +31,7 @@ import DarkModeBtn from "./components/DarkModeBtn/DarkModeBtn";
 import { useDarkMode } from "./Hooks/useDarkMode";
 import WorkerProfile from "./pages/WorkerProfile";
 import PublishService from "./pages/PublishService/PublishService";
-import Admin from './pages/Admin/Admin.jsx'
+import Admin from "./pages/Admin/Admin.jsx";
 import ServicesDetail from "./pages/ServicesDetail";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -43,7 +41,7 @@ import SearchResults from "./pages/SearchResults";
 import Confirm from "./pages/Confirm/Confirm";
 import LogInConfirm from "./pages/LogInConfirm/LogInConfirm";
 import Wishlist from "./pages/Wishlist/Wishlist";
-import PaymentSuccess from './pages/PaymenSuccess/PaymentSuccess.jsx'
+import PaymentSuccess from "./pages/PaymenSuccess/PaymentSuccess.jsx";
 import Swal from "sweetalert2";
 import Favourites from "./pages/Favourites/Favourites";
 import PostComments from "./components/PostComments/PostComments";
@@ -51,15 +49,13 @@ import HirePage from "./pages/HireConfirmation";
 import SuccesOrFail from "./pages/SuccesOrFailHirings";
 import CommentPage from "./pages/PaginaComentarios";
 
-
- // const stripePromise = loadStripe("pk_test_51L5zjMHq6KUjuv7IIFciLODh9WoDWs5rnmbUrfSZVOfMMWN67dB15Ricdwoi8UNFfuIHL6lgzSTocRXWlYa7aBSA00oP1VlFMI");
+// const stripePromise = loadStripe("pk_test_51L5zjMHq6KUjuv7IIFciLODh9WoDWs5rnmbUrfSZVOfMMWN67dB15Ricdwoi8UNFfuIHL6lgzSTocRXWlYa7aBSA00oP1VlFMI");
 
 function App() {
   const userSignIn = useSelector((state) => state.userSignIn);
 
   const { userInfo } = userSignIn;
   // console.log(userInfo)
-
 
   const [isOpen, setIsOpen] = useState(false);
   const [theme, setTheme] = useDarkMode();
@@ -84,23 +80,19 @@ function App() {
     setIsOpenModalSignOut(!isOpenModalSignOut);
   };
 
-  
-
   const options = {
     // passing the client secret obtained in step 2
-    clientSecret: '{{CLIENT_SECRET}}',
+    clientSecret: "{{CLIENT_SECRET}}",
     // Fully customizable with appearance API.
-    appearance: {/*...*/},
-
-    }
-
+    appearance: {
+      /*...*/
+    },
+  };
 
   return (
     <BrowserRouter>
       <ThemeProvider theme={themes[themeMode]}>
-
-
-      <Navbar
+        <Navbar
           toggle={toggle}
           isOpenModalSignUp={isOpenModalSignUp}
           toggleModalSignUp={toggleModalSignUp}
@@ -110,34 +102,48 @@ function App() {
           toggleModalSignOut={toggleModalSignOut}
           userInfo={userInfo}
         />
-        
-        <Sidebar isOpen={isOpen} toggle={toggle} />
-        <Switch>    
-          <Route exact path="/" component={Home}/>
+
+        <Sidebar
+          isOpen={isOpen}
+          toggle={toggle}
+          userInfo={userInfo}
+          isOpenModalSignUp={isOpenModalSignUp}
+          toggleModalSignUp={toggleModalSignUp}
+          isOpenModalLogIn={isOpenModalLogIn}
+          toggleModalLogIn={toggleModalLogIn}
+          isOpenModalSignOut={isOpenModalSignOut}
+          toggleModalSignOut={toggleModalSignOut}
+        />
+        <Switch>
+          <Route exact path="/" component={Home} />
           <Route exact path="/paysuccess" component={PaymentSuccess} />
-          <Route exact path="/" component={Home} userInfo={userInfo}/>
+          <Route exact path="/" component={Home} userInfo={userInfo} />
           <Route exact path="/servicios/:id" component={Services} />
           <Route exact path="/categoria/:id" component={Categories} />
           <Route path="/worker/:id" component={WorkerProfile} />
           <Route path="/compra/:id" component={Payment} />
           <Route path="/publicar" component={PublishService} />
           <Route exact path="/admin" component={Admin} />
-          <Route path="/posts/detail/:id" component={ServicesDetail}/>
-          <Route path="/search" component={SearchResults}/>
+          <Route path="/posts/detail/:id" component={ServicesDetail} />
+          <Route path="/search" component={SearchResults} />
           <Route exact path="/profile/:id" component={Profile} />
           {/* <Elements stripe={stripePromise}>
             <CheckoutForm />
         </Elements> */}
-          <Route path="/checkout" component={Payment}/>
+          <Route path="/checkout" component={Payment} />
           <Route path="/confirm/:id" component={Confirm} />
           <Route path="/iniciar-sesion" component={LogInConfirm} />
           <Route path="/lista-favoritos" component={Wishlist} />
           {/* <Route exact path="/paysuccess" component={PaymentSuccess} /> */}
-          <Route path="/favoritos/:id" component={Favourites} userInfo={userInfo} />
-          <Route path="/comentar/:publicationId" component={PostComments}/>
+          <Route
+            path="/favoritos/:id"
+            component={Favourites}
+            userInfo={userInfo}
+          />
+          <Route path="/comentar/:publicationId" component={PostComments} />
           <Route exact path="/contratar/post/:id" component={HirePage} />
-          <Route path="/contratar/succes" component={SuccesOrFail}/>
-          <Route path="/comentarios/:id" component={CommentPage}/>
+          <Route path="/contratar/succes" component={SuccesOrFail} />
+          <Route path="/comentarios/:id" component={CommentPage} />
         </Switch>
         <Footer />
         <ModalLogIn
@@ -154,7 +160,7 @@ function App() {
           isOpenModalSignOut={isOpenModalSignOut}
           toggleModalSignOut={toggleModalSignOut}
         />
-        
+
         <DarkModeBtn theme={theme} setTheme={setTheme} />
         <GlobalStyle />
       </ThemeProvider>

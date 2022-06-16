@@ -37,7 +37,7 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
   const [isFaved, setIsFaved] = useState(false);
   const userWishlist = useSelector(state => state.userWishlist?.favorites);
 
-  console.log("poronga", );
+  console.log("poronga", pageslice);
 
   useEffect(() => {
     dispatch(getWishlistById(userInfo?.uid));
@@ -83,17 +83,9 @@ const CardPublication = ({ pageslice, userInfo, title, img }) => {
               <Rating>{card.score[0]}</Rating>
             </DivRating>
             <DivPay>
-              {userInfo && userInfo.confirm_email === true ? (
-                <Link to={`/compra/${card._id}`}>
-                  <BotonPago>Contratar</BotonPago>
-                </Link>
-              ) : (
-                <BotonPago
-                  onClick={() => alert("Debes registrarte o iniciar secion")}
-                >
-                  Contratar
-                </BotonPago>
-              )}
+                <Link to={`/posts/detail/${card._id}`}>
+                  <BotonPago>Ver detalle</BotonPago>
+                </Link>            
               <PriceContainer>
                 <Staring>COMIENZA EN</Staring>
                 <Pay>US${card.price}</Pay>

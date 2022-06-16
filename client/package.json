@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@splidejs/react-splide": "^0.7.8",
     "@stripe/react-stripe-js": "^1.8.1",
     "@stripe/stripe-js": "^1.31.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -14,7 +15,7 @@
     "formik": "^2.2.9",
     "gapi-script": "^1.2.0",
     "react": "^18.1.0",
-    "react-chartjs-2": "^4.1.0",
+    "react-chartjs-2": "^4.2.0",
     "react-dom": "^18.1.0",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.3.1",

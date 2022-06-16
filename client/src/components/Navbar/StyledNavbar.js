@@ -107,6 +107,10 @@ export const UserInfo = styled.div`
   gap: 15px;
   justify-content: center;
   align-items: center;
+
+  @media (max-width:680px){
+    display: none;
+  }
 `
 export const UserRole = styled.span`
   color: #13e300;

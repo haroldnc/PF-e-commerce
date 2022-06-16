@@ -61,7 +61,7 @@ const ModalSignUp = ({ isOpenModalSignUp, toggleModalSignUp }) => {
     console.log(googleData.profileObj);
     try {
       const dataGoogle = await axios.post(
-        `https://wixer-server.herokuapp.com/auth/google`,
+        `https://wixxer.up.railway.app/auth/google`,
         {
           tokenId: googleData.tokenId,
           givenName: googleData.profileObj.givenName,

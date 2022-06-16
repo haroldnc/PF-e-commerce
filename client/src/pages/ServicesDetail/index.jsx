@@ -4,6 +4,7 @@ import {Link, useParams} from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { getPostById, getUserById, getAllPosts, getWorkers, getAllUsers, clearServiceDetail, getHiringsByUserId } from "../../store/actions";
 import PostDetailCard from "../../components/PostDetailCard";
+import Swal from "sweetalert2";
 
 
 
@@ -35,7 +36,8 @@ export default function ServicesDetail(){
     // console.log(user.username)
     // console.log(post.title)
         if(arrayOfPosts.length ){
-            userPost= arrayOfPosts.filter(p=>p.user.uid===post.user)
+            userPost= arrayOfPosts.filter(p=>p.user.uid===post.user && p._id !== id)
+           // userPost = userPost.filter
 
         }
     //    console.log(userPost)
@@ -56,7 +58,13 @@ export default function ServicesDetail(){
    
     
     const HandleClick = ()=>{
-        alert("Ya has contratado este servicio con anterioridad intenta con otra publicación o probablemente aun no has iniciado sesión.")
+        // 
+        return Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Error',
+            text: 'Al parecer ya hiciste esta contratación. Si no lo has hecho recuerda loggearte',
+        })
     }
     
     
