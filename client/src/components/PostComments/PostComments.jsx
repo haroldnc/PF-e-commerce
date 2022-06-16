@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Rating } from 'react-simple-star-rating';
 import { Form, Comment, CommentBody, Inputs, Errors } from './styledComments';
-import { postComments, getHiringsByUserId } from "../../store/actions/index";
+import { postComments, getHiringsByUserId, putHiring } from "../../store/actions/index";
 import { InputImage } from '../PublishForm/styledPublishForm';
 
 const PostComments = () => {
@@ -83,6 +83,7 @@ const PostComments = () => {
 
         e.preventDefault();
         console.log(input)
+        dispatch(putHiring({idUser:userID, idPublication:publicationId}))
         dispatch(postComments(input));
         setInput({
             user: ``,
