@@ -23,7 +23,17 @@ import { IoIosStar } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2'
 
-const CardPostMyprofile = ({ title, img, description, price,idPist, rating, handleDelete, service, active, handleActivate }) => {
+const CardPostMyprofile = ({ title, 
+                              img,
+                              description, 
+                              price,idPist, 
+                              rating, 
+                              handleDelete, 
+                              service, 
+                              active, 
+                              handleActivate, 
+                              suscribe, 
+                              posts }) => {
 
   const [ activate, setActivate ] = useState(active)
 
@@ -61,27 +71,40 @@ const handleChange = () => {
         }
     })
     }else{
-      Swal.fire({
-        title: 'Estas seguro?',
-        text: "Tu publicación se activará",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, Activar!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Publicación activada correctamente!',
-            'Tu publicación ahora será visible',
-            'success'
-          )
-          handleActivate({
-            active: true
-          } ,idPist)
-          setActivate(true)
-        }
-    })
+      if(suscribe === "Standard" && posts.filter( p => p.active === true).length < 3){
+        console.log('los post',posts.filter( p => p.active === true).length)
+        console.log('plan',suscribe)
+        Swal.fire({
+          title: 'Estas seguro?',
+          text: "Tu publicación se activará",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Activar!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Publicación activada correctamente!',
+              'Tu publicación ahora será visible',
+              'success'
+            )
+            handleActivate({
+              active: true
+            } ,idPist)
+            setActivate(true)
+          }
+      })
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'No puedes activar',
+          text: 'Tienes 3 publicaciones activas, cambiate a Premium y no tendras problemas!',
+          footer: '<a href="">Why do I have this issue?</a>'
+        })
+      }
+
+
     
 
     }
