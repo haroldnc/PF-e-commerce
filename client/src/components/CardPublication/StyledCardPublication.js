@@ -46,6 +46,7 @@ export const NameProfile = styled.p`
 export const Description = styled.h2`
   margin-left: 15px;
   margin-right: 15px;
+  margin-bottom: 15px;
   text-align: left;
   font-size: 17px;
   font-weight: 400;
@@ -78,7 +79,7 @@ export const DivPay = styled.div`
 
 export const Staring = styled.p`
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.253);
+  color: ${props => props.theme.colors.font};
 `;
 
 export const Pay = styled.h1`
@@ -87,7 +88,7 @@ export const Pay = styled.h1`
   margin-left: 8px;
   font-size: 22px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.664);
+  color: ${props => props.theme.colors.font};
 `;
 
 export const PriceContainer = styled.div`

@@ -18,7 +18,7 @@ export const PublishFormSection = styled.div`
 `;
 
 export const Form = styled.form`
-  background-color: ${(props) => props.theme.colors.backgroundColorAlt};
+  background-color: ${props => props.theme.colors.backgroundColorAlt};
   border-radius: 5rem;
   padding-top: 1rem;
   padding-bottom: 1rem;

@@ -42,6 +42,10 @@ export const Right = styled.div`
 export const TitleContainer = styled.div`
   padding-bottom: 8px;
   cursor: pointer;
+
+  span{
+    color: ${props => props.theme.colors.primary}
+  }
 `
 
 export const LinksContainer = styled.ul`
@@ -125,4 +129,9 @@ export const Profile = styled.div`
   background-position: center;
   background-size: contain;
   cursor: pointer;
+`
+
+export const Logo = styled.img`
+  width: 10rem;
+  height: 1.5rem;
 `

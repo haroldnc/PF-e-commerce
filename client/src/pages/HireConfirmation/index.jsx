@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getPostById, hireButton } from "../../store/actions";
-import { ConfirmHire, FormContainer } from "./styledHireConfirm";
+import { ConfirmHire, Container, FormContainer, Info } from "./styledHireConfirm";
 import { Link } from "react-router-dom";
 
 export default function HirePage(){
@@ -53,7 +53,7 @@ export default function HirePage(){
     console.log(data)
     return(
 
-        <>
+        <Container>
         { postInfo && postInfo.user && userLog && userInfo ?
      <FormContainer>
         {/* <label htmlFor="idPublication">Id de Publicación</label><br />
@@ -62,22 +62,22 @@ export default function HirePage(){
         <input type="text" id="idWorker" name="idWorker" value={postInfo.user} disabled /><br />
         <label htmlFor="idUser">Id de Usuario</label><br />
         <input type="text" id="idUser" name="idUser" value={userInfo.uid} /><br /> */}
-        <div>
+        <Info>
             <h4>Datos de Publicación</h4>
             <span>Id de Publicación: {id}</span><br />
             <span>Titulo de Publicación: {postInfo.title}</span>
-        </div>
-        <div>
+        </Info>
+        <Info>
             <h4>Datos de Trabajador</h4>
             <span>Id de trabajador: {postInfo.user}</span><br />
         
-        </div>
-        <div>
+        </Info>
+        <Info>
             <h4>Datos de tu factura</h4>
             <span>Id de usuario: {userInfo.uid}</span><br />
             <span>Nombre: {`${userInfo.firstName} ${userInfo.lastName}`}</span><br />
             <span>email: {userInfo.email}</span>
-        </div>
+        </Info>
         <Link to={"/contratar/succes"}>
         <ConfirmHire onClick={onSubmit} type="submit">Enviar contratación</ConfirmHire>
         </Link>
@@ -86,6 +86,6 @@ export default function HirePage(){
     <FormContainer><h1>Es necesario que inicies sesión antes de hacer contrataciones</h1></FormContainer>
 
     }
-    </>
+    </Container>
         )
 }

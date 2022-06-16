@@ -7,8 +7,13 @@ export const CardParent = styled.div`
     width: 70%;
     margin: 5px 0 20px;
     align-items: flex-end;
-    border: 2px black solid;
     text-align: center;
+    background-color: ${props => props.theme.colors.backgroundColorAlt};
+    box-shadow: ${props => props.theme.boxShadow};
+
+    @media (max-width: 768px){
+        width: 90%;
+    }
     
 `
 
@@ -31,18 +36,21 @@ export const CardTitle = styled.h4`
 `
 
 export const CardLink = styled(Link)`
-    color: black;
+    color: ${props => props.theme.colors.font};
     width: 100%;
     font-size: 1rem;
     align-self: center;
     padding: 5px;
+    transition: .3s ease;
+    margin: 5px;
+
 
     &:visited{
         color: black;
     }
 
     &:hover{
-        text-decoration: underline;
+        color: ${(props) => props.theme.colors.secondary}
     }
 
 `

@@ -52,7 +52,7 @@ const Profile = () => {
     useEffect(() => {
         dispatch(clearProfile())
         dispatch(getUserById(id))
-    }, [])
+    }, [dispatch, id]);
 
     let TypeProfile = null
     if( Object.entries(profile).length !== 0 ){

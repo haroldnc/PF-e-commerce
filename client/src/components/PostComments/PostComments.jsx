@@ -27,7 +27,7 @@ const PostComments = () => {
     
     useEffect( () => {
         dispatch( getHiringsByUserId( userID ))
-      },[ dispatch ])
+      },[ dispatch, userID ])
 
     const handleRating = (rate) => {
         setRating(rate);

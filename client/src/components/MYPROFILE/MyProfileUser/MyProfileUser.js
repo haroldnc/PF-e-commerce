@@ -73,7 +73,7 @@ export const Correo = styled.h3 `
     color: ${props => props.theme.colors.font};
 
     
-    @media  (min-width: 768px) {
+    @media  (max-width: 768px) {
         font-size: 6px;
     }
 

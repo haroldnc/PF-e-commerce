@@ -39,6 +39,7 @@ export default function WorkersCarousel({ profiles }) {
     (person) => person.subscription_type.name === "Premium"
   );
 
+  console.log("availableProfiles", availableProfiles);
   return (
     <WorkerDiv>
       <TitleCarousel>Nuestros mejores talentos</TitleCarousel>

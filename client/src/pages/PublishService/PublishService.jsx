@@ -37,7 +37,7 @@ const PublishService = () => {
   useEffect(() => {
     if(userInfo && !allPost) dispatch(getPostByUser(userInfo.uid))
     if(workers.length === 0)dispatch(getWorkers());
-  },[])
+  },[dispatch, allPost, workers.length, userInfo])
 
   const validate = allPost && workers.length >0 && Validation(workers,allPost,userInfo)
   

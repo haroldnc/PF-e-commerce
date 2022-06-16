@@ -5,6 +5,7 @@ import {
   HamburguerMenuIcon,
   LinksContainer,
   LogIn,
+  Logo,
   Profile,
   Right,
   SignIn,
@@ -16,6 +17,7 @@ import {
 import ScrolledSearchbar from "./ScrolledSearchbar/ScrolledSearchbar";
 import ProfileBox from "../ProfileBox/ProfileBox";
 import ProfileBoxWorker from "../ProfileBoxWorker/ProfileBoxWorker";
+import logo from '../assets/images/logo.png'
 
 const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleModalSignOut }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,7 +56,8 @@ const Navbar = ({ toggle, toggleModalSignUp, toggleModalLogIn, userInfo, toggleM
       <Wrapper>
         <Right>
           <TitleContainer onClick={handleClick}>
-            <h1>wixxer</h1>
+            {/* <Logo src={logo}/> */}
+            <h1><span>w</span>ixxer</h1>
           </TitleContainer>
           <div>
             <ScrolledSearchbar isScrolled={isScrolled} />
