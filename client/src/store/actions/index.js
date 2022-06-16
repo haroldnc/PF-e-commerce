@@ -215,9 +215,9 @@ export const GetAllTransaction = () => dispatch => {
 }
 
 export const GetTransactionById = (id) => dispatch => {
-  console.log('Funciono transacit')
   axios.get(`https://wixer-server.herokuapp.com/transactions/${id}`)
   .then(res => dispatch({type: "GET_TRANSACTIONS_BYID", payload: res.data}))
+
 }
 
 
@@ -247,7 +247,7 @@ export const cancelSubscription = (body,id) => async () => {
 
 export const changeSubscription = (body,id) => async() => {
   // await axios.post(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body, )
-  await axios({ method: 'put', url:`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, data: body})
+  await axios(`https://wixer-server.herokuapp.com/subscriptions/change/${id}`, body)
 }
 
 export const getPostByUser = (id) => dispatch => {
@@ -325,3 +325,8 @@ export const removeFromWishlist = (_id) => (dispatch) => {
       dispatch({ type: "REMOVE_WISHLIST", payload: res.data.favorite._id })
     );
 };
+
+export const getLastTransactionById = (id)=> dispatch=> {
+  axios.get(`http://wixer-server.herokuapp.com/transactions/last/${id}`)
+  .then( res => dispatch({type: "GET_LAST_TRANSACT_BY_ID", payload: res.data }))
+}

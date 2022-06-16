@@ -2,27 +2,28 @@ import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from 'sweetalert2'
 import { ContainerCambio ,DivGob, Title, TextOne, TextTwo, Btn, BtnCancel, Parr  } from './CambioaPlanStandard'
-import { changeSubscription, GetTransactionById } from '../../../../store/actions/index'
+import { changeSubscription, getLastTransactionById } from '../../../../store/actions/index'
 
 const CambioaPlanStandard = ({profile, isOpenChangeStandard, toggleIsOpenChangeStandard}) => {
 
     const dispatch = useDispatch()
     
-    const Alltransaction = useSelector(state => state.transactionById)
+    const Alltransaction = useSelector(state => state.lastTransactionById)
 
     let LastTrans = "";
-    if(Alltransaction){
-        if(Alltransaction.length === 1){
-            LastTrans = Alltransaction
-        }else{
-            LastTrans = Alltransaction.pop()
-        }
-    } 
-    // console.log('session', LastTrans[0].sessionId)
+    // if(Alltransaction){
+    //     if(Alltransaction.length === 1){
+    //         LastTrans = Alltransaction
+    //     }else{
+    //         LastTrans = Alltransaction.pop()
+    //     }
+    // } 
+    console.log('session', Alltransaction)
 
 
     const handlechange = () => {
-        
+        console.log('id',profile)
+        console.log('transaction',Alltransaction.subSchedulesId)
         Swal.fire({
             title: 'Estas seguro?',
             text: "Tu plan se cambiará inmediatamente",
@@ -39,7 +40,7 @@ const CambioaPlanStandard = ({profile, isOpenChangeStandard, toggleIsOpenChangeS
                 'success'
               )
               dispatch(changeSubscription({
-                sessionId: LastTrans[0].sessionId,
+                subSchedulesId: Alltransaction.subSchedulesId,
                 priceId: "price_1L8UkLHq6KUjuv7IZqgYJUFE"
             }, profile))
                 toggleIsOpenChangeStandard()
@@ -49,7 +50,7 @@ const CambioaPlanStandard = ({profile, isOpenChangeStandard, toggleIsOpenChangeS
     }
 
     useEffect(() => {
-        dispatch(GetTransactionById(profile))
+        dispatch(getLastTransactionById(profile))
     },[])
 
     return (

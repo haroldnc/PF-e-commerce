@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
-import { GetTransactionById, cancelSubscription } from '../../store/actions/index'
+import { getLastTransactionById, cancelSubscription } from '../../store/actions/index'
 import Swal from 'sweetalert2'
 
 import { ContainerCancel, DivGlob, Title, Text, BtnCancel, BtnNoCancel, BtnDiv } from './ModalCancelPayment'
@@ -9,20 +9,21 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
 
     const dispatch = useDispatch()
 
-    const Alltransaction = useSelector(state => state.transactionById)
+    const Alltransaction = useSelector(state => state.lastTransactionById)
 
-    let LastTrans = "";
-    if(Alltransaction){
-        if(Alltransaction.length === 1){
-            LastTrans = Alltransaction[0]
-        }else{
-            LastTrans = Alltransaction.pop()
-        }
-    } 
+    // let LastTrans = "";
+    // if(Alltransaction){
+    //     if(Alltransaction.length === 1){
+    //         LastTrans = Alltransaction[0]
+    //     }else{
+    //         LastTrans = Alltransaction.pop()
+    //     }
+    // } 
 
-    console.log('transact', LastTrans)
+    console.log('transacts', Alltransaction)
 
     const cancelInmed = () =>{
+        console.log('alltrans',Alltransaction.subSchedulesId)
         Swal.fire({
             title: 'Estas seguro?',
             text: "Tu plan se cancelará inmediatamente",
@@ -39,8 +40,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
                 'success'
               )
                 dispatch(cancelSubscription({
-                    sessionId: LastTrans.sessionId,
-                    period_end: false
+                    subSchedulesId: Alltransaction.subSchedulesId,
                 },profile))
                 toggleModalPaymentCancel()
             window.location.href = window.location.href
@@ -54,7 +54,7 @@ const ModalCancelPayment = ({isOpenPaymentCancel, toggleModalPaymentCancel, togg
     // }
 
     useEffect(() => {
-        dispatch(GetTransactionById(profile))
+        dispatch(getLastTransactionById(profile))
     },[])
 
     return (
