@@ -25,6 +25,7 @@ import {
   getAllUsers,
   clearServiceDetail,
   getHiringsByUserId,
+  clearProfile
 } from "../../store/actions";
 import PostDetailCard from "../../components/PostDetailCard";
 import Swal from "sweetalert2";
@@ -46,13 +47,7 @@ export default function ServicesDetail() {
   arrayOfPosts = useSelector((state) => state.allPost);
   var userPost = [];
   const hiringsByUser = useSelector((state) => state.userHirings);
-  // var author
-  // console.log(user)
-  // console.log(post)
-
-  // console.log(workers)
-  // console.log(user.username)
-  // console.log(post.title)
+ 
   if (arrayOfPosts.length) {
     userPost = arrayOfPosts.filter(
       (p) => p.user.uid === post.user && p._id !== id
@@ -64,10 +59,7 @@ export default function ServicesDetail() {
 
   const filteredWorker = workers.filter((w) => w.userId.uid === post.user);
 
-  // const user = users.filter(u=>u.uid === post.user)
-  // console.log(filteredWorker)
-  //  console.log(filteredWorker[0]._id)
-  //console.log(post.user)
+ 
 
   const filteredHirings = hiringsByUser.filter(
     (h) => h.idPublication._id === id
@@ -90,6 +82,7 @@ export default function ServicesDetail() {
   };
 
   useEffect(() => {
+    dispatch(clearProfile())
     dispatch(getPostById(id));
     if (post.user) dispatch(getUserById(post.user));
     dispatch(getAllPosts());
