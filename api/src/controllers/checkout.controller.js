@@ -24,7 +24,7 @@ const createCheckoutSession = async (req, res) => {
             }
          ],
          success_url: `${domainURL}/paysuccess?s={CHECKOUT_SESSION_ID}&u=${userId}&p=${priceId}`,
-         cancel_url: `${domainURL}/cancel_subs?u=${userId}`
+         cancel_url: `${domainURL}/profile/${userId}`
       });
 
       //res.redirect(303, session.url);

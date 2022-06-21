@@ -11,8 +11,6 @@ const getSubscriptions = async (req, res) => {
 	} catch(error) {
 		res.status(404).json({ error: error.message });
 	}
-
-   res.status(200).json(session);
 }
 
 const getSubscriptionByPriceId = async (req, res) => {
@@ -27,8 +25,6 @@ const getSubscriptionByPriceId = async (req, res) => {
 	} catch(error) {
 		res.status(404).json({ error: error.message });
 	}
-
-   res.status(200).json(session);
 }
 
 const addSubscriptions = async (req, res) => {
@@ -133,16 +129,16 @@ const changeSubscription = async (req, res) => {
 			subscribed: true,
 			subscription_type: subs._id
 		});
-
+		
 		if(subs.name === 'Standard'){
 			let posts_active = await Publications.find({user: id, active:true});
-			
+			console.log(posts_active);
 			if (posts_active.length > 3){
 				posts_active = posts_active.slice(3);
 			}
-
+			console.log(posts_active);
 			for (let i=0; i<posts_active.length; i++){
-				await Publications.findByIdAndUpdate(posts_active._id, {
+				await Publications.findByIdAndUpdate(posts_active[i]._id, {
 					active: false
 				});
 			}
